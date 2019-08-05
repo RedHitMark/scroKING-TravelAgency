@@ -32,7 +32,7 @@
                             <div class="row">
                                     <div class="col-12">
                                             
-                                            <form action="#" method="POST">
+                                            <form id="loginForm" method="POST">
                                                     <span>
                                                         <h1>ScroKING</h1>
                                                     </span>
@@ -82,5 +82,29 @@
     </footer>
 </body>
 <script src="JS/menu.js"></script>
+
+<script>
+var form = document.getElementById("loginForm"); 
+ 
+function login(event) { 
+    event.preventDefault(); 
+    
+    let http = new XMLHttpRequest();
+    const url = "api/user/login.php";
+
+    http.open("POST", url, true);
+    http.onreadystatechange = function() {
+        if(http.readyState == 4 && http.status == 200) {
+            alert("ok");
+        } else {
+            console.log(http.response);
+            alter("male");
+        }
+    }
+    http.send();
+}
+
+form.addEventListener('submit', login);
+</script>
 
 </html>
