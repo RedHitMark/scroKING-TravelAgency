@@ -11,13 +11,28 @@
 
     $login = json_decode(file_get_contents("php://input"));
 
+    try {
+        $mng = new MongoDB\Driver\Manager( "mongodb://scroking.ddns.net:27017");
+        $query = new MongoDB\Driver\Query( [ 'username' => $login->username ] );
+        $rows = $mng->executeQuery("scroKING.user", $query);
 
+        $count = 0;
+        foreach ($rows as $row) {
+            $count++;
+        }
 
-    if($login->username == "giovanni" && $login->password == "giovanniBravo") {
-        http_response_code(200);
-        echo json_encode(array("message" => "Login effettuata correttamente."));
-    } else {
-        http_response_code(400);
-        echo json_encode(array("message" => "Login errata."));
+        if($count == 1) {
+            http_response_code(200);
+            echo json_encode(array("message" => "Login effettuata correttamente."));
+        } else {
+            http_response_code(400);
+            echo json_encode(array("message" => "Login errata."));
+        }
+
+        
+        
+    } catch (MongoDB\Driver\Exception\Exception $e) {
+        http_response_code(500);
+        echo json_encode(array("message" => "Configurazione errata."));
     }
 ?>
