@@ -238,14 +238,12 @@ font-weight: bold;
     text-transform: uppercase;
 }
 
-/* ============== Mezzi ================= */
 
+/* ======= Mezzi ====== */
 #mezzi{
     display:flex;
     justify-content: center;
 }
-
-
 
 #mezzi .col-3{
     display:flex;
@@ -253,12 +251,13 @@ font-weight: bold;
 }
 
 #mezzi .col-3 .mezzi img{
- 
     width: 450px;
     height: 250px;
-
 }
 
+
+/* ======= Hotel ====== */
+#hotel .col-3
 
 
 /* =======  Contact ====== */
@@ -444,7 +443,7 @@ font-weight: bold;
 
 
 @media screen and (max-width: 992px){
-    /* ====== Generale */
+    /* ====== Generale ====== */
     .line{
         width: 30px;
         height: 3px;
