@@ -440,6 +440,9 @@ font-weight: bold;
     color: white;
     font-size: 15px;
 }
+
+
+
 @media screen and (max-width: 992px){
     /* ====== Generale */
     .line{
