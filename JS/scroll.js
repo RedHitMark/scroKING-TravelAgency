@@ -1,9 +1,9 @@
 
-$('#scroll').hide();
+$('.scroll').hide();
 let visible = false;
 $('#moreButton').click(function (e) {
     e.preventDefault();
-    $('#scroll').toggle("slow");
+    $('.scroll').toggle("slow");
     if (visible == false) {
         $("#moreButton").prop('value', 'Mostra meno risultati');
 
