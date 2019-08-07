@@ -281,9 +281,6 @@ font-weight: bold;
     height: 250px;
 }
 
-.row.best{
-    margin: 1em 0;
-}
 
 /* ======= Hotel ====== */
 .row.button form{
@@ -301,22 +298,18 @@ font-weight: bold;
     margin-bottom: 1em;
     cursor: pointer;
 }
-.besthotel{
-    border: 1px solid black;
-    padding: 0.5em;
-    background-color: black;
-    color: white;
-    width: 45%;
-}
 
-.bestMezzi{
+.bestMezzi, .besthotel{
     border: 1px solid black;
     padding: 0.5em;
     background-color: black;
     color: white;
-    width: 30%;
-   display:flex;
+    width: 40%;
+    display:flex;
     justify-content:center;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    margin-bottom: 2em;
 }
 
 /* =======  Contact ====== */
@@ -736,14 +729,11 @@ font-weight: bold;
     #mezzi{
     flex-direction:column;
     }
-
     .bestMezzi{
         width: 100%;
     }
-
     /* ====== Hotel ======= */
     .besthotel{
         width: 100%;
-        font-size: small;
     }
 }
