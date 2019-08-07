@@ -16,7 +16,7 @@
         if(isset($new_user->username) && isset($new_user->password)) {
             $bulk = new MongoDB\Driver\BulkWrite();
             
-            $doc = ['_id' => new MongoDB\BSON\ObjectID(), 'username' => username, 'password' => hash('sha512', $new_user->password)];
+            $doc = ['_id' => new MongoDB\BSON\ObjectID(), 'username' => $new_user->username, 'password' => hash('sha512', $new_user->password)];
 
             $bulk->insert($doc);
             $mng->executeBulkWrite('scroKING.user', $bulk);
