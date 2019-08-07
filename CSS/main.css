@@ -207,10 +207,16 @@ font-weight: bold;
     padding: 1em;
     margin: 1em;
 }
-#main .row .col-3 .image img{
+#main .row .col-3 .image img {
   width: 300px;
   height: 200px;  
 }
+
+#main .row .col-3 .image img:hover{
+    opacity:0.5;
+    zoom:unset;
+}
+
 #comments{
     padding: 1em;
 }
@@ -275,6 +281,9 @@ font-weight: bold;
     height: 250px;
 }
 
+.row.best{
+    margin: 1em 0;
+}
 
 /* ======= Hotel ====== */
 .row.button form{
@@ -298,6 +307,16 @@ font-weight: bold;
     background-color: black;
     color: white;
     width: 45%;
+}
+
+.bestMezzi{
+    border: 1px solid black;
+    padding: 0.1em;
+    background-color: black;
+    color: white;
+    width: 50%;
+   display:flex;
+    justify-content:center;
 }
 
 /* =======  Contact ====== */
