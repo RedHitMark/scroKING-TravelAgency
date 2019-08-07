@@ -23,7 +23,6 @@
 
         if($count == 1) {
             http_response_code(200);
-            echo json_encode(array("message" => "Login effettuata correttamente."));
             session_start();
             if(isset($login->username)){
                 $_SESSION['username'] = $login->username;
@@ -31,6 +30,8 @@
             }else {
                 /*fai qualcosa */
             }
+            echo json_encode(array("message" => "Login effettuata correttamente."));
+            
         } else {
             http_response_code(400);
             echo json_encode(array("message" => "Login errata."));
