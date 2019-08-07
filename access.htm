@@ -112,7 +112,27 @@
         </footer>
 </body>
 <script src="JS/menu.js"></script>
+<script src="JS/jquery.min.js"></script>
+<script src="JS/http.js"></script>
+<script>
+    var login_data = {
+        username: "giovanni",
+        password : "giovanniBello"
+    }
 
+    function login () {
+        //@TODO cose da fare in caso di login ok
+        //@TODO
+        alert("ok");
+    }
+
+    post("api/user/login.php", login, login_data);
+
+    
+</script>
+
+
+<!--
 <script>
 var form = document.getElementById("loginForm"); 
  
@@ -125,16 +145,25 @@ function login(event) {
     http.open("POST", url, true);
     http.onreadystatechange = function() {
         if(http.readyState == 4 && http.status == 200) {
+            console.log(http.response);
             alert("ok");
         } else {
             console.log(http.response);
             alter("male");
         }
     }
-    http.send();
-}
 
+    var data = new FormData();
+    data.append('username', 'giovanni');
+    data.append('password', 'giovanniBello');
+
+
+    http.send(data);
+}
 form.addEventListener('submit', login);
-</script>
+
+
+
+</script> -->
 
 </html>
