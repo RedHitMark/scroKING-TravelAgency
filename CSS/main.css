@@ -311,10 +311,10 @@ font-weight: bold;
 
 .bestMezzi{
     border: 1px solid black;
-    padding: 0.1em;
+    padding: 0.5em;
     background-color: black;
     color: white;
-    width: 50%;
+    width: 45%;
    display:flex;
     justify-content:center;
 }
