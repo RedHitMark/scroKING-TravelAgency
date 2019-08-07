@@ -426,7 +426,7 @@ font-weight: bold;
     text-transform: uppercase;
     color: white;
 }
-.wrapper #access article .row .col-12 form input[type=text]{
+.wrapper #access article .row .col-12 form input[type=text], .wrapper #access article .row .col-12 form input[type=password]{
     width: 100%;
     padding: 10px;
     margin: 0.5em 0;
@@ -468,6 +468,76 @@ font-weight: bold;
     list-style: none;
 }
 .wrapper #access article .row .col-12 form .bottom ul li a{
+    text-decoration: none; 
+    text-transform: uppercase;
+    color: white;
+    font-size: 15px;
+}
+/* ===== Registration ====== */
+.wrapper #registration article .row .col-12 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 12em 0;
+}
+.wrapper #registration article .row .col-12 form span h1{
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 1em;
+    color: white;
+}
+.wrapper #registration article .row .col-12 form{
+    background-color: rgba(94, 94, 94, 0.514);
+    border-radius: 8px;
+    padding: 2em;
+    width: 400px;
+}
+.wrapper #registration article .row .col-12 form label{
+    text-transform: uppercase;
+    color: white;
+}
+.wrapper #registration article .row .col-12 form input[type=text], .wrapper #registration article .row .col-12 form input[type=password]{
+    width: 100%;
+    padding: 10px;
+    margin: 0.5em 0;
+    border-radius: 8px;
+    border: none;
+}
+.wrapper #registration article .row .col-12 form input[type=reset]{
+    margin: 0.5em 0;
+    border: none;
+    background-color: rgb(129, 14, 20);
+    text-transform: uppercase;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    width: 49%;
+    padding: 10px;
+}
+.wrapper #registration article .row .col-12 form input[type=reset]:hover{
+    background-color: rgb(184, 53, 60);
+}
+.wrapper #registration article .row .col-12 form input[type=submit]{
+    margin: 0.5em 0;
+    border: none;
+    background-color: rgb(14, 64, 129);
+    text-transform: uppercase;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    width: 49%;
+    padding: 10px;
+}   
+.wrapper #registration article .row .col-12 form input[type=submit]:hover{
+    background-color: rgb(62, 113, 179);
+}
+.wrapper #registration article .row .col-12 form .bottom ul{
+    margin-top: 0.5em;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+.wrapper #registration article .row .col-12 form .bottom ul li a{
     text-decoration: none; 
     text-transform: uppercase;
     color: white;
@@ -625,12 +695,16 @@ font-weight: bold;
     #contact article .row .col-12 ul{
         flex-direction: column;
     }
+    #contact article .row .col-12 ul li p{
+        margin-bottom: 0.5em;
+    }
     /* ====== Access ======= */
     .wrapper #access article .row .col-12 {
         padding: 0.5em;
     }
-    #contact article .row .col-12 ul li p{
-        margin-bottom: 0.5em;
+    /* ======= Registration ====== */
+    .wrapper #registration article .row .col-12 {
+        padding: 0.5em;
     }
     /* ============== Mezzi ================= */
 
