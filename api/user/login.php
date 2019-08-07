@@ -8,7 +8,7 @@
 
     $login = json_decode(file_get_contents("php://input"));
 
-    session_start();
+   
 
     try {
         $mng = new MongoDB\Driver\Manager( "mongodb://scroking.ddns.net:27017");
@@ -24,6 +24,13 @@
         if($count == 1) {
             http_response_code(200);
             echo json_encode(array("message" => "Login effettuata correttamente."));
+            session_start();
+            if(isset($login->username)){
+                $_SESSION['username'] = $login->username;
+                echo  $_SESSION['username'];
+            }else {
+                /*fai qualcosa */
+            }
         } else {
             http_response_code(400);
             echo json_encode(array("message" => "Login errata."));
@@ -35,9 +42,6 @@
         echo json_encode(array("message" => "Configurazione errata."));
     }
 
-    if(isset($login->username)){
-        $_SESSION['username'] = $login->username;
-        echo  $_SESSION['username'];
-    }
+   
 
     ?>
