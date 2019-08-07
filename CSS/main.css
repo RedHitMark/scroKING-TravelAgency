@@ -292,7 +292,12 @@ font-weight: bold;
     margin-bottom: 1em;
     cursor: pointer;
 }
-
+.besthotel{
+    border: 1px solid black;
+    padding: 0.5em;
+    background-color: black;
+    color: white;
+}
 
 /* =======  Contact ====== */
 .bg-contact{
