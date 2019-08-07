@@ -743,10 +743,7 @@ font-weight: bold;
 
     /* ====== Hotel ======= */
     .besthotel{
-        border: 1px solid black;
-        padding: 0.5em;
-        background-color: black;
-        color: white;
         width: 100%;
+        font-size: small;
     }
 }
