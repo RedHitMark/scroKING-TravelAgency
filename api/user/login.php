@@ -10,7 +10,8 @@
 
     try {
         $mng = new MongoDB\Driver\Manager( "mongodb://scroking.ddns.net:27017");
-        $query = new MongoDB\Driver\Query( [ 'username' => $login->username ] );
+        $query = new MongoDB\Driver\Query( [ 'username' => $login->username, 'password' => hash('sha512', $login->password) ] );
+
         $rows = $mng->executeQuery("scroKING.user", $query);
 
         $count = 0;
@@ -32,4 +33,3 @@
         http_response_code(500);
         echo json_encode(array("message" => "Configurazione errata."));
     }
-?>
