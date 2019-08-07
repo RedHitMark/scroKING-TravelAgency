@@ -8,6 +8,8 @@
 
     $login = json_decode(file_get_contents("php://input"));
 
+    session_start();
+
     try {
         $mng = new MongoDB\Driver\Manager( "mongodb://scroking.ddns.net:27017");
         $query = new MongoDB\Driver\Query( [ 'username' => $login->username, 'password' => hash('sha512', $login->password) ] );
@@ -32,3 +34,10 @@
         http_response_code(500);
         echo json_encode(array("message" => "Configurazione errata."));
     }
+
+    if(isset($login->username)){
+        $_SESSION['username'] = $login->username;
+        echo  $_SESSION['username'];
+    }
+
+    ?>
