@@ -24,12 +24,12 @@
         if($count == 1) {
             http_response_code(200);
             session_start();
-            if(isset($login->username)){
-                $_SESSION['username'] = $login->username;
-                echo  $_SESSION['username'];
+            $_SESSION['username'] = $login->username;
+            
+            /*if(isset($login->username)){
             }else {
-                /*fai qualcosa */
-            }
+                fai qualcosa 
+            }*/
             echo json_encode(array("message" => "Login effettuata correttamente."));
             
         } else {
