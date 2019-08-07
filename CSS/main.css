@@ -257,7 +257,21 @@ font-weight: bold;
 
 
 /* ======= Hotel ====== */
-#hotel .col-3
+.row.button form{
+    display: flex;
+    justify-content: center;
+}
+#moreButton{
+    border: none;
+    border: 1px solid black;
+    background-color: #17252A;
+    border-radius: 8px;
+    text-transform: uppercase;
+    color: white;
+    padding: 10px;
+    margin-bottom: 1em;
+    cursor: pointer;
+}
 
 
 /* =======  Contact ====== */
