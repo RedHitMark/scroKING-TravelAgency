@@ -562,13 +562,62 @@ font-weight: bold;
 }
 
 /* ====== User Page ======== */
-.viaggiPrenotati{
-    border: 1px solid black;
-    padding: 0.5em;
-    background-color: black;
-    color: white;
-    width: 50%;
-}
+#informations {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../IMG/island.jpg");
+    min-height: 300px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+   #informations .profile-image img {
+    background-color: tomato;
+    height: 8em;
+    width: 8em;
+    border-radius: 100%;
+    border: 5px solid white;
+  }
+  
+   #informations .button {
+    display: none;
+  }
+  
+   #informations .button ul li {
+    list-style: none;
+  }
+  
+   #informations .button ul li a {
+    text-transform: uppercase;
+    color: grey;
+    border: 1px solid grey;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    width: 5em;
+    padding: 5px 10px;
+  }
+  
+   #informations .stat ul li {
+    display: inline;
+  }
+  
+   #informations .stat ul li a {
+    margin-right: 20px;
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+   #informations .stat ul li a:hover {
+    border-bottom: 3px solid tomato;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
 
 
 @media screen and (max-width: 992px){
