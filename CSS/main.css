@@ -733,13 +733,20 @@ font-weight: bold;
     }
     /* ============== Mezzi ================= */
 
-#mezzi{
-    
+    #mezzi{
     flex-direction:column;
-}
+    }
 
     .bestMezzi{
         width: 100%;
     }
 
+    /* ====== Hotel ======= */
+    .besthotel{
+        border: 1px solid black;
+        padding: 0.5em;
+        background-color: black;
+        color: white;
+        width: 100%;
+    }
 }
