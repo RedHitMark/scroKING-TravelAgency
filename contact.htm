@@ -12,46 +12,14 @@
 </head>
 
 <body>
-    <header>
-        <nav>
-
-            <div class="hamburger">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
-
-            <div class="col-12">
-                <div class="col-6">
-                    <ul class="log">
-                        <li><a href="registration.htm">Registrati</a></li>
-                        <li><a href="access.htm" class="enter">Entra</a></li>
-                    </ul>
-                </div>
-                <div class="col-6 login">
-                    <ul class="nav-links">
-                        <li><a href="index.htm">Home</a></li>
-                        <li><a href="hotel.htm">Hotel</a></li>
-                        <li><a href="mezzi.htm">Mezzi</a></li>
-                        <li><a href="about.htm">About</a></li>
-                        <li><a href="contact.htm">Contact</a></li>
-
-                    </ul>
-                    <ul class="log">
-                        <li><a href="registration.htm">Registrati</a></li>
-                        <li><a href="access.htm" class="enter">Entra</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <div id="header"></div>
     <div class="bg-contact">
         <div class="row">
             <div class="col-12">
-            <h1>contattaci</h1>    
-            </div>
+                <h1>contattaci</h1>
             </div>
         </div>
+    </div>
     </div>
     <div class="wrapper">
         <section id="contact">
@@ -66,9 +34,9 @@
                                 <p>Lorem ipsum dolor sit.</p>
                             </li>
                             <li>
-                               <div class="icon">
-                                <i class="fas fa-envelope"></i>
-                               </div>
+                                <div class="icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
                                 <p>Lorem ipsum dolor sit.</p>
                             </li>
                             <li>
@@ -85,7 +53,9 @@
                 <div class="row">
                     <div class="col-12 map">
                         <div class="col-6">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2983.2493258078794!2d14.263129215675526!3d41.607119890306876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133a8092fdcbaf0b%3A0x4fa28b9984fabd42!2sUNIMOL+-+Dipartimento+di+Bioscienze+e+Territorio!5e0!3m2!1sit!2sit!4v1565077215371!5m2!1sit!2sit" frameborder="0" style="border:0" allowfullscreen></iframe>
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2983.2493258078794!2d14.263129215675526!3d41.607119890306876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133a8092fdcbaf0b%3A0x4fa28b9984fabd42!2sUNIMOL+-+Dipartimento+di+Bioscienze+e+Territorio!5e0!3m2!1sit!2sit!4v1565077215371!5m2!1sit!2sit"
+                                frameborder="0" style="border:0" allowfullscreen></iframe>
                         </div>
                         <div class="col-6">
                             <form action="#" method="post">
@@ -113,59 +83,11 @@
     </div>
 
 
-    <footer class="footer">
-            <div class="top">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="col-3">
-                            <span class="logo">
-                                <img src="IMG/scroking_black.png" alt="logo">
-                            </span>
-                            <ul class="social">
-                                <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                                <li><a href="https://github.com/RedHitMark/scroKING-TravelAgency"><i
-                                            class="fab fa-github"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-3">
-                            <ul class="voices">
-                                <li><a href="#">Aiuto</a></li>
-                                <li><a href="#">Scopri come funziona ScroKING</a></li>
-                                <li><a href="#">Termini e condizioni</a></li>
-                                <li><a href="">Note legali</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-3"> 
-                            <ul class="voices">
-                                <li><a href="#">Società</a></li>
-                                <li><a href="#">Posizioni aperte</a></li>
-                                <li><a href="#">Stampa</a></li>
-                                <li><a href="#">Relazioni con gli scroccatori</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="bottom">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="col-8">
-                            <h3>&#9400; ScroKING team 2019</h3>
-                        </div>
-                        <div class="col-4">
-                            <p>Metodo di pagamento: </p>
-                            <div class="payIMG">
-                                <img src="IMG/Bitcoin.png" alt="payment">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </footer>
+    <div id="footer"></div>
 
 </body>
+<script src="JS/jquery.min.js"></script>
+<script src="JS/loadheaderfooter.js"></script>
 <script src="JS/menu.js"></script>
 
 </html>

@@ -492,11 +492,18 @@ font-weight: bold;
     font-size: 15px;
 }
 /* ===== Registration ====== */
+.fristlastname{
+    display: flex;
+    justify-content: space-around;
+}
+.fristlastname .col-6:first-child{
+    margin-right: 0.5em;
+}
 .wrapper #registration article .row .col-12 {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 12em 0;
+    margin: 10% 0;
 }
 .wrapper #registration article .row .col-12 form span h1{
     text-align: center;
@@ -514,7 +521,7 @@ font-weight: bold;
     text-transform: uppercase;
     color: white;
 }
-.wrapper #registration article .row .col-12 form input[type=text], .wrapper #registration article .row .col-12 form input[type=password]{
+.wrapper #registration article .row .col-12 form input[type=text], .wrapper #registration article .row .col-12 form input[type=password], .wrapper #registration article .row .col-12 form input[type=email]{
     width: 100%;
     padding: 10px;
     margin: 0.5em 0;
@@ -769,6 +776,12 @@ font-weight: bold;
         padding: 0.5em;
     }
     /* ======= Registration ====== */
+    .fristlastname{
+        flex-direction: column;
+    }
+    .fristlastname .col-6:first-child{
+        margin: 0;
+    }
     .wrapper #registration article .row .col-12 {
         padding: 0.5em;
     }
