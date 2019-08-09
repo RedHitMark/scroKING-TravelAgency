@@ -117,6 +117,7 @@
 </body>
 <script src="JS/menu.js"></script>
 <script src="JS/http.js"></script>
+<script src="JS/sha512.js"></script>
 <script src="JS/session.js"></script>
 <script>
     function login_ok() {
@@ -129,6 +130,8 @@
 
     function login_button(event) {
         event.preventDefault();
+
+        console.log( hex_sha512(document.getElementById("password").value) );
 
         var login_data = {
             username: document.getElementById("username").value,
