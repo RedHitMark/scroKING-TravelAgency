@@ -41,29 +41,9 @@
     </header>
     
     <div class="wrapper">
-        <div id="profile-mobile">
-        <div class="row">
-               <div class="col-12">
-                       <section>
-                               <aside id="userName">
-                                   <h1>Santa claus</h1>
-                               </aside>
-                               <br>
-                               <aside>
-                                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, saepe.</p>
-                               </aside>
-                               <br>
-                               <aside>
-                                   <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt voluptatum delectus magni enim cum. Deserunt, earum alias. Saepe, consequatur ipsa!</p>
-                               </aside>
-                           </section>
-                </div> 
-        </div>   
-       </div>
        <div id="mainUser">
-           <div class="col-6">
-            <div id="profile">
-                <section>
+           <div class="col-4">
+                <section id="profile">
                     <aside id="userName"> 
                         <h1>Santa claus</h1>
                     </aside>
@@ -75,17 +55,22 @@
                     <aside>
                         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt voluptatum delectus magni enim cum. Deserunt, earum alias. Saepe, consequatur ipsa!</p>
                     </aside>
+                    <aside>
+                        <button id="levelScrocco">Level of scrocco: <a id="level">Giovanni</a></button>
+                    </aside>
                 </section>
-            </div>
            </div>
-           <div class="col-6">
+           <div class="col-8">
             <div id="content">
                 <section id="trips">
                     <article class="next-trips">
-                        <p>I tuoi viaggi futuri</p>
+                        <h3>I tuoi viaggi futuri </h3>
+                        <p>Non hai effettuato ancora nessun viaggio</p>
+
                     </article>
                     <article class="previus-trips">
-                        <p>I tuoi viaggi passati</p>
+                        <h3>I tuoi viaggi passati&nbsp;<i class="fas fa-arrow-down"></i></h3>
+                        <p>Non hai effettuato ancora nessun viaggio</p>
                     </article>
                 </section>
             </div>
@@ -149,6 +134,8 @@
         </div>
     </footer>
 </body>
+<script src="JS/jquery.min.js"></script>
+<script src="JS/userscroll.js"></script>
 <script src="JS/menu.js"></script>
 
 </html>

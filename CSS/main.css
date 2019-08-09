@@ -562,11 +562,14 @@ font-weight: bold;
 }
 
 /* ====== User Page ======== */
+#userName{
+    text-transform: uppercase;
+}
 #informations {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("../IMG/island.jpg");
+    background-image: url("../IMG/cover.jpg");
     min-height: 300px;
     background-position: center;
     background-repeat: no-repeat;
@@ -574,51 +577,39 @@ font-weight: bold;
   }
   
    #informations .profile-image img {
-    background-color: tomato;
     height: 8em;
     width: 8em;
     border-radius: 100%;
     border: 5px solid white;
   }
-  
-   #informations .button {
-    display: none;
+  #mainUser{
+      margin: 1em 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
   }
-  
-   #informations .button ul li {
-    list-style: none;
+  #profile{
+      border-right: 1px solid black;
+      padding: 1em;
   }
-  
-   #informations .button ul li a {
-    text-transform: uppercase;
-    color: grey;
-    border: 1px solid grey;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 8px;
-    width: 5em;
-    padding: 5px 10px;
+  #levelScrocco{
+      margin-top: 1em;  
+      padding: 0.5em;
+      text-transform: uppercase;
   }
-  
-   #informations .stat ul li {
-    display: inline;
+  #content{
+      padding: 1em;
   }
-  
-   #informations .stat ul li a {
-    margin-right: 20px;
-    text-decoration: none;
-    color: black;
-    text-transform: uppercase;
-    font-size: 16px;
-    font-weight: bold;
+  #trips .next-trips h3, .previus-trips h3{
+      cursor: pointer;
+      text-transform: uppercase;    
+      font-size: 15px;
+      padding: 0.5em 0;
+      border-bottom: 1px solid black;
   }
-  
-   #informations .stat ul li a:hover {
-    border-bottom: 3px solid tomato;
-    margin-bottom: 0;
-    padding-bottom: 0;
+  #trips .next-trips p, #trips .previus-trips p{
+      margin: 1em 0;
   }
-
 
 @media screen and (max-width: 992px){
     /* ====== Generale ====== */
@@ -791,5 +782,12 @@ font-weight: bold;
     /* ====== Hotel ======= */
     .besthotel{
         width: 100%;
+    }
+    /* ==== User page ====== */
+    #profile{
+        border:none;
+    }
+    #mainUser{
+        flex-direction: column;
     }
 }
