@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-12">
 
-                            <form id="loginForm" method="POST">
+                            <form id="registrationForm" method="POST">
                                 <span>
                                     <h1>Registrazione</h1>
                                 </span>
@@ -48,12 +48,12 @@
                                 <br>
 
                                 <label for="password">Password</label>
-                                <input type="password" name="password" placeholder=" Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="la password deve essere almeno di 6 caratteri, 1 lettera maiuscola, una minuscola, un numero" required>
+                                <input type="password" id="password" name="password" placeholder=" Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="la password deve essere almeno di 6 caratteri, 1 lettera maiuscola, una minuscola, un numero" required>
                                 <br>
                                 <br>
                                 
                                 <label for="conferma_psw">Conferma password</label>
-                                <input type="password" name="conferma_psw" placeholder="Conferma Password">
+                                <input type="password" id="conferma_psw" name="conferma_psw" placeholder="Conferma Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="la password deve essere almeno di 6 caratteri, 1 lettera maiuscola, una minuscola, un numero" required>
 
                                 <input type="reset" value="Cancella">
                                 <input id="submit" type="submit" value="Entra">
@@ -80,6 +80,39 @@
 </body>
 <script src="JS/jquery.min.js"></script>
 <script src="JS/loadheaderfooter.js"></script>
+<script src="JS/sha512.js"></script>
+<script>
+    function is_matching(s1, s2) {
+        if(s1 == s2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function registration_button(event) {
+        event.preventDefault();
+
+        console.log( hex_sha512(document.getElementsByName("password")[0].value) );
+
+        let password = document.getElementsByName("password")[0];
+        let conferma_psw = document.getElementsByName("conferma_psw")[0];
+
+        if( is_matching(password.value, conferma_psw.value) ) {
+            alert("Form apposto! A breve funzionerà")
+            //@TODO Chiamata ajax
+            //post("api/user/login.php", login_ok, login_error, login_data);
+        } else {
+            alert("Le password non corrispondo");
+        }
+
+        
+    }
+
+
+    let form = document.getElementById("registrationForm");
+    form.addEventListener('submit', registration_button);
+</script>
 
 
 </html>
