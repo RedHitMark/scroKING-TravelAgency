@@ -492,11 +492,11 @@ font-weight: bold;
     font-size: 15px;
 }
 /* ===== Registration ====== */
-.fristlastname{
+.firstlastname{
     display: flex;
     justify-content: space-around;
 }
-.fristlastname .col-6:first-child{
+.firstlastname .col-6:first-child{
     margin-right: 0.5em;
 }
 .wrapper #registration article .row .col-12 {
@@ -517,6 +517,11 @@ font-weight: bold;
     padding: 2em;
     width: 400px;
 }
+.wrapper #registration article .row .col-12 form:invalid > #submit {
+    /* Disattiva il bottone di submit finche il form non è valido*/
+    pointer-events: none;
+    background-color: gray; /*TODO colore migliore*/
+}
 .wrapper #registration article .row .col-12 form label{
     text-transform: uppercase;
     color: white;
@@ -527,6 +532,9 @@ font-weight: bold;
     margin: 0.5em 0;
     border-radius: 8px;
     border: none;
+}
+.wrapper #registration article .row .col-12 form input[type=text]:invalid:not(:placeholder-shown), .wrapper #registration article .row .col-12 form input[type=email]:invalid:not(:placeholder-shown){
+    border: 2px solid red;
 }
 .wrapper #registration article .row .col-12 form input[type=reset]{
     margin: 0.5em 0;

@@ -23,33 +23,40 @@
                                 <span>
                                     <h1>Registrazione</h1>
                                 </span>
-                                <div class="fristlastname">
+
+                                <div class="firstlastname">
                                         <div class="col-6">
                                                 <label for="nome">Nome</label>
-                                                <input type="text" name="nome" placeholder=" Nome">
+                                                <input type="text" name="nome" placeholder=" Nome" required>
                                                 
                                         </div>
                                         <div class="col-6">
                                                 <label for="cognome">Cognome</label>
-                                                <input type="text" name="cognome" placeholder=" Cognome">
+                                                <input type="text" name="cognome" placeholder=" Cognome" required>
                                         </div>
                                 </div>
                                 <br>
+
                                 <label for="email">E-mail</label>
-                                <input type="email" name="email" placeholder=" E-mail" required>
+                                <input type="email" name="email" placeholder=" E-mail" pattern=".+@.+\..+" title="Inserisci un indirizzo email valido" required>
                                 <br>
                                 <br>
+
                                 <label for="username">Username</label>
                                 <input type="text" name="username" placeholder=" Username" required>
                                 <br>
-                                <label for="password">Password</label>
-                                <input type="password" name="password" placeholder=" Password" required>
                                 <br>
+
+                                <label for="password">Password</label>
+                                <input type="password" name="password" placeholder=" Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="la password deve essere almeno di 6 caratteri, 1 lettera maiuscola, una minuscola, un numero" required>
+                                <br>
+                                <br>
+                                
                                 <label for="conferma_psw">Conferma password</label>
                                 <input type="password" name="conferma_psw" placeholder="Conferma Password">
 
                                 <input type="reset" value="Cancella">
-                                <input type="submit" value="Entra">
+                                <input id="submit" type="submit" value="Entra">
                                 <div class="bottom">
                                     <ul>
                                         <li><a href="access.htm">Entra</a></li>
