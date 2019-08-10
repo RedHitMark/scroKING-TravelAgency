@@ -600,10 +600,14 @@ font-weight: bold;
       border-right: 1px solid black;
       padding: 1em;
   }
-  #levelScrocco{
+  #scroccoLevel{
       margin-top: 1em;  
       padding: 0.5em;
       text-transform: uppercase;
+      border: 2px solid gold;
+      background-color: rgba(30, 30, 138, 0.801);
+      color: gold;
+      border-radius: 8px;
   }
   #content{
       padding: 1em;
