@@ -1,43 +1,55 @@
 /* ======Generale======== */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Indie+Flower&display=swap');
-*{
+
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-body{
-    font-family:'Montserrat', sans-serif;
+
+body {
+    font-family: 'Montserrat', sans-serif;
 }
-.wrapper{
+
+.wrapper {
     width: 70em;
     max-width: 100%;
     margin: 0 auto;
 }
-.col-3{
+
+.col-3 {
     width: 33.33333333333%;
 }
-.col-4{
+
+.col-4 {
     width: 25%;
 }
-.col-6{
+
+.col-6 {
     width: 50%;
 }
-.col-8{
+
+.col-8 {
     width: 75%;
 }
-.col-12{
+
+.col-12 {
     width: 100%;
 }
-.row{
+
+.row {
     display: flex;
     justify-content: center;
-}nav{
+}
+
+nav {
     overflow: hidden;
     height: 10vh;
-    background-color:#3AAFA9;
+    background-color: #3AAFA9;
 }
-nav .col-12{
+
+nav .col-12 {
     width: 100%;
     display: flex;
     align-items: flex-end;
@@ -45,10 +57,12 @@ nav .col-12{
     margin-top: 4vh;
 
 }
-.col-6.login .log{
+
+.col-6.login .log {
     display: none;
 }
-.log{
+
+.log {
     display: flex;
     list-style: none;
     width: 50%;
@@ -58,8 +72,9 @@ nav .col-12{
     float: left;
     margin-left: auto;
 }
-.log li a{
-    padding:  0.2em 0.5em;
+
+.log li a {
+    padding: 0.2em 0.5em;
     text-decoration: none;
     border: 1px solid black;
     background-color: #17252A;
@@ -68,11 +83,13 @@ nav .col-12{
     font-weight: bold;
     color: white;
 }
-nav .col-12 .col-6 .log li .enter{
+
+nav .col-12 .col-6 .log li .enter {
     margin-left: 1em;
     background-color: #2B7B78;
 }
- .nav-links{
+
+.nav-links {
     display: flex;
     list-style: none;
     width: 50%;
@@ -81,123 +98,147 @@ nav .col-12 .col-6 .log li .enter{
     align-items: center;
     margin-left: auto;
 }
-.nav-links li a{
+
+.nav-links li a {
     color: white;
     text-decoration: none;
     font-size: 16px;
     text-transform: uppercase;
     font-weight: bold;
 }
-.nav-links li a:hover{
+
+.nav-links li a:hover {
     border-bottom: 2px solid gold;
 }
-.footer{
+
+.footer {
     display: flex;
     flex-direction: column;
     width: 100%;
     background-color: #DEF2F1;
     padding: 1em 0;
 }
-.footer .top .row .col-12{
+
+.footer .top .row .col-12 {
     display: flex;
     justify-content: space-around;
 }
-.footer .top .row .col-12 .col-3 .logo{
+
+.footer .top .row .col-12 .col-3 .logo {
     display: flex;
     justify-content: center;
 }
-.footer .top .row .col-12 .col-3 .logo img{
+
+.footer .top .row .col-12 .col-3 .logo img {
     width: 200px;
     height: auto;
 }
-.footer .top .row .col-12 .col-3 .social{
+
+.footer .top .row .col-12 .col-3 .social {
     margin: 1em;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     list-style: none;
 }
-.footer .top .row .col-12 .col-3 .social li a{
+
+.footer .top .row .col-12 .col-3 .social li a {
     color: black;
     font-size: 22px;
 }
-.footer .top .row .col-12 .col-3 .social li a:hover{
+
+.footer .top .row .col-12 .col-3 .social li a:hover {
     color: rgb(37, 37, 37);
 }
-.footer .top .row .col-12 .col-3 .voices{
+
+.footer .top .row .col-12 .col-3 .voices {
     list-style: none;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.footer .top .row .col-12 .col-3 .voices li a{
+
+.footer .top .row .col-12 .col-3 .voices li a {
     color: black;
     text-decoration: none;
     text-transform: uppercase;
 }
-.footer .top .row .col-12 .col-3 p{
+
+.footer .top .row .col-12 .col-3 p {
     color: black;
     text-align: center;
 }
-.footer .bottom .row .col-12{
+
+.footer .bottom .row .col-12 {
     margin: 1em;
     display: flex;
     justify-content: space-around;
     width: 100%;
 }
-.footer .bottom .row .col-12 .col-8 h3{
+
+.footer .bottom .row .col-12 .col-8 h3 {
     color: black;
     font-size: 15px;
 }
-.footer .bottom .row .col-12 .col-4{
+
+.footer .bottom .row .col-12 .col-4 {
     display: flex;
     justify-content: center;
 }
-.footer .bottom .row .col-12 .col-4 .payIMG img{
+
+.footer .bottom .row .col-12 .col-4 .payIMG img {
     margin-top: -5px;
     width: 100px;
     height: auto;
 }
-.footer .bottom .row .col-12 .col-4 p{
+
+.footer .bottom .row .col-12 .col-4 p {
     color: black;
     font-size: 13px;
 }
+
 /* =======Home======= */
-.bg-img{
+.bg-img {
     background-image: url("../IMG/island.jpg");
 
-  min-height: 480px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+    min-height: 480px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
-#main .row .adv{
+
+#main .row .adv {
     display: flex;
     align-items: center;
     margin: 1em 0;
 }
-#main .row .adv .col-4 h1{
+
+#main .row .adv .col-4 h1 {
     text-transform: uppercase;
     font-weight: bold;
     padding: 1em;
     font-size: 15px;
 }
-#main .row .adv .col-8 p{
+
+#main .row .adv .col-8 p {
     padding: 1em;
 }
-#main .row .col-3 header h1{
-margin-bottom: 0.5em;
-text-align: center;
-text-transform: uppercase;
-font-size: 15px;
-font-weight: bold;
+
+#main .row .col-3 header h1 {
+    margin-bottom: 0.5em;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: bold;
 }
-#main .row .col-3 footer p{
+
+#main .row .col-3 footer p {
     margin: 0.5em 0;
     text-align: center;
-    
+
 }
-#main .row .col-3{
+
+#main .row .col-3 {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -206,87 +247,99 @@ font-weight: bold;
     padding: 1em;
     margin: 1em;
 }
+
 #main .row .col-3 .image img {
-  width: 300px;
-  height: 200px;  
+    width: 300px;
+    height: 200px;
 }
 
-#main .row .col-3 .image img:hover{
-    opacity:0.5;
-    zoom:unset;
+#main .row .col-3 .image img:hover {
+    opacity: 0.5;
+    zoom: unset;
 }
 
-#comments{
+#comments {
     padding: 1em;
 }
-#comments .row.rev{
+
+#comments .row.rev {
     display: flex;
     justify-content: center;
 }
-#comments .row .col-12 h3{
+
+#comments .row .col-12 h3 {
     text-transform: uppercase;
     text-align: center;
     font-weight: 300;
     margin: 0.5em 0;
 }
-#comments .row .col-3{
+
+#comments .row .col-3 {
     padding: 0.5em;
 }
-#comments .row .col-3 hr{
+
+#comments .row .col-3 hr {
     border: 1px solid black;
     margin: 0.5em 0;
 }
-#comments .row .col-3 h3{
+
+#comments .row .col-3 h3 {
     text-transform: uppercase;
     font-weight: 300;
 }
-#comments .row .col-3 p{
+
+#comments .row .col-3 p {
     font-family: 'Indie Flower', cursive;
     font-style: italic;
     font-weight: bold;
 }
+
 /* =======  About ======== */
-.wrapper #about .row article{
+.wrapper #about .row article {
     height: 250px;
     display: flex;
     align-items: center;
 }
-.wrapper #about .row h1{
+
+.wrapper #about .row h1 {
     padding: 1em 0;
     text-transform: uppercase;
 }
-.aboutIMG{
+
+.aboutIMG {
     display: flex;
     justify-content: center;
 }
-.aboutIMG img{
+
+.aboutIMG img {
     width: 400px;
     height: auto;
 }
 
 /* ======= Mezzi ====== */
-#mezzi{
-    display:flex;
+#mezzi {
+    display: flex;
     justify-content: center;
 }
 
-#mezzi .col-3{
-    display:flex;
+#mezzi .col-3 {
+    display: flex;
     flex-direction: column;
 }
 
-#mezzi .col-3 .mezzi img{
+#mezzi .col-3 .mezzi img {
     width: 450px;
     height: 250px;
 }
 
 
 /* ======= Hotel ====== */
-.row.button form{
+.row.button form {
     display: flex;
     justify-content: center;
 }
-#moreButton{
+
+#moreButton {
     border: none;
     border: 1px solid black;
     background-color: #17252A;
@@ -298,78 +351,89 @@ font-weight: bold;
     cursor: pointer;
 }
 
-.bestMezzi, .besthotel{
+.bestMezzi,
+.besthotel {
     border: 1px solid black;
     padding: 0.5em;
     background-color: black;
     color: white;
     width: 40%;
-    display:flex;
-    justify-content:center;
+    display: flex;
+    justify-content: center;
     text-transform: uppercase;
     font-size: 0.8em;
     margin-bottom: 2em;
 }
 
 /* =======  Contact ====== */
-.bg-contact{
-  background-image: url("../IMG/contact1.jpg");
-  min-height: 480px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+.bg-contact {
+    background-image: url("../IMG/contact1.jpg");
+    min-height: 480px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
-.bg-contact .row .col-12{
+
+.bg-contact .row .col-12 {
     min-height: 480px;
     margin: 2em;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.bg-contact .row .col-12 h1{
+
+.bg-contact .row .col-12 h1 {
     text-transform: uppercase;
     font-size: 60px;
     color: white;
     font-weight: 300;
 }
-#contact .row .col-12.map{
+
+#contact .row .col-12.map {
     display: flex;
 }
-#contact .row .col-12.map .col-6{  
-    padding: 0 0.5em; 
+
+#contact .row .col-12.map .col-6 {
+    padding: 0 0.5em;
 }
-#contact .row .col-12 .col-6 iframe{
+
+#contact .row .col-12 .col-6 iframe {
     width: 100%;
     height: 400px;
     border-radius: 8px;
 }
-#contact .row .col-12 .col-6 form{
+
+#contact .row .col-12 .col-6 form {
     background-color: rgba(39, 39, 39, 0.644);
     padding: 1em;
     border-radius: 8px;
     height: 400px;
     width: 100%;
 }
-#contact .row .col-12 .col-6 form label{
+
+#contact .row .col-12 .col-6 form label {
     text-transform: uppercase;
     color: white;
     font-weight: bold;
 }
-#contact .row .col-12 .col-6 form input[type=text]{
+
+#contact .row .col-12 .col-6 form input[type=text] {
     width: 100%;
     margin: 1em 0;
     height: 25px;
     border: none;
     border-radius: 8px;
 }
-#contact .row .col-12 .col-6 form textarea{
+
+#contact .row .col-12 .col-6 form textarea {
     resize: none;
     width: 100%;
     margin: 1em 0;
     border: none;
     border-radius: 8px;
 }
-#contact .row .col-12 .col-6 form input[type=submit]{
+
+#contact .row .col-12 .col-6 form input[type=submit] {
     width: 49%;
     height: 25px;
     border: none;
@@ -380,7 +444,8 @@ font-weight: bold;
     font-weight: bold;
 
 }
-#contact .row .col-12 .col-6 form input[type=reset]{
+
+#contact .row .col-12 .col-6 form input[type=reset] {
     width: 49%;
     height: 25px;
     border: none;
@@ -390,11 +455,13 @@ font-weight: bold;
     color: white;
     font-weight: bold;
 }
-#contact article .row .col-12{
+
+#contact article .row .col-12 {
     margin: 2em 0;
     width: 100%;
 }
-#contact article .row .col-12 ul{
+
+#contact article .row .col-12 ul {
     list-style: none;
     display: flex;
     justify-content: space-around;
@@ -402,56 +469,67 @@ font-weight: bold;
     justify-items: center;
     flex-direction: row-reverse;
 }
-#contact article .row .col-12 ul li .icon{
+
+#contact article .row .col-12 ul li .icon {
     display: flex;
     justify-content: center;
 }
-#contact article .row .col-12 ul li .icon i{
+
+#contact article .row .col-12 ul li .icon i {
     font-size: 50px;
     margin-bottom: 0.5em;
 }
-#contact article .row .col-12 ul li p{
+
+#contact article .row .col-12 ul li p {
     text-transform: uppercase;
 
 }
+
 /* ====== Access ======== */
-.bg-page{
+.bg-page {
     background-image: url("../IMG/blur.jpeg");
     width: 100%;
     height: 800px;
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 .wrapper #access article .row .col-12 {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 12em 0;
 }
-.wrapper #access article .row .col-12 form span h1{
+
+.wrapper #access article .row .col-12 form span h1 {
     text-align: center;
     font-size: 30px;
     margin-bottom: 1em;
     color: white;
 }
-.wrapper #access article .row .col-12 form{
+
+.wrapper #access article .row .col-12 form {
     background-color: rgba(94, 94, 94, 0.514);
     border-radius: 8px;
     padding: 2em;
     width: 400px;
 }
-.wrapper #access article .row .col-12 form label{
+
+.wrapper #access article .row .col-12 form label {
     text-transform: uppercase;
     color: white;
 }
-.wrapper #access article .row .col-12 form input[type=text], .wrapper #access article .row .col-12 form input[type=password]{
+
+.wrapper #access article .row .col-12 form input[type=text],
+.wrapper #access article .row .col-12 form input[type=password] {
     width: 100%;
     padding: 10px;
     margin: 0.5em 0;
     border-radius: 8px;
     border: none;
 }
-.wrapper #access article .row .col-12 form input[type=reset]{
+
+.wrapper #access article .row .col-12 form input[type=reset] {
     margin: 0.5em 0;
     border: none;
     background-color: rgb(129, 14, 20);
@@ -462,10 +540,12 @@ font-weight: bold;
     width: 49%;
     padding: 10px;
 }
-.wrapper #access article .row .col-12 form input[type=reset]:hover{
+
+.wrapper #access article .row .col-12 form input[type=reset]:hover {
     background-color: rgb(184, 53, 60);
 }
-.wrapper #access article .row .col-12 form input[type=submit]{
+
+.wrapper #access article .row .col-12 form input[type=submit] {
     margin: 0.5em 0;
     border: none;
     background-color: rgb(14, 64, 129);
@@ -475,68 +555,86 @@ font-weight: bold;
     font-weight: bold;
     width: 49%;
     padding: 10px;
-}   
-.wrapper #access article .row .col-12 form input[type=submit]:hover{
+}
+
+.wrapper #access article .row .col-12 form input[type=submit]:hover {
     background-color: rgb(62, 113, 179);
 }
-.wrapper #access article .row .col-12 form .bottom ul{
+
+.wrapper #access article .row .col-12 form .bottom ul {
     margin-top: 0.5em;
     display: flex;
     justify-content: space-between;
     list-style: none;
 }
-.wrapper #access article .row .col-12 form .bottom ul li a{
-    text-decoration: none; 
+
+.wrapper #access article .row .col-12 form .bottom ul li a {
+    text-decoration: none;
     text-transform: uppercase;
     color: white;
     font-size: 15px;
 }
+
 /* ===== Registration ====== */
-.firstlastname{
+.firstlastname {
     display: flex;
     justify-content: space-around;
 }
-.firstlastname .col-6:first-child{
+
+.firstlastname .col-6:first-child {
     margin-right: 0.5em;
 }
+
 .wrapper #registration article .row .col-12 {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 10% 0;
 }
-.wrapper #registration article .row .col-12 form span h1{
+
+.wrapper #registration article .row .col-12 form span h1 {
     text-align: center;
     font-size: 30px;
     margin-bottom: 1em;
     color: white;
 }
-.wrapper #registration article .row .col-12 form{
+
+.wrapper #registration article .row .col-12 form {
     background-color: rgba(94, 94, 94, 0.514);
     border-radius: 8px;
     padding: 2em;
     width: 400px;
 }
-.wrapper #registration article .row .col-12 form:invalid > #submit {
+
+.wrapper #registration article .row .col-12 form:invalid>#submit {
     /* Disattiva il bottone di submit finche il form non è valido*/
     pointer-events: none;
-    background-color: gray; /*TODO colore migliore*/
+    background-color: gray;
+    /*TODO colore migliore*/
 }
-.wrapper #registration article .row .col-12 form label{
+
+.wrapper #registration article .row .col-12 form label {
     text-transform: uppercase;
     color: white;
 }
-.wrapper #registration article .row .col-12 form input[type=text], .wrapper #registration article .row .col-12 form input[type=password], .wrapper #registration article .row .col-12 form input[type=email]{
+
+.wrapper #registration article .row .col-12 form input[type=text],
+.wrapper #registration article .row .col-12 form input[type=password],
+.wrapper #registration article .row .col-12 form input[type=email] {
     width: 100%;
     padding: 10px;
     margin: 0.5em 0;
     border-radius: 8px;
     border: 2px solid rgba(0, 0, 0, 0);
 }
-.wrapper #registration article .row .col-12 form input[type=text]:invalid:not(:placeholder-shown), .wrapper #registration article .row .col-12 form input[type=email]:invalid:not(:placeholder-shown), .wrapper #registration article .row .col-12 form input[type=password]:invalid:not(:placeholder-shown){
+
+.wrapper #registration article .row .col-12 form input[type=text]:invalid:not(:placeholder-shown),
+.wrapper #registration article .row .col-12 form input[type=email]:invalid:not(:placeholder-shown),
+.wrapper #registration article .row .col-12 form input[type=password]:invalid:not(:placeholder-shown) {
     border: 2px solid red;
 }
-.wrapper #registration article .row .col-12 form input[type=reset]{
+
+.wrapper #registration article .row .col-12 form input[type=reset] {
     margin: 0.5em 0;
     border: none;
     background-color: rgb(129, 14, 20);
@@ -547,10 +645,12 @@ font-weight: bold;
     width: 49%;
     padding: 10px;
 }
-.wrapper #registration article .row .col-12 form input[type=reset]:hover{
+
+.wrapper #registration article .row .col-12 form input[type=reset]:hover {
     background-color: rgb(184, 53, 60);
 }
-.wrapper #registration article .row .col-12 form input[type=submit]{
+
+.wrapper #registration article .row .col-12 form input[type=submit] {
     margin: 0.5em 0;
     border: none;
     background-color: rgb(14, 64, 129);
@@ -560,89 +660,112 @@ font-weight: bold;
     font-weight: bold;
     width: 49%;
     padding: 10px;
-}   
-.wrapper #registration article .row .col-12 form input[type=submit]:hover{
+}
+
+.wrapper #registration article .row .col-12 form input[type=submit]:hover {
     background-color: rgb(62, 113, 179);
 }
-.wrapper #registration article .row .col-12 form .bottom ul{
+
+.wrapper #registration article .row .col-12 form .bottom ul {
     margin-top: 0.5em;
     display: flex;
     justify-content: space-between;
     list-style: none;
 }
-.wrapper #registration article .row .col-12 form .bottom ul li a{
-    text-decoration: none; 
+
+.wrapper #registration article .row .col-12 form .bottom ul li a {
+    text-decoration: none;
     text-transform: uppercase;
     color: white;
     font-size: 15px;
 }
 
 /* ====== User Page ======== */
-#userName{
+#profile aside{
+    margin: 0.5em 0;
+}
+#userName {
     text-transform: uppercase;
 }
-#informations {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url("../IMG/cover.jpg");
-    min-height: 300px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  
-   #informations .profile-image img {
+
+#profile .profile-image img {
     height: 8em;
     width: 8em;
     border-radius: 100%;
-    border: 5px solid white;
-  }
-  #mainUser{
-      margin: 1em 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-  }
-  #profile{
-      border-right: 1px solid black;
-      padding: 1em;
-  }
-  #scroccoLevel{
-      margin-top: 1em;  
-      padding: 0.5em;
-      text-transform: uppercase;
-      border: 2px solid gold;
-      background-color: rgba(30, 30, 138, 0.801);
-      color: gold;
-      border-radius: 8px;
-  }
-  #content{
-      padding: 1em;
-  }
-  #trips .next-trips h3, .previus-trips h3{
-      cursor: pointer;
-      text-transform: uppercase;    
-      font-size: 15px;
-      padding: 0.5em 0;
-      border-bottom: 1px solid black;
-  }
-  #trips .next-trips p, #trips .previus-trips p{
-      margin: 1em 0;
-  }
+    border: 3px solid rgba(63, 63, 63, 0.747);
+}
 
-@media screen and (max-width: 992px){
+#mainUser {
+    margin: 1em 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#profile {
+    border-right: 1px solid black;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#scroccoLevel {
+    text-decoration: none;
+    color: gold;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+    border: 2px solid gold;
+    padding: 0.5em;
+    border-radius: 8px;
+    background-color: rgb(80, 20, 245);
+    text-transform: uppercase;
+}
+#content {
+    padding: 1em;
+}
+
+#trips .next-trips h3,
+.previus-trips h3 {
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 15px;
+    padding: 0.5em 0;
+    border-bottom: 1px solid black;
+}
+
+#trips .next-trips p,
+#trips .previus-trips p {
+    margin: 1em 0;
+}
+/* ========= livello di scrocco page ======= */
+#levels .row{
+    align-items: center;
+    margin: 2em 0;
+}
+#levels .row .col-6 h3{
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 300;
+}
+
+@media screen and (max-width: 992px) {
+
     /* ====== Generale ====== */
-    .line{
+    .line {
         width: 30px;
         height: 3px;
         background-color: white;
         margin: 5px;
     }
-    nav{
+
+    nav {
         position: relative;
     }
-    .hamburger{
+
+    .hamburger {
         position: absolute;
         cursor: pointer;
         right: 5%;
@@ -650,170 +773,230 @@ font-weight: bold;
         transform: translate(-5%, -50%);
         z-index: 2;
     }
-    .nav-links{
+
+    .nav-links {
         position: fixed;
         background-color: #3AAFA9;
         height: 100vh;
         width: 100%;
         flex-direction: column;
-        clip-path: circle( 100px at 90% -20%);
-        -webkit-clip-path: circle( 100px at 90% -20%);
+        clip-path: circle(100px at 90% -20%);
+        -webkit-clip-path: circle(100px at 90% -20%);
         transition: all 1s ease-out;
         pointer-events: none;
         top: 2%;
-        
+
     }
-    .nav-links li{
+
+    .nav-links li {
         opacity: 0;
     }
-    .nav-links li a{
+
+    .nav-links li a {
         font-size: 25px;
     }
-    .nav-links li:nth-child(1){
+
+    .nav-links li:nth-child(1) {
         transition: all 0.5s ease 0.2s;
     }
-    .nav-links li:nth-child(2){
+
+    .nav-links li:nth-child(2) {
         transition: all 0.5s ease 0.4s;
     }
-    .nav-links li:nth-child(3){
+
+    .nav-links li:nth-child(3) {
         transition: all 0.5s ease 0.6s;
     }
-    li.fade{
+
+    li.fade {
         opacity: 1;
     }
-    .nav-links.open{
-        clip-path: circle( 1000px at 90% -20%);
-        -webkit-clip-path: circle( 1500px at 90% -30%);
+
+    .nav-links.open {
+        clip-path: circle(1000px at 90% -20%);
+        -webkit-clip-path: circle(1500px at 90% -30%);
         pointer-events: all;
     }
-    nav .col-12 .col-6:nth-child(1){
+
+    nav .col-12 .col-6:nth-child(1) {
         display: none;
     }
-    .col-6.login .log{
+
+    .col-6.login .log {
         display: flex;
         float: left;
         margin-left: 2em;
     }
-    .log li a{
+
+    .log li a {
         margin-right: 0.5em;
     }
-    .col-3, .col-4, .col-6, .col-8{
+
+    .col-3,
+    .col-4,
+    .col-6,
+    .col-8 {
         width: 100%;
     }
-    .row{
+
+    .row {
         flex-direction: column;
     }
-    .footer .top .row .col-12{
+
+    .footer .top .row .col-12 {
         flex-direction: column;
     }
-    .footer .top .row .col-12 .col-3 p{
+
+    .footer .top .row .col-12 .col-3 p {
         margin: 1em 0;
     }
-    .footer .top .row .col-12 .col-3 .voices{
+
+    .footer .top .row .col-12 .col-3 .voices {
         margin: 0.5em 0;
     }
-    .footer .bottom .row .col-12{
+
+    .footer .bottom .row .col-12 {
         margin-left: 0;
         margin-right: 0;
         flex-direction: column;
     }
-    .footer .bottom .row .col-12 .col-8 h3{
+
+    .footer .bottom .row .col-12 .col-8 h3 {
         text-align: center;
     }
-    .footer .bottom .row .col-12 .col-4 p{
+
+    .footer .bottom .row .col-12 .col-4 p {
         text-align: center;
     }
+
     /* ======= Home ======= */
-    #main .row .col-3{
+    #main .row .col-3 {
         margin: 0;
         padding: 0;
         margin-bottom: 1em;
     }
-    #main .row .adv{
+
+    #main .row .adv {
         flex-direction: column;
     }
-    #comments .row.rev{
+
+    #comments .row.rev {
         flex-direction: column;
     }
+
     /*  ======== About ======= */
-    .wrapper #about .row article{
+    .wrapper #about .row article {
         flex-direction: column;
         height: auto;
         padding: 1em;
     }
-    .wrapper #about .row h1{
+
+    .wrapper #about .row h1 {
         text-align: center;
     }
-    .wrapper #about .row article .col-6{
+
+    .wrapper #about .row article .col-6 {
         padding-top: 1em;
     }
-    .aboutIMG img{
+
+    .aboutIMG img {
         width: 300px;
         height: auto;
     }
-    .footer .bottom .row .col-12 .col-4{
+
+    .footer .bottom .row .col-12 .col-4 {
         margin-top: 0.5em;
         flex-direction: column;
         align-items: center;
     }
-    .footer .bottom .row .col-12 .col-4 .payIMG img{
+
+    .footer .bottom .row .col-12 .col-4 .payIMG img {
         margin-top: 0.5em;
     }
+
     /* ======== Contact ====== */
-    .bg-contact  .row .col-12{
+    .bg-contact .row .col-12 {
         flex-direction: column;
         margin: 1em 0;
     }
-    .bg-contact .row .col-12 h1{
+
+    .bg-contact .row .col-12 h1 {
         font-size: 40px;
     }
-    #contact .row .col-12.map{
+
+    #contact .row .col-12.map {
         flex-direction: column;
     }
-    #contact .row .col-12.map .col-6{
+
+    #contact .row .col-12.map .col-6 {
         padding: 0.5em;
         margin: 0;
     }
-    .bg-contact  .row .col-12 form{
+
+    .bg-contact .row .col-12 form {
         margin: 1em;
     }
-    #contact article .row .col-12 ul{
+
+    #contact article .row .col-12 ul {
         flex-direction: column;
     }
-    #contact article .row .col-12 ul li p{
+
+    #contact article .row .col-12 ul li p {
         margin-bottom: 0.5em;
     }
+
     /* ====== Access ======= */
     .wrapper #access article .row .col-12 {
         padding: 0.5em;
     }
+
     /* ======= Registration ====== */
-    .fristlastname{
+    .fristlastname {
         flex-direction: column;
     }
-    .fristlastname .col-6:first-child{
+
+    .fristlastname .col-6:first-child {
         margin: 0;
     }
+
     .wrapper #registration article .row .col-12 {
         padding: 0.5em;
     }
+
     /* ============== Mezzi ================= */
 
-    #mezzi{
-    flex-direction:column;
-    }
-    .bestMezzi{
-        width: 100%;
-    }
-    /* ====== Hotel ======= */
-    .besthotel{
-        width: 100%;
-    }
-    /* ==== User page ====== */
-    #profile{
-        border:none;
-    }
-    #mainUser{
+    #mezzi {
         flex-direction: column;
     }
+
+    .bestMezzi {
+        width: 100%;
+    }
+
+    /* ====== Hotel ======= */
+    .besthotel {
+        width: 100%;
+    }
+
+    /* ==== User page ====== */
+    #profile {
+        border: none;
+    }
+
+    #mainUser {
+        flex-direction: column;
+    }
+    /* ========= livello di scrocco page ======= */
+    #levels .row .col-6{
+        margin: 1em 0;
+        padding: 0 0.5em;
+    }
+#levels .row.rev{
+    flex-direction: column-reverse;
+}
+#levels .row .col-6 h3{
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 300;
+}
 }
