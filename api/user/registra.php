@@ -5,22 +5,19 @@
     header("Access-Control-Allow-Methods: POST");
     header("Access-Control-Max-Age: 3600");
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
+    include("../config/MongoDB.php");
     require_once "../models/User.php";
 
     $new_user = json_decode(file_get_contents("php://input"));
 
     try {
-        $mng = new MongoDB\Driver\Manager( "mongodb://scroking.ddns.net:27017");
+        $mongo = new MongoDB();
 
-        if(isset($new_user->username) && isset($new_user->password)) {
-            $bulk = new MongoDB\Driver\BulkWrite();
-            
-            //$doc = new User(new MongoDB\BSON\ObjectID(), "marco", "cacca", "pipi", "pupu", "ff", "fff");
-            $doc = ['_id' => new MongoDB\BSON\ObjectID(), 'username' => $new_user->username, 'password' => hash('sha512', $new_user->password)];
+        if(isset($new_user->username) && isset($new_user->password) && isset($new_user->name) && isset($new_user->surname) && isset($new_user->email)) {
 
-            $bulk->insert($doc);
-            $mng->executeBulkWrite('scroKING.user', $bulk);
+             $doc = new User( new MongoDB\BSON\ObjectID(),$new_user->name ,$new_user->surname,$new_user->email, $new_user->username , $new_user->password);
+
+             $mongo->WriteQuery($doc);
             
             http_response_code(200);
             echo json_encode(array("message" => "Registrazione effettuata correttamente."));

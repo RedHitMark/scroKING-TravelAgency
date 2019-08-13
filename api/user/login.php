@@ -5,16 +5,19 @@
     header("Access-Control-Allow-Methods: POST");
     header("Access-Control-Max-Age: 3600");
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+    include("../config/MongoDB.php");
 
     $login = json_decode(file_get_contents("php://input"));
 
-   
+
 
     try {
-        $mng = new MongoDB\Driver\Manager( "mongodb://scroking.ddns.net:27017");
+        $mongo = new MongoDB();
+
+
         $query = new MongoDB\Driver\Query( [ 'username' => $login->username, 'password' => hash('sha512', $login->password) ] );
 
-        $rows = $mng->executeQuery("scroKING.user", $query);
+        $rows = $mongo->ReadQuery($query);
 
         $count = 0;
         foreach ($rows as $row) {
