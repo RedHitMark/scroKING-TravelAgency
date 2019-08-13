@@ -67,11 +67,9 @@
     function login_button(event) {
         event.preventDefault();
 
-        console.log( hex_sha512(document.getElementById("password").value) );
-
         var login_data = {
             username: document.getElementById("username").value,
-            password: document.getElementById("password").value
+            password: hex_sha512(document.getElementById("password").value)
         }
 
         post("api/user/login.php", login_ok, login_error, login_data);
