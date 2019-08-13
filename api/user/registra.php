@@ -16,6 +16,7 @@
         if(isset($new_user->username) && isset($new_user->password)) {
             $bulk = new MongoDB\Driver\BulkWrite();
             
+            //$doc = new User(new MongoDB\BSON\ObjectID(), "marco", "cacca", "pipi", "pupu", "ff", "fff");
             $doc = ['_id' => new MongoDB\BSON\ObjectID(), 'username' => $new_user->username, 'password' => hash('sha512', $new_user->password)];
 
             $bulk->insert($doc);
