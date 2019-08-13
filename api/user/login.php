@@ -15,7 +15,7 @@
         $mongo = new MongoDB();
 
 
-        $query = new MongoDB\Driver\Query( [ 'username' => $login->username, 'password' => hash('sha512', $login->password) ] );
+        $query = new MongoDB\Driver\Query( [ 'username' => $login->username, 'password' => $login->password ] );
 
         $rows = $mongo->ReadQuery($query);
 
