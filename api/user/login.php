@@ -29,10 +29,7 @@
             session_start();
             $_SESSION['username'] = $login->username;
             
-            /*if(isset($login->username)){
-            }else {
-                fai qualcosa 
-            }*/
+            
             echo json_encode(array("message" => "Login effettuata correttamente."));
             
         } else {
