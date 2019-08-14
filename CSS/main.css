@@ -198,14 +198,13 @@ nav .col-12 .col-6 .log li .enter {
 }
 
 /* =======Home======= */
-.bg-img {
-    background-image: url("../IMG/island.jpg");
-
-    min-height: 480px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.slider {
+    width: 100%;
 }
+.slider div img{
+    width: 100%;
+}
+
 
 #main .row .adv {
     display: flex;
@@ -681,9 +680,10 @@ nav .col-12 .col-6 .log li .enter {
 }
 
 /* ====== User Page ======== */
-#profile aside{
+#profile aside {
     margin: 0.5em 0;
 }
+
 #userName {
     text-transform: uppercase;
 }
@@ -723,6 +723,7 @@ nav .col-12 .col-6 .log li .enter {
     background-color: rgb(80, 20, 245);
     text-transform: uppercase;
 }
+
 #content {
     padding: 1em;
 }
@@ -740,12 +741,14 @@ nav .col-12 .col-6 .log li .enter {
 #trips .previus-trips p {
     margin: 1em 0;
 }
+
 /* ========= livello di scrocco page ======= */
-#levels .row{
+#levels .row {
     align-items: center;
     margin: 2em 0;
 }
-#levels .row .col-6 h3{
+
+#levels .row .col-6 h3 {
     text-transform: uppercase;
     text-align: center;
     font-weight: 300;
@@ -951,12 +954,8 @@ nav .col-12 .col-6 .log li .enter {
     }
 
     /* ======= Registration ====== */
-    .fristlastname {
+    .firstlastname {
         flex-direction: column;
-    }
-
-    .fristlastname .col-6:first-child {
-        margin: 0;
     }
 
     .wrapper #registration article .row .col-12 {
@@ -986,17 +985,20 @@ nav .col-12 .col-6 .log li .enter {
     #mainUser {
         flex-direction: column;
     }
+
     /* ========= livello di scrocco page ======= */
-    #levels .row .col-6{
+    #levels .row .col-6 {
         margin: 1em 0;
         padding: 0 0.5em;
     }
-#levels .row.rev{
-    flex-direction: column-reverse;
-}
-#levels .row .col-6 h3{
-    text-transform: uppercase;
-    text-align: center;
-    font-weight: 300;
-}
+
+    #levels .row.rev {
+        flex-direction: column-reverse;
+    }
+
+    #levels .row .col-6 h3 {
+        text-transform: uppercase;
+        text-align: center;
+        font-weight: 300;
+    }
 }
