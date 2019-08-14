@@ -1,4 +1,5 @@
 <?php
+    include("../config/timestamp.php");
     session_start();
 
     if(isset($_SESSION['username']) && isset($_SESSION['datalogin'])){
@@ -10,4 +11,11 @@
 
     }
 
+    /*
+    $differenza = getTimestamp() - $_SESSION['datalogin'];
+
+    if($differenza == $oneHour){
+
+    }
+    */
 ?>
