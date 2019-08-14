@@ -7,6 +7,7 @@
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
     include("../config/MongoDB.php");
     include("../config/timestamp.php");
+    include("../config/session.php");
 
     $login = json_decode(file_get_contents("php://input"));
 
@@ -27,7 +28,7 @@
 
         if($count == 1) {
             http_response_code(200);
-            session_start();
+            sessionInit();
             
             $_SESSION['username'] = $login->username;
             $_SESSION['datalogin'] = getTimestamp();

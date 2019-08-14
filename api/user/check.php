@@ -1,5 +1,6 @@
 <?php
     include("../config/timestamp.php");
+    include("../config/session.php");
     session_start();
 
     if(isset($_SESSION['username']) && isset($_SESSION['datalogin'])){
