@@ -6,6 +6,7 @@
     header("Access-Control-Max-Age: 3600");
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
     include("../config/MongoDB.php");
+    include("../config/timestamp.php");
 
     $login = json_decode(file_get_contents("php://input"));
 
@@ -15,7 +16,7 @@
         $mongo = new MongoDB();
 
 
-        $query = new MongoDB\Driver\Query( [ 'username' => $login->username, 'password' => $login->password ] );
+        $query = new MongoDB\Driver\Query( [ 'username' => $login->username, 'password' => $login->password   ] );
 
         $rows = $mongo->ReadQuery($query);
 
@@ -27,7 +28,10 @@
         if($count == 1) {
             http_response_code(200);
             session_start();
+            
             $_SESSION['username'] = $login->username;
+            $_SESSION['datalogin'] = getTimestamp();
+           
             
             
             echo json_encode(array("message" => "Login effettuata correttamente."));
