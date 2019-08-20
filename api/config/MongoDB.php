@@ -1,10 +1,12 @@
 <?php
 
-use MongoDB\Driver\BulkWrite;
-
 class MongoDB {
     private $manager;
 
+    /**
+     * MongoDB constructor.
+     * @throws \MongoDB\Driver\Exception\Exception
+     */
     public function __construct() {
         try {
             $this->manager = new MongoDB\Driver\Manager("mongodb://scroking.ddns.net:27017");
@@ -15,11 +17,21 @@ class MongoDB {
     }
 
 
+    /**
+     * @param $query
+     * @return \MongoDB\Driver\Cursor
+     * @throws \MongoDB\Driver\Exception\Exception\
+     * @throws \MongoDB\Driver\Exception\Exception
+     */
     public function ReadQuery($query ) {
+
         $rows = $this->manager->executeQuery("scroKING.user", $query);
         return $rows;
     }
 
+    /**
+     * @param $doc object to write
+     */
     public function WriteQuery($doc){
         $bulk = new MongoDB\Driver\BulkWrite();
 
