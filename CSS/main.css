@@ -199,6 +199,7 @@ nav .col-12 .col-6 .log li .enter {
 
 /* =======Home======= */
 .slider {
+    margin: 2em 0 0 0;
     width: 100%;
 }
 
@@ -367,7 +368,8 @@ nav .col-12 .col-6 .log li .enter {
     font-size: 0.8em;
     margin-bottom: 2em;
 }
-#main.scroll{
+
+#main.scroll {
     margin: 1em 0 2em 0;
 }
 

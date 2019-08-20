@@ -1,7 +1,9 @@
 <?php
-    session_start();
-    session_destroy();
+     include("../config/session.php");
 
-    echo json_encode(array("message" => "logout effettuata correttamente."));
-    exit();
-    ?>
+     sessionInit();
+     sessionDestroY();
+
+    
+
+?>
