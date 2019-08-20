@@ -2,7 +2,7 @@
      include("../config/session.php");
 
      sessionInit();
-     sessionDestroY();
+     sessionDestroy();
 
     
 
