@@ -30,14 +30,11 @@
             http_response_code(200);
             sessionInit();
             
+            $_SESSION['id'] = 'LE SCOREGGE DI MARCO PUZZANO DI GORGONZOLA';
             $_SESSION['username'] = $login->username;
-            $_SESSION['datalogin'] = getTimestamp();
-
-            
-           
-            
-            
-            echo json_encode(array("message" => "Login effettuata correttamente."));
+            $_SESSION['timestamp'] = getTimestamp();
+               
+             echo json_encode(array("message" => "Login effettuata correttamente."));
             
         } else {
             http_response_code(400);
