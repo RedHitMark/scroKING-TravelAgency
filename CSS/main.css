@@ -737,6 +737,11 @@ nav .col-12 .col-6 .log li .enter {
     padding: 1em;
 }
 
+.tableprenotazioni {
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 20%;
+}
 
 /* ========= livello di scrocco page ======= */
 #levels .row {
