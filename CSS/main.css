@@ -732,21 +732,17 @@ nav .col-12 .col-6 .log li .enter {
     background-color: rgb(80, 20, 245);
     text-transform: uppercase;
 }
+.buttons{
+    display: flex;
+    width: 100%;
+}
+.buttons .booking, .buttons .portafoglio{
+    width: 50%;
+    cursor: pointer;
+}
 
 #content {
     padding: 1em;
-}
-
-.tableprenotazioni{
-    text-align: center;
-    border: 1px solid black;
-    border-radius: 20%;
-}
-
-.wallet{
-    text-align: center;
-    border: 1px solid black;
-    border-radius: 20%;
 }
 
 /* ========= livello di scrocco page ======= */

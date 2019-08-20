@@ -27,19 +27,34 @@
     
 // });
     
-$('.tableprenotazioni').hide();
+$('#wallet').hide();
 let visible = false;
-$('.tableprenotazioni').click(function(e)
+let visibleWallet = false;
+$('.booking').click(function(e)
 {
     
     if(visible == true){
-        $('.tabellaprenotazioni').toggle("slow");
+        $('#prenotazionihistory').toggle("slow");
         visible =false;
     
     }else if(visible == false)
     {
-        $('.tabellaprenotazioni').hide();
+        $('#prenotazionihistory').hide();
         visible = true;
+    }
+
+}); 
+$('.portafoglio').click(function(e)
+{
+    
+    if(visibleWallet == true){
+        $('#wallet').toggle("slow");
+        visibleWallet =false;
+    
+    }else if(visibleWallet == false)
+    {
+        $('#wallet').hide();
+        visibleWallet = true;
     }
 
 }); 
