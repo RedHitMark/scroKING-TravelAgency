@@ -745,6 +745,11 @@ nav .col-12 .col-6 .log li .enter {
     padding: 1em;
 }
 
+.portafoglio img{
+    width: 75px;
+    height: auto;
+}
+
 /* ========= livello di scrocco page ======= */
 #levels .row {
     align-items: center;
