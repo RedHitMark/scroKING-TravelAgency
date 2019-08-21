@@ -707,8 +707,8 @@ nav .col-12 .col-6 .log li .enter {
 #mainUser {
     margin: 1em 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 #profile {
@@ -739,6 +739,7 @@ nav .col-12 .col-6 .log li .enter {
     align-items: flex-start;
     width: 100%;
 }
+
 .buttons .booking, .buttons .portafoglio{
     align-items: center;
     display: flex;
