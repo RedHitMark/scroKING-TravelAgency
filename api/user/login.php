@@ -11,41 +11,48 @@
     include("../config/timestamp.php");
     include("../config/session.php");
 
-    //query params
+    //login params from http body
     $login = json_decode(file_get_contents("php://input"));
 
     try {
-        //new mongo instance
-        $mongo = new MongoDB();
+        if(  (isset($login->username) || isset($login->email) ) && isset($login->password) ) {
+            //new mongo instance
+            $mongo = new MongoDB();
 
+            //object
+            $results = $mongo->ReadQuery("scroKING", "user", [ 'username' => $login->username, 'password' => $login->password ]);
 
-        $results = $mongo->ReadQuery([ 'username' => $login->username, 'password' => $login->password   ]);
+            if($results->getNumResults() == 1) {
+                //if there ONLY ONE user matching
+                $user = $results->getResults()['0'];
 
+                //init session
+                sessionInit();
 
-        if($results->getNumResults() == 1) {
-            $user = $results->getResults()['0'];
-            //if there ONLY ONE user matching
-            sessionInit();
-            
-            $_SESSION['id'] = 'LE SCOREGGE DI MARCO PUZZANO DI GORGONZOLA';
-            $_SESSION['username'] = $user->username;
-            $_SESSION['timestamp'] = getTimestamp();
+                //set session value
+                sessionSet('id', 'LE SCOREGGE DI MARCO PUZZANO DI GORGONZOLA');
+                sessionSet('username', $user->username);
+                sessionSet('timestamp', getTimestamp());
 
-
-            http_response_code(200);
-            echo json_encode(array("message" => "Login effettuata correttamente."));
+                //response: 200 OK
+                http_response_code(200);
+                echo json_encode(array("message" => "Login effettuata correttamente."));
+            } else {
+                    //response: 401 Unauthorized
+                http_response_code(401);
+                echo json_encode(array("message" => "Login errata."));
+            }
         } else {
+            //response: 400 Bed Request
             http_response_code(400);
-            echo json_encode(array("message" => "Login errata."));
+            echo json_encode(array("message" => "Parametri mancanti."));
         }
-
-        
     } catch (MongoDB\Driver\Exception\Exception $e) {
-        //internal server error
+        //response: 500 Internal Server Error
         http_response_code(500);
-        echo json_encode(array("message" => "Configurazione errata."));
+        echo json_encode(array("message" => "Configurazione server errata."));
     }
 
-   
 
-    ?>
+
+?>

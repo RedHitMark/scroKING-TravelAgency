@@ -14,6 +14,7 @@ function post(url, success_f, error_f, data) {
             statusCode: {
                 200 : success_f,
                 400: error_f,
+                401: error_f,
                 500: error_f
             }
         });
