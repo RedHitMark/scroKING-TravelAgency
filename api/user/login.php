@@ -19,23 +19,16 @@
         $mongo = new MongoDB();
 
 
-        $query = new MongoDB\Driver\Query( [ 'username' => $login->username, 'password' => $login->password   ] );
-
-        $rows = $mongo->ReadQuery($query);
-
-        //@TODO migliorare questa roba al più presto possibile
-        $count = 0;
-        foreach ($rows as $row) {
-            $count++;
-        }
+        $results = $mongo->ReadQuery([ 'username' => $login->username, 'password' => $login->password   ]);
 
 
-        if($count == 1) {
+        if($results->getNumResults() == 1) {
+            $user = $results->getResults()['0'];
             //if there ONLY ONE user matching
             sessionInit();
             
             $_SESSION['id'] = 'LE SCOREGGE DI MARCO PUZZANO DI GORGONZOLA';
-            $_SESSION['username'] = $login->username;
+            $_SESSION['username'] = $user->username;
             $_SESSION['timestamp'] = getTimestamp();
 
 

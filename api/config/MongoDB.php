@@ -1,5 +1,6 @@
 <?php
 
+include("Result.php");
 class MongoDB {
     private $manager;
 
@@ -19,14 +20,22 @@ class MongoDB {
 
     /**
      * @param $query
-     * @return \MongoDB\Driver\Cursor
+     * @return
      * @throws \MongoDB\Driver\Exception\Exception\
      * @throws \MongoDB\Driver\Exception\Exception
      */
-    public function ReadQuery($query ) {
+    public function ReadQuery($filter, $projection = null, $sort = null) {
+        $query = new MongoDB\Driver\Query($filter);
 
-        $rows = $this->manager->executeQuery("scroKING.user", $query);
-        return $rows;
+        $docs = $this->manager->executeQuery("scroKING.user", $query);
+
+        $result = new Result();
+
+        foreach ($docs as $doc) {
+            $result->addElement($doc);
+        }
+
+        return $result;
     }
 
     /**
