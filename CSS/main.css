@@ -734,21 +734,74 @@ nav .col-12 .col-6 .log li .enter {
 }
 .buttons{
     display: flex;
+    justify-content: space-around;
     width: 100%;
 }
 .buttons .booking, .buttons .portafoglio{
-    width: 50%;
+    position: relative;
+    top: -140pt;
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    border: solid 1px black;
+    border-radius: 50px;
+    width: 10%;
+    height: 10%;
     cursor: pointer;
+    background: mediumaquamarine;
 }
 
 #content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     padding: 1em;
 }
 
 .portafoglio img{
+    text-align: center;
     width: 75px;
     height: auto;
 }
+
+.portafoglio p { 
+    font-size: 13pt;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    position: absolute; 
+    left: 0; 
+    bottom: 0; 
+    background: none repeat scroll 0 0; 
+    color:red; 
+    display: none; 
+    width: 100%; 
+    padding: 10px; 
+} 
+
+.portafoglio:hover p { 
+    display:block; 
+} 
+
+.booking i{
+    font-size: 30px;
+    margin: 6px;
+}
+
+.booking p{
+    font-size: 9pt;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    position: absolute; 
+    left: 0; 
+    bottom: 0; 
+    background: none repeat scroll 0 0; 
+    color: white; 
+    display: none; 
+    width: 100%; 
+    padding: 10px; 
+}
+
+.booking:hover p { 
+    display:block; 
+} 
 
 /* ========= livello di scrocco page ======= */
 #levels .row {
