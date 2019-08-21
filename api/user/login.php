@@ -30,7 +30,7 @@
 
                 //save login log in db
                 $loginLog = new LoginLog(getTimestamp(), getClientIp(), $user->_id, "OK");
-                $mongo->WriteQuery("scroKING", "LoginLogs", $loginLog);
+                $mongo->WriteOneQuery("scroKING", "LoginLogs", $loginLog);
 
                 //init session
                 sessionInit();
