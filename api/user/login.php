@@ -8,8 +8,10 @@
 
     //include
     include("../config/MongoDB.php");
+    include("../models/LoginLog.php");
     include("../config/timestamp.php");
     include("../config/session.php");
+    include("../config/client.php");
 
     //login params from http body
     $login = json_decode(file_get_contents("php://input"));
@@ -26,6 +28,10 @@
                 //if there ONLY ONE user matching
                 $user = $results->getResults()['0'];
 
+                //save login log in db
+                $loginLog = new LoginLog(getTimestamp(), getClientIp(), $user->_id, "OK");
+                $mongo->WriteQuery("scroKING", "LoginLogs", $loginLog);
+
                 //init session
                 sessionInit();
 
@@ -38,7 +44,7 @@
                 http_response_code(200);
                 echo json_encode(array("message" => "Login effettuata correttamente."));
             } else {
-                    //response: 401 Unauthorized
+                //response: 401 Unauthorized
                 http_response_code(401);
                 echo json_encode(array("message" => "Login errata."));
             }

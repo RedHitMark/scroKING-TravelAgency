@@ -48,13 +48,15 @@ class MongoDB {
     /**
      * @param $doc object to write
      */
-    public function WriteQuery($doc){
+    public function WriteQuery(string $db, string $collection, $doc){
+        $namespace = $db . "." . $collection;
+
         $bulk = new MongoDB\Driver\BulkWrite();
 
         try {
 
             $bulk->insert($doc);
-            $this->manager->executeBulkWrite('scroKING.user', $bulk);
+            $this->manager->executeBulkWrite($namespace, $bulk);
 
         }catch(MongoDB\Driver\Exception\BulkWriteException $e){
             throw $e;

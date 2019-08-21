@@ -17,7 +17,7 @@
 
              $doc = new User( new MongoDB\BSON\ObjectID(),$new_user->name ,$new_user->surname,$new_user->email, $new_user->username , $new_user->password);
 
-             $mongo->WriteQuery($doc);
+             $mongo->WriteQuery("scroKING", "LoginLogs", $doc);
             
             http_response_code(200);
             echo json_encode(array("message" => "Registrazione effettuata correttamente."));
