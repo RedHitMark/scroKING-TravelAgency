@@ -21,7 +21,7 @@ try {
     $mongo = new MongoDB();
 
     //object
-    $results = $mongo->ReadQuery("scroKING", "user");
+    $results = $mongo->ReadQuery("scroKING", "Users");
 
     //response: 200 OK
     http_response_code(200);
@@ -29,7 +29,7 @@ try {
 } catch (MongoDB\Driver\Exception\Exception $e) {
     //response: 500 Internal Server Error
     http_response_code(500);
-    echo json_encode(array("message" => "Configurazione server errata."));
+    echo json_encode(array("message" =>  $e->getMessage()));
 }
 
 
