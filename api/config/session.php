@@ -5,11 +5,11 @@ function sessionInit(){
     session_start();
 }
 
-function sessionSet(string $key, string $value) {
+function sessionSet($key, $value) {
     $_SESSION[$key] = $value;
 }
 
-function sessionGet(string $key) {
+function sessionGet($key) {
     return $_SESSION[$key];
 }
 

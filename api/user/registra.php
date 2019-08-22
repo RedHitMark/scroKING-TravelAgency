@@ -13,11 +13,12 @@
     try {
         $mongo = new MongoDB();
 
+        //@TODO controllare se non esiste gia un tizio registrato con stesso username ed email
         if(isset($new_user->username) && isset($new_user->password) && isset($new_user->name) && isset($new_user->surname) && isset($new_user->email)) {
 
              $doc = new User( new MongoDB\BSON\ObjectID(),$new_user->name ,$new_user->surname,$new_user->email, $new_user->username , $new_user->password);
 
-             $mongo->WriteQuery("scroKING", "LoginLogs", $doc);
+             $mongo->WriteOneQuery("scroKING", "Users", $doc);
             
             http_response_code(200);
             echo json_encode(array("message" => "Registrazione effettuata correttamente."));
@@ -28,6 +29,6 @@
         
     } catch (MongoDB\Driver\Exception\Exception $e) {
         http_response_code(500);
-        echo json_encode(array("message" => "Configurazione errata."));
+        echo json_encode(array("message" => $e->getMessage()));
     }
 ?>

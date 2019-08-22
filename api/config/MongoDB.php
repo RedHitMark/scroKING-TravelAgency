@@ -2,7 +2,8 @@
 
 include("Result.php");
 class MongoDB {
-    private const HOST = "mongodb://scroking.ddns.net:27017";
+    //private const HOST = "mongodb://scroking.ddns.net:27017";
+    private const RS = "mongodb://scroking.ddns.net:56786,scroking.ddns.net:56787,scroking.ddns.net:56788/?replicaSet=rs0";
     private $manager;
 
     /**
@@ -11,7 +12,7 @@ class MongoDB {
      */
     public function __construct() {
         try {
-            $this->manager = new MongoDB\Driver\Manager(MongoDB::HOST);
+            $this->manager = new MongoDB\Driver\Manager(MongoDB::RS);
         } catch (MongoDB\Driver\Exception\Exception $e) {
             throw $e;
         }
@@ -20,16 +21,22 @@ class MongoDB {
 
 
     /**
-     * @param $db: name of the mongo db to query
+     * @param $db: name of the db to query
      * @param $collection: name of the collection to query
-     * @param $filter:
-     * @param null $projection:
-     * @param null $sort:
-     * @return Result
-     * @throws \MongoDB\Driver\Exception\Exception
+     * @param $filter: array of key-value
+     * @param null $projection: array of value to retrive
+     * @param null $sort: array of sort order
+     * @return Result: Result object with object
+     * @throws \MongoDB\Driver\Exception\Exception: if query went wrong
      */
-    public function ReadQuery(string $db, string $collection, $filter, $projection = null, $sort = null) {
+    public function ReadQuery(string $db, string $collection, $filter = null, $projection = null, $sort = null) {
+        //namespace is a string such "dbName.collectionName"
         $namespace = $db . "." . $collection;
+
+        //if filter is not set init as empty array filter
+        if (!isset($filter)) {
+           $filter = [];
+        }
 
         $query = new MongoDB\Driver\Query($filter);
 
@@ -46,9 +53,11 @@ class MongoDB {
     }
 
     /**
+     * @param $db: name of the db to write
+     * @param $collection: name of the collection to write
      * @param $doc object to write
      */
-    public function WriteQuery(string $db, string $collection, $doc){
+    public function WriteOneQuery(string $db, string $collection, $doc) {
         $namespace = $db . "." . $collection;
 
         $bulk = new MongoDB\Driver\BulkWrite();

@@ -22,7 +22,7 @@
             $mongo = new MongoDB();
 
             //object
-            $results = $mongo->ReadQuery("scroKING", "user", [ 'username' => $login->username, 'password' => $login->password ]);
+            $results = $mongo->ReadQuery("scroKING", "Users", [ 'username' => $login->username, 'password' => $login->password ]);
 
             if($results->getNumResults() == 1) {
                 //if there ONLY ONE user matching
@@ -30,7 +30,7 @@
 
                 //save login log in db
                 $loginLog = new LoginLog(getTimestamp(), getClientIp(), $user->_id, "OK");
-                $mongo->WriteQuery("scroKING", "LoginLogs", $loginLog);
+                $mongo->WriteOneQuery("scroKING", "LoginLogs", $loginLog);
 
                 //init session
                 sessionInit();
