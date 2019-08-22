@@ -1,5 +1,6 @@
 <?php 
 
+//require('../config/timestamp.php');
 function sessionInit(){
     session_start();
 }
@@ -18,6 +19,19 @@ function sessionDestroy(){
 
     echo json_encode(array("message" => "logout effettuata correttamente."));
     exit();
+}
+
+function sessionDestroyAferOneHour(string $key){
+
+    if(isset($_SESSION[$key])){
+        if((getTimestamp()-$_SESSION[$key]) > $oneHour){
+            sessionDestroy();
+            echo json_encode(array("message" => "logout effettuata mancanza tempo ."));
+
+        }
+    }
+
+
 }
 
 ?>
