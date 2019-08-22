@@ -21,7 +21,7 @@ try {
     $mongo = new MongoDB();
 
     //object
-    $results = $mongo->ReadQuery("scroKING", "Users");
+    $results = $mongo->ReadQuery("scroKING", "LoginLogs");
 
     //response: 200 OK
     http_response_code(200);

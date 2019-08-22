@@ -59,19 +59,39 @@
         alert("ok");
     }
 
-    function login_error() {
-        alert("mala");
+    function login_parametri_error() {
+        alert("parametri errore");
+    }
+
+    function login_username_error() {
+        alert("username errore");
+    }
+
+    function login_password_error() {
+        alert("password errore");
+    }
+
+    function login_server_error() {
+        alert("errore del server");
     }
 
     function login_button(event) {
         event.preventDefault();
 
-        var login_data = {
+        let login_data = {
             username: document.getElementById("username").value,
             password: hex_sha512(document.getElementById("password").value)
+        };
+
+        let login_functions = {
+            200: login_ok,
+            400: login_parametri_error,
+            401: login_username_error,
+            403: login_password_error,
+            500: login_server_error
         }
 
-        post("api/user/login.php", login_ok, login_error, login_data);
+        post("api/user/login.php", login_data, login_functions);
     }
 
     
