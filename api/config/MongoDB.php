@@ -2,7 +2,7 @@
 
 include("Result.php");
 class MongoDB {
-    private const HOST = "mongodb://scroking.ddns.net:27017";
+    //private const HOST = "mongodb://scroking.ddns.net:27017";
     private const RS = "mongodb://scroking.ddns.net:56786,scroking.ddns.net:56787,scroking.ddns.net:56788/?replicaSet=rs0";
     private $manager;
 
