@@ -1,11 +1,16 @@
 <?php 
 
+const FIVE_SECOND = 5000;
+const ONE_HOUR = 3600000;
+
 function getTimestamp(){
-    $time = time()*1000;
-    
-    return $time;
+    $mt = explode(' ', microtime());
+    return ((int)$mt[1]) * 1000000 + ((int)round($mt[0] * 1000000));
 }
  
-$onehour = 3600000;
+
+
+
+
 
 ?>

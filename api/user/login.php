@@ -36,7 +36,7 @@
                 sessionInit();
 
                 //set session value
-                sessionSet('id', 'LE SCOREGGE DI MARCO PUZZANO DI GORGONZOLA');
+                sessionSet('id', $user->_id);
                 sessionSet('username', $user->username);
                 sessionSet('timestamp', getTimestamp());
 
