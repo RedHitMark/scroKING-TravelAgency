@@ -19,14 +19,13 @@ function sessionDestroy(){
     session_destroy();
     // response: 401 Unauthorized
     http_response_code(401);
-    echo json_encode(array("message" => "logout effettuata correttamente."));
     exit();
 }
 
 function sessionCheckAferOneHour(){
 
         if(isset( $_SESSION['timestamp'])){
-            if((getTimestamp() - $_SESSION['timestamp']) > ONE_HOUR){
+            if((getTimestamp() - $_SESSION['timestamp']) > 5000){
                 return true;
             }else{
                return false;
