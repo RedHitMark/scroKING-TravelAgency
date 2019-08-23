@@ -16,12 +16,12 @@
         //@TODO controllare se non esiste gia un tizio registrato con stesso username ed email
         if(isset($new_user->username) && isset($new_user->password) && isset($new_user->name) && isset($new_user->surname) && isset($new_user->email)) {
 
-             $doc = new User( new MongoDB\BSON\ObjectID(),$new_user->name ,$new_user->surname,$new_user->email, $new_user->username , $new_user->password);
+             $doc = new User( $mongo->getNewIdObject(),$new_user->name ,$new_user->surname,$new_user->email, $new_user->username , $new_user->password);
 
              $mongo->WriteOneQuery("scroKING", "Users", $doc);
-            
-            http_response_code(200);
-            echo json_encode(array("message" => "Registrazione effettuata correttamente."));
+
+             http_response_code(200);
+             echo json_encode(array("message" => "Registrazione effettuata correttamente."));
         } else {
             http_response_code(400);
             echo json_encode(array("message" => "Registrazione impossibile."));

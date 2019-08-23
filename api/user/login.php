@@ -43,7 +43,7 @@
                     sessionInit();
 
                     //set session value
-                    sessionSet('id', $user->_id);
+                    sessionSet('id', $mongo->getIdFromObj($user->_id) );
                     sessionSet('username', $user->username);
                     sessionSet('timestamp', getTimestamp());
 

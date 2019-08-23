@@ -15,14 +15,10 @@ function sessionGet($key) {
 }
 
 function sessionDestroy(){
-    
     session_destroy();
-    // response: 401 Unauthorized
-    http_response_code(401);
-    exit();
 }
 
-function sessionCheckAferOneHour(){
+function sessionCheckAferOneHour(): bool {
 
         if(isset( $_SESSION['timestamp'])){
             if((getTimestamp() - $_SESSION['timestamp']) > 5000){
