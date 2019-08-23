@@ -7,11 +7,11 @@
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
     //include
-    include("../config/MongoDB.php");
-    include("../models/LoginLog.php");
-    include("../config/timestamp.php");
-    include("../config/session.php");
-    include("../config/client.php");
+    include_once("../config/MongoDB.php");
+    include_once("../models/LoginLog.php");
+    include_once("../config/timestamp.php");
+    include_once("../config/session.php");
+    include_once("../config/client.php");
     include_once("../config/security.php");
 
     //login params from http body

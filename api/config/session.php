@@ -1,6 +1,7 @@
 <?php 
 
 include_once('../config/timestamp.php');
+
 function sessionInit(){
     session_start();
 }
@@ -16,21 +17,24 @@ function sessionGet($key) {
 function sessionDestroy(){
     
     session_destroy();
-
+    // response: 401 Unauthorized
+    http_response_code(401);
     echo json_encode(array("message" => "logout effettuata correttamente."));
     exit();
 }
 
-function sessionDestroyAferOneHour(){
+function sessionCheckAferOneHour(){
 
-    if(isset($_SESSION['timestamp'])){
-        if((getTimestamp() - $_SESSION['timestamp']) > ONE_HOUR){
-            sessionDestroy();
-            echo json_encode(array("message" => "logout effettuata mancanza tempo ."));
+        if(isset( $_SESSION['timestamp'])){
+            if((getTimestamp() - $_SESSION['timestamp']) > ONE_HOUR){
+                return true;
+            }else{
+               return false;
+           }
 
         }
-    }
-
+        
+        
 
 }
 
