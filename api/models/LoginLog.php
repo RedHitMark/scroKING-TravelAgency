@@ -1,6 +1,6 @@
 <?php
 
-include("Log.php");
+include_once("Log.php");
 
 class LoginLog extends Log {
     public $userId;
