@@ -40,7 +40,7 @@ class MongoDB {
      * @return Result: Result object with object
      * @throws MongoDB\Driver\Exception\Exception: if query went wrong
      */
-    public function ReadOneQuery(string $db, string $collection, $id, $projection = null) {
+    public function ReadOneQuery(string $db, string $collection, string $id, $projection = null) {
         //namespace is a string such "dbName.collectionName"
         $namespace = $db . "." . $collection;
 

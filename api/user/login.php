@@ -49,7 +49,7 @@
 
                     //response: 200 OK
                     http_response_code(200);
-                    echo json_encode(array("message" => "Login effettuata correttamente."));
+                    echo json_encode(array("message" => "Login effettuata correttamente.", "username" => $user->username));
                 } else {
                     //password errata
                     //save login log in db
