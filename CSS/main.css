@@ -335,7 +335,9 @@ nav .col-12 .col-6 .log li .enter {
     width: 450px;
     height: 250px;
 }
-
+.row.mezzi{
+    margin-bottom: 30%;
+}
 
 /* ======= Hotel ====== */
 .row.button form {
@@ -1044,11 +1046,14 @@ nav .col-12 .col-6 .log li .enter {
     .bestMezzi {
         width: 100%;
     }
-
+    .row.mezzi{
+        margin-bottom: 0;
+    }
     /* ====== Hotel ======= */
     .besthotel {
         width: 100%;
     }
+
 
     /* ==== User page ====== */
 
