@@ -34,27 +34,46 @@ class MongoDB {
     /**
      * @param $db: name of the db to query
      * @param $collection: name of the collection to query
-     * @param $filter: array of key-value
      * @param null $projection: array of value to retrive
-     * @param null $sort: array of sort order
      * @return Result: Result object with object
      * @throws MongoDB\Driver\Exception\Exception: if query went wrong
      */
-    public function ReadOneQuery(string $db, string $collection, $id = null, $projection = null) {
+    public function ReadOneQuery(string $db, string $collection, $id, $projection = null) {
         //namespace is a string such "dbName.collectionName"
         $namespace = $db . "." . $collection;
 
-        //@TODO
+        $filter = [ "_id" => $this->getIdObjectFromExistent($id) ];
+
+        $option = [];
+
+        if(isset($projection)) {
+            foreach ($projection as $col) {
+                $option['projection'][$col] = 1;
+            }
+        }
+
+        $query = new MongoDB\Driver\Query($filter, $option);
+
+        $docs = $this->manager->executeQuery($namespace, $query);
+
+
+        $result = new Result();
+
+        foreach ($docs as $doc) {
+            $result->addElement($doc);
+        }
+
+        return $result->getResults()['0'];
     }
 
     /**
-     * @param $db: name of the db to query
-     * @param $collection: name of the collection to query
-     * @param $filter: array of key-value
-     * @param null $projection: array of value to retrive
-     * @param null $sort: array of sort order
+     * @param string $db : name of the db to query
+     * @param string $collection : name of the collection to query
+     * @param $filter : array of key-value
+     * @param array $projection : array of value to retrive
+     * @param null $sort : array of sort order
      * @return Result: Result object with object
-     * @throws MongoDB\Driver\Exception\Exception: if query went wrong
+     * @throws \MongoDB\Driver\Exception\Exception : if query went wrong
      */
     public function ReadQuery(string $db, string $collection, $filter = null, $projection = null, $sort = null) {
         //namespace is a string such "dbName.collectionName"
@@ -65,8 +84,21 @@ class MongoDB {
            $filter = [];
         }
 
-        $query = new MongoDB\Driver\Query($filter);
+        $option = [];
 
+        if(isset($projection)) {
+            foreach ($projection as $col) {
+                $option['projection'][$col] = 1;
+            }
+        }
+
+        if(isset($sort)) {
+            $option['sort'][$sort] = 1;
+        }
+
+
+
+        $query = new MongoDB\Driver\Query($filter, $option);
 
         $docs = $this->manager->executeQuery($namespace, $query);
 
@@ -125,6 +157,7 @@ class MongoDB {
     }
 
     /**
+     * TODO non usarla fino a prossime disposizioni
      * @param string $db : name of the db to query
      * @param string $collection : name of the collection to query
      * @param $id : id of the document to update

@@ -23,9 +23,16 @@ try {
 
     /*
     //read
-    $result = $mongo->ReadQuery("scroKING", "Users");
+    $result = $mongo->ReadQuery("scroKING", "Users", null, ["name", "surname"], "name");
     echo json_encode($result);
     */
+
+
+    //read one
+    $result = $mongo->ReadOneQuery("scroKING", "Users", "5d5e997784aa340a8c000f1d", ["name", "surname"]);
+    echo json_encode($result);
+
+
 
     /*
     //write
