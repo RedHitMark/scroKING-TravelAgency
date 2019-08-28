@@ -87,8 +87,8 @@
 
 <script>
     function dati_ok(json_response) {
-        alert("ok");
         console.log(json_response);
+        $( "#userName" ).html(json_response.username);
     }
 
     function dati_non_loggato(json_response) {
