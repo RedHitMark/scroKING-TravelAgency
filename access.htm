@@ -58,6 +58,11 @@
     function login_success(json_response) {
         alert("ok");
         console.log(json_response);
+        $(".nolog").css({ 'display' : 'none'});
+        $(".yeslog").css({ 'display' : 'block'});
+        const username =json_response.username;
+        $( ".benvenuto" ).html("Benvenuto, " +  username);
+
     }
 
     function login_missing_parameter(json_response) {
