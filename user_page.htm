@@ -83,5 +83,30 @@
 <script src="JS/userscroll.js"></script>
 <script src="JS/menu.js"></script>
 <script src="JS/loadheaderfooter.js"></script>
+<script src="JS/http.js"></script>
 
+<script>
+    function dati_ok(json_response) {
+        alert("ok");
+        console.log(json_response);
+    }
+
+    function dati_non_loggato(json_response) {
+        alert("Non sei loggato");
+        console.log(json_response);
+    }
+
+    function dati_internal_server_error(json_response) {
+        alert("Server non raggiungibile, riprova piu tardi");
+        console.log(json_response);
+    }
+
+    const functions = {
+        200 : dati_ok,
+        401 : dati_non_loggato, 
+        501 : dati_internal_server_error
+    };
+
+    post("api/user/read_one.php", null, functions);
+</script>
 </html>
