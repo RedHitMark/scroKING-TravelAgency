@@ -55,28 +55,29 @@
 <script src="JS/sha512.js"></script>
 <script src="JS/session.js"></script>
 <script>
-    function login_ok(response) {
+    function login_success(json_response) {
         alert("ok");
-        console.log(response);
+        console.log(json_response);
     }
 
-    function login_parametri_error() {
+    function login_missing_parameter(json_response) {
         alert("parametri errore");
     }
 
-    function login_username_error() {
+    function login_wrong_username(json_response) {
         alert("username errore");
     }
 
-    function login_password_error() {
+    function login_wrong_password(json_response) {
         alert("password errore");
     }
 
-    function login_server_error() {
+    function login_internal_server_error(json_response) {
         alert("errore del server");
     }
 
-    function login_button(event) {
+    //TODO trovare nome più consono
+    function login(event) {
         event.preventDefault();
 
         let login_data = {
@@ -85,12 +86,12 @@
         };
 
         let login_functions = {
-            200: login_ok,
-            400: login_parametri_error,
-            401: login_username_error,
-            403: login_password_error,
-            500: login_server_error
-        }
+            200: login_success,
+            400: login_missing_parameter,
+            401: login_wrong_username,
+            403: login_wrong_password,
+            500: login_internal_server_error
+        };
 
         post("api/user/login.php", login_data, login_functions);
     }
@@ -98,7 +99,7 @@
     
 
     let form = document.getElementById("loginForm");
-    form.addEventListener('submit', login_button);
+    form.addEventListener('submit', login);
     
 </script>
 
