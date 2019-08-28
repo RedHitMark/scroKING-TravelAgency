@@ -1,6 +1,7 @@
 <?php 
-
+//include
 include_once('../config/timestamp.php');
+
 
 function sessionInit(){
     session_start();
@@ -20,15 +21,22 @@ function sessionDestroy(){
 
 function sessionCheckAferOneHour(): bool {
 
-        if(isset( $_SESSION['timestamp'])){
-            if((getTimestamp() - $_SESSION['timestamp']) > 5000){
-                return true;
-            }else{
-               return false;
-           }
-
+    if(isset( $_SESSION['timestamp'])){
+        if((getTimestamp() - $_SESSION['timestamp']) > 5000) {
+            return true;
+        } else {
+            return false;
         }
-        
+
+    }
+}
+
+function isSessionSet($key){
+    if($_SESSION[$key]){
+        return true;
+    }else{
+        return false;
+    }
         
 
 }
