@@ -86,8 +86,8 @@
         event.preventDefault();
 
         let login_data = {
-            username: document.getElementById("username").value,
-            password: hex_sha512(document.getElementById("password").value)
+            username: $("#username").val(),
+            password: hex_sha512($("#password").val())
         };
 
         let login_functions = {
