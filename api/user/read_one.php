@@ -29,7 +29,7 @@ try{
     }else{
         // response: 401 Unauthorized
         http_response_code(401);
-        echo json_decode(array('message:'=> 'Non autorizzato'));
+        echo json_encode(array("message:" => "Non autorizzato"));
     }
         
 

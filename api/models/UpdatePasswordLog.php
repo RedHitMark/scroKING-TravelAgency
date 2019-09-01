@@ -2,7 +2,7 @@
 
 include_once("Log.php");
 
-class LoginLog extends Log {
+class UpdatePasswordLog extends Log {
     public $userId;
     public $result;
 

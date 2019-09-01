@@ -69,7 +69,7 @@
                 echo json_encode(array("message" => "Username errato."));
             }
         } else {
-            //response: 400 Bed Request
+            //response: 400 Bad Request
             http_response_code(400);
             echo json_encode(array("message" => "Parametri mancanti."));
         }

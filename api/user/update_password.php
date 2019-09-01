@@ -9,7 +9,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 //include
 include_once("../config/MongoDB.php");
-include_once("../models/LoginLog.php");
+include_once("../models/UpdatePasswordLog.php");
 include_once("../config/timestamp.php");
 include_once("../config/session.php");
 include_once("../config/client.php");
@@ -30,10 +30,18 @@ try {
             if($result->password == $params->old_password) {
                 $mongo->UpdateOneQuery("scroKING", "Users", sessionGet("id"), (object) ["password" => $params->new_password]);
 
+                //save update log in db
+                $updatePasswordLog = new UpdatePasswordLog(getTimestamp(), getClientIp(), sessionGet("id"), "OK");
+                $mongo->WriteOneQuery("scroKING", "UpdatePasswordLogs", $updatePasswordLog);
+
                 //response: 200  Success0
                 http_response_code(200);
                 echo json_encode(array("message" => "Password aggiornata con successo."));
             } else {
+                //save wrong update password log in db
+                $updatePasswordLog = new UpdatePasswordLog(getTimestamp(), getClientIp(), sessionGet("id"), "Vecchia password errata.");
+                $mongo->WriteOneQuery("scroKING", "UpdatePasswordLogs", $updatePasswordLog);
+
                 //response: 403 Forbidden
                 http_response_code(403);
                 echo json_encode(array("message" => "Vecchia password errata."));
