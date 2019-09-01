@@ -8,11 +8,11 @@
 
     //include
     include_once("../config/MongoDB.php");
-    include_once("../models/LoginLog.php");
     include_once("../config/timestamp.php");
     include_once("../config/Session.php");
     include_once("../config/client.php");
     include_once("../config/security.php");
+    include_once("../models/LoginLog.php");
 
     //login params from http body
     $params = json_decode(file_get_contents("php://input"));
