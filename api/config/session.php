@@ -22,7 +22,7 @@ function sessionDestroy(){
 function sessionCheckAferOneHour(): bool {
 
     if(isset( $_SESSION['timestamp'])){
-        if((getTimestamp() - $_SESSION['timestamp']) > 5000) {
+        if((getTimestamp() - $_SESSION['timestamp']) > 50000) {
             return true;
         } else {
             return false;
