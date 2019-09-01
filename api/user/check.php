@@ -8,7 +8,7 @@
         if (!sessionCheckAferOneHour()) {
             // response: 200 OK
             http_response_code(200);
-            echo json_encode(array("message"=>"sessione attiva", "utente" => $_SESSION['id'], 'data' =>  $_SESSION['timestamp']));
+            echo json_encode(array("message"=>"sessione attiva", "id_utente" => $_SESSION['id'], "username" => sessionGet("username"), 'data' =>  $_SESSION['timestamp']));
         } else {
             sessionDestroy();
 
