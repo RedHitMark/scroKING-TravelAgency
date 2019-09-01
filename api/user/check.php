@@ -7,19 +7,20 @@
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
     //include
+    include_once("../config/Session.php");
     include_once("../config/timestamp.php");
-    include_once("../config/session.php");
 
     try {
-        sessionInit();
+        //init session
+        $session = new Session();
 
-        if( isset($_SESSION['id']) && isset($_SESSION['timestamp'])) {
-            if (!sessionCheckAferOneHour()) {
+        if( $session->isset("id") &&  $session->isset("timestamp") ) {
+            if (!$session->checkAfterOneHour()) {
                 // response: 200 OK
                 http_response_code(200);
-                echo json_encode(array("message"=>"sessione attiva", "id_utente" => $_SESSION['id'], "username" => sessionGet("username"), 'data' =>  $_SESSION['timestamp']));
+                echo json_encode( array("message"=>"sessione attiva", "id" => $session->get("id"), "username" => $session->get("username"), "data" =>  $session->get('timestamp') ));
             } else {
-                sessionDestroy();
+                $session->destroy();
 
                 // response: 408 Request timeout
                 http_response_code(408);

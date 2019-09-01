@@ -8,18 +8,18 @@
 
     //include
     include_once("../config/MongoDB.php");
-    include_once("../models/LoginLog.php");
+    include_once("../config/Session.php");
     include_once("../config/timestamp.php");
-    include_once("../config/session.php");
+    include_once("../models/LoginLog.php");
 
     try{
-        sessionInit();
+        $session = new Session();
 
         if(isset($_SESSION['id']) && isset($_SESSION['timestamp'])){
 
             $query = new MongoDB();
 
-            $result = $query->ReadOneQuery("scroKING", "Users",sessionGet('id'),["name","surname","username","email"]);
+            $result = $query->ReadOneQuery("scroKING", "Users", $session->get("id"), ["name","surname","username","email"]);
 
             // response: 200 OK
             http_response_code(200);

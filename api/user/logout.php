@@ -7,22 +7,25 @@
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
     //include
-    include_once("../config/session.php");
+    include_once("../config/MongoDB.php");
+    include_once("../config/Session.php");
+    include_once("../config/client.php");
+    include_once ("../models/LogoutLog.php");
 
     try {
         //start session
-        sessionInit();
+        $session = new Session();
 
         //new mongo instance
         $mongo = new MongoDB();
 
         //save logout log in db
-        $logoutLog = new LoginLog(getTimestamp(), getClientIp(), sessionGet("id"), "OK");
+        $logoutLog = new LogoutLog(getTimestamp(), getClientIp(), $session->get("id"), "OK");
         $mongo->WriteOneQuery("scroKING", "LogoutLogs", $logoutLog);
 
 
         //destroy session
-        sessionDestroy();
+        $session->destroy();
 
         // response: 200 Success
         http_response_code(200);

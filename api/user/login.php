@@ -10,7 +10,7 @@
     include_once("../config/MongoDB.php");
     include_once("../models/LoginLog.php");
     include_once("../config/timestamp.php");
-    include_once("../config/session.php");
+    include_once("../config/Session.php");
     include_once("../config/client.php");
     include_once("../config/security.php");
 
@@ -40,12 +40,12 @@
                     $mongo->WriteOneQuery("scroKING", "LoginLogs", $loginLog);
 
                     //init session
-                    sessionInit();
+                    $session = new Session();
 
                     //set session value
-                    sessionSet('id', $mongo->getIdFromObj($user->_id) );
-                    sessionSet('username', $user->username);
-                    sessionSet('timestamp', getTimestamp());
+                    $session->set('id', $mongo->getIdFromObj($user->_id) );
+                    $session->set('username', $user->username);
+                    $session->set('timestamp', getTimestamp());
 
                     //response: 200 OK
                     http_response_code(200);

@@ -8,6 +8,7 @@
 
     //include
     include_once("../config/MongoDB.php");
+    include_once("../config/client.php");
     include_once("../models/User.php");
     include_once("../models/RegistrationLog.php");
 

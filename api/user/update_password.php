@@ -9,7 +9,7 @@
     //include
     include_once("../config/MongoDB.php");
     include_once("../config/timestamp.php");
-    include_once("../config/session.php");
+    include_once("../config/Session.php");
     include_once("../config/client.php");
     include_once("../config/security.php");
     include_once("../models/UpdatePasswordLog.php");
@@ -19,18 +19,18 @@
 
     try {
         if ( (isset($params->old_password) && isset($params->new_password) ) ) {
-            sessionInit();
-            if (isset($_SESSION['id']) ) {
+            $session = new Session();
+            if ( $session->isSet("id") ) {
                 //new mongo instance
                 $mongo = new MongoDB();
 
-                $result = $mongo->ReadOneQuery("scroKING", "Users", sessionGet("id"), ["password"]);
+                $result = $mongo->ReadOneQuery("scroKING", "Users", $session->get("id"), ["password"]);
 
                 if($result->password == $params->old_password) {
-                    $mongo->UpdateOneQuery("scroKING", "Users", sessionGet("id"), (object) ["password" => $params->new_password]);
+                    $mongo->UpdateOneQuery("scroKING", "Users", $session->get("id"), (object) ["password" => $params->new_password]);
 
                     //save update log in db
-                    $updatePasswordLog = new UpdatePasswordLog(getTimestamp(), getClientIp(), sessionGet("id"), "OK");
+                    $updatePasswordLog = new UpdatePasswordLog(getTimestamp(), getClientIp(), $session->get("id"), "OK");
                     $mongo->WriteOneQuery("scroKING", "UpdatePasswordLogs", $updatePasswordLog);
 
                     //response: 200  Success0
@@ -38,7 +38,7 @@
                     echo json_encode(array("message" => "Password aggiornata con successo."));
                 } else {
                     //save wrong update password log in db
-                    $updatePasswordLog = new UpdatePasswordLog(getTimestamp(), getClientIp(), sessionGet("id"), "Vecchia password errata.");
+                    $updatePasswordLog = new UpdatePasswordLog(getTimestamp(), getClientIp(), $session->get("id"), "Vecchia password errata.");
                     $mongo->WriteOneQuery("scroKING", "UpdatePasswordLogs", $updatePasswordLog);
 
                     //response: 403 Forbidden
