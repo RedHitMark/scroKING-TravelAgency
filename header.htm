@@ -18,10 +18,17 @@
 
             <div class="col-12">
                 <div class="col-6">
-                    <ul class="log">
-                        <li><a href="registration.htm">Registrati</a></li>
-                        <li><a href="access.htm" class="enter">Entra</a></li>
-                    </ul>
+                    <div class="log desktop">
+                        <ul class="nolog">
+                             <li><a href="registration.htm" class="registrati">Registrati</a></li>
+                            <li><a href="access.htm" class="enter">Entra</a></li>
+                        </ul>
+                        <ul class="yeslog">
+                            <li><a href="user_page.htm" class="benvenuto">Benvenuto, </a></li>
+                            <li><a href="#" class="logout">Log out</a></li>
+                        </ul>
+
+                    </div>
                 </div>
                 <div class="col-6 login">
                     <ul class="nav-links">
@@ -32,17 +39,16 @@
                         <li><a href="contact.htm">Contact</a></li>
 
                     </ul>
-                    <ul class="log">
-                        <div class="nolog">
+                    <div class="log mobile">
+                        <ul class="nolog">
                              <li><a href="registration.htm" class="registrati">Registrati</a></li>
                             <li><a href="access.htm" class="enter">Entra</a></li>
-                        </div>
-                        <div class="yeslog">
+                        </ul>
+                        <ul class="yeslog">
                             <li><a href="user_page.htm" class="benvenuto">Benvenuto, </a></li>
                             <li><a class="logout">Log out</a></li>
-                        </div>
-
-                    </ul>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -50,4 +56,7 @@
 </body>
 <script src="JS/menu.js"></script>
 <script src="JS/prenotazione.js"></script>
+<script src="JS/http.js"></script>
+<script src="JS/reloadlog.js"></script>
+
 </html>

@@ -3,7 +3,7 @@
 include_once("Result.php");
 class MongoDB {
     //private const HOST = "mongodb://scroking.ddns.net:27017";
-    private const MARCO_NODES = "scroking.ddns.net:56786,scroking.ddns.net:56787,scroking.ddns.net:56788";
+    private const MARCO_NODES = "scroking.ddns.net:56786,scroking.ddns.net:56787";
     private const STEFANO_NODES = "vox3715217.mynet.vodafone.it:34512,vox3715217.mynet.vodafone.it:34513,vox3715217.mynet.vodafone.it:34514,vox3715217.mynet.vodafone.it:34515,vox3715217.mynet.vodafone.it:34516,vox3715217.mynet.vodafone.it:34517,vox3715217.mynet.vodafone.it:34518";
     private const RS = "mongodb://" . MongoDB::MARCO_NODES . "," . MongoDB::STEFANO_NODES . "/?replicaSet=rs0";
 

@@ -56,10 +56,9 @@
 <script src="JS/session.js"></script>
 <script>
     function login_success(json_response) {
-        alert("ok");
         console.log(json_response);
-        // $(".nolog").css({ 'display' : 'none'});
-        // $(".yeslog").css({ 'display' : 'block'});
+        $(".nolog").css({ 'display' : 'none'});
+        $(".yeslog").css({ 'display' : 'inline-block'});
         const username =json_response.username;
         $( ".benvenuto" ).html("Benvenuto, " +  username);
 
