@@ -15,24 +15,24 @@
     include_once("../config/security.php");
 
     //login params from http body
-    $login = json_decode(file_get_contents("php://input"));
+    $params = json_decode(file_get_contents("php://input"));
 
     try {
-        if (  (isset($login->username) || isset($login->email) ) && isset($login->password) ) {
+        if (  (isset($params->username) || isset($params->email) ) && isset($params->password) ) {
             //new mongo instance
             $mongo = new MongoDB();
 
             //object Result @TODO cambiare un po sta roba
-            $results = $mongo->ReadQuery("scroKING", "Users", [ 'username' => $login->username]);
+            $results = $mongo->ReadQuery("scroKING", "Users", [ 'username' => $params->username]);
 
             if ($results->getNumResults() == 1) {
                 //if there ONLY ONE username matching
                 $id = $results->getResults()['0']->_id;
 
-                $results = $mongo->ReadQuery("scroKING", "Users", [ '_id' => $id, 'password' => $login->password]);
+                $results = $mongo->ReadQuery("scroKING", "Users", ['_id' => $id, 'password' => $params->password] );
 
                 if ($results->getNumResults() == 1) {
-                    //logim success
+                    //login success
                     $user = $results->getResults()['0'];
 
                     //save login log in db
@@ -73,12 +73,9 @@
             http_response_code(400);
             echo json_encode(array("message" => "Parametri mancanti."));
         }
-    } catch (MongoDB\Driver\Exception\Exception $e) {
+    } catch (Exception | MongoDB\Driver\Exception\Exception $e) {
         //response: 500 Internal Server Error
         http_response_code(500);
-        echo json_encode(array("message" => "Configurazione server errata."));
+        echo json_encode(array("message" => "Errore lato server."));
     }
 
-
-
-?>
