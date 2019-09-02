@@ -33,11 +33,11 @@
                     </aside>
                     <aside >
                         <div >
-                            <form class="scrollpassword">
-                             <input type="password" placeholder="Vecchia password">
-                             <input type="password" placeholder="Nuova password">
-                             <input type="password" placeholder=" Ripeti nuova password"> 
-                             <input type="button" value="Conferma" id="confirmpassword">
+                            <form id="changepasswordform" class="scrollpassword">
+                             <input type="password"  name="oldpassword" id="oldpassword" placeholder="Vecchia password">
+                             <input type="password"  name="newpassword" id="newpassword" placeholder="Nuova password">
+                             <input type="password"  name="confirmnewpassword"  id="confirmnewpassword" placeholder=" Ripeti nuova password"> 
+                             <input type="button" value="Conferma" id="changepassword">
                             </form>
                         </div>
                     </aside>
@@ -122,6 +122,24 @@
         401 : dati_non_loggato, 
         501 : dati_internal_server_error
     };
+
+    function password_change(event){
+        event.preventDefault();
+        console.log( hex_sha512(document.getElementsByName("newpassword")[0].value) );
+
+        let new_password = document.getElementById("newpassword")[0];
+        let confirm_new_pass= document.getElementById("confirmnewpassword")[0];
+
+        if(is_matching(new_password, confirm_new_pass) ){
+            allert("Le Passwords corrsipondono");
+        }else{
+            allert("Le password non corrrispondo");
+        }
+
+    }
+
+    let form = document.getElementById("changepasswordform");
+    form.addEventListener('changepassword', password_change);
 
     post("api/user/read_one.php", null, functions);
 </script>

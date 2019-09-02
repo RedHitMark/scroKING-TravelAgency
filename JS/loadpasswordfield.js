@@ -6,7 +6,7 @@ $('#morePassword').click(function(e){
 
 });
 
-$('#confirmpassword').click(function(e){
+$('#changepassword').click(function(e){
     e.preventDefault();
     $(".scrollpassword").hide("slow");
 
