@@ -23,7 +23,7 @@ class Session {
     public function checkAfterOneHour() : bool {
 
         if (isset($_SESSION['timestamp'])) {
-            if ((getTimestamp() - $_SESSION['timestamp']) > 50000) {
+            if ((getTimestamp() - $_SESSION['timestamp']) > ONE_HOUR) {
                 return true;
             } else {
                 return false;
