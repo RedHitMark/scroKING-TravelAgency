@@ -12,17 +12,17 @@
 
 <body>
     <div id="header"></div>
-    
+
     <div class="wrapper">
-       <div id="mainUser">
-           <div class="col-4">
+        <div id="mainUser">
+            <div class="col-4">
                 <section id="profile">
                     <aside>
                         <div class="profile-image">
                             <img src="IMG/profile_pic.png" alt="profile pic">
                         </div>
                     </aside>
-                    <aside id="userName"> 
+                    <aside id="userName">
                         <h1>Santa claus</h1>
                     </aside>
                     <br>
@@ -31,44 +31,61 @@
                             <button id="morePassword">Cambia password</button>
                         </div>
                     </aside>
-                    <aside >
-                        <div >
+                    <aside>
+                        <div>
                             <form class="scrollpassword">
-                             <input type="password" placeholder="Vecchia password">
-                             <input type="password" placeholder="Nuova password">
-                             <input type="password" placeholder=" Ripeti nuova password"> 
-                             <input type="button" value="Conferma" id="confirmpassword">
+                                <input type="password" placeholder="Vecchia password">
+                                <input type="password" placeholder="Nuova password">
+                                <input type="password" placeholder=" Ripeti nuova password">
+                                <input type="button" value="Conferma" id="confirmpassword">
                             </form>
                         </div>
                     </aside>
                     <aside>
                         <h3>About me:</h3>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis veniam saepe quas laborum ad deserunt, impedit obcaecati ratione, dolore illum, et ut quos facilis officiis. Libero soluta debitis incidunt qui.</p>
+                        <div class="info">
+
+                            <div class="name">
+                                <h3>Nome</h3>
+                                <div id="nomeuser"></div>
+                            </div>
+
+                            <div class="lastname">
+                                <h3>Cognome</h3>
+                                <div id="cognomeuser"></div>
+                            </div>
+
+                            <div class="mail">
+                                <h3>E-mail</h3>
+                                <div id="emailuser"></div>
+                            </div>
+                        </div>
                     </aside>
                     <br>
                     <aside>
                         <h3>Mete preferite:</h3>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt voluptatum delectus magni enim cum. Deserunt, earum alias. Saepe, consequatur ipsa!</p>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt voluptatum delectus magni
+                            enim cum. Deserunt, earum alias. Saepe, consequatur ipsa!</p>
                     </aside>
                     <aside>
                         <a href="livelloscrocco.htm" id="scroccoLevel">Livello di scrocco: Giovanni</a>
                     </aside>
                 </section>
-           </div>
-           <div class="col-8">
-               <div class="buttons">       
+            </div>
+            <div class="col-8">
+                <div class="buttons">
                     <div class="booking">
-                            <i class="fas fa-route">
-                            </i>
-                            <p>I tuoi viaggi</p>
+                        <i class="fas fa-route">
+                        </i>
+                        <p>I tuoi viaggi</p>
                     </div>
-                   
+
                     <div class="portafoglio">
-                        <img src="IMG/scrocco.png" >
+                        <img src="IMG/scrocco.png">
                         <p>Wallet</p>
                     </div>
-               </div>
-            
+                </div>
+
                 <div id="content">
                     <div id="prenotazionihistory">
                         <div class="nothing">
@@ -84,13 +101,13 @@
                     </div>
                 </div>
             </div>
-           </div>
         </div>
     </div>
-    
-    
-        
-    
+    </div>
+
+
+
+
 
     <div id="footer"></div>
 </body>
@@ -104,7 +121,10 @@
 <script>
     function dati_ok(json_response) {
         console.log(json_response);
-        $( "#userName" ).html(json_response.username);
+        $("#userName").html(json_response.username);
+        $("#nomeuser").html(json_response.name);
+        $("#cognomeuser").html(json_response.surname);
+        $("#emailuser").html(json_response.email);
     }
 
     function dati_non_loggato(json_response) {
@@ -118,11 +138,12 @@
     }
 
     const functions = {
-        200 : dati_ok,
-        401 : dati_non_loggato, 
-        501 : dati_internal_server_error
+        200: dati_ok,
+        401: dati_non_loggato,
+        501: dati_internal_server_error
     };
 
     post("api/user/read_one.php", null, functions);
 </script>
+
 </html>

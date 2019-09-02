@@ -2,7 +2,7 @@ function check_login_status() {
     function login_success(json_response) {
         console.log(json_response);
         $(".nolog").css({ 'display' : 'none'});
-        $(".yeslog").css({ 'display' : 'inline-block'});
+        $(".yeslog").css({ 'display' : 'flex'});
         const username =json_response.username;
         $( ".benvenuto" ).html("Benvenuto, " +  username);
 
