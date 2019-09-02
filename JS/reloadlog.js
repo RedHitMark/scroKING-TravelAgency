@@ -9,19 +9,16 @@ function check_login_status() {
     }
     function request_timeout(json_response) {
         alert("sessione scaduta");
-        $(".nolog").css({ 'display' : 'inline-block'});
-        $(".yeslog").css({ 'display' : 'none'});
+        $(".yeslog").hide();
     }
 
     function login_unauthorized(json_response) {
-        $(".nolog").css({ 'display' : 'inline-block'});
-        $(".yeslog").css({ 'display' : 'none'});
+        $(".yeslog").hide();
     }
 
     function login_internal_server_error(json_response) {
         alert("errore del server");
-        $(".nolog").css({ 'display' : 'inline-block'});
-        $(".yeslog").css({ 'display' : 'none'});
+        $(".yeslog").hide();
     }
     let login_functions = {
         200: login_success,

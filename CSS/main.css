@@ -1022,19 +1022,16 @@ nav .col-12 {
         font-weight: bold;
         color: white;
     }
-    .log.mobile .yeslog{
-        display: none;
-    }
     .log.mobile .yeslog li{
         list-style: none;
         display: inline;
-        margin-left: 10%;
+        margin-left: 5%;
     }
     .log.mobile .yeslog li:nth-child(2){
         margin-left: 0.5em;
     }
     .log.mobile .yeslog .benvenuto{
-        width: 5em;
+        width: 2em;
     }
     .user li{
         margin-right: 0.5em;
