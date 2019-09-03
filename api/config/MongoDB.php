@@ -1,6 +1,5 @@
 <?php
 
-include_once("Result.php");
 class MongoDB {
     //private const HOST = "mongodb://scroking.ddns.net:27017";
     private const MARCO_NODES = "scroking.ddns.net:56786,scroking.ddns.net:56787";
@@ -42,35 +41,35 @@ class MongoDB {
      * @param string $collection : name of the collection to query
      * @param string $id
      * @param null $projection : array of value to retrieve
-     * @return object: Result object
+     * @return bool|object
      * @throws \MongoDB\Driver\Exception\Exception : if query went wrong
      */
     public function ReadOneQuery(string $db, string $collection, string $id, $projection = null) {
         //namespace is a string such "dbName.collectionName"
         $namespace = $db . "." . $collection;
 
+        //filer only document with given id
         $filter = [ "_id" => $this->getIdObjectFromExistent($id) ];
 
+        //empty option array
         $option = [];
 
+        //add projection option to query
         if(isset($projection)) {
             foreach ($projection as $col) {
                 $option['projection'][$col] = 1;
             }
         }
 
+        //query obj
         $query = new MongoDB\Driver\Query($filter, $option);
 
+        //execute query
         $docs = $this->manager->executeQuery($namespace, $query);
 
+        $result = $docs->toArray()['0'];
 
-        $result = new Result();
-
-        foreach ($docs as $doc) {
-            $result->addElement($doc);
-        }
-
-        return $result->getResults()['0'];
+        return (isset($result) ?  $result : false);
     }
 
     /**
@@ -81,7 +80,7 @@ class MongoDB {
      * @param null $limit
      * @param null $sort : array of sort order
      * @param int|null $sort_type
-     * @return Result: Result object with object
+     * @return array: array with result objects
      * @throws \MongoDB\Driver\Exception\Exception : if query went wrong
      */
     public function ReadQuery(string $db, string $collection, $filter = null, $projection = null, $limit = null, $sort = null, int $sort_type = null) {
@@ -119,13 +118,8 @@ class MongoDB {
         //execute query
         $docs = $this->manager->executeQuery($namespace, $query);
 
-        $result = new Result();
-
-        foreach ($docs as $doc) {
-            $result->addElement($doc);
-        }
-
-        return $result;
+        //return the array of object
+        return $docs->toArray();
     }
 
     /**

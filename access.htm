@@ -58,7 +58,7 @@
         console.log(json_response);
         $(".nolog").css({ 'display' : 'none'});
         $(".yeslog").css({ 'display' : 'flex'});
-        const username =json_response.username;
+        const username = json_response.username;
         $( ".benvenuto" ).html("Benvenuto, " +  username);
 
         $(location).attr("href", "user_page.htm");
@@ -74,6 +74,12 @@
 
     function login_wrong_password(json_response) {
         alert("password errore");
+    }
+
+    function login_user_blocked(json_response) {
+        console.log(json_response);
+        const sec_left = json_response.responseJSON.sec_left;
+        alert("sei stato bloccato per troppi tentativi di accesso, riprova tra" + sec_left + "secondi.");
     }
 
     function login_bruteforce_detected(json_response) {
@@ -98,6 +104,7 @@
             400: login_missing_parameter,
             401: login_wrong_username,
             403: login_wrong_password,
+            405: login_user_blocked,
             429: login_bruteforce_detected,
             500: login_internal_server_error
         };

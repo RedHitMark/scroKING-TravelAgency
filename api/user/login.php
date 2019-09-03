@@ -22,55 +22,63 @@
             //new mongo instance
             $mongo = new MongoDB();
 
-            //object Result @TODO cambiare un po sta roba
-            $results = $mongo->ReadQuery("scroKING", "Users", [ 'username' => $params->username]);
+            //query for all user with given username
+            $results = $mongo->ReadQuery("scroKING", "Users", ['username' => $params->username], ['_id', 'blockedUntil'],1);
 
-            if ($results->getNumResults() == 1) {
+            if ( count($results) == 1) {
                 //if there ONLY ONE username matching
-                $id = $mongo->getIdFromObj($results->getResults()['0']->_id);
+                $id = $mongo->getIdFromObj($results['0']->_id);
 
-                $results = $mongo->ReadQuery("scroKING", "Users", ['_id' => $mongo->getIdObjectFromExistent($id), 'password' => $params->password] );
+                if( !isBlocked($results['0']->blockedUntil)) {
+                    //if user is not blocked
+                    $results = $mongo->ReadQuery("scroKING", "Users", ['_id' => $mongo->getIdObjectFromExistent($id), 'password' => $params->password], ['_id', 'username'],1 );
 
-                if ($results->getNumResults() == 1) {
-                    //login success
-                    $user = $results->getResults()['0'];
+                    if (count($results) == 1) {
+                        //login success
+                        $user = $results['0'];
 
-                    //save login log in db
-                    $loginLog = new LoginLog(getTimestamp(), getClientIp(), $id, "OK");
-                    $mongo->WriteOneQuery("scroKING", "LoginLogs", $loginLog);
+                        //save login log in db
+                        $loginLog = new LoginLog(getTimestamp(), getClientIp(), $id, "OK");
+                        $mongo->WriteOneQuery("scroKING", "LoginLogs", $loginLog);
 
-                    //init session
-                    $session = new Session();
+                        //init session
+                        $session = new Session();
 
-                    //set session value
-                    $session->set('id', $mongo->getIdFromObj($user->_id) );
-                    $session->set('username', $user->username);
-                    $session->set('timestamp', getTimestamp());
+                        //set session value
+                        $session->set('id', $mongo->getIdFromObj($user->_id) );
+                        $session->set('username', $user->username);
+                        $session->set('timestamp', getTimestamp());
 
-                    //response: 200 OK
-                    http_response_code(200);
-                    echo json_encode(array("message" => "Login effettuata correttamente.", "username" => $user->username));
-                } else {
-                    //password errata
-
-                    //save login log in db
-                    $loginLog = new LoginLog(getTimestamp(), getClientIp(), $id, "Password errata");
-                    $mongo->WriteOneQuery("scroKING", "LoginLogs", $loginLog);
-
-                    //query monogodb for last 5 login attempts
-                    $logs = $mongo->ReadQuery("scroKING", "LoginLogs", ['userId' => $id], null, 5, "timestamp", MongoDB::DESCENTENT_SORT)->getResults();
-
-                    if (is_bruteforceing($logs)) {
-                        //@TODO bloccare l'utente per 10 min
-
-                        //response: 429 Too Many Requests
-                        http_response_code(429);
-                        echo json_encode(array("message" => "Smettila di fare bruteforce della password."));
+                        //response: 200 OK
+                        http_response_code(200);
+                        echo json_encode(array("message" => "Login effettuata correttamente.", "username" => $user->username));
                     } else {
-                        //response: 439 Forbidden
-                        http_response_code(403);
-                        echo json_encode(array("message" => "Password errata."));
+                        //password errata
+
+                        //save login log in db
+                        $loginLog = new LoginLog(getTimestamp(), getClientIp(), $id, "Password errata");
+                        $mongo->WriteOneQuery("scroKING", "LoginLogs", $loginLog);
+
+                        //query monogodb for last 5 login attempts
+                        $logs = $mongo->ReadQuery("scroKING", "LoginLogs", ['userId' => $id], null, 5, "timestamp", MongoDB::DESCENTENT_SORT);
+
+                        if (is_bruteforceing($logs)) {
+                            //block user for 10 minutes
+                            $mongo->UpdateOneQuery("scroKING", "Users", $id, ["blockedUntil" => getTimestamp() + 600000]);
+
+                            //response: 429 Too Many Requests
+                            http_response_code(429);
+                            echo json_encode(array("message" => "Smettila di fare bruteforce della password."));
+                        } else {
+                            //response: 439 Forbidden
+                            http_response_code(403);
+                            echo json_encode(array("message" => "Password errata."));
+                        }
                     }
+                } else {
+                    //response: 405 Method Not Allowed
+                    http_response_code(405);
+                    echo json_encode(array("message" => "Utente bloccato.", "sec_left" =>  seconds_between($results['0']->blockedUntil, getTimestamp())));
                 }
             } else {
                 //response: 401 Unauthorized

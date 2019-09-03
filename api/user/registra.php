@@ -17,7 +17,7 @@
     try {
         $mongo = new MongoDB();
 
-        //@TODO controllare se non esiste gia un tizio registrato con stesso username ed email
+        //@TODO controllare se non esiste gia un tizio registrato con stesso username ed email -> condizione necessaria affinche la login non si bugghi
         if(isset($new_user->username) && isset($new_user->password) && isset($new_user->name) && isset($new_user->surname) && isset($new_user->email)) {
 
             $doc = new User( $mongo->getNewIdObject(),$new_user->name ,$new_user->surname,$new_user->email, $new_user->username , $new_user->password);
