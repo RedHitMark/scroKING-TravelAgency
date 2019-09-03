@@ -32,9 +32,9 @@
         }
 
 
-    }catch (Exception | MongoDB\Driver\Exception\Exception $e) {
+    } catch (Exception | MongoDB\Driver\Exception\Exception $e) {
         //response: 500 Internal Server Error
         http_response_code(500);
-        echo json_encode(array("message" => "Configurazione server errata."));
+        echo json_encode(array("message" => "Errore lato server.", "verbose" => $e->getMessage()));
     }
 
