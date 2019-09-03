@@ -27,9 +27,9 @@
 
             if ($results->getNumResults() == 1) {
                 //if there ONLY ONE username matching
-                $id = $results->getResults()['0']->_id;
+                $id = $mongo->getIdFromObj($results->getResults()['0']->_id);
 
-                $results = $mongo->ReadQuery("scroKING", "Users", ['_id' => $id, 'password' => $params->password] );
+                $results = $mongo->ReadQuery("scroKING", "Users", ['_id' => $mongo->getIdObjectFromExistent($id), 'password' => $params->password] );
 
                 if ($results->getNumResults() == 1) {
                     //login success
@@ -52,16 +52,25 @@
                     echo json_encode(array("message" => "Login effettuata correttamente.", "username" => $user->username));
                 } else {
                     //password errata
+
                     //save login log in db
                     $loginLog = new LoginLog(getTimestamp(), getClientIp(), $id, "Password errata");
                     $mongo->WriteOneQuery("scroKING", "LoginLogs", $loginLog);
 
-                    //@TODO check is is bruteforcing
-                    //$logs = $mongo->ReadQuery("scroKING", "LoginLogs", ['$userId' => $id])->getResults();
+                    //query monogodb for last 5 login attempts
+                    $logs = $mongo->ReadQuery("scroKING", "LoginLogs", ['userId' => $id], null, 5, "timestamp", MongoDB::DESCENTENT_SORT)->getResults();
 
-                    //response: 403 Forbidden
-                    http_response_code(403);
-                    echo json_encode(array("message" => "Password errata."));
+                    if (is_bruteforceing($logs)) {
+                        //@TODO bloccare l'utente per 10 min
+
+                        //response: 429 Too Many Requests
+                        http_response_code(429);
+                        echo json_encode(array("message" => "Smettila di fare bruteforce della password."));
+                    } else {
+                        //response: 439 Forbidden
+                        http_response_code(403);
+                        echo json_encode(array("message" => "Password errata."));
+                    }
                 }
             } else {
                 //response: 401 Unauthorized

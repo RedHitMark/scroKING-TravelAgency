@@ -53,7 +53,6 @@
 <script src="JS/loadheaderfooter.js"></script>
 <script src="JS/http.js"></script>
 <script src="JS/sha512.js"></script>
-<script src="JS/session.js"></script>
 <script>
     function login_success(json_response) {
         console.log(json_response);
@@ -62,6 +61,7 @@
         const username =json_response.username;
         $( ".benvenuto" ).html("Benvenuto, " +  username);
 
+        $(location).attr("href", "user_page.htm");
     }
 
     function login_missing_parameter(json_response) {
@@ -74,6 +74,10 @@
 
     function login_wrong_password(json_response) {
         alert("password errore");
+    }
+
+    function login_bruteforce_detected(json_response) {
+        alert("Hai sbagliato la password troppe volte, riprova tra un po!");
     }
 
     function login_internal_server_error(json_response) {
@@ -94,6 +98,7 @@
             400: login_missing_parameter,
             401: login_wrong_username,
             403: login_wrong_password,
+            429: login_bruteforce_detected,
             500: login_internal_server_error
         };
 

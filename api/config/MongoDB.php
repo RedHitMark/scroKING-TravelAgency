@@ -7,6 +7,9 @@ class MongoDB {
     private const STEFANO_NODES = "vox3715217.mynet.vodafone.it:34512,vox3715217.mynet.vodafone.it:34513,vox3715217.mynet.vodafone.it:34514,vox3715217.mynet.vodafone.it:34515,vox3715217.mynet.vodafone.it:34516,vox3715217.mynet.vodafone.it:34517,vox3715217.mynet.vodafone.it:34518";
     private const RS = "mongodb://" . MongoDB::MARCO_NODES . "," . MongoDB::STEFANO_NODES . "/?replicaSet=rs0";
 
+    public const ASCENDENT_SORT = 1;
+    public const DESCENTENT_SORT = -1;
+
     //delegato
     private $manager;
 
@@ -35,11 +38,12 @@ class MongoDB {
     }
 
     /**
-     * @param $db: name of the db to query
-     * @param $collection: name of the collection to query
-     * @param null $projection: array of value to retrive
+     * @param string $db : name of the db to query
+     * @param string $collection : name of the collection to query
+     * @param string $id
+     * @param null $projection : array of value to retrieve
      * @return object: Result object
-     * @throws MongoDB\Driver\Exception\Exception: if query went wrong
+     * @throws \MongoDB\Driver\Exception\Exception : if query went wrong
      */
     public function ReadOneQuery(string $db, string $collection, string $id, $projection = null) {
         //namespace is a string such "dbName.collectionName"
@@ -74,11 +78,13 @@ class MongoDB {
      * @param string $collection : name of the collection to query
      * @param $filter : array of key-value
      * @param array $projection : array of value to retrive
+     * @param null $limit
      * @param null $sort : array of sort order
+     * @param int|null $sort_type
      * @return Result: Result object with object
      * @throws \MongoDB\Driver\Exception\Exception : if query went wrong
      */
-    public function ReadQuery(string $db, string $collection, $filter = null, $projection = null, $sort = null) {
+    public function ReadQuery(string $db, string $collection, $filter = null, $projection = null, $limit = null, $sort = null, int $sort_type = null) {
         //namespace is a string such "dbName.collectionName"
         $namespace = $db . "." . $collection;
 
@@ -87,22 +93,30 @@ class MongoDB {
            $filter = [];
         }
 
+        //empty option array
         $option = [];
 
+        //add projection option to query
         if(isset($projection)) {
             foreach ($projection as $col) {
                 $option['projection'][$col] = 1;
             }
         }
 
-        if(isset($sort)) {
-            $option['sort'][$sort] = 1;
+        //add limit option to query
+        if(isset($limit)) {
+            $option['limit'] = $limit;
         }
 
+        //add sort option to query
+        if(isset($sort)) {
+            $option['sort'][$sort] = $sort_type;
+        }
 
-
+        //query obj
         $query = new MongoDB\Driver\Query($filter, $option);
 
+        //execute query
         $docs = $this->manager->executeQuery($namespace, $query);
 
         $result = new Result();
