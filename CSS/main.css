@@ -988,8 +988,9 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     .nav-links {
         position: fixed;
         background-color: #3AAFA9;
-        height: 100vh;
+        height: 100%;
         width: 100%;
+        margin-bottom: 2em;
         flex-direction: column;
         clip-path: circle(100px at 90% -20%);
         -webkit-clip-path: circle(100px at 90% -20%);
@@ -1017,6 +1018,13 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
 
     .nav-links li:nth-child(3) {
         transition: all 0.5s ease 0.6s;
+    }
+    .nav-links li:nth-child(4) {
+        transition: all 0.5s ease 0.8s;
+    }
+
+    .nav-links li:nth-child(5) {
+        transition: all 0.5s ease 1.0s;
     }
 
     li.fade {
