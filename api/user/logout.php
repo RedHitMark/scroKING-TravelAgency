@@ -9,7 +9,7 @@
     //include
     include_once("../config/MongoDB.php");
     include_once("../config/Session.php");
-    include_once("../config/client.php");
+    include_once("../config/security.php");
     include_once ("../models/LogoutLog.php");
 
     try {
