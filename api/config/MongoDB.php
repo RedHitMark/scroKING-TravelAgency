@@ -9,7 +9,7 @@ class MongoDB {
     public const ASCENDENT_SORT = 1;
     public const DESCENTENT_SORT = -1;
 
-    //delegato
+    //delega
     private $manager;
 
     /**
@@ -34,6 +34,16 @@ class MongoDB {
 
     public function getIdFromObj($obj) {
         return $obj->__toString();
+    }
+
+
+    /**
+     * @throws \MongoDB\Driver\Exception\Exception
+     */
+    public function getServerInfo() {
+        $command = new MongoDB\Driver\Command( array( "replSetGetStatus" => 1));
+        $cursor = $this->manager->executeCommand("admin", $command);
+        return $cursor->toArray();
     }
 
     /**
