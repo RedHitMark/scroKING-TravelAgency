@@ -988,6 +988,19 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
 .row form #elimina:hover{
     background-color: rgb(165, 21, 21);
 }
+
+/* ======== server status ============ */
+.wrapper #serverStatus .row article {
+    height: 250px;
+    display: flex;
+    align-items: center;
+}
+
+.wrapper #serverStatus .row h1 {
+    padding: 1em 0;
+    text-transform: uppercase;
+}
+
 @media screen and (max-width: 992px) {
 
     /* ====== Generale ====== */
@@ -1300,6 +1313,21 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     /* ========== info prenotazioni ========= */
     #infoPrenotazioni .hotels .row article, #infoPrenotazioni .mezzi .row article{
         flex-direction: column;
+    }
+
+    /* ======== server status ============ */
+    .wrapper #serverStatus .row article {
+        flex-direction: column;
+        height: auto;
+        padding: 1em;
+    }
+
+    .wrapper #serverStatus .row h1 {
+        text-align: center;
+    }
+
+    .wrapper #serverStatus .row article .col-6 {
+        padding-top: 1em;
     }
 }
 @media screen and (max-width: 400px){

@@ -10,8 +10,6 @@
     include_once("../config/MongoDB.php");
     include_once("../config/timestamp.php");
     include_once("../config/Session.php");
-    include_once("../config/client.php");
-    include_once("../config/security.php");
     include_once("../models/LoginLog.php");
 
     //login params from http body
@@ -29,7 +27,7 @@
                 //if there ONLY ONE username matching
                 $id = $mongo->getIdFromObj($results['0']->_id);
 
-                if( !isBlocked($results['0']->blockedUntil)) {
+                if( !isUserBlocked($results['0']->blockedUntil)) {
                     //if user is not blocked
                     $results = $mongo->ReadQuery("scroKING", "Users", ['_id' => $mongo->getIdObjectFromExistent($id), 'password' => $params->password], ['_id', 'username'],1 );
 
