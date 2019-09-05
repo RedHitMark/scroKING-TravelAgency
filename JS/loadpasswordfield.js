@@ -1,6 +1,6 @@
 $('.scrollpassword').hide();
 let visiblefield =  false;
-$('#morePassword').click(function(e){
+$('#modifypassword').click(function(e){
     e.preventDefault();
     $('.scrollpassword').toggle("slow");
 

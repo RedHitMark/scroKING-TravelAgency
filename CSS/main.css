@@ -899,6 +899,32 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     cursor: pointer;
 }
 
+#modifypassword {
+    border: none;
+    border: 1px solid black;
+    background-color: #17252A;
+    border-radius: 8px;
+    text-transform: uppercase;
+    color: white;
+    padding: 10px;
+    margin: 0 0 0 0;
+    cursor: pointer;
+}
+
+#confirmpasswordbutton {
+    border: none;
+    border: 1px solid black;
+    background-color: #17252A;
+    border-radius: 8px;
+    text-transform: uppercase;
+    color: white;
+    padding: 10px;
+    margin: 0.5em 0 0 3em;
+    cursor: pointer;
+}
+
+
+
 /* ========= livello di scrocco page ======= */
 #levels .row {
     align-items: center;
