@@ -22,60 +22,68 @@
                 <p>In questa pagina troverai il riepilogo dei server attivi. Se per qualisiasi motivo i server non funzionano contattaci a info@scroking.com</p>
             </article>
         </div>
-        <div class="row">
-            <h1>Primary</h1>
-        </div>
-        <div class="row">
+        <div id="loading" class="row">
             <article>
-                <div class="col-6">
-                    <div class="aboutIMG">
-                        <img src="IMG/primary.png" alt="logo">
+                <div class="fa-10x">
+                    <i class="fas fa-spinner fa-pulse"></i>
+                </div>
+            </article>
+        </div>
+        <div id="server">
+            <div class="row">
+                <h1>Primary</h1>
+            </div>
+            <div class="row">
+                <article>
+                    <div class="col-6">
+                        <div class="aboutIMG">
+                            <img src="IMG/primary.png" alt="logo">
+                        </div>
                     </div>
-                </div>
-                <div class="col-6">
-                    <article>
-                        <p id="primary-host"></p>
-                        <h1>Eletto il</h1>
-                        <p id="primary-election-date"></p>
-                        <h1>Acceso da</h1>
-                        <p id="primary-uptime"></p>
-                    </article>
-                </div>
-            </article>
-        </div>
-        <div class="row">
-            <h1>Server secondary</h1>
-        </div>
-        <div class="row">
-            <article>
-                <div class="col-6">
-                    <table>
-                        <tr>
-                            <th>Hostname</th>
-                            <th>Uptime</th>
-                        </tr>
-                        <tbody id="secondaryTableBody"></tbody>
-                    </table>
-                </div>
-            </article>
-        </div>
+                    <div class="col-6">
+                        <article>
+                            <p id="primary-host"></p>
+                            <h1>Eletto il</h1>
+                            <p id="primary-election-date"></p>
+                            <h1>Acceso da</h1>
+                            <p id="primary-uptime"></p>
+                        </article>
+                    </div>
+                </article>
+            </div>
+            <div class="row">
+                <h1>Server secondary</h1>
+            </div>
+            <div class="row">
+                <article>
+                    <div class="col-6">
+                        <table>
+                            <tr>
+                                <th>Hostname</th>
+                                <th>Uptime</th>
+                            </tr>
+                            <tbody id="secondaryTableBody"></tbody>
+                        </table>
+                    </div>
+                </article>
+            </div>
 
-        <div class="row">
-            <h1>Server morti</h1>
+            <div class="row">
+                <h1>Server morti</h1>
+            </div>
+            <div class="row">
+                <article>
+                    <div class="col-6">
+                        <table>
+                            <tr>
+                                <th>Hostname</th>
+                            </tr>
+                            <tbody id="mortiTableBody"></tbody>
+                        </table>
+                    </div>
+                </article>
+            </div>
         </div>
-        <div class="row">
-            <article>
-                <div class="col-6">
-                    <table>
-                        <tr>
-                            <th>Hostname</th>
-                        </tr>
-                        <tbody id="mortiTableBody"></tbody>
-                    </table>
-                </div>
-            </article>
-        </div>
-
     </section>
 </div>
 <div id="footer"></div>
@@ -120,10 +128,15 @@
 
             $("#secondaryTableBody").html(secondaryHTMLTableBody);
             $("#mortiTableBody").html(mortiHTMLTableBody);
+
+            //show things
+            $("#loading").css({ 'display' : 'none'});
+            $("#server").css({ 'display' : 'block'});
         }
 
         function server_error(json_response) {
-            return false;
+            $("#loading").css({ 'display' : 'none'});
+            $("#server").css({ 'display' : 'none'});
         }
 
         const info_functions = {
@@ -135,6 +148,8 @@
     }
 
     loadServerInfo();
+    $("#loading").css({ 'display' : 'flex'});
+    $("#server").css({ 'display' : 'none'});
 </script>
 
 </html>
