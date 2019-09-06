@@ -37,6 +37,11 @@
         return $ip;
     }
 
-    function isUserBlocked(int $blockedUntil) : bool {
-        return $blockedUntil >= getTimestamp();
+    function isUserBlocked(int $blockedUntil = null) : bool {
+        if( isset($blockedUntil)) {
+            return $blockedUntil >= getTimestamp();
+        } else {
+            return false;
+        }
+        
     }
