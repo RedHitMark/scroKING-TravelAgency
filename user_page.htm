@@ -33,7 +33,7 @@
                     </aside>
                     <aside>
                         <div>
-                            <form class="scrollpassword">
+                            <form class="scrollpassword" id="restPassForm">
                                 <input type="password" id="oldpassword" name="oldpassword" placeholder="Vecchia password">
                                 <input type="password" id="newpassword" name= "newPassword"  placeholder="Nuova password">
                                 <input type="password" id="newpasswordconf" name="NewPassowrdConfirm" placeholder="Ripeti nuova password">
@@ -143,12 +143,31 @@
         501: dati_internal_server_error
     };
 
-    function change_password(e){
-        e.preventDefault();
+    function is_matching(s1, s2) {
+        if(s1 == s2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function change_password(event){
+        event.preventDefault();
 
         let newPassword = document.getElementById("newpassword")[0];
         let newPassConf = document.getElementsById("newpasswordconf")[0];
+    
+        if(is_matching(newPassword.value,newPassConf.value)){
+            alert('ok, matching');
+        }else{
+            alert('bad, no matching');
+        } 
+        
     }
+
+
+    let formNewPass = document.getElementById('restPassForm');
+    formNewPass.addEventListener('confirmpasswordbutton', change_password);
 
     post("api/user/read_one.php", null, functions);
 </script>
