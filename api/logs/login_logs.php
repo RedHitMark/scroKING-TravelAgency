@@ -10,6 +10,7 @@
     include_once("../config/MongoDB.php");
     include_once("../config/timestamp.php");
     include_once("../config/Session.php");
+    include_once("../config/security.php");
     include_once("../models/LoginLog.php");
 
     //login params from http body
@@ -28,12 +29,12 @@
 
 
             //add location to result
-            foreach( $result as &$log ) {
-                $location_details = json_decode(file_get_contents("http://ipinfo.io/{$log->ip}/json"));
-                if( isset($location_details->city)) {
-                    $log = (object) array_merge(array_merge( (array)$log, array( 'location' => $location_details->city ) ));
+            foreach ($result as &$log) {
+                if ($log->ip != "::1") {
+                    $location_details = getLocationFromIp($log->ip);
+                    $log = (object)array_merge(array_merge((array)$log, array('location' => $location_details)));
                 } else {
-                    $log = (object) array_merge(array_merge( (array)$log, array( 'location' => 'localhost' ) ));
+                    $log = (object)array_merge(array_merge((array)$log, array('location' => 'localhost')));
                 }
             }
 

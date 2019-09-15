@@ -27,7 +27,7 @@
 
                 //save update log in db
                 $updateUsernameLog = new UpdateUsernameLog(getTimestamp(), getClientIp(), $session->get("id"), $session->get("username"), $params->newUsername);
-                $mongo->WriteOneQuery("scroKING", "UpdateUsernameLog", $updateUsernameLog);
+                $mongo->WriteOneQuery("scroKING", "UpdateUsernameLogs", $updateUsernameLog);
 
                 //response: 200  Success
                 http_response_code(200);
