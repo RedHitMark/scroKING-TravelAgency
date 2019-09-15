@@ -33,10 +33,10 @@
                     </aside>
                     <aside>
                         <div>
-                            <form class="scrollname" id="resetname">
-                                <input type="text" id="newusername" name="newusrname" placeholder="Username nuovo">
-
-                                <input type="button" value="Conferma" id="confirmnewusrname">
+                            <form class="scrollname" id="updatename">
+                                <input type="text" id="newusername" name="newusrname" placeholder="Username nuovo" required>
+                                <input type="submit" value="Conferma" id="confirmnewusrname">
+                                <input type="reset" name="Cancella" id="resetuserform">
                             </form>
                         </div>
                     </aside>
@@ -247,9 +247,45 @@
         }
     }
 
+    function change_name(e){
+        e.preventDefault();
 
-    let formNewPass = document.getElementById('restPassForm');
+        function change_username_success(json_response){
+            alert("Username cambiato con sucesso");
+            formNewUsername.reset();
+            post("api/user/logout.php", null , null);
+            $(location).attr("href", "access.htm")
+
+        }
+
+        function change_username_Unauthorized(json_response){
+            alert("Non sei loggato, non puoi cambiare la password");
+        }
+
+        function change_username_internal_server_error(json_response){
+            alert("Errore server, riprovare più tardi.");
+        }
+
+        let username_data = {
+            newUsername : $('#newusrname').val()
+        }
+
+        let change_name_functions ={
+            200:change_username_success,
+            401:change_username_Unauthorized,
+            500: change_username_internal_server_error
+        }
+
+
+
+        post("/api/user/update_username.php", username_data, change_name_functions);
+    }
+
+    let formNewPass = $('#restPassForm').val();
     formNewPass.addEventListener('submit', change_password);
+
+    let formNewUsername = $('#updatename').val();
+    formNewUsername.addEventListener('submit', chamge_name);
 </script>
 
 </html>
