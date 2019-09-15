@@ -9,8 +9,7 @@ class Log {
      * @param $timestamp
      * @param $ip
      */
-    public function __construct($timestamp, $ip)
-    {
+    public function __construct($timestamp, $ip) {
         $this->timestamp = $timestamp;
         $this->ip = $ip;
     }

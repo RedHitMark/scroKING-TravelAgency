@@ -13,7 +13,7 @@ class LogoutLog extends Log {
      * @param $userId
      * @param $result
      */
-    public function __construct($timestamp, $ip, $userId, $result){
+    public function __construct($timestamp, $ip, $userId, $result) { 
         parent::__construct($timestamp, $ip);
         $this->userId = $userId;
         $this->result = $result;

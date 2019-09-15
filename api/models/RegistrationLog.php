@@ -15,7 +15,7 @@ class RegistrationLog extends Log {
      * @param $email
      * @param $result
      */
-    public function __construct($timestamp, $ip, $username, $email, $result){
+    public function __construct($timestamp, $ip, $username, $email, $result) {
         parent::__construct($timestamp, $ip);
         $this->username = $username;
         $this->email = $email;
