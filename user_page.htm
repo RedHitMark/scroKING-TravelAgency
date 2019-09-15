@@ -189,7 +189,24 @@
 
         }
 
-        function change_password_Unauthorized(json_response){}
+        function change_password_missing_paramtrer(json_response){
+            alert("Paramtri mancanti");
+        }
+
+        function change_password_Unauthorized(json_response){
+            alert("Non sei loggato, non puoi cambiare la password");
+        }
+
+        function change_password_wrong_oldpassword(json_response){
+            alert("La vecchia password è errata");
+        }
+
+        function change_password_internal_server_error(json_response){
+            alert("Errore server, riprovare più tardi.");
+        }
+
+        
+        
 
         const oldPassword = $("#oldpassword").val();
         const newPassword = $("#newpassword").val();
@@ -205,8 +222,8 @@
 
             let chamge_password_function = {
                 200: change_password_success,
-                400: change_password_Unauthorized,
-                401: change_password_missing_paramtrer,
+                400: change_password_missing_paramtrer,
+                401: change_password_Unauthorized,
                 403: change_password_wrong_oldpassword,
                 500: change_password_internal_server_error
                 
