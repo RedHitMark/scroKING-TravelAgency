@@ -551,7 +551,7 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
 .bg-page-access {
     background-image: url("../IMG/blur.jpeg");
     width: 100%;
-    height: 700px;
+    height: 80%;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -574,7 +574,7 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     background-color: rgba(94, 94, 94, 0.514);
     border-radius: 8px;
     padding: 2em;
-    width: 400px;
+    width: 500px;
 }
 
 .wrapper #access article .row .col-12 form label {
@@ -641,7 +641,7 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
 .bg-page-registration {
     background-image: url("../IMG/blur.jpeg");
     width: 100%;
-    height: 1000px;
+    height: 80%;
     background-repeat: no-repeat;
     background-size: cover;
 }
