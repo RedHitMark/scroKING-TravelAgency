@@ -11,3 +11,9 @@ $('#confirmpassword').click(function(e){
     $(".scrollpassword").hide("slow");
 
 });
+
+$('#resetpssform').click(function(e){
+    e.preventDefault();
+    $(".scrollpassword").hide("slow");
+
+});
