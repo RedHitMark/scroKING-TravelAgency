@@ -17,15 +17,16 @@
     $params = json_decode(file_get_contents("php://input"));
 
     try{
-        if( isset($params->oldUsername) && isset($params->newUsername)){
+        if( isset($params->newUsername)){
             $session = new Session();
-            if ( $session->isSet("id") ){
+            if ($session->isSet("username") && $session->isSet("id") ){
                 //new mongo instance
                 $mongo = new MongoDB();
 
                 $result = $mongo->ReadOneQuery("scroKING", "Users", $session->get("id"), ["username"]);
 
                 if($result->username == $params->oldUsername){
+                    $mongo->UpdateOneQuery("scroKING", "Users", $session->get("id"), (object) ["username" => $params->newUsername]);
                      //save update log in db
                      $updateUsernameLog = new UpdateUsernameLog(getTimestamp(), getClientIp(), $session->get("id"), "OK");
                      $mongo->WriteOneQuery("scroKING", "UpdateUsernameLog", $updateUsernameLog);
