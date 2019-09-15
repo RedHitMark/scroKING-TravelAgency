@@ -18,6 +18,10 @@ body {
     margin: 0 auto;
 }
 
+.col-2 {
+    width: 16.666666666666%;
+}
+
 .col-3 {
     width: 33.33333333333%;
 }
@@ -643,6 +647,15 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     margin-right: 0.5em;
 }
 
+.passAndConfPass {
+    display: flex;
+    justify-content: space-around;
+}
+
+.passAndConfPass .col-6:first-child {
+    margin-right: 0.5em;
+}
+
 .wrapper #registration article .row .col-12 {
     display: flex;
     justify-content: center;
@@ -661,14 +674,13 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     background-color: rgba(94, 94, 94, 0.514);
     border-radius: 8px;
     padding: 2em;
-    width: 400px;
+    width: 500px;
 }
 
 .wrapper #registration article .row .col-12 form:invalid>#submit {
     /* Disattiva il bottone di submit finche il form non è valido*/
     pointer-events: none;
     background-color: gray;
-    /*TODO colore migliore*/
 }
 
 .wrapper #registration article .row .col-12 form label {
@@ -676,7 +688,16 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     color: white;
 }
 
+.wrapper #registration article .row .col-12 form input[type=number],
+.wrapper #registration article .row .col-12 form input[type=number]::-webkit-inner-spin-button,
+.wrapper #registration article .row .col-12 form input[type=number]::-webkit-outer-spin-button {
+    -moz-appearance:textfield;
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 .wrapper #registration article .row .col-12 form input[type=text],
+.wrapper #registration article .row .col-12 form input[type=number],
 .wrapper #registration article .row .col-12 form input[type=password],
 .wrapper #registration article .row .col-12 form input[type=email] {
     width: 100%;
@@ -687,6 +708,7 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
 }
 
 .wrapper #registration article .row .col-12 form input[type=text]:invalid:not(:placeholder-shown),
+.wrapper #registration article .row .col-12 form input[type=number]:invalid:not(:placeholder-shown),
 .wrapper #registration article .row .col-12 form input[type=email]:invalid:not(:placeholder-shown),
 .wrapper #registration article .row .col-12 form input[type=password]:invalid:not(:placeholder-shown) {
     border: 2px solid red;
@@ -1247,6 +1269,10 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
 
     /* ======= Registration ====== */
     .firstlastname {
+        flex-direction: column;
+    }
+
+    .passAndConfPass {
         flex-direction: column;
     }
 

@@ -35,28 +35,50 @@
                                                 <input type="text" name="cognome" placeholder=" Cognome" required>
                                         </div>
                                 </div>
+
+                                <br>
+
+                                <div class="firstlastname">
+                                    <div class="col-6">
+                                        <label for="street">Via</label>
+                                        <input type="text" name="street" placeholder=" Via" required>
+                                    </div>
+                                    <div class="col-2">
+                                        <label for="cap">CAP</label>
+                                        <input type="number" name="cap" placeholder=" CAP" required>
+                                    </div>
+                                    <div class="col-4">
+                                        <label for="city">Città</label>
+                                        <input type="text" name="city" placeholder=" Città" required>
+                                    </div>
+                                </div>
+
                                 <br>
 
                                 <label for="email">E-mail</label>
                                 <input type="email" name="email" placeholder=" E-mail" pattern=".+@.+\..+" title="Inserisci un indirizzo email valido" required>
                                 <br>
-                                <br>
 
                                 <label for="username">Username</label>
                                 <input type="text" name="username" placeholder=" Username" required>
-                                <br>
+
                                 <br>
 
-                                <label for="password">Password</label>
-                                <input type="password" id="password" name="password" placeholder=" Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="la password deve essere almeno di 6 caratteri, 1 lettera maiuscola, una minuscola, un numero" required>
+                                <div class="passAndConfPass">
+                                    <div class="col-6">
+                                        <label for="password">Password</label>
+                                        <input type="password" id="password" name="password" placeholder=" Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="la password deve essere almeno di 6 caratteri, 1 lettera maiuscola, una minuscola, un numero" required>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="conferma_psw">Conferma password</label>
+                                        <input type="password" id="conferma_psw" name="conferma_psw" placeholder="Conferma Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="la password deve essere almeno di 6 caratteri, 1 lettera maiuscola, una minuscola, un numero" required>
+                                    </div>
+                                </div>
+
                                 <br>
-                                <br>
-                                
-                                <label for="conferma_psw">Conferma password</label>
-                                <input type="password" id="conferma_psw" name="conferma_psw" placeholder="Conferma Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="la password deve essere almeno di 6 caratteri, 1 lettera maiuscola, una minuscola, un numero" required>
 
                                 <input type="reset" value="Cancella">
-                                <input id="submit" type="submit" value="Entra">
+                                <input id="submit" type="submit" value="Registrati">
                                 <div class="bottom">
                                     <ul>
                                         <li><a href="access.htm">Entra</a></li>
