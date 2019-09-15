@@ -11,7 +11,7 @@
     include_once("../config/timestamp.php");
     include_once("../config/Session.php");
     include_once("../config/security.php");
-    include_once("../models/UpdatePasswordLog.php");
+    include_once("../models/UpdateUsernameLog.php");
 
     //params from http body
     $params = json_decode(file_get_contents("php://input"));
@@ -23,9 +23,6 @@
                 //new mongo instance
                 $mongo = new MongoDB();
 
-                $result = $mongo->ReadOneQuery("scroKING", "Users", $session->get("id"), ["username"]);
-
-                if($result->username == $params->oldUsername){
                     $mongo->UpdateOneQuery("scroKING", "Users", $session->get("id"), (object) ["username" => $params->newUsername]);
                      //save update log in db
                      $updateUsernameLog = new UpdateUsernameLog(getTimestamp(), getClientIp(), $session->get("id"), "OK");
@@ -35,8 +32,6 @@
                     http_response_code(200);
                     echo json_encode(array("message" => "Username aggiornato con successo."));
  
-                }
-
             }else{
                 //response: 401 Unauthorized
                 http_response_code(401);
