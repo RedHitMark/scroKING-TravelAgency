@@ -189,6 +189,8 @@
 
         }
 
+        function change_password_Unauthorized(json_response){}
+
         const oldPassword = $("#oldpassword").val();
         const newPassword = $("#newpassword").val();
         const newPasswordConf = $("#newpasswordconf").val();
@@ -197,8 +199,8 @@
             alert('ok, matching');
            
             let password_data = {
-                oldPassword: oldPassword,
-                newPassword: newPasswordConf,
+                oldPassword:  hex_sha512(oldPassword),
+                newPassword:  hex_sha512(newPasswordConf),
             };
 
             let chamge_password_function = {
