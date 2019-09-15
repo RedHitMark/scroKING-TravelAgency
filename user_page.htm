@@ -247,7 +247,7 @@
         }
     }
 
-    function change_name(e){
+    function change_username(e){
         e.preventDefault();
 
         function change_username_success(json_response){
@@ -285,7 +285,7 @@
     formNewPass.addEventListener('submit', change_password);
 
     let formNewUsername = $('#updatename').val();
-    formNewUsername.addEventListener('submit', chamge_name);
+    formNewUsername.addEventListener('submit', change_username);
 </script>
 
 </html>
