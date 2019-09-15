@@ -121,6 +121,21 @@
         let conferma_psw = document.getElementsByName("conferma_psw")[0];
 
         if( is_matching(password.value, conferma_psw.value) ) {
+            const registration_data = {
+                name : "d",
+                surname : "f",
+                address : {
+                    street : "v",
+                    city : "",
+                    cap : "",
+                    region : "gag",
+                    state : ""
+                },
+                email : "",
+                username : "",
+                password : hex_sha512("")
+            };
+
             alert("Form apposto! A breve funzionerà")
             //@TODO Chiamata ajax
             //post("api/user/login.php", login_ok, login_error, login_data);
