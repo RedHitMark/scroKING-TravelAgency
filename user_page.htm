@@ -28,10 +28,24 @@
                     <br>
                     <aside>
                         <div>
-                            <button id="modifypassword">Cambia password</button>
+                            <button id="modifyusername">Cambia username</button>
                         </div>
                     </aside>
                     <aside>
+                        <div>
+                            <form class="scrollname" id="resetname">
+                                <input type="text" id="newusername" name="newusrname" placeholder="Username nuovo">
+
+                                <input type="button" value="Conferma" id="confirmnewusrname">
+                            </form>
+                        </div>
+                    </aside>
+                    <aside>
+                        <div>
+                            <button id="modifypassword">Cambia password</button>
+                        </div>
+                    </aside>
+                     <aside>
                         <div>
                             <form class="scrollpassword" id="restPassForm">
                                 <input type="password" id="oldpassword" name="oldpassword" placeholder="Vecchia password">
@@ -117,6 +131,7 @@
 <script src="JS/loadheaderfooter.js"></script>
 <script src="JS/http.js"></script>
 <script src="JS/loadpasswordfield.js"></script>
+<script src="JS/loadnamefield.js"></script>
 
 <script>
     function dati_ok(json_response) {
