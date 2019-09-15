@@ -17,7 +17,7 @@
     $params = json_decode(file_get_contents("php://input"));
 
     try {
-        if ( (isset($params->old_password) && isset($params->new_password) ) ) {
+        if ( (isset($params->oldPassword) && isset($params->newPassword) ) ) {
             $session = new Session();
             if ( $session->isSet("id") ) {
                 //new mongo instance
@@ -25,14 +25,14 @@
 
                 $result = $mongo->ReadOneQuery("scroKING", "Users", $session->get("id"), ["password"]);
 
-                if($result->password == $params->old_password) {
-                    $mongo->UpdateOneQuery("scroKING", "Users", $session->get("id"), (object) ["password" => $params->new_password]);
+                if($result->password == $params->oldPassword) {
+                    $mongo->UpdateOneQuery("scroKING", "Users", $session->get("id"), (object) ["password" => $params->newPassword]);
 
                     //save update log in db
                     $updatePasswordLog = new UpdatePasswordLog(getTimestamp(), getClientIp(), $session->get("id"), "OK");
                     $mongo->WriteOneQuery("scroKING", "UpdatePasswordLogs", $updatePasswordLog);
 
-                    //response: 200  Success0
+                    //response: 200  Success
                     http_response_code(200);
                     echo json_encode(array("message" => "Password aggiornata con successo."));
                 } else {
@@ -50,7 +50,7 @@
                 echo json_encode(array("message" => "Utente non loggato."));
             }
         } else {
-            //response: 401 Bad Request
+            //response: 400 Bad Request
             http_response_code(400);
             echo json_encode(array("message" => "Parametri mancanti."));
         }
