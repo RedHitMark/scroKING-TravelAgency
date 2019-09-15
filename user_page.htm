@@ -51,7 +51,7 @@
                                 <input type="password" id="oldpassword" name="oldpassword" placeholder="Vecchia password">
                                 <input type="password" id="newpassword" name= "newPassword"  placeholder="Nuova password">
                                 <input type="password" id="newpasswordconf" name="NewPassowrdConfirm" placeholder="Ripeti nuova password">
-                                <input type="button" value="Conferma" id="confirmpasswordbutton">
+                                <input type="submit" value="Conferma" id="confirmpasswordbutton">
                             </form>
                         </div>
                     </aside>
@@ -134,29 +134,39 @@
 <script src="JS/loadnamefield.js"></script>
 
 <script>
-    function dati_ok(json_response) {
-        console.log(json_response);
-        $("#userName").html(json_response.username);
-        $("#nomeuser").html(json_response.name);
-        $("#cognomeuser").html(json_response.surname);
-        $("#emailuser").html(json_response.email);
-    }
+    /**
+     * Post call to retrive user data
+     */
+    function loadData() {
+        function dati_ok(json_response) {
+            console.log(json_response);
+            $("#userName").html(json_response.username);
+            $("#nomeuser").html(json_response.name);
+            $("#cognomeuser").html(json_response.surname);
+            $("#emailuser").html(json_response.email);
+        }
 
-    function dati_non_loggato(json_response) {
-        alert("Non sei loggato");
-        console.log(json_response);
-    }
+        function dati_non_loggato(json_response) {
+            alert("Non sei loggato");
+            console.log(json_response);
+        }
 
-    function dati_internal_server_error(json_response) {
-        alert("Server non raggiungibile, riprova piu tardi");
-        console.log(json_response);
-    }
+        function dati_internal_server_error(json_response) {
+            alert("Server non raggiungibile, riprova piu tardi");
+            console.log(json_response);
+        }
 
-    const functions = {
-        200: dati_ok,
-        401: dati_non_loggato,
-        501: dati_internal_server_error
-    };
+        const functions = {
+            200: dati_ok,
+            401: dati_non_loggato,
+            501: dati_internal_server_error
+        };
+
+        post("api/user/read_one.php", null, functions);
+    }
+    loadData();
+
+
 
     function is_matching(s1, s2) {
         if(s1 == s2) {
@@ -169,22 +179,22 @@
     function change_password(event){
         event.preventDefault();
 
-        let newPassword = document.getElementById("newpassword")[0];
-        let newPassConf = document.getElementsById("newpasswordconf")[0];
+        //@TODO cambiare
+        let newPassword = document.getElementById("newpassword");
+        let newPassConf = document.getElementById("newpasswordconf");
     
         if(is_matching(newPassword.value,newPassConf.value)){
             alert('ok, matching');
+            //
         }else{
             alert('bad, no matching');
-        } 
-        
+            formNewPass.reset();
+        }
     }
 
 
     let formNewPass = document.getElementById('restPassForm');
-    formNewPass.addEventListener('confirmpasswordbutton', change_password);
-
-    post("api/user/read_one.php", null, functions);
+    formNewPass.addEventListener('submit', change_password);
 </script>
 
 </html>

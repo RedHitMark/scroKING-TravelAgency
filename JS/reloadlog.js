@@ -20,6 +20,7 @@ function check_login_status() {
         alert("errore del server");
         $(".yeslog").hide();
     }
+
     let login_functions = {
         200: login_success,
         408: request_timeout,
@@ -27,9 +28,6 @@ function check_login_status() {
         500: login_internal_server_error
     };
     post('api/user/check.php', null, login_functions);
-
-    
-
 }
 
-    check_login_status();
+check_login_status();

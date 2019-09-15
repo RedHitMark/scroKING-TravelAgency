@@ -13,7 +13,7 @@ $('.logout').click(function(e){
             $(location).attr("href", "index.htm");
         }
 
-        let log_out_functions = {
+        const log_out_functions = {
             200: log_out_success,
             500: log_out_internal_server_error
         };
@@ -22,6 +22,5 @@ $('.logout').click(function(e){
     }
     
     log_out();
-
 });
 
