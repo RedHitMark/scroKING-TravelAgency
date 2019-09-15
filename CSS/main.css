@@ -548,10 +548,10 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
 }
 
 /* ====== Access ======== */
-.bg-page {
+.bg-page-access {
     background-image: url("../IMG/blur.jpeg");
     width: 100%;
-    height: 800px;
+    height: 700px;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -638,6 +638,14 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
 }
 
 /* ===== Registration ====== */
+.bg-page-registration {
+    background-image: url("../IMG/blur.jpeg");
+    width: 100%;
+    height: 1000px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .firstlastname {
     display: flex;
     justify-content: space-around;
@@ -774,11 +782,11 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     justify-content: center;
     text-align: center;
 }
-.info .name, .info .lastname, .info .mail{
+.info .name, .info .lastname, .info .mail, .info .address {
     display: flex;
     margin: 0.5em 0;
 }
-.info .name h3, .info .lastname h3, .info .mail h3{
+.info .name h3, .info .lastname h3, .info .mail h3, .info .address h3{
     font-size: 15px;
     margin-right: 10px;
 }
@@ -1146,6 +1154,7 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
         margin-right: 0.5em;
     }
 
+    .col-2,
     .col-3,
     .col-4,
     .col-6,

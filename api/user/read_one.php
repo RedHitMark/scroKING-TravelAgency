@@ -19,7 +19,7 @@
 
             $query = new MongoDB();
 
-            $result = $query->ReadOneQuery("scroKING", "Users", $session->get("id"), ["name","surname","username","email"]);
+            $result = $query->ReadOneQuery("scroKING", "Users", $session->get("id"), ["name","surname","username","email","address"]);
 
             // response: 200 OK
             http_response_code(200);

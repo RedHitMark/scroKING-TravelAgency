@@ -74,6 +74,13 @@
                                 <h3>E-mail</h3>
                                 <div id="emailuser"></div>
                             </div>
+
+                            <div class="address">
+                                <h3>Indirizzo</h3>
+                                <div id="street"></div>
+                                <div id="city"></div>
+                                <div id="state"></div>
+                            </div>
                         </div>
                     </aside>
                     <br>
@@ -146,6 +153,9 @@
             $("#nomeuser").html(json_response.name);
             $("#cognomeuser").html(json_response.surname);
             $("#emailuser").html(json_response.email);
+            $("#street").html(json_response.address.street);
+            $("#city").html(json_response.address.cap + " " + json_response.address.city + " (" + json_response.address.region + ")");
+            $("#state").html(json_response.address.state);
         }
 
         function dati_non_loggato(json_response) {
@@ -184,9 +194,10 @@
         function change_password_success(json_response){
             alert("Cambio Password effetuato con successo.");
             formNewPass.reset();
-            post("api/user/logout.php", null , null);
-            $(location).attr("href", "access.htm");
 
+            post("api/user/logout.php", null , null);
+
+            $(location).attr("href", "access.htm");
         }
 
         function change_password_missing_paramtrer(json_response){
@@ -226,8 +237,6 @@
                 401: change_password_Unauthorized,
                 403: change_password_wrong_oldpassword,
                 500: change_password_internal_server_error
-                
-
             };
 
             post("api/user/update_password.php", password_data ,chamge_password_function);
