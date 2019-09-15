@@ -903,7 +903,7 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
 }
 
 
-#confirmpasswordbutton, #confirmnewusrname {
+#confirmpasswordbutton, #confirmnewusrname, #resetpssform {
     border: none; 
     border: 1px solid black;
     background-color: #17252A;
