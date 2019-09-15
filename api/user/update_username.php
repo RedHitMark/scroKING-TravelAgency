@@ -26,7 +26,7 @@
                 $mongo->UpdateOneQuery("scroKING", "Users", $session->get("id"), (object) ["username" => $params->newUsername]);
 
                 //save update log in db
-                $updateUsernameLog = new UpdateUsernameLog(getTimestamp(), getClientIp(), $session->get("id"), "OK");
+                $updateUsernameLog = new UpdateUsernameLog(getTimestamp(), getClientIp(), $session->get("id"), $session->get("username"), $params->newUsername);
                 $mongo->WriteOneQuery("scroKING", "UpdateUsernameLog", $updateUsernameLog);
 
                 //response: 200  Success

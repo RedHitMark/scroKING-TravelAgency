@@ -834,6 +834,19 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     text-transform: uppercase;
 }
 
+#logButton {
+    text-decoration: none;
+    color: gold;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+    border: 2px solid gold;
+    padding: 0.5em;
+    border-radius: 8px;
+    background-color: rgb(80, 20, 245);
+    text-transform: uppercase;
+}
+
 .buttons{
     display: flex;
     justify-content: space-around;
