@@ -1,5 +1,21 @@
 function timestamp2string(timestamp) {
-    const d = new Date(timestamp * 1000);
+    const d = new Date(timestamp);
+    const dataFormattata =
+        ('0' + d.getDate()).slice(-2) + '/' +
+        ('0' + (d.getMonth() + 1)).slice(-2) + '/' +
+        d.getFullYear().toString().slice(-4) + ' ' +
+        ('0' + d.getHours()).slice(-2) + ':' +
+        ('0' + d.getMinutes()).slice(-2);
+
+    if (dataFormattata) {
+        return dataFormattata;
+    } else {
+        return '';
+    }
+}
+
+function timestamp_seconds2string(timestamp) {
+    const d = new Date(timestamp*1000);
     const dataFormattata =
         ('0' + d.getDate()).slice(-2) + '/' +
         ('0' + (d.getMonth() + 1)).slice(-2) + '/' +

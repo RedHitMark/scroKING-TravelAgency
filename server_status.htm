@@ -115,7 +115,7 @@
 
                 if(member.stateStr === "PRIMARY" ) {
                     $("#primary-host").html(member.name);
-                    $("#primary-election-date").html(timestamp2string(member.electionTime.$timestamp.t));
+                    $("#primary-election-date").html(timestamp_seconds2string(member.electionTime.$timestamp.t));
                     $("#primary-uptime").html(uptimestring);
                 } else if (member.stateStr === "SECONDARY") {
                     var newSecondary = "<tr><td>"+ member.name + "</td><td>" + uptimestring + "</td></tr>";
