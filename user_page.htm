@@ -133,6 +133,7 @@
 <script src="JS/http.js"></script>
 <script src="JS/loadpasswordfield.js"></script>
 <script src="JS/loadnamefield.js"></script>
+<script src="JS/sha512.js"></script>
 
 <script>
     /**
@@ -188,16 +189,16 @@
 
         }
 
-       
-        let newPassword = $("#newpassword").val();
-        let newPassConf = $("#newpasswordconf").val();
-    
-        if(is_matching(newPassword.value,newPassConf.value)){
+        const oldPassword = $("#oldpassword").val();
+        const newPassword = $("#newpassword").val();
+        const newPasswordConf = $("#newpasswordconf").val();
+
+        if(is_matching( newPassword, newPasswordConf)) {
             alert('ok, matching');
            
             let password_data = {
-            oldPassword: $("#oldpassword").val(),
-            newPassword: $("#newpassword").val(),
+                oldPassword: oldPassword,
+                newPassword: newPasswordConf,
             };
 
             let chamge_password_function = {
