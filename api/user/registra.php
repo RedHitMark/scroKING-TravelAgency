@@ -27,11 +27,13 @@
             $registrationLog = new RegistrationLog(getTimestamp(), getClientIp(), $new_user->username, $new_user->email, "OK");
             $mongo->WriteOneQuery("scroKING", "LoginLogs", $registrationLog);
 
+            //response: 200  Success
             http_response_code(200);
             echo json_encode(array("message" => "Registrazione effettuata correttamente."));
         } else {
+            //response: 400 Bad Request
             http_response_code(400);
-            echo json_encode(array("message" => "Registrazione impossibile."));
+            echo json_encode(array("message" => "Parametri mancanti."));
         }
         
     } catch (Exception | MongoDB\Driver\Exception\Exception $e) {

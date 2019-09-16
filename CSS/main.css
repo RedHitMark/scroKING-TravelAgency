@@ -240,6 +240,7 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
 .slider {
     margin: 2em 0 0 0;
     width: 100%;
+    z-index: -1;
 }
 
 .slider div img {
