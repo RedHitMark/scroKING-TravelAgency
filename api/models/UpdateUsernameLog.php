@@ -5,7 +5,8 @@ include_once("Log.php");
 class UpdateUsernameLog extends Log{
 
     public $userId;
-    public $result;
+    public $oldUsername;
+    public $newUsername;
 
     /**
      * LoginLog constructor.
@@ -14,10 +15,11 @@ class UpdateUsernameLog extends Log{
      * @param $userId
      * @param $result
      */
-    public function __construct($timestamp, $ip, $userId, $result) {
+    public function __construct($timestamp, $ip, $userId, $oldUsername, $newUsername) {
         parent::__construct($timestamp, $ip);
         $this->userId = $userId;
-        $this->result = $result;
+        $this->oldUsername = $oldUsername;
+        $this->newUsername = $newUsername;
     }
 
 

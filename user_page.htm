@@ -14,47 +14,58 @@
     <div id="header"></div>
 
     <div class="wrapper">
+        <div id="loading" class="row">
+            <article>
+                <div class="fa-10x">
+                    <i class="fas fa-spinner fa-pulse"></i>
+                </div>
+            </article>
+        </div>
         <div id="mainUser">
-            <div class="col-4">
+            <div class="col-5">
                 <section id="profile">
                     <aside>
                         <div class="profile-image">
                             <img src="IMG/profile_pic.png" alt="profile pic">
                         </div>
                     </aside>
-                    <aside id="userName">
-                        <h1>Santa claus</h1>
+                    <aside>
+                        <h1 id="userName">Santa claus</h1>
                     </aside>
                     <br>
                     <aside>
-                        <div>
-                            <button id="modifyusername">Cambia username</button>
-                        </div>
+                        <button id="modifyusername">Cambia username</button>
                     </aside>
                     <aside>
-                        <div>
-                            <form class="scrollname" id="updatename">
-                                <input type="text" id="newusername" name="newusrname" placeholder="Username nuovo" required>
-                                <input type="submit" value="Conferma" id="confirmnewusrname">
-                                <input type="reset" name="Cancella" id="resetuserform">
-                            </form>
-                        </div>
+                        <form class="scrollname" id="update_username_form">
+                            <input type="text" id="new_username" name="newusrname" placeholder="Username nuovo" required>
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="submit" value="Conferma" id="update_username_button">
+                                </div>
+                                <div class="col-6">
+                                    <input type="reset" value="Cancella" id="reset_username_form">
+                                </div>
+                            </div>
+                        </form>
                     </aside>
                     <aside>
-                        <div>
-                            <button id="modifypassword">Cambia password</button>
-                        </div>
+                        <button id="modifypassword">Cambia password</button>
                     </aside>
                      <aside>
-                        <div>
-                            <form class="scrollpassword" id="restPassForm">
-                                <input type="password" id="oldpassword" name="oldpassword" placeholder="Vecchia password" required>
-                                <input type="password" id="newpassword" name= "newPassword"  placeholder="Nuova password" required>
-                                <input type="password" id="newpasswordconf" name="NewPassowrdConfirm" placeholder="Ripeti nuova password" required>
-                                <input type="submit" value="Conferma" id="confirmpasswordbutton">
-                                <input type="reset" value="Cancella" id="resetpssform">
-                            </form>
-                        </div>
+                        <form class="scrollpassword" id="restPassForm">
+                            <input type="password" id="oldpassword" name="oldpassword" placeholder="Vecchia password" required>
+                            <input type="password" id="newpassword" name= "newPassword"  placeholder="Nuova password" required>
+                            <input type="password" id="newpasswordconf" name="NewPassowrdConfirm" placeholder="Ripeti nuova password" required>
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="submit" value="Conferma" id="confirmpasswordbutton">
+                                </div>
+                                <div class="col-6">
+                                    <input type="reset" value="Cancella" id="resetpssform">
+                                </div>
+                            </div>
+                        </form>
                     </aside>
                     <aside>
                         <h3>About me:</h3>
@@ -83,18 +94,21 @@
                             </div>
                         </div>
                     </aside>
-                    <br>
+                    <aside>
+                        <a href="user_log.htm" id="logButton">Log del account</a>
+                    </aside>
                     <aside>
                         <h3>Mete preferite:</h3>
                         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt voluptatum delectus magni
                             enim cum. Deserunt, earum alias. Saepe, consequatur ipsa!</p>
                     </aside>
+
                     <aside>
                         <a href="livelloscrocco.htm" id="scroccoLevel">Livello di scrocco: Giovanni</a>
                     </aside>
                 </section>
             </div>
-            <div class="col-8">
+            <div class="col-7">
                 <div class="buttons">
                     <div class="booking">
                         <i class="fas fa-route">
@@ -125,10 +139,6 @@
             </div>
         </div>
     </div>
-    </div>
-
-
-
 
 
     <div id="footer"></div>
@@ -156,16 +166,26 @@
             $("#street").html(json_response.address.street);
             $("#city").html(json_response.address.cap + " " + json_response.address.city + " (" + json_response.address.region + ")");
             $("#state").html(json_response.address.state);
+
+            $("#loading").css({ 'display' : 'none'});
+            $("#mainUser").css({ 'display' : 'flex'});
         }
 
         function dati_non_loggato(json_response) {
             alert("Non sei loggato");
             console.log(json_response);
+
+            $(location).attr("href", "access.htm");
         }
 
         function dati_internal_server_error(json_response) {
             alert("Server non raggiungibile, riprova piu tardi");
             console.log(json_response);
+
+            $("#loading").css({ 'display' : 'none'});
+            $("#mainUser").css({ 'display' : 'none'});
+
+            $(location).attr("href", "access.htm");
         }
 
         const functions = {
@@ -173,6 +193,9 @@
             401: dati_non_loggato,
             501: dati_internal_server_error
         };
+
+        $("#loading").css({ 'display' : 'flex', 'align-items' : 'center', 'height' : '100vh'});
+        $("#mainUser").css({ 'display' : 'none'});
 
         post("api/user/read_one.php", null, functions);
     }
@@ -231,7 +254,7 @@
                 newPassword:  hex_sha512(newPasswordConf),
             };
 
-            let chamge_password_function = {
+            let change_password_function = {
                 200: change_password_success,
                 400: change_password_missing_paramtrer,
                 401: change_password_Unauthorized,
@@ -239,7 +262,7 @@
                 500: change_password_internal_server_error
             };
 
-            post("api/user/update_password.php", password_data ,chamge_password_function);
+            post("api/user/update_password.php", password_data, change_password_function);
 
         }else{
             alert('bad, no matching');
@@ -247,11 +270,17 @@
         }
     }
 
-    function change_username(e){
-        e.preventDefault();
+
+
+    function change_username(event){
+        event.preventDefault();
+
 
         function change_username_success(json_response){
             alert("Username cambiato con sucesso");
+
+            $('.scrollname').hide("slow");
+
             formNewUsername.reset();
             post("api/user/logout.php", null , null);
             $(location).attr("href", "access.htm")
@@ -259,7 +288,7 @@
         }
 
         function change_username_Unauthorized(json_response){
-            alert("Non sei loggato, non puoi cambiare la password");
+            alert("Non sei loggato, non puoi cambiare lo username");
         }
 
         function change_username_internal_server_error(json_response){
@@ -267,24 +296,22 @@
         }
 
         let username_data = {
-            newUsername : $('#newusrname').val()
-        }
+            newUsername : $('#new_username').val()
+        };
 
-        let change_name_functions ={
+        let update_usename_functions ={
             200:change_username_success,
             401:change_username_Unauthorized,
             500: change_username_internal_server_error
-        }
+        };
 
-
-
-        post("/api/user/update_username.php", username_data, change_name_functions);
+        post("api/user/update_username.php", username_data, update_usename_functions);
     }
 
-    let formNewPass = $('#restPassForm').val();
+    let formNewPass = document.getElementById("restPassForm");
     formNewPass.addEventListener('submit', change_password);
 
-    let formNewUsername = $('#updatename').val();
+    let formNewUsername = document.getElementById("update_username_form");
     formNewUsername.addEventListener('submit', change_username);
 </script>
 

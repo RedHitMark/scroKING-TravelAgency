@@ -37,6 +37,10 @@
         return $ip;
     }
 
+    function getLocationFromIp($ip) {
+        return json_decode(file_get_contents("http://api.ipstack.com/". $ip . "?access_key=07442de09688a3b8e53eaf8c132b61f4&format=1"));
+    }
+
     function isUserBlocked(int $blockedUntil = null) : bool {
         if( isset($blockedUntil)) {
             return $blockedUntil >= getTimestamp();

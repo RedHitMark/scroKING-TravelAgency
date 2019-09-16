@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="IMG/favicon.png" />
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="Font/fontawesome-free-5.10.1-web/css/all.css">
+    <title>ScroKING viaggi</title>
+</head>
+
+<body>
+<div id="header"></div>
+
+<div id="wrapper">
+    <section id="logPage">
+        <div id="loading" class="row">
+            <article>
+                <div class="fa-10x">
+                    <i class="fas fa-spinner fa-pulse"></i>
+                </div>
+            </article>
+        </div>
+
+        <div id="logs">
+            <table>
+                <tr>
+                    <th>Risultato</th>
+                    <th>Data</th>
+                    <th>IP</th>
+                </tr>
+                <tbody id="loginLogsTableBody"></tbody>
+            </table>
+
+            <br>
+            <br>
+
+            <table>
+                <tr>
+                    <th>Risultato</th>
+                    <th>Data</th>
+                    <th>IP</th>
+                </tr>
+                <tbody id="updatePasswordLogsTableBody"></tbody>
+            </table>
+
+            <table>
+                <tr>
+                    <th>Vecchio Username</th>
+                    <th>Nuovo Username</th>
+                    <th>Data</th>
+                    <th>IP</th>
+                </tr>
+                <tbody id="updateUsernameLogsTableBody"></tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+<div id="footer"></div>
+</body>
+<script src="JS/jquery.min.js"></script>
+<script src="JS/loadheaderfooter.js"></script>
+<script src="JS/menu.js"></script>
+<script src="JS/http.js"></script>
+<script src="JS/time.js"></script>
+<script>
+    var loginLogsLoaded = false;
+    var updateUsernameLogsLoaded = false;
+    var updatePasswordLogsLoaded = false;
+
+    function loadLoginLogs() {
+        function login_logs_ok(json_response) {
+            console.log(json_response);
+
+            let loginLogsTableBody = "";
+
+            $.each(json_response, function(index, log) {
+                const ip = log.ip;
+                const location = log.location;
+
+                let ipString;
+                if(location === "localhost") {
+                    ipString = ip + " (" + location + ")";
+                } else {
+                    ipString = "<a href='http://maps.google.com/maps?q=" + location.latitude + "," + location.longitude +"'>" + ip +  "(" + location.city + ", " + location.region_name + ", " + location.country_name  + ")";
+                }
+
+
+
+                let newRow;
+
+                if(log.result === "OK") {
+                    newRow = "<tr><td>" + "<i class='fas fa-check-circle'></i>" +  "</td><td>" + timestamp2string(log.timestamp) + "</td><td>" + ipString + "</td></tr>";
+                } else {
+                    newRow = "<tr><td>" + "<i class='fas fa-times-circle'></i>"+ "</td><td>" + timestamp2string(log.timestamp) + "</td><td>" + ipString + "</td></tr>";
+                }
+
+                loginLogsTableBody += newRow;
+            });
+
+            $("#loginLogsTableBody").html(loginLogsTableBody);
+            loginLogsLoaded = true;
+
+            if(loginLogsLoaded && updatePasswordLogsLoaded && updateUsernameLogsLoaded) {
+                $("#loading").css({ 'display' : 'none'});
+                $("#logs").css({ 'display' : 'flex', 'align-items' : 'center'});
+            }
+        }
+
+        function dati_internal_server_error(json_response) {
+        }
+
+        const functions = {
+            200 : login_logs_ok,
+            500 : dati_internal_server_error
+        };
+
+        post("api/logs/login_logs.php", null, functions);
+    }
+
+    function loadUpdatePasswordLogs() {
+        function dati_ok(json_response) {
+            console.log(json_response);
+
+            let updatePasswordLogsTableBody = "";
+
+            $.each(json_response, function(index, log) {
+                const ip = log.ip;
+                const location = log.location;
+
+                let ipString;
+                if(location === "localhost") {
+                    ipString = ip + " (" + location + ")";
+                } else {
+                    ipString = "<a href='http://maps.google.com/maps?q=" + location.latitude + "," + location.longitude +"'>" + ip +  "(" + location.city + ", " + location.region_name + ", " + location.country_name  + ")";
+                }
+
+                let newRow;
+
+                if(log.result === "OK") {
+                    newRow = "<tr><td>" + "<i class='fas fa-check-circle'></i>" +  "</td><td>" + timestamp2string(log.timestamp) + "</td><td>" + ipString + "</td></tr>";
+                } else {
+                    newRow = "<tr><td>" + "<i class='fas fa-times-circle'></i>"+ "</td><td>" + timestamp2string(log.timestamp) + "</td><td>" + ipString + "</td></tr>";
+                }
+
+                updatePasswordLogsTableBody += newRow;
+            });
+
+            $("#updatePasswordLogsTableBody").html(updatePasswordLogsTableBody);
+            updatePasswordLogsLoaded = true;
+
+            if(loginLogsLoaded && updatePasswordLogsLoaded && updateUsernameLogsLoaded) {
+                $("#loading").css({ 'display' : 'none'});
+                $("#logs").css({ 'display' : 'flex', 'align-items' : 'center'});
+            }
+        }
+
+        function dati_internal_server_error(json_response) {
+        }
+
+        const functions = {
+            200 : dati_ok,
+            500 : dati_internal_server_error
+        };
+
+        post("api/logs/update_password_logs.php", null, functions);
+    }
+
+    function loadUpdateUsernameLogs() {
+        function update_username_logs_ok(json_response) {
+            console.log(json_response);
+
+            let updateUsernameLogsTableBody = "";
+
+            $.each(json_response, function(index, log) {
+                const ip = log.ip;
+                const location = log.location;
+
+                let ipString;
+                if(location === "localhost") {
+                    ipString = ip + " (" + location + ")";
+                } else {
+                    ipString = "<a href='http://maps.google.com/maps?q=" + location.latitude + "," + location.longitude +"'>" + ip +  "(" + location.city + ", " + location.region_name + ", " + location.country_name  + ")";
+                }
+
+                let newRow;
+                newRow = "<tr><td>" + log.oldUsername + "</td><td>" + log.newUsername + "</td><td>" + timestamp2string(log.timestamp) + "</td><td>" + ipString + "</td></tr>";
+
+                updateUsernameLogsTableBody += newRow;
+            });
+
+            $("#updateUsernameLogsTableBody").html(updateUsernameLogsTableBody);
+            updateUsernameLogsLoaded = true;
+
+            if(loginLogsLoaded && updatePasswordLogsLoaded && updateUsernameLogsLoaded) {
+                $("#loading").css({ 'display' : 'none'});
+                $("#logs").css({ 'display' : 'flex', 'align-items' : 'center'});
+            }
+        }
+
+        function dati_internal_server_error(json_response) {
+        }
+
+        const functions = {
+            200 : update_username_logs_ok,
+            500 : dati_internal_server_error
+        };
+
+        post("api/logs/update_username_logs.php", null, functions);
+    }
+
+    function loadData() {
+        $("#loading").css({ 'display' : 'flex', 'align-items' : 'center', 'height' : '100vh'});
+        $("#logs").css({ 'display' : 'none'});
+
+        Promise.all([loadLoginLogs(), loadUpdatePasswordLogs(), loadUpdateUsernameLogs()]).then();
+    }
+
+    loadData();
+</script>
