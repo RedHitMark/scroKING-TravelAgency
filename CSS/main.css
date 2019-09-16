@@ -929,7 +929,7 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
 
 
 
-#modifypassword, #modifyusername{
+#modifypassword, #modifyusername, #modifymail {
     border: none;
     border: 1px solid black;
     background-color: #17252A;
@@ -941,21 +941,21 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     cursor: pointer;
 }
 
-.scrollpassword, .scrollname{
+.scrollpassword, .scrollname, .scrollmail{
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
 }
 
-#newusername, #oldpassword, #newpassword, #newpasswordconf {
+#newusername, #oldpassword, #newpassword, #newpasswordconf, #oldmail, #newmail {
     font-family: cursive;
     text-align: center;
     margin-bottom: 5px;
 }
 
 
-#confirmpasswordbutton, #resetpssform, #update_username_button, #reset_username_form {
+#confirmpasswordbutton, #resetpssform, #update_username_button, #reset_username_form, #confirmmaildbutton, #resetmailform{
     border: none; 
     border: 1px solid black;
     background-color: #17252A;
