@@ -71,18 +71,21 @@
                     <aside>
                         <button id="modifymail">Cambia E-mail</button>
                     </aside>
-                    <form class="scrollmail" id="restMailForm">
-                        <input type="text" id="oldmail" name="oldmail" placeholder="Vecchia e-mail" required>
-                        <input type="text" id="newmail" name= "newmail"  placeholder="Nuova e-mail" required>
-                        <div class="row">
-                            <div class="col-6">
-                                <input type="submit" value="Conferma" id="confirmmaildbutton">
+                    <aside>
+                        <form class="scrollmail" id="restMailForm">
+                            
+                            <input type="text" id="newmail" name= "newmail"  placeholder="Nuova e-mail" required>
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="submit" value="Conferma" id="confirmmaildbutton">
+                                </div>
+                                <div class="col-6">
+                                    <input type="reset" value="Cancella" id="resetmailform">
+                                </div>
                             </div>
-                            <div class="col-6">
-                                <input type="reset" value="Cancella" id="resetmailform">
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </aside>
+                    
 
                     <aside>
                         <h3>About me:</h3>
@@ -167,6 +170,7 @@
 <script src="JS/http.js"></script>
 <script src="JS/loadpasswordfield.js"></script>
 <script src="JS/loadnamefield.js"></script>
+<script src="JS/loadmailfield.js"></script>
 <script src="JS/sha512.js"></script>
 
 <script>
