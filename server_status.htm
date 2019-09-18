@@ -11,82 +11,93 @@
 </head>
 
 <body>
-<div id="header"></div>
-<div class="wrapper">
-    <section id="serverStatus">
-        <div class="row">
-            <h1>Server status</h1>
-        </div>
-        <div class="row">
-            <article>
-                <p>In questa pagina troverai il riepilogo dei server attivi. Se per qualisiasi motivo i server non funzionano contattaci a info@scroking.com</p>
-            </article>
-        </div>
-        <div id="loading" class="row">
-            <article>
-                <div class="fa-10x">
-                    <i class="fas fa-spinner fa-pulse"></i>
+    <div id="header"></div>
+    <div class="wrapper">
+        <section class="adv">
+            <div class="row">
+                <div class="col-4">
+                    <h2>A cosa serve la pagina Server Status?</h2>
                 </div>
-            </article>
-        </div>
-        <div id="server">
-            <div class="row">
-                <h1>Primary</h1>
+                <div class="col-8">
+                    <p>In questa pagina troverai il riepilogo dei server attivi. Se per qualisiasi motivo i server non
+                        funzionano contattaci a issues@scroking.com</p>
+                </div>
             </div>
-            <div class="row">
+            <div id="loading" class="row">
                 <article>
-                    <div class="col-6">
+                    <div class="fa-10x">
+                        <i class="fas fa-spinner fa-pulse"></i>
+                    </div>
+                </article>
+            </div>
+            <section id="primaryserver">
+                <div class="row">
+                    <div class="col-4">
                         <div class="aboutIMG">
                             <img src="IMG/primary.png" alt="logo">
                         </div>
                     </div>
-                    <div class="col-6">
-                        <article>
-                            <p id="primary-host"></p>
-                            <h1>Eletto il</h1>
-                            <p id="primary-election-date"></p>
-                            <h1>Acceso da</h1>
-                            <p id="primary-uptime"></p>
-                        </article>
+                    <div class="col-8">
+                        <h1>Primary server</h1>
+                        <p id="primary-host"></p>
+                        <div class="tables primary">
+                            <table>
+                                <tr>
+                                    <th>Eletto il</th>
+                                </tr>
+                                <tr>
+                                    <td id="primary-election-date"></td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <th>Accesso da</th>
+                                </tr>
+                                <tr>
+                                    <td id="primary-uptime"></td>
+                                </tr>
+                            </table>
+                        </div>
+
                     </div>
-                </article>
-            </div>
-            <div class="row">
-                <h1>Server secondary</h1>
-            </div>
-            <div class="row">
-                <article>
-                    <div class="col-6">
+                </div>
+            </section>
+            <section id="secondaryserver">
+                <div class="row">
+                        <h1>Secondary server</h1>
+                </div>
+                <div class="row">
+                    <div class="tables">
                         <table>
                             <tr>
                                 <th>Hostname</th>
+                            </tr>
+                            <tr>
+                                <tbody id="secondaryTableBody"></tbody>
+                            </tr>
+                        </table>
+                        <table>
+                            <tr>
                                 <th>Uptime</th>
                             </tr>
-                            <tbody id="secondaryTableBody"></tbody>
+                            <tr>
+                                <tbody id="secondaryHTMLTableUptime"></tbody>
+                            </tr>
                         </table>
-                    </div>
-                </article>
-            </div>
-
-            <div class="row">
-                <h1>Server morti</h1>
-            </div>
-            <div class="row">
-                <article>
-                    <div class="col-6">
                         <table>
                             <tr>
-                                <th>Hostname</th>
+                                <th>IP <address></address>
+                                </th>
                             </tr>
-                            <tbody id="mortiTableBody"></tbody>
+                            <tr>
+                                <tbody id="ipserver"></tbody>
+                            </tr>
                         </table>
                     </div>
-                </article>
-            </div>
-        </div>
-    </section>
-</div>
-<div id="footer"></div>
+                </div>
+            </section>
+    </div>
+    <div id="footer"></div>
 </body>
 
 <script src="JS/jquery.min.js"></script>
@@ -104,39 +115,61 @@
 
             let secondaryHTMLTableBody = "";
             let mortiHTMLTableBody = "";
+            let secondaryHTMLTableUptime = "";
+            let ipserver = "";
 
-            $.each(members, function(index, member) {
-                let giorni = Math.floor(member.uptime/86400);
-                let ore = Math.floor((member.uptime - giorni*86400)/3600);
-                let minuti = Math.floor((member.uptime - giorni*86400 - ore*3600)/60);
-                let secondi = Math.floor(member.uptime - giorni*86400 - ore*3600 - minuti*60);
+            $.each(members, function (index, member) {
+                let giorni = Math.floor(member.uptime / 86400);
+                let ore = Math.floor((member.uptime - giorni * 86400) / 3600);
+                let minuti = Math.floor((member.uptime - giorni * 86400 - ore * 3600) / 60);
+                let secondi = Math.floor(member.uptime - giorni * 86400 - ore * 3600 - minuti * 60);
 
-                let uptimestring = "".concat(giorni, "giorni,", ore, "ore,", minuti, "minuti,", secondi, "secondi");
+                let uptimestring = "".concat(giorni, "giorni,", ore, "ore,", minuti, "minuti,", secondi,
+                    "secondi");
 
-                if(member.stateStr === "PRIMARY" ) {
+                if (member.stateStr === "PRIMARY") {
                     $("#primary-host").html(member.name);
-                    $("#primary-election-date").html(timestamp_seconds2string(member.electionTime.$timestamp.t));
+                    $("#primary-election-date").html(timestamp_seconds2string(member.electionTime.$timestamp
+                        .t));
+                    var newip = "<tr><td>" + member.ip + "</td></tr>";
+                    ipserver += newip;
                     $("#primary-uptime").html(uptimestring);
+
                 } else if (member.stateStr === "SECONDARY") {
-                    var newSecondary = "<tr><td>"+ member.name + "</td><td>" + uptimestring + "</td></tr>";
+                    var newSecondary = "<tr><td>" + member.name + "</td></tr>";
+                    var uptimesecondary = "<tr><td>" + uptimestring + "</td></tr>";
+                    var newip = "<tr><td>" + member.ip + "</td></tr>";
+                    ipserver += newip;
                     secondaryHTMLTableBody += newSecondary;
+                    secondaryHTMLTableUptime += uptimesecondary;
                 } else if (member.stateStr === "(not reachable/healthy)") {
-                    var newMorto = "<tr><td>"+ member.name + "</td></tr>";
+                    var newMorto = "<tr><td>" + member.name + "</td></tr>";
                     mortiHTMLTableBody += newMorto;
                 }
+
             });
 
             $("#secondaryTableBody").html(secondaryHTMLTableBody);
             $("#mortiTableBody").html(mortiHTMLTableBody);
+            $("#secondaryHTMLTableUptime").html(secondaryHTMLTableUptime);
+            $("#ipserver").html(ipserver);
 
             //show things
-            $("#loading").css({ 'display' : 'none'});
-            $("#server").css({ 'display' : 'block'});
+            $("#loading").css({
+                'display': 'none'
+            });
+            $("#server").css({
+                'display': 'block'
+            });
         }
 
         function server_error(json_response) {
-            $("#loading").css({ 'display' : 'none'});
-            $("#server").css({ 'display' : 'none'});
+            $("#loading").css({
+                'display': 'none'
+            });
+            $("#server").css({
+                'display': 'none'
+            });
         }
 
         const info_functions = {
@@ -148,8 +181,12 @@
     }
 
     loadServerInfo();
-    $("#loading").css({ 'display' : 'flex'});
-    $("#server").css({ 'display' : 'none'});
+    $("#loading").css({
+        'display': 'flex'
+    });
+    $("#server").css({
+        'display': 'none'
+    });
 </script>
 
 </html>

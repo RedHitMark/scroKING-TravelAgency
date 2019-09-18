@@ -17,19 +17,31 @@
     try {
         $mongo = new MongoDB();
 
-        //@TODO controllare se non esiste gia un tizio registrato con stesso username ed email -> condizione necessaria affinche la login non si bugghi
         if (isset($new_user->username) && isset($new_user->password) && isset($new_user->name) && isset($new_user->surname) && isset($new_user->email) && isset($new_user->address) ) {
-            $doc = new User( $mongo->getNewIdObject(),$new_user->name ,$new_user->surname, $new_user->address, $new_user->email, $new_user->username , $new_user->password, 0);
+            $result_with_existent_email = $mongo->ReadQuery("scroKING", "Users", ["email" => $new_user->email], [], 1);
+            $result_with_existent_username = $mongo->ReadQuery("scroKING", "Users", ["username" => $new_user->username], [], 1);
 
-            $mongo->WriteOneQuery("scroKING", "Users", $doc);
+            if (count($result_with_existent_email) == 0 && count($result_with_existent_username) == 0) {
+                $doc = new User( $mongo->getNewIdObject(),$new_user->name ,$new_user->surname, $new_user->address, $new_user->email, $new_user->username , $new_user->password, 0);
 
-            //save registration log in db
-            $registrationLog = new RegistrationLog(getTimestamp(), getClientIp(), $new_user->username, $new_user->email, "OK");
-            $mongo->WriteOneQuery("scroKING", "LoginLogs", $registrationLog);
+                $mongo->WriteOneQuery("scroKING", "Users", $doc);
 
-            //response: 200  Success
-            http_response_code(200);
-            echo json_encode(array("message" => "Registrazione effettuata correttamente."));
+                //save registration log in db
+                $registrationLog = new RegistrationLog(getTimestamp(), getClientIp(), $new_user->username, $new_user->email, "OK");
+                $mongo->WriteOneQuery("scroKING", "LoginLogs", $registrationLog);
+
+                //response: 200  Success
+                http_response_code(200);
+                echo json_encode(array("message" => "Registrazione effettuata correttamente."));
+
+            } else {
+                $message = count($result_with_existent_email) == 0 ? "Username già utilizzato" : "Email già utilizzata";
+                $message = count($result_with_existent_email) >= 1 && count($result_with_existent_username) >= 1? "Username e password già utilizzate" : $message;
+                //response: 406 Not Acceptable
+                http_response_code(406);
+                echo json_encode(array("message" => $message));
+            }
+
         } else {
             //response: 400 Bad Request
             http_response_code(400);

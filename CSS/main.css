@@ -1062,15 +1062,54 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
 }
 
 /* ======== server status ============ */
-.wrapper #serverStatus .row article {
-    height: 250px;
+.adv .col-4 h2{
+    font-weight: bold;
+    padding: 1em;
+    font-size: 15px;
+}
+.adv .col-8 p{
+    padding: 1em;
+}
+#primaryserver{
     display: flex;
     align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid black;
 }
-
-.wrapper #serverStatus .row h1 {
-    padding: 1em 0;
+#primaryserver h1, #secondaryserver .row h1{
+    margin: 1em 0;
+    text-align: center;
     text-transform: uppercase;
+    font-size: 16px;
+    font-weight: bold;
+}
+#primaryserver .tables.primary{
+    margin-top: 1em;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+#primaryserver p{
+    text-align: center;
+    font-weight: bold;
+}
+#secondaryserver{
+    display: flex;
+    flex-direction: column;
+}
+#secondaryserver .tables{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+td, th{
+    padding: 0.5em;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+    border-top: 1px solid black;
 }
 /* ========== bot page ======== */
 #infoBot{
@@ -1431,18 +1470,14 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     }
 
     /* ======== server status ============ */
-    .wrapper #serverStatus .row article {
+    #primaryserver{
         flex-direction: column;
-        height: auto;
-        padding: 1em;
     }
-
-    .wrapper #serverStatus .row h1 {
-        text-align: center;
+    #secondaryserver .tables{
+        flex-direction: column;
     }
-
-    .wrapper #serverStatus .row article .col-6 {
-        padding-top: 1em;
+    #primaryserver .tables.primary{
+        flex-direction: column;
     }
 }
 @media screen and (max-width: 400px){
