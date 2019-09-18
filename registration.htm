@@ -112,13 +112,35 @@
         }
     }
 
-    function registration_button(event) {
+    function registration(event) {
         event.preventDefault();
 
         console.log( hex_sha512(document.getElementsByName("password")[0].value) );
 
         let password = document.getElementsByName("password")[0];
         let conferma_psw = document.getElementsByName("conferma_psw")[0];
+
+        function registration_success(json_response){
+            alert("Registrazione avvenuta con successo!");
+        }
+        function registration_bad_request(json_response){
+            alert("Parametri mancanti per la registrazione");
+        }
+
+        function registration_not_acceptable(json_response){
+            alert(json_response.message);
+        }
+
+        function registration_internal_server_error(){
+            alert("Errore server, riprovare più tardi.");
+        }
+
+        let registration_functions={
+              200: registration_success,
+              400: registration_bad_request,
+              406: registration_not_acceptable,
+              500: registration_internal_server_error  
+        }
 
         if( is_matching(password.value, conferma_psw.value) ) {
             const registration_data = {
@@ -143,6 +165,7 @@
             alert("Le password non corrispondo");
         }
 
+        pust("api/user/registra.php", registration_data, registration_functions);
         
     }
 
