@@ -37,7 +37,7 @@
 
                 //send email to confirm registration
                 $mail = new Mail();
-                $mail->sendEmail($new_user->name, "Conferma della registrazione", "Bernvenuto " . $new_user->name);
+                $mail->sendEmail($new_user->email, "Conferma della registrazione", "<p/>Benvenuto " . $new_user->name . "<p>");
 
                 //response: 200  Success
                 http_response_code(200);

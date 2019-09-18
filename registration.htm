@@ -26,12 +26,12 @@
 
                                 <div class="firstlastname">
                                         <div class="col-6">
-                                                <label for="nome">Nome</label>
+                                                <label for="name">Nome</label>
                                                 <input type="text" name="name"  id="name" placeholder=" Nome" required>
                                                 
                                         </div>
                                         <div class="col-6">
-                                                <label for="cognome">Cognome</label>
+                                                <label for="surname">Cognome</label>
                                                 <input type="text" name="surname"  id="surname" placeholder=" Cognome" required>
                                         </div>
                                 </div>
@@ -135,7 +135,7 @@
             alert("Errore server, riprovare più tardi.");
         }
 
-        let registration_functions={
+        let registration_functions = {
               200: registration_success,
               400: registration_bad_request,
               406: registration_not_acceptable,
@@ -144,34 +144,31 @@
 
         if( is_matching(password.value, conferma_psw.value) ) {
             const registration_data = {
-                name : "d",
-                surname : "f",
+                name : $("#name").val(),
+                surname : $("#surname").val(),
                 address : {
-                    street : "v",
-                    city : "",
-                    cap : "",
-                    region : "gag",
-                    state : ""
+                    street : $("#street").val(),
+                    city : $("#city").val(),
+                    cap : $("#cap").val(),
+                    region : "Molisen't",
+                    state : "Italia"
                 },
-                email : "",
-                username : "",
-                password : hex_sha512("")
+                email : $("#email").val(),
+                username : $("#username").val(),
+                password : hex_sha512($("#password").val())
             };
 
-            alert("Form apposto! A breve funzionerà")
-            //@TODO Chiamata ajax
-            //post("api/user/login.php", login_ok, login_error, login_data);
+            console.log(registration_data);
+
+            post("api/user/registra.php", registration_data, registration_functions);
         } else {
             alert("Le password non corrispondo");
         }
-
-        pust("api/user/registra.php", registration_data, registration_functions);
-        
     }
 
 
     let form = document.getElementById("registrationForm");
-    form.addEventListener('submit', registration_button);
+    form.addEventListener('submit', registration);
 </script>
 
 
