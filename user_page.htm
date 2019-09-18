@@ -342,9 +342,10 @@
         event.preventDefault();
 
         function change_email_success(json_response){
-            alert("Email cambiata con sucesso");
-
-            $('.scrollemail').hide("slow");
+            window.alert("Email cambiata con sucesso");
+            
+            $('.scrollmail').hide("slow");
+            location.reload();
 
             formNewEmail.reset();
         }
@@ -376,7 +377,7 @@
     let formNewUsername = document.getElementById("update_username_form");
     formNewUsername.addEventListener('submit', change_username);
 
-    let formNewEmail = documen.getElementById("update_email_form");
+    let formNewEmail = document.getElementById("update_email_form");
     formNewEmail.addEventListener('submit', change_email);
 
 </script>
