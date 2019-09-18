@@ -10,9 +10,10 @@ class User {
     public $email;
     public $username;
     public $password;
+    public $role;
     public $blockedUntil;
 
-    public function __construct($_id, $name, $surname, Address $address, $email, $username, $password, $blockedUntil) {
+    public function __construct($_id, $name, $surname, Address $address, $email, $username, $password, $role, $blockedUntil) {
         $this->_id = $_id; 
         $this->name = $name;
         $this->surname = $surname;
@@ -20,6 +21,7 @@ class User {
         $this->email = $email;
         $this->username = $username;
         $this->password = $password;
+        $this->role = $role;
         $this->blockedUntil = $blockedUntil;
     }
 }

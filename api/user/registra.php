@@ -11,6 +11,9 @@
     include_once("../models/Address.php");
     include_once("../models/User.php");
     include_once("../models/RegistrationLog.php");
+    include_once ("../config/Mail.php");
+    include_once ("../config/timestamp.php");
+    include_once ("../config/security.php");
 
     $new_user = json_decode(file_get_contents("php://input"));
 
@@ -22,21 +25,27 @@
             $result_with_existent_username = $mongo->ReadQuery("scroKING", "Users", ["username" => $new_user->username], [], 1);
 
             if (count($result_with_existent_email) == 0 && count($result_with_existent_username) == 0) {
-                $doc = new User( $mongo->getNewIdObject(),$new_user->name ,$new_user->surname, $new_user->address, $new_user->email, $new_user->username , $new_user->password, 0);
+                $address = new Address($new_user->address->street, $new_user->address->city, $new_user->address->cap, $new_user->address->region, "Italia");
+                $doc = new User( $mongo->getNewIdObject(),$new_user->name ,$new_user->surname, $address, $new_user->email, $new_user->username , $new_user->password, "customer",0);
 
+                //write new user in db
                 $mongo->WriteOneQuery("scroKING", "Users", $doc);
 
                 //save registration log in db
                 $registrationLog = new RegistrationLog(getTimestamp(), getClientIp(), $new_user->username, $new_user->email, "OK");
                 $mongo->WriteOneQuery("scroKING", "LoginLogs", $registrationLog);
 
+                //send email to confirm registration
+                $mail = new Mail();
+                $mail->sendEmail($new_user->name, "Conferma della registrazione", "Bernvenuto " . $new_user->name);
+
                 //response: 200  Success
                 http_response_code(200);
                 echo json_encode(array("message" => "Registrazione effettuata correttamente."));
-
             } else {
                 $message = count($result_with_existent_email) == 0 ? "Username già utilizzato" : "Email già utilizzata";
-                $message = count($result_with_existent_email) >= 1 && count($result_with_existent_username) >= 1? "Username e password già utilizzate" : $message;
+                $message = count($result_with_existent_email) >= 1 && count($result_with_existent_username) >= 1? "Username e email già utilizzate" : $message;
+
                 //response: 406 Not Acceptable
                 http_response_code(406);
                 echo json_encode(array("message" => $message));
