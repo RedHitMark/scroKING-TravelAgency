@@ -1044,6 +1044,40 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     padding: 1em 0;
     text-transform: uppercase;
 }
+/* ========== bot page ======== */
+#infoBot{
+    margin: 1em 0;
+}
+#infoBot .row .col-4 h2{
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 1em;
+    font-size: 15px;
+}
+#infoBot .row .col-8 p{
+    padding: 1em;
+}
+#botPage{
+    margin: 30% 0;
+}
+#botPage  .row article .question{
+    text-align: center;
+}
+#botPage .row .buttons{
+    width: 100%;
+    margin-top: 2em;
+    display: flex;
+    justify-content: space-evenly;
+}
+#botPage button{
+    margin: 1em;
+    padding: 1em;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    background-color: rgba(38, 197, 17, 0.5);
+}
 
 @media screen and (max-width: 992px) {
 
