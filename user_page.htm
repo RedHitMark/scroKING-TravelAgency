@@ -72,7 +72,7 @@
                         <button id="modifymail">Cambia E-mail</button>
                     </aside>
                     <aside>
-                        <form class="scrollmail" id="restMailForm">
+                        <form class="scrollmail" id="update_email_form">
                             
                             <input type="text" id="newmail" name= "newmail"  placeholder="Nuova e-mail" required>
                             <div class="row">
@@ -329,11 +329,47 @@
         post("api/user/update_username.php", username_data, update_usename_functions);
     }
 
+    function change_email(event){
+        event.preventDefault();
+
+        function change_email_success(json_response){
+            alert("Email cambiata con sucesso");
+
+            $('.scrollemail').hide("slow");
+
+            formNewEmail.reset();
+        }
+
+        function change_email_Unauthorized(json_response){
+            alert("Non sei loggato, non puoi cambiare la email");
+         }
+
+         function change_email_internal_server_error(json_response){
+            alert("Errore server, riprovare più tardi.");
+        }
+
+        email_data = {
+            newEmail : $('#newmail').val()
+        } 
+        
+        change_email_functions = {
+            200:  change_email_success,
+            400:  change_email_Unauthorized,
+            500:  change_email_internal_server_error
+        }
+        
+        post("api/user/update_email.php", email_data, change_email_functions );
+    }
+
     let formNewPass = document.getElementById("restPassForm");
     formNewPass.addEventListener('submit', change_password);
 
     let formNewUsername = document.getElementById("update_username_form");
     formNewUsername.addEventListener('submit', change_username);
+
+    let formNewEmail = documen.getElementById("update_email_form");
+    formNewEmail.addEventListener('submit', change_email);
+
 </script>
 
 </html>

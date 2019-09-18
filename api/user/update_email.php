@@ -49,10 +49,6 @@
             echo json_encode(array("message" => "Parametri mancanti."));
         } 
 
-
-
-
-
     }catch (Exception | MongoDB\Driver\Exception\Exception $e){
         //response: 500 Internal Server Error
         http_response_code(500);
