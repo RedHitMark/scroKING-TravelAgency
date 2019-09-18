@@ -349,6 +349,11 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     padding: 1em 0;
     text-transform: uppercase;
 }
+#citazione{
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+}
 
 .aboutIMG {
     display: flex;
@@ -1204,7 +1209,7 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     }
     .log.mobile .yeslog li{
         list-style: none;
-        display: inline;
+        display: none;
     }
     .user li{
         margin-right: 0.5em;
@@ -1297,6 +1302,7 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     .footer .bottom .row .col-12 .col-4 .payIMG img {
         margin-top: 0.5em;
     }
+    
 
     /* ======== Contact ====== */
     .bg-contact .row .col-12 {
