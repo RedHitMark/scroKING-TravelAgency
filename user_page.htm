@@ -34,44 +34,52 @@
                     </aside>
                     <br>
                     <aside>
-                        <button id="modifyusername">Cambia username</button>
+                        <div class="cog">
+                            <i class="fas fa-cog"></i>
+                            <h3>Impostazioni</h3>
+                        </div>
                     </aside>
-                    <aside>
-                        <form class="scrollname" id="update_username_form">
-                            <input type="text" id="new_username" name="newusrname" placeholder="Username nuovo" required>
-                            <div class="row">
-                                <div class="col-6">
-                                    <input type="submit" value="Conferma" id="update_username_button">
+                    <section id="usersettings">
+                        <aside>
+                            <button id="modifyusername">Cambia username</button>
+                        </aside>
+                        <aside>
+                            <form class="scrollname" id="update_username_form">
+                                <input type="text" id="new_username" name="newusrname" placeholder="Username nuovo" required>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <input type="submit" value="Conferma" id="update_username_button">
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="reset" value="Cancella" id="reset_username_form">
+                                    </div>
                                 </div>
-                                <div class="col-6">
-                                    <input type="reset" value="Cancella" id="reset_username_form">
+                            </form>
+                        </aside>
+                        <aside>
+                            <button id="modifypassword">Cambia password</button>
+                        </aside>
+                         <aside>
+                            <form class="scrollpassword" id="restPassForm">
+                                <input type="password" id="oldpassword" name="oldpassword" placeholder="Vecchia password" required>
+                                <input type="password" id="newpassword" name= "newPassword"  placeholder="Nuova password" required>
+                                <input type="password" id="newpasswordconf" name="NewPassowrdConfirm" placeholder="Ripeti nuova password" required>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <input type="submit" value="Conferma" id="confirmpasswordbutton">
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="reset" value="Cancella" id="resetpssform">
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                    </aside>
-                    <aside>
-                        <button id="modifypassword">Cambia password</button>
-                    </aside>
-                     <aside>
-                        <form class="scrollpassword" id="restPassForm">
-                            <input type="password" id="oldpassword" name="oldpassword" placeholder="Vecchia password" required>
-                            <input type="password" id="newpassword" name= "newPassword"  placeholder="Nuova password" required>
-                            <input type="password" id="newpasswordconf" name="NewPassowrdConfirm" placeholder="Ripeti nuova password" required>
-                            <div class="row">
-                                <div class="col-6">
-                                    <input type="submit" value="Conferma" id="confirmpasswordbutton">
-                                </div>
-                                <div class="col-6">
-                                    <input type="reset" value="Cancella" id="resetpssform">
-                                </div>
-                            </div>
-                        </form>
-                    </aside>
-
-                    <aside>
-                        <button id="modifymail">Cambia E-mail</button>
-                    </aside>
-                    <aside>
+                            </form>
+                        </aside>
+    
+                        <aside>
+                            <button id="modifymail">Cambia E-mail</button>
+                        </aside>
+                        <aside>
+                    </section>
                         <form class="scrollmail" id="update_email_form">
                             
                             <input type="text" id="newmail" name= "newmail"  placeholder="Nuova e-mail" required>
@@ -172,6 +180,7 @@
 <script src="JS/loadnamefield.js"></script>
 <script src="JS/loadmailfield.js"></script>
 <script src="JS/sha512.js"></script>
+<script src="JS/showusersettings.js"></script>
 
 <script>
     /**
