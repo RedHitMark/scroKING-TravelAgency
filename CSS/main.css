@@ -1145,7 +1145,47 @@ td, th{
     border-radius: 8px;
     background-color: rgba(38, 197, 17, 0.5);
 }
-
+/* ======= Admin panel ======== */
+#adminpanel{
+    margin: 20% 0;
+}
+#adminpanel .title h1{
+    text-transform: uppercase;
+    text-align: center;
+    margin: 2em 0;
+}
+#adminpanel form{
+    display: flex;
+    flex-direction: column;
+}
+#adminpanel form label{
+    text-align: center;
+    text-transform: uppercase;
+    margin: 1em;
+}
+#adminpanel form input[type=text],#adminpanel form select{
+    padding: 1em;
+    margin-bottom: 1em;
+}
+#adminpanel form .buttons input[type="reset"]{
+    padding: 0.5em;
+    background-color: brown;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    text-transform: uppercase;
+}
+#adminpanel form .buttons{
+    margin: 1em 0;
+}
+#adminpanel form .buttons input[type="button"]{
+    padding: 0.5em;
+    background-color: rgba(78, 167, 18, 0.623);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    text-transform: uppercase;
+}
 @media screen and (max-width: 992px) {
 
     /* ====== Generale ====== */
@@ -1478,6 +1518,11 @@ td, th{
     }
     #primaryserver .tables.primary{
         flex-direction: column;
+    }
+    /* ======== Admin panel ======= */
+    #adminpanel{
+        margin: 0;
+        padding: 4px;
     }
 }
 @media screen and (max-width: 400px){
