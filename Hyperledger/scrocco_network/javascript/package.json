@@ -7,7 +7,7 @@
         "npm": ">=5"
     },
     "scripts": {
-        "lint": "eslint .",
+        "lint": "eslint ",
         "pretest": "npm run lint",
         "test": "nyc mocha --recursive"
     },
