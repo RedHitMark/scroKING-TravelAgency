@@ -23,14 +23,20 @@
                 //new mongo instance
                 $mongo = new MongoDB();
 
-                $result = $mongo->ReadOneQuery("scroKING", "Users", $session->get("id"), ["password"]);
+                //read password and email from db
+                $result = $mongo->ReadOneQuery("scroKING", "Users", $session->get("id"), ["password", "email"]);
 
                 if($result->password == $params->oldPassword) {
+                    //update only if old password is the same of db
                     $mongo->UpdateOneQuery("scroKING", "Users", $session->get("id"), (object) ["password" => $params->newPassword]);
 
                     //save update log in db
                     $updatePasswordLog = new UpdatePasswordLog(getTimestamp(), getClientIp(), $session->get("id"), "OK");
                     $mongo->WriteOneQuery("scroKING", "UpdatePasswordLogs", $updatePasswordLog);
+
+                    //send mail of confirm
+                    $mail = new Mail();
+                    $mail ->sendEmail($result->email, "Password modificata", "Complimenti, la tua password è stata aggiornata. <br> Se noti attività sospette sul tuo account rispondi a questa mail per ottenere assistenza.");
 
                     //response: 200  Success
                     http_response_code(200);

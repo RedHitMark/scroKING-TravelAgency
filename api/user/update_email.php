@@ -1,5 +1,3 @@
-
-
 <?php
     //headers
     header("Access-Control-Allow-Origin: *");
@@ -10,8 +8,9 @@
 
     //include
     include_once("../config/MongoDB.php");
-    include_once("../config/timestamp.php");
     include_once("../config/Session.php");
+    include_once("../config/Mail.php");
+    include_once("../config/timestamp.php");
     include_once("../config/security.php");
     include_once("../models/UpdateEmailLog.php");
 
@@ -25,18 +24,24 @@
                 //new mongo instance
                 $mongo = new MongoDB();
 
+                //read old email from db
                 $result = $mongo->ReadOneQuery("scroKING", "Users", $session->get("id"), ["email"]);
 
-               
-                    $mongo->UpdateOneQuery("scroKING", "Users", $session->get("id"), (object) ["email" => $params->newEmail]);
+                //update
+                $mongo->UpdateOneQuery("scroKING", "Users", $session->get("id"), (object) ["email" => $params->newEmail]);
 
-                    //save update log in db
-                    $updateEmailLog = new UpdateEmailLog(getTimestamp(), getClientIp(), $session->get("id"), "OK");
-                    $mongo->WriteOneQuery("scroKING", "UpdateEmailLogs", $updateEmailLog);
+                //save update log in db
+                $updateEmailLog = new UpdateEmailLog(getTimestamp(), getClientIp(), $session->get("id"), $params->newEmail, $result->oldEmail);
+                $mongo->WriteOneQuery("scroKING", "UpdateEmailLogs", $updateEmailLog);
 
-                    //response: 200  Success
-                    http_response_code(200);
-                    echo json_encode(array("message" => "Email aggiornata con successo."));
+                //send mail of confirm
+                $mail = new Mail();
+                $mail ->sendEmail($result->email, "Email modificata", "Attenzione, il tuo indirizzo email è stato aggiornato.<br> Adesso la tua email è $params->newEmail. <br> Se noti attività sospette sul tuo account rispondi a questa mail per ottenere assistenza.");
+                $mail ->sendEmail($params->newEmail, "Email modificata", "Complimenti, il tuo indirizzo email è stato aggiornato con successo.");
+
+                //response: 200  Success
+                http_response_code(200);
+                echo json_encode(array("message" => "Email aggiornata con successo."));
                 
             } else {
                 //response: 401 Unauthorized
@@ -49,15 +54,9 @@
             echo json_encode(array("message" => "Parametri mancanti."));
         } 
 
-    }catch (Exception | MongoDB\Driver\Exception\Exception $e){
+    } catch (Exception | MongoDB\Driver\Exception\Exception $e) {
         //response: 500 Internal Server Error
         http_response_code(500);
         echo json_encode(array("message" => "Errore lato server.", "verbose" => $e->getMessage()));
     }
-
-
-
-
-
-
 ?>

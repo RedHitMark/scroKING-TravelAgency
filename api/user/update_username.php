@@ -23,11 +23,19 @@
                 //new mongo instance
                 $mongo = new MongoDB();
 
+                //read username and email from db
+                $result = $mongo->ReadOneQuery("scroKING", "Users", $session->get("id"), ["username", "email"]);
+
+                //update
                 $mongo->UpdateOneQuery("scroKING", "Users", $session->get("id"), (object) ["username" => $params->newUsername]);
 
                 //save update log in db
-                $updateUsernameLog = new UpdateUsernameLog(getTimestamp(), getClientIp(), $session->get("id"), $session->get("username"), $params->newUsername);
+                $updateUsernameLog = new UpdateUsernameLog(getTimestamp(), getClientIp(), $session->get("id"), $result->username, $params->newUsername);
                 $mongo->WriteOneQuery("scroKING", "UpdateUsernameLogs", $updateUsernameLog);
+
+                //send mail of confirm
+                $mail = new Mail();
+                $mail ->sendEmail($result->email, "Username modificato", "Complimenti, il tuo username è stato aggiornato. <br> Il tuo nuovo username è $params->newUsername. <br> Se noti attività sospette sul tuo account rispondi a questa mail per ottenere assistenza.");
 
                 //response: 200  Success
                 http_response_code(200);
