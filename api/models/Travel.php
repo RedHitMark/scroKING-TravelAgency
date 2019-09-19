@@ -14,11 +14,15 @@
         /**
          * Travel constructor.
          * @param $_id
+         * @param $type
          * @param $destination
+         * @param string $startdata
+         * @param string $finishdata
+         * @param string $price
+         * @param array $veicles
+         * @param array $hotels
          */
-
-
-        public function __construct($_id, $type, array $destinations, string $startdata, string $finishdata, string $price, array $veicles, array $hotels) {
+         public function __construct($_id, $type, array $destinations, string $startdata, string $finishdata, string $price, array $veicles, array $hotels) {
             $this->_id = $_id;
             $this->type = $type;
             $this->destination = $destinations;
