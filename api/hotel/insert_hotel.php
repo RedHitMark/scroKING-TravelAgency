@@ -20,7 +20,7 @@
 
         if ( isset($new_hotel->name) && isset($new_hotel->description) && isset($new_hotel->address) && isset($new_hotel->phone) && isset($new_hotel->email) && isset($new_hotel->free_rooms) ){
 
-            $address = new Address($new_hotel->address->street, $new_hotel->address->city, $new_hotel->address->cap, $new_hotel->address->region, $new_hotel->address->state);
+            $address = new Address($new_hotel->address->street, $new_hotel->address->city, $new_hotel->address->cap, $new_hotel->address->region, $new_hotel->address->state );
 
             $doc = new Hotel($mongo->getNewIdObject(), $new_hotel->name, $new_hotel->description, $address, $new_hotel->phone, $new_hotel->email, $new_hotel->free_rooms);
 
