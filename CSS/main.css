@@ -1147,7 +1147,7 @@ td, th{
 }
 /* ======= Admin panel ======== */
 #adminpanel{
-    margin: 20% 0;
+    margin-top: 20%;
 }
 #adminpanel .title h1{
     text-transform: uppercase;
@@ -1158,33 +1158,33 @@ td, th{
     display: flex;
     flex-direction: column;
 }
-#adminpanel form label{
+#hotels-panel form label, #mezzi-panel form label, #adminpanel form label{
     text-align: center;
     text-transform: uppercase;
     margin: 1em;
 }
-#adminpanel form input[type=text],#adminpanel form select{
+#hotels-panel input[type=text], #mezzi-panel input[type=text], #adminpanel form input[type=text],#adminpanel form select{
     padding: 1em;
     margin-bottom: 1em;
-}
-#adminpanel form .buttons input[type="reset"]{
-    padding: 0.5em;
-    background-color: brown;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    text-transform: uppercase;
 }
 #adminpanel form .buttons{
     margin: 1em 0;
 }
-#adminpanel form .buttons input[type="button"]{
+#tasti form .buttons input[type="button"]{
     padding: 0.5em;
     background-color: rgba(78, 167, 18, 0.623);
     border: none;
     border-radius: 8px;
     color: white;
     text-transform: uppercase;
+}
+#hotels-panel form, #mezzi-panel form{
+    display: flex;
+    flex-direction: column;
+    padding: 0.2em;
+}
+#tasti{
+    margin-bottom: 20%;
 }
 @media screen and (max-width: 992px) {
 
