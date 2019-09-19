@@ -790,20 +790,47 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
 #userName {
     text-transform: uppercase;
 }
+.ipostazioniaccount{
+    display: flex;
+}
+#admin-access{
+    cursor: pointer;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0.5em;
+}
+#admin-access > h3{
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+    margin-top: 1em;
+}
+#admin-access > .fas.fa-user-lock{
+    text-align: center;
+    margin-top: 1em;
+    font-size: 30px;
+}
 .cog{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     cursor: pointer;
+    margin: 0 0.5em;
 }
 .cog h3{
+    margin-top: 1em;
     text-transform: uppercase;
-    font-size: 14px;
-    font-weight: 300;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
 }
 .cog i{
     font-size: 30px;
+    margin-top: 1em;
 }
 #usersettings{
     display: flex;
