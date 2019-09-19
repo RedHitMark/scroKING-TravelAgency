@@ -28,5 +28,20 @@ $('.kindsButtons, button').click(function(e){
     $('.botanswer').show();
 });
 
+/* selection each dates to make query */
+
+
+$( "#countryB button" ).click(function() {
+    var country = $(this).text();
+    console.log(country);
+});
+$( "#placesB button" ).click(function() {
+    var place = $(this).text();
+    console.log(place);
+});
+$( "#kindsB button" ).click(function() {
+    var kind = $(this).text();
+    console.log(kind);
+});
 
 

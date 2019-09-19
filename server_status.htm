@@ -57,6 +57,14 @@
                                     <td id="primary-uptime"></td>
                                 </tr>
                             </table>
+                            <table>
+                                <tr>
+                                    <th>IP address</th>
+                                </tr>
+                                <tr>
+                                    <tbody id="ipserverPrimary"></tbody>
+                                </tr>
+                            </table>
                         </div>
 
                     </div>
@@ -92,6 +100,7 @@
                                 <tbody id="ipserver"></tbody>
                             </tr>
                         </table>
+                        
                     </div>
                 </div>
             </section>
@@ -116,6 +125,7 @@
             let mortiHTMLTableBody = "";
             let secondaryHTMLTableUptime = "";
             let ipserver = "";
+            let ipserverPrimary = "";
 
             $.each(members, function (index, member) {
                 let giorni = Math.floor(member.uptime / 86400);
@@ -130,8 +140,8 @@
                     $("#primary-host").html(member.name);
                     $("#primary-election-date").html(timestamp_seconds2string(member.electionTime.$timestamp
                         .t));
-                    var newip = "<tr><td>" + member.ip + "</td></tr>";
-                    ipserver += newip;
+                    var newipPrimary = "<tr><td>" + member.ip + "</td></tr>";
+                    ipserverPrimary += newipPrimary;
                     $("#primary-uptime").html(uptimestring);
 
                 } else if (member.stateStr === "SECONDARY") {
@@ -152,6 +162,7 @@
             $("#mortiTableBody").html(mortiHTMLTableBody);
             $("#secondaryHTMLTableUptime").html(secondaryHTMLTableUptime);
             $("#ipserver").html(ipserver);
+            $("#ipserverPrimary").html(ipserverPrimary);
 
             //show things
             $("#loading").css({

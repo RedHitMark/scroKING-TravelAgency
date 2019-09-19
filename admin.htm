@@ -22,20 +22,23 @@
             </div>
             <form action="#">
                 <label for="select">Tipologia nuovo elemento</label>
-                <select>
+                <select id="selection">
                     <option value="null" selected>-</option>
-                    <option value="mezzi">Mezzi</option>
-                    <option value="hotel">Hotel</option>
+                    <option value="mezzi" id="mezzi">Mezzi</option>
+                    <option value="hotel" id="hotel">Hotel</option>
 
                 </select>
-                <label for="nomenewelement">Nome nuovo elemento</label>
-                <input type="text" id="nomenewelement" placeholder="Inserire il nome del nuovo elemento">
+                <label for="namenewelement">Nome nuovo elemento</label>
+                <input type="text" id="namenewelement" placeholder="Inserire il nome del nuovo elemento">
                 <label for="infonewelement">Info nuovo elemento</label>
                 <input type="text" id="infonewelement" placeholder="Inserire informazioni del nuovo elemento">
+            </form>
+            <section id="report"></section>
+            <form action="#">
                 <div class="buttons">
-                        <input type="reset" id="annulla" value="Annulla">
-                        <input type="button" id="invia" value="Inserisci">
-                </div>
+                    <input type="reset" id="annulla" value="Annulla">
+                    <input type="button" id="invia" value="Inserisci">
+                 </div>
             </form>
 
         </section>
@@ -47,5 +50,6 @@
 <script src="JS/menu.js"></script>
 <script src="JS/http.js"></script>
 <script src="JS/time.js"></script>
+<script src="JS/admin.js"></script>
 
 </html>
