@@ -18,16 +18,13 @@
     try{
         $mongo = new MongoDB();
 
-        var_dump($new_hotel);
-
-
         if ( isset($new_hotel->name) && isset($new_hotel->description) && isset($new_hotel->address) && isset($new_hotel->phone) && isset($new_hotel->email) && isset($new_hotel->free_rooms) ){
 
-            $address = new Address($new_hotel->address->street, $new_hotel->address->city, $new_hotel->address->cap, $new_hotel->address->region, $new_hotel->address->region);
+            $address = new Address($new_hotel->address->street, $new_hotel->address->city, $new_hotel->address->cap, $new_hotel->address->region, $new_hotel->address->state );
 
-            $doc = new Hotel($mongo->getNewIdObject(), $new_hotel->nome, $new_hotel->description, $address, $new_hotel->phone, $new_hotel->email, $new_hotel->free_rooms);
+            $doc = new Hotel($mongo->getNewIdObject(), $new_hotel->name, $new_hotel->description, $address, $new_hotel->phone, $new_hotel->email, $new_hotel->free_rooms);
 
-            $mongo->WriteOneQuery("scroKING", "Viaggi", $doc);
+            $mongo->WriteOneQuery("scroKING", "Hotels", $doc);
 
             //response: 200  Success
             http_response_code(200);
@@ -38,13 +35,12 @@
             http_response_code(400);
             echo json_encode(array("message" => "Parametri mancanti."));
         }
+
     }catch (Exception | MongoDB\Driver\Exception\Exception $e) {
         //response: 500 Internal Server Error
         http_response_code(500);
         echo json_encode(array("message" => "Errore lato server.", "verbose" => $e->getMessage()));
     }
-
-?>
 
 
 

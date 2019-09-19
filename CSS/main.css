@@ -875,6 +875,10 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     align-items: center;
 }
 
+#street, #city, #state {
+    /*padding-right: 0.2em*/
+}
+
 #scroccoLevel {
     text-decoration: none;
     color: gold;
