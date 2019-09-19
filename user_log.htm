@@ -54,6 +54,16 @@
                 </tr>
                 <tbody id="updateUsernameLogsTableBody"></tbody>
             </table>
+
+            <table>
+                <tr>
+                    <th>Vecchia Email</th>
+                    <th>Nuova Email</th>
+                    <th>Data</th>
+                    <th>IP</th>
+                </tr>
+                <tbody id="updateEmailLogsTableBody"></tbody>
+            </table>
         </div>
     </section>
 </div>
@@ -66,9 +76,10 @@
 <script src="JS/http.js"></script>
 <script src="JS/time.js"></script>
 <script>
-    var loginLogsLoaded = false;
-    var updateUsernameLogsLoaded = false;
-    var updatePasswordLogsLoaded = false;
+    let loginLogsLoaded = false;
+    let updatePasswordLogsLoaded = false;
+    let updateUsernameLogsLoaded = false;
+    let updateEmailLogsLoaded = false;
 
     function loadLoginLogs() {
         function login_logs_ok(json_response) {
@@ -103,13 +114,14 @@
             $("#loginLogsTableBody").html(loginLogsTableBody);
             loginLogsLoaded = true;
 
-            if(loginLogsLoaded && updatePasswordLogsLoaded && updateUsernameLogsLoaded) {
+            if(loginLogsLoaded && updatePasswordLogsLoaded && updateUsernameLogsLoaded && updateEmailLogsLoaded) {
                 $("#loading").css({ 'display' : 'none'});
                 $("#logs").css({ 'display' : 'flex', 'align-items' : 'center'});
             }
         }
 
-        function dati_internal_server_error(json_response) {
+        function dati_internal_server_error() {
+            alert("Riprova più tardi");
         }
 
         const functions = {
@@ -151,13 +163,14 @@
             $("#updatePasswordLogsTableBody").html(updatePasswordLogsTableBody);
             updatePasswordLogsLoaded = true;
 
-            if(loginLogsLoaded && updatePasswordLogsLoaded && updateUsernameLogsLoaded) {
+            if(loginLogsLoaded && updatePasswordLogsLoaded && updateUsernameLogsLoaded && updateEmailLogsLoaded) {
                 $("#loading").css({ 'display' : 'none'});
                 $("#logs").css({ 'display' : 'flex', 'align-items' : 'center'});
             }
         }
 
-        function dati_internal_server_error(json_response) {
+        function dati_internal_server_error() {
+            alert("Riprova più tardi");
         }
 
         const functions = {
@@ -194,13 +207,14 @@
             $("#updateUsernameLogsTableBody").html(updateUsernameLogsTableBody);
             updateUsernameLogsLoaded = true;
 
-            if(loginLogsLoaded && updatePasswordLogsLoaded && updateUsernameLogsLoaded) {
+            if(loginLogsLoaded && updatePasswordLogsLoaded && updateUsernameLogsLoaded && updateEmailLogsLoaded) {
                 $("#loading").css({ 'display' : 'none'});
                 $("#logs").css({ 'display' : 'flex', 'align-items' : 'center'});
             }
         }
 
-        function dati_internal_server_error(json_response) {
+        function dati_internal_server_error() {
+            alert("Riprova più tardi");
         }
 
         const functions = {
@@ -211,11 +225,55 @@
         post("api/logs/update_username_logs.php", null, functions);
     }
 
+    function loadUpdateEmailLogs() {
+        function update_email_logs_ok(json_response) {
+            console.log(json_response);
+
+            let updateEmailLogsTableBody = "";
+
+            $.each(json_response, function(index, log) {
+                const ip = log.ip;
+                const location = log.location;
+
+                let ipString;
+                if(location === "localhost") {
+                    ipString = ip + " (" + location + ")";
+                } else {
+                    ipString = "<a href='http://maps.google.com/maps?q=" + location.latitude + "," + location.longitude +"'>" + ip +  "(" + location.city + ", " + location.region_name + ", " + location.country_name  + ")";
+                }
+
+                let newRow;
+                newRow = "<tr><td>" + log.oldEmail + "</td><td>" + log.newEmail + "</td><td>" + timestamp2string(log.timestamp) + "</td><td>" + ipString + "</td></tr>";
+
+                updateEmailLogsTableBody += newRow;
+            });
+
+            $("#updateEmailLogsTableBody").html(updateEmailLogsTableBody);
+            updateEmailLogsLoaded = true;
+
+            if(loginLogsLoaded && updatePasswordLogsLoaded && updateUsernameLogsLoaded && updateEmailLogsLoaded) {
+                $("#loading").css({ 'display' : 'none'});
+                $("#logs").css({ 'display' : 'flex', 'align-items' : 'center'});
+            }
+        }
+
+        function dati_internal_server_error() {
+            alert("Riprova più tardi");
+        }
+
+        const functions = {
+            200 : update_email_logs_ok,
+            500 : dati_internal_server_error
+        };
+
+        post("api/logs/update_email_logs.php", null, functions);
+    }
+
     function loadData() {
         $("#loading").css({ 'display' : 'flex', 'align-items' : 'center', 'height' : '100vh'});
         $("#logs").css({ 'display' : 'none'});
 
-        Promise.all([loadLoginLogs(), loadUpdatePasswordLogs(), loadUpdateUsernameLogs()]).then();
+        Promise.all([loadLoginLogs(), loadUpdatePasswordLogs(), loadUpdateUsernameLogs(), loadUpdateEmailLogs()]).then();
     }
 
     loadData();

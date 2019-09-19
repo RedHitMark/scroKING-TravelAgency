@@ -31,7 +31,7 @@
                 $mongo->UpdateOneQuery("scroKING", "Users", $session->get("id"), (object) ["email" => $params->newEmail]);
 
                 //save update log in db
-                $updateEmailLog = new UpdateEmailLog(getTimestamp(), getClientIp(), $session->get("id"), $params->newEmail, $result->oldEmail);
+                $updateEmailLog = new UpdateEmailLog(getTimestamp(), getClientIp(), $session->get("id"), $params->newEmail, $result->email);
                 $mongo->WriteOneQuery("scroKING", "UpdateEmailLogs", $updateEmailLog);
 
                 //send mail of confirm
@@ -59,4 +59,3 @@
         http_response_code(500);
         echo json_encode(array("message" => "Errore lato server.", "verbose" => $e->getMessage()));
     }
-?>

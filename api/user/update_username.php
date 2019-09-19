@@ -8,8 +8,9 @@
 
     //include
     include_once("../config/MongoDB.php");
-    include_once("../config/timestamp.php");
     include_once("../config/Session.php");
+    include_once("../config/Mail.php");
+    include_once("../config/timestamp.php");
     include_once("../config/security.php");
     include_once("../models/UpdateUsernameLog.php");
 
@@ -57,6 +58,3 @@
         http_response_code(500);
         echo json_encode(array("message" => "Errore lato server.", "verbose" => $e->getMessage()));
     }
-
-
-?>
