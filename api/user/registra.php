@@ -37,7 +37,7 @@
 
                 //send email to confirm registration
                 $mail = new Mail();
-                $mail->sendEmail($new_user->email, "Conferma della registrazione", "<p/>Benvenuto " . $new_user->name . "<p>");
+                $mail->sendEmail($new_user->email, "Conferma della registrazione", "<p>Benvenuto " . $new_user->name . "</p><p>La tua iscrizione a ScroKING Viaggi è completa!</p><p>Inizia subito a scroccare viaggi</p><p>dal Team ScroKING</p>");
 
                 //response: 200  Success
                 http_response_code(200);
