@@ -22,11 +22,11 @@
             $this->_id = $_id;
             $this->type = $type;
             $this->destination = $destination;
-            $this->$startdata = $startdata;
-            $this->$finishdata = $finishdata;
-            $this->$price = $price;
-            $this->$veicles = $veicles;
-            $this->$hotels = $hotels;
+            $this->startdata = $startdata;
+            $this->finishdata = $finishdata;
+            $this->price = $price;
+            $this->veicles = $veicles;
+            $this->hotels = $hotels;
         }
 
 

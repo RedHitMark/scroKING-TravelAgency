@@ -23,9 +23,7 @@
         $mongo = new MongoDB();
 
 
-        if(isset($new_travel->type) && isset($new_travel->destination) && isset($new_travel->startdata) && isset($new_travel->finishdata) && isset($new_travel->price)){
-
-            print_r($new_travel);
+        if (isset($new_travel->type) && isset($new_travel->destination) && isset($new_travel->startdata) && isset($new_travel->finishdata) && isset($new_travel->price)){
 
             $destination = new Destination(
                 $new_travel->destination->city1, $new_travel->destination->city2
@@ -39,7 +37,9 @@
             $mongo->getNewIdObject(),
             $new_travel->type, $destination, $new_travel->startdata,
             $new_travel->finishdata, $new_travel->price, ["1", "2"], ["1", "2"]);
-        
+
+            var_dump($doc);
+
             $mongo->WriteOneQuery("scroKING", "Viaggi", $doc);   
 
             //response: 200  Success
