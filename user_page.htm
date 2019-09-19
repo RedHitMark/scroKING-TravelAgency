@@ -297,8 +297,6 @@
         const newPasswordConf = $("#newpasswordconf").val();
         
         if(is_matching( newPassword, newPasswordConf)) {
-            alert('ok, matching');
-           
             let password_data = {
                 oldPassword:  hex_sha512(oldPassword),
                 newPassword:  hex_sha512(newPasswordConf),
