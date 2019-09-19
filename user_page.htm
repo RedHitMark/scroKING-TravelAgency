@@ -33,11 +33,17 @@
                         <h1 id="userName">Santa claus</h1>
                     </aside>
                     <br>
-                    <aside>
+                    <aside class="ipostazioniaccount">
                         <div class="cog">
                             <i class="fas fa-cog"></i>
                             <h3>Impostazioni</h3>
                         </div>
+                        <aside>
+                            <div id="admin-access">
+                                <h3>Accesso admin</h3>
+                                <i class="fas fa-user-lock"></i>
+                            </div>
+                        </aside>
                     </aside>
                     <section id="usersettings">
                         <aside>
@@ -186,9 +192,11 @@
     /**
      * Post call to retrive user data
      */
+    
     function loadData() {
         function dati_ok(json_response) {
             console.log(json_response);
+            var ruolo = json_response.role;
             $("#userName").html(json_response.username);
             $("#nomeuser").html(json_response.name);
             $("#cognomeuser").html(json_response.surname);
@@ -199,7 +207,19 @@
 
             $("#loading").css({ 'display' : 'none'});
             $("#mainUser").css({ 'display' : 'flex'});
+            if(ruolo == 'admin'){
+                $('#admin-access').show();
+            }else{
+                $('#admin-access').hide();
+            }
+
+            $('#admin-access').click(function(e){
+                e.preventDefault();
+                location.replace('http://localhost/scroKING-TravelAgency/admin.htm');
+            });
         }
+
+        
 
         function dati_non_loggato(json_response) {
             alert("Non sei loggato");

@@ -1,4 +1,4 @@
 $('.buy').click(function(e){
     e.preventDefault();
-    location.replace('../info_prenotazioni.htm');
+    location.replace('http://localhost/scroKING-TravelAgency/info_prenotazioni.htm');
 });
