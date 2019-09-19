@@ -13,7 +13,8 @@ class UpdateUsernameLog extends Log{
      * @param $timestamp
      * @param $ip
      * @param $userId
-     * @param $result
+     * @param $oldUsername
+     * @param $newUsername
      */
     public function __construct($timestamp, $ip, $userId, $oldUsername, $newUsername) {
         parent::__construct($timestamp, $ip);

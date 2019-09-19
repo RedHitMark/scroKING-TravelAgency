@@ -52,6 +52,16 @@
                                         <input type="text" name="city" id="city" placeholder=" Città" required>
                                     </div>
                                 </div>
+                                <div class="firstlastname">
+                                    <div class="col-6">
+                                        <label for="region">Regione</label>
+                                        <input type="text" name="region" id="region"  placeholder=" Regione" required>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="state">Stato</label>
+                                        <input type="text" name="state" id="state" placeholder=" Stato" required>
+                                    </div>
+                                </div>
 
                                 <br>
 
@@ -150,8 +160,8 @@
                     street : $("#street").val(),
                     city : $("#city").val(),
                     cap : $("#cap").val(),
-                    region : "Molisen't",
-                    state : "Italia"
+                    region : $("#region").val(),
+                    state : $("#state").val()
                 },
                 email : $("#email").val(),
                 username : $("#username").val(),

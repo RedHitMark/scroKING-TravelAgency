@@ -3,17 +3,18 @@
     class Veicle {
         public $_id;
         public $name;
-        public $vtype;
+        public $type;
         public $description;
         public $seats;
-        public $vprice;
+        public $price;
 
-        public function __construct($_id, $name, $vtype, $description, $seats, $vprice) {
+        public function __construct($_id, $name, $type, $description, $seats, $price) {
             $this->_id = $_id;
             $this->name = $name;
+            $this->type = $type;
             $this->description = $description;
             $this->seats = $seats;
-            $this->vprice = $vprice;
+            $this->price = $price;
         }
 
 

@@ -35,5 +35,3 @@
         http_response_code(500);
         echo json_encode(array("message" => "Errore lato server.", "verbose" => $e->getMessage()));
     }
-
-?>

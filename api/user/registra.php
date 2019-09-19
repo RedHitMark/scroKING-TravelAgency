@@ -25,7 +25,7 @@
             $result_with_existent_username = $mongo->ReadQuery("scroKING", "Users", ["username" => $new_user->username], [], 1);
 
             if (count($result_with_existent_email) == 0 && count($result_with_existent_username) == 0) {
-                $address = new Address($new_user->address->street, $new_user->address->city, $new_user->address->cap, $new_user->address->region, "Italia");
+                $address = new Address($new_user->address->street, $new_user->address->city, $new_user->address->cap, $new_user->address->region, $new_user->address->state);
                 $doc = new User( $mongo->getNewIdObject(),$new_user->name ,$new_user->surname, $address, $new_user->email, $new_user->username , $new_user->password, "customer",0);
 
                 //write new user in db
@@ -62,4 +62,3 @@
         http_response_code(500);
         echo json_encode(array("message" => "Errore lato server.", "verbose" => $e->getMessage()));
     }
-?>
