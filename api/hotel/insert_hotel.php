@@ -8,35 +8,26 @@
 
     //include
     include_once("../config/MongoDB.php");
-    include_once("../models/Travel.php");
-    include_once("../models/Veicle.php");
-    include_once("../models/Destination.php");
-    include_once("../config/Mail.php");
+    include_once("../models/Hotel.php");
+    include_once("../models/Address.php");
     include_once("../config/timestamp.php");
     include_once("../config/security.php");
-    
 
-    $new_travel = json_decode(file_get_contents("php://input"));
+    $new_hotel = json_decode(file_get_contents("php://input"));
 
     try{
         $mongo = new MongoDB();
 
+        var_dump($new_hotel);
 
-        if (isset($new_travel->type) && isset($new_travel->destinations) && isset($new_travel->startdata) && isset($new_travel->finishdata) && isset($new_travel->price)){
 
-           
-            
+        if ( isset($new_hotel->name) && isset($new_hotel->description) && isset($new_hotel->address) && isset($new_hotel->phone) && isset($new_hotel->email) && isset($new_hotel->free_rooms) ){
 
-            //$hotel = new Hotel();
-            $doc = new Travel(
-            $mongo->getNewIdObject(),
-            $new_travel->destinations,
-            $new_travel->type, $destination, $new_travel->startdata,
-            $new_travel->finishdata, $new_travel->price, ["1", "2"], ["1", "2"]);
+            $address = new Address($new_hotel->address->street, $new_hotel->address->city, $new_hotel->address->cap, $new_hotel->address->region, $new_hotel->address->region);
 
-            var_dump($doc);
+            $doc = new Hotel($mongo->getNewIdObject(), $new_hotel->nome, $new_hotel->description, $address, $new_hotel->phone, $new_hotel->email, $new_hotel->free_rooms);
 
-            $mongo->WriteOneQuery("scroKING", "Viaggi", $doc);   
+            $mongo->WriteOneQuery("scroKING", "Viaggi", $doc);
 
             //response: 200  Success
             http_response_code(200);
@@ -54,3 +45,6 @@
     }
 
 ?>
+
+
+

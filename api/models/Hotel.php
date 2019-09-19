@@ -1,9 +1,9 @@
 <?php 
 
-class Hotel{
+class Hotel {
     public $_id;
     public $name;
-    public $destination;
+    public $description;
     public $address;
     public $phone;
     public $email;
@@ -13,16 +13,16 @@ class Hotel{
      * Hotel constructor.
      * @param $_id
      * @param $name
-     * @param $destination
+     * @param $description
      * @param $address
      * @param $phone
      * @param $email
      * @param $freeRoom
      */
-    public function __construct($_id, $name, $destination, $address, $phone, $email, $freeRoom) {
+    public function __construct($_id, $name, $description, $address, $phone, $email, $freeRoom) {
         $this->_id = $_id;
         $this->name = $name;
-        $this->destination = $destination;
+        $this->description = $description;
         $this->address = $address;
         $this->phone = $phone;
         $this->email = $email;
