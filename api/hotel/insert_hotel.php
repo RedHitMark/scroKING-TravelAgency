@@ -13,16 +13,17 @@
     include_once("../config/timestamp.php");
     include_once("../config/security.php");
 
-    $new_hotel = json_decode(file_get_contents("php://input"));
+    //params from http body
+    $params = json_decode(file_get_contents("php://input"));
 
     try{
         $mongo = new MongoDB();
 
-        if ( isset($new_hotel->name) && isset($new_hotel->description) && isset($new_hotel->address) && isset($new_hotel->phone) && isset($new_hotel->email) && isset($new_hotel->free_rooms) ){
+        if ( isset($params->name) && isset($params->description) && isset($params->address) && isset($params->phone) && isset($params->email) && isset($params->free_rooms) ){
 
-            $address = new Address($new_hotel->address->street, $new_hotel->address->city, $new_hotel->address->cap, $new_hotel->address->region, $new_hotel->address->state );
+            $address = new Address($params->address->street, $params->address->city, $params->address->cap, $params->address->region, $params->address->state );
 
-            $doc = new Hotel($mongo->getNewIdObject(), $new_hotel->name, $new_hotel->description, $address, $new_hotel->phone, $new_hotel->email, $new_hotel->free_rooms);
+            $doc = new Hotel($mongo->getNewIdObject(), $params->name, $params->description, $address, $params->phone, $params->email, $params->free_rooms);
 
             $mongo->WriteOneQuery("scroKING", "Hotels", $doc);
 

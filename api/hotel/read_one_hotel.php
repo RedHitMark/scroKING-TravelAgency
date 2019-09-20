@@ -10,6 +10,7 @@
     include_once("../config/MongoDB.php");
     include_once("../models/Hotel.php");
 
+    //params from http body
     $params = json_decode(file_get_contents("php://input"));
 
     try{
@@ -28,6 +29,7 @@
             http_response_code(400);
             echo json_encode(array("message" => "Parametri mancanti."));
         }
+
     }catch (Exception | MongoDB\Driver\Exception\Exception $e) {
         //response: 500 Internal Server Error
         http_response_code(500);

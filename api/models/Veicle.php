@@ -16,11 +16,4 @@
             $this->seats = $seats;
             $this->price = $price;
         }
-
-
-
-
     }
-
-
-?>

@@ -10,6 +10,7 @@
     include_once("../config/MongoDB.php");
     include_once("../models/Hotel.php");
 
+    //params from http body
     $params = json_decode(file_get_contents("php://input"));
 
     try{

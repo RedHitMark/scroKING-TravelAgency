@@ -32,6 +32,4 @@
             $this->veicles = $veicles;
             $this->hotels = $hotels;
         }
-
-
     }

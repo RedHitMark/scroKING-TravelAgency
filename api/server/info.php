@@ -9,7 +9,7 @@
     //include
     include_once("../config/MongoDB.php");
 
-    //login params from http body
+    //params from http body
     $params = json_decode(file_get_contents("php://input"));
 
     try {

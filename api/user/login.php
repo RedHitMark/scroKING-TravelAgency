@@ -13,7 +13,7 @@
     include_once("../config/timestamp.php");
     include_once("../models/LoginLog.php");
 
-    //login params from http body
+    //params from http body
     $params = json_decode(file_get_contents("php://input"));
 
     try {

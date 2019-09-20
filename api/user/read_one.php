@@ -11,6 +11,9 @@
     include_once("../config/Session.php");
     include_once("../config/timestamp.php");
 
+    //params from http body
+    $params = json_decode(file_get_contents("php://input"));
+
     try{
         $session = new Session();
 

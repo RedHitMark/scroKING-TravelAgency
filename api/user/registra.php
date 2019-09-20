@@ -15,29 +15,31 @@
     include_once ("../config/timestamp.php");
     include_once ("../config/security.php");
 
-    $new_user = json_decode(file_get_contents("php://input"));
+    //params from http body
+    $params = json_decode(file_get_contents("php://input"));
 
     try {
-        $mongo = new MongoDB();
 
-        if (isset($new_user->username) && isset($new_user->password) && isset($new_user->name) && isset($new_user->surname) && isset($new_user->email) && isset($new_user->address) ) {
-            $result_with_existent_email = $mongo->ReadQuery("scroKING", "Users", ["email" => $new_user->email], [], 1);
-            $result_with_existent_username = $mongo->ReadQuery("scroKING", "Users", ["username" => $new_user->username], [], 1);
+        if (isset($params->username) && isset($params->password) && isset($params->name) && isset($params->surname) && isset($params->email) && isset($params->address) ) {
+            $mongo = new MongoDB();
+
+            $result_with_existent_email = $mongo->ReadQuery("scroKING", "Users", ["email" => $params->email], [], 1);
+            $result_with_existent_username = $mongo->ReadQuery("scroKING", "Users", ["username" => $params->username], [], 1);
 
             if (count($result_with_existent_email) == 0 && count($result_with_existent_username) == 0) {
-                $address = new Address($new_user->address->street, $new_user->address->city, $new_user->address->cap, $new_user->address->region, $new_user->address->state);
-                $doc = new User( $mongo->getNewIdObject(),$new_user->name ,$new_user->surname, $address, $new_user->email, $new_user->username , $new_user->password, "customer",0);
+                $address = new Address($params->address->street, $params->address->city, $params->address->cap, $params->address->region, $params->address->state);
+                $doc = new User( $mongo->getNewIdObject(),$params->name ,$params->surname, $address, $params->email, $params->username , $params->password, "customer",0);
 
                 //write new user in db
                 $mongo->WriteOneQuery("scroKING", "Users", $doc);
 
                 //save registration log in db
-                $registrationLog = new RegistrationLog(getTimestamp(), getClientIp(), $new_user->username, $new_user->email, "OK");
+                $registrationLog = new RegistrationLog(getTimestamp(), getClientIp(), $params->username, $params->email, "OK");
                 $mongo->WriteOneQuery("scroKING", "LoginLogs", $registrationLog);
 
                 //send email to confirm registration
                 $mail = new Mail();
-                $mail->sendEmail($new_user->email, "Conferma della registrazione", "<p>Benvenuto " . $new_user->name . "</p><p>La tua iscrizione a ScroKING Viaggi è completa!</p><p>Inizia subito a scroccare viaggi</p><p>dal Team ScroKING</p>");
+                $mail->sendEmail($params->email, "Conferma della registrazione", "<p>Benvenuto " . $params->name . "</p><p>La tua iscrizione a ScroKING Viaggi è completa!</p><p>Inizia subito a scroccare viaggi</p><p>dal Team ScroKING</p>");
 
                 //response: 200  Success
                 http_response_code(200);
