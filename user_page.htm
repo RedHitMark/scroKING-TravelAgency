@@ -218,11 +218,22 @@
                 location.replace('http://localhost/scroKING-TravelAgency/admin.htm');
             });
 
-            if ( json_response.booked_travels.length != 0) {
+
+            if ( json_response.booked_travels.length !== 0) {
+                $('.tableprenotazioni').css("display : flex");
+                $('.nothing').css("display : none");
+
+                $('.tableprenotazioni').append("<table>");
+                $('.tableprenotazioni').append("<tr><th>Id</th>p1<th></th></tr>");
                 $.each(json_response.booked_travels, function (index, travel) {
                     console.log(travel.id_travel);
-                    $('.tableprenotazioni').append(travel.id_travel);
+                    $('.tableprenotazioni').append("<tr><th>" + travel.id_travel + "</th>p1<th></th></tr>");
                 });
+
+                $('.tableprenotazioni').append("</table>");
+            } else {
+                $('.tableprenotazioni').css("display : none");
+                $('.nothing').css("display : flex");
             }
 
         }

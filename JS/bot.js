@@ -38,8 +38,7 @@ $('#selection-motivo').click(function (e) {
     $('#bot-answer').delay(2000).fadeIn(800);
     $('#tipologia-viaggio').hide();
 
-        chiamataViaggi();
-
+    chiamataViaggi();
 });
 
 $('#selection-motivo').change(function(){
@@ -81,11 +80,11 @@ function chiamataViaggi(){
     function bot_internal_server_error(json_response){
         alert("Internal server error");
     }
+
     let viaggio_dati ={
-
-        type : $('#tipologia-viaggio').val()
-
+        type : $('#selection-tipologia').val()
     };
+
     let viaggio_functions = {
         200: bot_success,
         400: bot_missing_parameter,
