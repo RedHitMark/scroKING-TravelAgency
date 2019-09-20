@@ -1577,7 +1577,7 @@ form #selection-tipologia, form #selection-luogo, form #selection-motivo{
     #primaryserver .tables.primary{
         flex-direction: column;
     }
-    /* ======== Admin panel ======= */
+   /* ======== Admin panel ======= */ 
     #adminpanel{
         margin: 0;
         padding: 4px;
@@ -1614,3 +1614,14 @@ form #selection-tipologia, form #selection-luogo, form #selection-motivo{
         margin-left: 0;
     }
 }
+
+   /* ======== ricerca viaggio ======= */ 
+   .selectviaggio, #selectviaggio{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    padding: 5px 8px;
+    margin-bottom: 30px;
+   }
+   
