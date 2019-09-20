@@ -41,7 +41,7 @@
                 $mail = new Mail();
 
                 //load html text of mail from file and replace with new client name
-                $html_text_email = file_get_contents("http://scroking.ddns.net/scroKING-TravelAgency/api/mail/email.htm");
+                $html_text_email = file_get_contents("http://scroking.ddns.net/scroKING-TravelAgency/api/mail/registration_email.htm");
                 $html_text_email = str_replace("%cliente%", $params->name . " " . $params->surname, $html_text_email);
 
                 //send mail to confirm registration
