@@ -208,7 +208,7 @@
             $("#mainUser").css({ 'display' : 'flex'});
 
             //check role
-            if(ruolo == 'admin'){
+            if(ruolo === 'admin'){
                 //show role and set action
                 $('#admin-access').show();
                 $('#admin-access').click(function(e){
@@ -297,6 +297,7 @@
             501: dati_internal_server_error
         };
 
+        //start loading
         $("#loading").css({ 'display' : 'flex', 'align-items' : 'center', 'height' : '100vh'});
         $("#mainUser").css({ 'display' : 'none'});
 

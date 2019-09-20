@@ -39,7 +39,9 @@
 
                 //send email to confirm registration
                 $mail = new Mail();
-                $mail->sendEmail($params->email, "Conferma della registrazione", "<p>Benvenuto " . $params->name . "</p><p>La tua iscrizione a ScroKING Viaggi è completa!</p><p>Inizia subito a scroccare viaggi</p><p>dal Team ScroKING</p>");
+                $html_text_email = file_get_contents("../mail/email.html");
+                str_replace("%cliente%", $params->name . " " . $params->surname, $html_text_email);
+                $mail->sendEmail($params->email, "Benvenuto in scroKING", $html_text_email);
 
                 //response: 200  Success
                 http_response_code(200);
