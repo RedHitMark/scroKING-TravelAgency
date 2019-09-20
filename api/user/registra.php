@@ -28,7 +28,7 @@
 
             if (count($result_with_existent_email) == 0 && count($result_with_existent_username) == 0) {
                 $address = new Address($params->address->street, $params->address->city, $params->address->cap, $params->address->region, $params->address->state);
-                $doc = new User( $mongo->getNewIdObject(),$params->name ,$params->surname, $address, $params->email, $params->username , $params->password, "customer",0);
+                $doc = new User( $mongo->getNewIdObject(),$params->name ,$params->surname, $address, $params->email, $params->username , $params->password, "customer",0, 0);
 
                 //write new user in db
                 $mongo->WriteOneQuery("scroKING", "Users", $doc);

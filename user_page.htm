@@ -137,7 +137,7 @@
                     </aside>
 
                     <aside>
-                        <a href="livelloscrocco.htm" id="scroccoLevel">Livello di scrocco: Giovanni</a>
+                        <a href="livelloscrocco.htm" id="scroccoLevel">Livello di scrocco: </a>
                     </aside>
                 </section>
             </div>
@@ -193,6 +193,8 @@
         function dati_ok(json_response) {
             console.log(json_response);
             var ruolo = json_response.role;
+
+            //personal data
             $("#userName").html(json_response.username);
             $("#nomeuser").html(json_response.name);
             $("#cognomeuser").html(json_response.surname);
@@ -201,28 +203,62 @@
             $("#city").html(json_response.address.cap + " " + json_response.address.city + " (" + json_response.address.region + ")");
             $("#state").html(json_response.address.state);
 
+            //stop loading
             $("#loading").css({ 'display' : 'none'});
             $("#mainUser").css({ 'display' : 'flex'});
 
+            //check role
             if(ruolo == 'admin'){
+                //show role and set action
                 $('#admin-access').show();
+                $('#admin-access').click(function(e){
+                    e.preventDefault();
+                    location.replace('admin.htm');
+                });
             }else{
                 $('#admin-access').hide();
             }
 
-            $('#admin-access').click(function(e){
-                e.preventDefault();
-                location.replace('http://localhost/scroKING-TravelAgency/admin.htm');
-            });
+            //set scrocco level
+            const num_scrocced_travels = json_response.num_scrocced_travels;
+            console.log(num_scrocced_travels);
+            switch (true) {
+                case (num_scrocced_travels < 5):
+                    $("#scroccoLevel").html("Livello di scrocco: Christian");
+                    break;
+                case (num_scrocced_travels >= 5 && num_scrocced_travels <= 10):
+                    $("#scroccoLevel").html("Livello di scrocco: Stefano");
+                    break;
+                case (num_scrocced_travels >= 11 && num_scrocced_travels <= 20):
+                    $("#scroccoLevel").html("Livello di scrocco: Walter");
+                    break;
 
+                case (num_scrocced_travels >= 21 && num_scrocced_travels <= 30):
+                    $("#scroccoLevel").html("Livello di scrocco: Marco");
+                    break;
 
+                case (num_scrocced_travels >= 31 && num_scrocced_travels <= 40):
+                    $("#scroccoLevel").html("Livello di scrocco: Raffaele");
+                    break;
+                default:
+                    $("#scroccoLevel").html("Livello di scrocco: Giovanni");
+                    break;
+            }
+
+            //set booked travels
             if ( json_response.booked_travels.length !== 0) {
                 $('.nothing').html("");
 
                 $('.tableprenotazioni').append("<table>");
-                $('.tableprenotazioni').append("<tr><th>Id</th><th>Tipo</th><th>Inizio</th><th>Fine</th><th>Prezzo</th><th>Dettagli</th></tr>");
+                $('.tableprenotazioni').append("<tr><th>Tipo</th><th>Destinazione</th><th>Inizio</th><th>Fine</th><th>Prezzo</th><th>Dettagli</th></tr>");
+
                 $.each(json_response.booked_travels, function (index, travel) {
-                    $('.tableprenotazioni').append("<tr><td>" + travel._id.$oid + "</td><td>" + travel.type + "</td><td>" + travel.startdata + "</td><td>" + travel.finishdata + "</td><td>" + travel.price + "</td><td><a href='#'>Dettagli</a></td></tr>");
+                    let destinationString = "";
+                    $.each(travel.destinations, function (index, destination) {
+                        destinationString = destinationString + destination + "<br>";
+                    });
+
+                    $('.tableprenotazioni').append("<tr><td>" + travel.type + "</td><td>" + destinationString + "</td><td>"+ travel.startdata + "</td><td>" + travel.finishdata + "</td><td>" + travel.price + "</td><td><a href='#'>Dettagli</a></td></tr>");
                 });
 
                 $('.tableprenotazioni').append("</table>");
@@ -230,6 +266,9 @@
                 $('.tableprenotazioni').html("<p>Non hai effettuato ancora nessun viaggio</p>");
                 $('.nothing').html("display : flex");
             }
+
+
+            //@TODO set transaction
 
         }
 

@@ -22,7 +22,7 @@
             $mongo = new MongoDB();
 
             //retrive info of user from db
-            $user_result = $mongo->ReadOneQuery("scroKING", "Users", $session->get("id"), ["name","surname","username","email","address","role"]);
+            $user_result = $mongo->ReadOneQuery("scroKING", "Users", $session->get("id"), ["name","surname","username","email","address","role", "num_scrocced_travels"]);
 
             //retrive info of booked of user from db
             $booked_results = $mongo->ReadQuery("scroKING", "BookedTravels", ["id_user" => $session->get("id")]);

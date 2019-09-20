@@ -7,8 +7,7 @@
 
         //public $id_transaction;
 
-        public function __construct($_id, $id_user, $id_travel)
-        {
+        public function __construct($_id, $id_user, $id_travel) {
             $this->_id = $_id;
             $this->id_user = $id_user;
             $this->id_travel = $id_travel;
