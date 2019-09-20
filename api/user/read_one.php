@@ -23,11 +23,12 @@
 
             $booked_travels_result = $mongo->ReadQuery("scroKING", "BookedTravels", ["id_user" => $session->get("id")]);
 
+            $result = (object) array_merge( (array) $user_result, array("booked_travels" => $booked_travels_result));
             //var_dump($booked_travels_result);
 
             // response: 200 OK
             http_response_code(200);
-            echo json_encode($user_result);
+            echo json_encode($result);
         }else{
             // response: 401 Unauthorized
             http_response_code(401);

@@ -206,6 +206,7 @@
 
             $("#loading").css({ 'display' : 'none'});
             $("#mainUser").css({ 'display' : 'flex'});
+
             if(ruolo == 'admin'){
                 $('#admin-access').show();
             }else{
@@ -216,6 +217,14 @@
                 e.preventDefault();
                 location.replace('http://localhost/scroKING-TravelAgency/admin.htm');
             });
+
+            if ( json_response.booked_travels.length != 0) {
+                $.each(json_response.booked_travels, function (index, travel) {
+                    console.log(travel.id_travel);
+                    $('.tableprenotazioni').append(travel.id_travel);
+                });
+            }
+
         }
 
         
