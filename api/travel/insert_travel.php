@@ -16,26 +16,23 @@
     include_once("../config/security.php");
     
 
-    $new_travel = json_decode(file_get_contents("php://input"));
+    $params = json_decode(file_get_contents("php://input"));
 
     try{
         $mongo = new MongoDB();
 
 
-        if (isset($new_travel->type) && isset($new_travel->destinations) && isset($new_travel->startdata) && isset($new_travel->finishdata) && isset($new_travel->price) && isset($new_travel->veicles) && isset($new_travel->hotels) ){
+        if (isset($params->type) && isset($params->destinations) && isset($params->startdata) && isset($params->finishdata) && isset($params->price) && isset($params->veicles) && isset($params->hotels) ){
 
-            $doc = new Travel(
-            $mongo->getNewIdObject(),
-            $new_travel->destinations,
-            $new_travel->type, $destination, $new_travel->startdata,
-            $new_travel->finishdata, $new_travel->price, ["1", "2"], ["1", "2"]);
+            $doc = new Travel( $mongo->getNewIdObject(), $params->type,
+            $params->destinations, $params->startdata,
+            $params->finishdata, $params->price, $params->veicles, $params->hotels );
 
             $mongo->WriteOneQuery("scroKING", "Travels", $doc);
 
             //response: 200  Success
             http_response_code(200);
             echo json_encode(array("message" => "Viggio inserito con successo"));
-
         } else {
             //response: 400 Bad Request
             http_response_code(400);
