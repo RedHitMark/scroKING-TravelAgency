@@ -157,12 +157,9 @@
 
                 <div id="content">
                     <div id="prenotazionihistory">
-                        <div class="nothing">
-                            <p>Non hai effettuato ancora nessun viaggio</p>
-                        </div>
+                        <div class="nothing"></div>
 
-                        <div class="tableprenotazioni">
-                        </div>
+                        <div class="tableprenotazioni"></div>
                         <br>
                     </div>
                     <div id="wallet">
@@ -220,8 +217,7 @@
 
 
             if ( json_response.booked_travels.length !== 0) {
-                $('.tableprenotazioni').css("display : flex");
-                $('.nothing').css("display : none");
+                $('.nothing').html("");
 
                 $('.tableprenotazioni').append("<table>");
                 $('.tableprenotazioni').append("<tr><th>Id</th>p1<th></th></tr>");
@@ -232,8 +228,8 @@
 
                 $('.tableprenotazioni').append("</table>");
             } else {
-                $('.tableprenotazioni').css("display : none");
-                $('.nothing').css("display : flex");
+                $('.tableprenotazioni').html("<p>Non hai effettuato ancora nessun viaggio</p>");
+                $('.nothing').html("display : flex");
             }
 
         }
@@ -395,15 +391,15 @@
             alert("Errore server, riprovare più tardi.");
         }
 
-        email_data = {
+        var email_data = {
             newEmail : $('#newmail').val()
-        } 
+        };
         
-        change_email_functions = {
+        var change_email_functions = {
             200:  change_email_success,
             400:  change_email_Unauthorized,
             500:  change_email_internal_server_error
-        }
+        };
         
         post("api/user/update_email.php", email_data, change_email_functions );
     }
