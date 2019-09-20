@@ -9,20 +9,13 @@
     //include
     include_once("../config/MongoDB.php");
     include_once("../models/Travel.php");
-    include_once("../models/Veicle.php");
-    include_once("../models/Destination.php");
-    include_once("../config/Mail.php");
-    include_once("../config/timestamp.php");
-    include_once("../config/security.php");
-    
 
     $params = json_decode(file_get_contents("php://input"));
 
     try{
-        $mongo = new MongoDB();
-
 
         if (isset($params->type) && isset($params->destinations) && isset($params->startdata) && isset($params->finishdata) && isset($params->price) && isset($params->veicles) && isset($params->hotels) ){
+            $mongo = new MongoDB();
 
             $doc = new Travel( $mongo->getNewIdObject(), $params->type,
             $params->destinations, $params->startdata,
