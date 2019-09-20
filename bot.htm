@@ -25,72 +25,61 @@
                 </div>
             </div>
         </section>
-        <section id="botPage">
-            <div class="row">
-                <article class="countryButtons">
-                    <div class="question">
-                        <h2>Quale paese preferisci?</h2>
-                    </div>
-                    <div class="buttons">
-                        <div id="countryB">
-                            <div class="fristCountry">
-                                <button id="fristc">Italia</button>
-                            </div>
-                            <div class="secondCountry">
-                                <button id="secondc">Germania</button>
-                            </div>
-                            <div class="thirdCountry">
-                                <button id="secondc">Inghilterra</button>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-            </div>
-            <div class="row">
-                <article class="placesButtons">
-                    <div class="question">
-                        <h2>Che località preferisci?</h2>
-                    </div>
-                    <div class="buttons">
-                        <div id="placesB">
-                            <div class="fristPlace">
-                                <button id="fristp">Mare</button>
-                            </div>
-                            <div class="secondPlace">
-                                <button id="secondp">Collina</button>
-                            </div>
-                            <div class="thirdPlace">
-                                <button id="thridp">Montagna</button>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-            </div>
-            <div class="row">
-                <article class="kindsButtons">
-                    <div class="question">
-                        <h2>Che tipologia di viaggio dovrai affronntare?</h2>
-                    </div>
-                    <div class="buttons">
-                        <div id="kindsB">
-                            <div class="fristKind">
-                                <button id="fristk">Vacanza</button>
-                            </div>
-                            <div class="secondKind">
-                                <button id="secondk">Lavoro</button>
-                            </div>
-                            <div class="thirdKind">
-                                <button id="thridk">Altro</button>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-            </div>
-            <div class="row">
-                <div class="botanswer" style="text-align: center;">
-                    <h2>Your journey should be in <strong id="journey">Scroking City</strong></h2>
+        <section id="bot-page">
+            <article id="tipologia-viaggio">
+                <div class="row">
+                    <h2>Che tipologia di viaggio vuoi affrontare?</h2>
                 </div>
-            </div>
+                <div class="row">
+                    <form action="#">
+                        <select id="selection-tipologia">
+                            <option value="relax" id="relax">Relax</option>
+                            <option value="religioso" id="religioso">Religioso</option>
+                            <option value="storico" id="storico">Storico</option>
+                            <option value="gastronomico" id="gastronomico">Gastronomico</option>
+                            <option value="sportivo" id="sportivo">Sportivo</option>
+                            <option value="divertimento" id="divertimento">Divertimento</option>
+                            <option value="sessuale" id="sessuale">Sessuale</option>
+        
+                        </select>
+                    </form>
+                </div>
+            </article>
+            <article id="luogo-viaggio">
+                <div class="row">
+                    <h2>Quale Paese vuoi visitare?</h2>
+                </div>
+                <div class="row">
+                    <form action="#">
+                        <select id="selection-luogo">
+                            <option value="italia" id="italia">Italia</option>
+                            <option value="inghilterra" id="inghilterra">Inghilterra</option>
+                            <option value="germania" id="germania">Germania</option>
+                            <option value="giappone" id="giappone">Giappone</option>
+                        </select>
+                    </form>
+                </div>
+            </article>
+            <article id="motivo-viaggio"> 
+                <div class="row">
+                    <h2>Per quale motivo affronterai questo viaggio?</h2>
+                </div>
+                <div class="row">
+                    <form action="#">
+                        <select id="selection-motivo">
+                            <option value="vacanza" id="vacanza">Vacanza</option>
+                            <option value="lavoro" id="lavoro">Lavoro</option>
+                            <option value="altro" id="altro">Altro</option>
+                        </select>
+                    </form>
+                </div>
+            </article>
+            <article id="bot-answer">
+                <div class="row"><h2>Il bot ha trovato queste mete per il tuo viaggio!</h2></div>
+                <div class="row">
+                    <div id="results-travel"></div>
+                </div>
+            </article>
         </section>
     </div>
     <div id="footer"></div>

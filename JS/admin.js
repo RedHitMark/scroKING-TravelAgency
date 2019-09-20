@@ -1,5 +1,6 @@
 $("#mezzi-panel").hide();
 $("#hotels-panel").hide();
+$("#viaggi-panel").hide();
 
 
 $( "#selection" ).click(function(e) {
@@ -8,15 +9,32 @@ $( "#selection" ).click(function(e) {
     if( type == "mezzi"){
         $("#mezzi-panel").show();
         $("#hotels-panel").hide();
+        $("#viaggi-panel").hide();
     }else if( type == "hotel"){
         $("#hotels-panel").show();
         $("#mezzi-panel").hide();
+        $("#viaggi-panel").hide();
     }else if (type == "null"){
+        $("#mezzi-panel").hide();
+        $("#hotels-panel").hide();
+        $("#viaggi-panel").hide();
+    }else if (type == 'viaggi'){
+        $("#viaggi-panel").show();
         $("#mezzi-panel").hide();
         $("#hotels-panel").hide();
     }
 });
-
+$('#porcone').click(function(){
+    var city1 = $('#city1').val();
+    var city2 = $('#city2').val();
+    var city3 = $('#city3').val();
+    console.log(city1+ "," + city2 + "," + city3);
+});
+$('#button-mezzo-scelto').click(function(){
+    var id = "input" + $(this).attr("id").replace("field","");
+    input = $("<input type=\"text\" id=\"scelta-mezzi" + id +"\" />");
+    $("#scelta-mezzi").append(input);
+});
 $("#invia-riepilogo").click(function(){
     /* General*/
     var type = $("#selection").val();
@@ -34,6 +52,15 @@ $("#invia-riepilogo").click(function(){
     var telefonoHotel = $('#telefono-hotel').val();
     var emailHotel = $('#email-hotel').val();
     var camerelibereHotel = $('#camerelibere-hotel').val();
+    /* Viaggi */
+    var dataAndata = $('#dataandata').val();
+    var dataRitorno = $('#dataritorno').val();
+    var prezzo = $('#prezzo').val();
+    var city1 = $('#city1').val();
+    var city2 = $('#city2').val();
+    var city3 = $('#city3').val();
+    var mezzoscelto = $('#mezzi-scelto').val();
+    
     /* Report message and insert call */
     if (type == 'mezzi') {
         $( "#report" ).html("<h1 style='text-transform: uppercase; text-align: center; font-weight: bold;'>Riepilogo informazioni inserite:</h1>" + "<br>" + "<b>Tipologia nuovo elemento: </b> " + type + "<br>" + "<b>Posti del mezzo: </b>" + postiMezzo + "<br>" + "<b>Costo del mezzo:</b> " + costoMezzo + "<br>" + "<b>Tipologia del mezzo: </b>" + tipologiaMezzo + "<br>" + "<b>Nome del mezzo</b>" + nomeMezzo + "<br>" + "<b>Descrizione del mezzo</b>" + descrizioneMezzo );
@@ -45,6 +72,8 @@ $("#invia-riepilogo").click(function(){
         insert_hotel()
     } else if(type == 'null') {
         $('#report').html("<h1 style='text-transform: uppercase; text-align: center; font-weight: bold; margin: 1em 0; color:red;'>Non sono state inserite informazioni</h1>");
+    } else if (type == 'viaggi'){
+
     }
 });
 
