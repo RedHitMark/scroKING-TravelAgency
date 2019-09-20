@@ -220,10 +220,9 @@
                 $('.nothing').html("");
 
                 $('.tableprenotazioni').append("<table>");
-                $('.tableprenotazioni').append("<tr><th>Id</th>p1<th></th></tr>");
+                $('.tableprenotazioni').append("<tr><th>Id</th><th>Tipo</th><th>Inizio</th><th>Fine</th><th>Prezzo</th><th>Dettagli</th></tr>");
                 $.each(json_response.booked_travels, function (index, travel) {
-                    console.log(travel.id_travel);
-                    $('.tableprenotazioni').append("<tr><th>" + travel.id_travel + "</th>p1<th></th></tr>");
+                    $('.tableprenotazioni').append("<tr><td>" + travel._id.$oid + "</td><td>" + travel.type + "</td><td>" + travel.startdata + "</td><td>" + travel.finishdata + "</td><td>" + travel.price + "</td><td><a href='#'>Dettagli</a></td></tr>");
                 });
 
                 $('.tableprenotazioni').append("</table>");

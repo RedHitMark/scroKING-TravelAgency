@@ -54,45 +54,44 @@
 <script src="JS/http.js"></script>
 <script src="JS/sha512.js"></script>
 <script>
-    function login_success(json_response) {
-        console.log(json_response);
-        $(".nolog").css({ 'display' : 'none'});
-        $(".yeslog").css({ 'display' : 'flex'});
-        const username = json_response.username;
-        $( ".benvenuto" ).html("Benvenuto, " +  username);
-
-        $(location).attr("href", "user_page.htm");
-    }
-
-    function login_missing_parameter(json_response) {
-        alert("parametri errore");
-    }
-
-    function login_wrong_username(json_response) {
-        alert("username errore");
-    }
-
-    function login_wrong_password(json_response) {
-        alert("password errore");
-    }
-
-    function login_user_blocked(json_response) {
-        console.log(json_response);
-        const sec_left = json_response.responseJSON.sec_left;
-        alert("sei stato bloccato per troppi tentativi di accesso, riprova tra" + sec_left + "secondi.");
-    }
-
-    function login_bruteforce_detected(json_response) {
-        alert("Hai sbagliato la password troppe volte, riprova tra un po!");
-    }
-
-    function login_internal_server_error(json_response) {
-        alert("errore del server");
-    }
-
-
     function login(event) {
         event.preventDefault();
+
+        function login_success(json_response) {
+            console.log(json_response);
+            $(".nolog").css({ 'display' : 'none'});
+            $(".yeslog").css({ 'display' : 'flex'});
+            const username = json_response.username;
+            $( ".benvenuto" ).html("Benvenuto, " +  username);
+
+            $(location).attr("href", "user_page.htm");
+        }
+
+        function login_missing_parameter(json_response) {
+            alert("parametri errore");
+        }
+
+        function login_wrong_username(json_response) {
+            alert("username errore");
+        }
+
+        function login_wrong_password(json_response) {
+            alert("password errore");
+        }
+
+        function login_user_blocked(json_response) {
+            console.log(json_response);
+            const sec_left = json_response.responseJSON.sec_left;
+            alert("sei stato bloccato per troppi tentativi di accesso, riprova tra" + sec_left + "secondi.");
+        }
+
+        function login_bruteforce_detected(json_response) {
+            alert("Hai sbagliato la password troppe volte, riprova tra un po!");
+        }
+
+        function login_internal_server_error(json_response) {
+            alert("errore del server");
+        }
 
         let login_data = {
             username: $("#username").val(),
