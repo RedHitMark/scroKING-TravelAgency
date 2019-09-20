@@ -17,7 +17,7 @@
         <section id="adminpanel">
             <div class="row">
                 <div class="title">
-                        <h1>Admin panel</h1>
+                    <h1>Admin panel</h1>
                 </div>
             </div>
             <form action="#">
@@ -26,49 +26,119 @@
                     <option value="null" selected>-</option>
                     <option value="mezzi" id="mezzi">Mezzi</option>
                     <option value="hotel" id="hotel">Hotel</option>
+                    <option value="viaggi" id="viaggi">Viaggi</option>
 
                 </select>
             </form>
-            
-            
+
+
 
         </section>
         <section id="mezzi-panel">
             <form action="#">
-            <label for="posti-mezzo">Posti a bordo</label>
-            <input type="text" name="posti-mezzo" id="posti-mezzo">
-            <label for="costo-mezzo">Costo</label>
-            <input type="text" name="costo-mezzo" id="costo-mezzo">
-            <label for="tipologia-mezzo">Tipologia</label>
-            <input type="text" name="tipologia-mezzo" id="tipologia-mezzo">
             <label for="nome-mezzo">Nome del mezzo</label>
             <input type="text" name="nome-mezzo" id="nome-mezzo">
             <label for="descrizione-mezzo">Descrizione del mezzo</label>
             <input type="text" name="descrizione-mezzo" id="descrizione-mezzo">
-            <label for="tratta-mezzo">Tratta del mezzo</label>
-            <input type="text" name="tratta-mezzo" id="tratta-mezzo">
+            <label for="tipologia-mezzo">Tipologia</label>
+            <input type="text" name="tipologia-mezzo" id="tipologia-mezzo">
+            <label for="posti-mezzo">Posti a bordo</label>
+            <input type="text" name="posti-mezzo" id="posti-mezzo">
+            <label for="costo-mezzo">Costo</label>
+            <input type="text" name="costo-mezzo" id="costo-mezzo">
             </form>
         </section>
         <section id="hotels-panel">
-            <form action="#">
+            <form action="#" id="viecleForm">
                 <label for="nome-hotel">Nome hotel</label>
                 <input type="text" name="nome-hotel" id="nome-hotel">
+
+                <label for="descrizione-hotel">Descrizione hotel</label>
+                <input type="text" name="descrizione-hotel" id="descrizione-hotel">
+
                 <label for="indirizzo-hotel">Indirizzo hotel</label>
                 <input type="text" name="indirizzo-hotel" id="indirizzo-hotel">
+
+                <label for="citta-hotel">Città hotel</label>
+                <input type="text" name="citta-hotel" id="citta-hotel">
+
+                <label for="cap-hotel">CAP hotel</label>
+                <input type="text" name="cap-hotel" id="cap-hotel">
+
+                <label for="region-hotel">Regione hotel</label>
+                <input type="text" name="region-hotel" id="region-hotel">
+
+                <label for="state-hotel">Stato hotel</label>
+                <input type="text" name="state-hotel" id="state-hotel">
+
                 <label for="telefono-hotel">Telefono hotel</label>
                 <input type="text" name="telefono-hotel" id="telefono-hotel">
+
                 <label for="email-hotel">E-mail hotel</label>
                 <input type="text" name="email-hotel" id="email-hotel">
+
                 <label for="camerelibere-hotel">Camere libere hotel</label>
                 <input type="text" name="camerelibere-hotel" id="camerelibere-hotel">
             </form>
+        </section>
+        <section id="viaggi-panel">
+            <form action="#" id="vaggi-form-panel">
+                <label for="selection-viaggio">Tipologia di viaggio</label>
+                <select id="selection-viaggio">
+                    <option value="null" selected>-</option>
+                    <option value="relax" id="relax">Relax</option>
+                    <option value="religioso" id="religioso">Religioso</option>
+                    <option value="storico" id="storico">Storico</option>
+                    <option value="gastronomico" id="gastronomico">Gastronomico</option>
+                    <option value="sportivo" id="sportivo">Sportivo</option>
+                    <option value="divertimento" id="divertimento">Divertimento</option>
+                    <option value="sessuale" id="sessuale">Sessuale</option>
+                </select>
+                <label for="dataandata">Data di andata</label>
+                <input type="date" name="dataandata" id="dataandata">
+                <label for="dataritorno">Data di ritorno</label>
+                <input type="date" name="dataritorno" id="dataritorno">
+                <label for="prezzo">Prezzo</label>
+                <input type="text" name="prezzo" id="prezzo" placeholder="Prezzo">
+                <label for="city1">Prima città</label>
+                <input type="text" name="city1" id="city1" placeholder="Prima città">
+                <label for="city2">Seconda città</label>
+                <input type="text" name="city2" id="city2" placeholder="Seconda città">
+                <label for="city3">Terza città</label>
+                <input type="text" name="city3" id="city3" placeholder="Terza città">
+            </form>
+            <div class="row">
+                <div class="col-10">
+                    <form action="#" id="scelta-mezzi">
+                            <input type="text" name="mezzo" id="mezzo-scelto">
+                    </form>
+                </div>
+                <div class="col-2">
+                        <form action="#" id="scelta-mezzi">
+                
+                                <input type="button" value="+" id="button-mezzo-scelto">
+                            </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-10">
+                        <form action="#" id="scelta-hotel">
+                                <input type="text" name="hotel" id="hotel-scelto">
+                            </form>
+                </div>
+                <div class="col-2">
+                        <form action="#" id="scelta-hotel">
+                                <input type="button" value="+" id="button-hotel-scelto">
+                            </form>
+                </div>
+            </div>
         </section>
         <section id="report"></section>
         <section id="tasti">
             <form action="#">
                 <div class="buttons">
                     <input type="button" id="invia-riepilogo" value="Inserisci">
-                 </div>
+                </div>
             </form>
         </section>
     </div>
@@ -80,5 +150,7 @@
 <script src="JS/http.js"></script>
 <script src="JS/time.js"></script>
 <script src="JS/admin.js"></script>
+
+
 
 </html>

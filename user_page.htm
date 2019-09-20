@@ -84,7 +84,6 @@
                         <aside>
                             <button id="modifymail">Cambia E-mail</button>
                         </aside>
-                        <aside>
                     </section>
                         <form class="scrollmail" id="update_email_form">
                             
@@ -122,8 +121,8 @@
 
                             <div class="address">
                                 <h3>Indirizzo</h3>
-                                <div id="street"></div>
-                                <div id="city"></div>
+                                <div id="street"></div>&nbsp;
+                                <div id="city"></div>&nbsp;
                                 <div id="state"></div>
                             </div>
                         </div>
@@ -158,12 +157,9 @@
 
                 <div id="content">
                     <div id="prenotazionihistory">
-                        <div class="nothing">
-                            <p>Non hai effettuato ancora nessun viaggio</p>
-                        </div>
+                        <div class="nothing"></div>
 
-                        <div class="tableprenotazioni">
-                        </div>
+                        <div class="tableprenotazioni"></div>
                         <br>
                     </div>
                     <div id="wallet">
@@ -207,6 +203,7 @@
 
             $("#loading").css({ 'display' : 'none'});
             $("#mainUser").css({ 'display' : 'flex'});
+
             if(ruolo == 'admin'){
                 $('#admin-access').show();
             }else{
@@ -217,6 +214,24 @@
                 e.preventDefault();
                 location.replace('http://localhost/scroKING-TravelAgency/admin.htm');
             });
+
+
+            if ( json_response.booked_travels.length !== 0) {
+                $('.nothing').html("");
+
+                $('.tableprenotazioni').append("<table>");
+                $('.tableprenotazioni').append("<tr><th>Id</th>p1<th></th></tr>");
+                $.each(json_response.booked_travels, function (index, travel) {
+                    console.log(travel.id_travel);
+                    $('.tableprenotazioni').append("<tr><th>" + travel.id_travel + "</th>p1<th></th></tr>");
+                });
+
+                $('.tableprenotazioni').append("</table>");
+            } else {
+                $('.tableprenotazioni').html("<p>Non hai effettuato ancora nessun viaggio</p>");
+                $('.nothing').html("display : flex");
+            }
+
         }
 
         
@@ -376,15 +391,15 @@
             alert("Errore server, riprovare più tardi.");
         }
 
-        email_data = {
+        var email_data = {
             newEmail : $('#newmail').val()
-        } 
+        };
         
-        change_email_functions = {
+        var change_email_functions = {
             200:  change_email_success,
             400:  change_email_Unauthorized,
             500:  change_email_internal_server_error
-        }
+        };
         
         post("api/user/update_email.php", email_data, change_email_functions );
     }

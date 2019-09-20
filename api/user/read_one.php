@@ -17,14 +17,18 @@
 
         if(isset($_SESSION['id']) && isset($_SESSION['timestamp'])){
 
-            $query = new MongoDB();
+            $mongo = new MongoDB();
 
-            $result = $query->ReadOneQuery("scroKING", "Users", $session->get("id"), ["name","surname","username","email","address","role"]);
+            $user_result = $mongo->ReadOneQuery("scroKING", "Users", $session->get("id"), ["name","surname","username","email","address","role"]);
+
+            $booked_travels_result = $mongo->ReadQuery("scroKING", "BookedTravels", ["id_user" => $session->get("id")]);
+
+            $result = (object) array_merge( (array) $user_result, array("booked_travels" => $booked_travels_result));
+            //var_dump($booked_travels_result);
 
             // response: 200 OK
             http_response_code(200);
             echo json_encode($result);
-
         }else{
             // response: 401 Unauthorized
             http_response_code(401);

@@ -13,28 +13,24 @@
     $params = json_decode(file_get_contents("php://input"));
 
     try{
-
-        if (isset($params->type) && isset($params->destinations) && isset($params->startdata) && isset($params->finishdata) && isset($params->price) && isset($params->veicles) && isset($params->hotels) ){
+        if ( isset($params->id) ) {
+            //new mongo instance
             $mongo = new MongoDB();
 
-            $doc = new Travel( $mongo->getNewIdObject(), $params->type,
-            $params->destinations, $params->startdata,
-            $params->finishdata, $params->price, $params->veicles, $params->hotels );
-
-            $mongo->WriteOneQuery("scroKING", "Travels", $doc);
+            //read all hotels from db
+            $result = $mongo->ReadOneQuery("scroKING", "Travels", $params->id);
 
             //response: 200  Success
             http_response_code(200);
-            echo json_encode(array("message" => "Viggio inserito con successo"));
+            echo json_encode($result);
         } else {
             //response: 400 Bad Request
             http_response_code(400);
             echo json_encode(array("message" => "Parametri mancanti."));
         }
+
     }catch (Exception | MongoDB\Driver\Exception\Exception $e) {
         //response: 500 Internal Server Error
         http_response_code(500);
         echo json_encode(array("message" => "Errore lato server.", "verbose" => $e->getMessage()));
     }
-
-?>
