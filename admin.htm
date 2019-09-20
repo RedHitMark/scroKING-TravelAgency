@@ -17,7 +17,7 @@
         <section id="adminpanel">
             <div class="row">
                 <div class="title">
-                        <h1>Admin panel</h1>
+                    <h1>Admin panel</h1>
                 </div>
             </div>
             <form action="#">
@@ -26,17 +26,18 @@
                     <option value="null" selected>-</option>
                     <option value="mezzi" id="mezzi">Mezzi</option>
                     <option value="hotel" id="hotel">Hotel</option>
+                    <option value="viaggi" id="viaggi">Viaggi</option>
 
                 </select>
             </form>
-            
-            
+
+
 
         </section>
         <section id="mezzi-panel">
             <form action="#">
             <label for="nome-mezzo">Nome del mezzo</label>
-            <input type="text" name="nome-mezzo" id="nome-mezzo">   
+            <input type="text" name="nome-mezzo" id="nome-mezzo">
             <label for="descrizione-mezzo">Descrizione del mezzo</label>
             <input type="text" name="descrizione-mezzo" id="descrizione-mezzo">
             <label for="tipologia-mezzo">Tipologia</label>
@@ -80,12 +81,41 @@
                 <input type="text" name="camerelibere-hotel" id="camerelibere-hotel">
             </form>
         </section>
+        <section id="viaggi-panel">
+            <form action="#">
+                <select id="selection-viaggio">
+                    <option value="null" selected>-</option>
+                    <option value="relax" id="relax">Relax</option>
+                    <option value="religioso" id="religioso">Religioso</option>
+                    <option value="storico" id="storico">Storico</option>
+                    <option value="gastronomico" id="gastronomico">Gastronomico</option>
+                    <option value="sportivo" id="sportivo">Sportivo</option>
+                    <option value="divertimento" id="divertimento">Divertimento</option>
+                    <option value="sessuale" id="sessuale">Sessuale</option>
+                </select>
+                <input type="date" name="dataandata" id="dataandata">
+                <input type="date" name="dataritorno" id="dataritorno">
+                <input type="text" name="prezzo" id="prezzo" placeholder="Prezzo">
+                <input type="text" name="city1" id="city1" placeholder="Prima città">
+                <input type="text" name="city2" id="city2" placeholder="Seconda città">
+                <input type="text" name="city3" id="city3" placeholder="Terza città">
+                <input type="button" value="proco" id="porcone">
+            </form>
+            <form action="#" id="scelta-mezzi">
+                <input type="text" name="mezzo" id="mezzo-scelto">
+                <input type="button" value="+" id="button-mezzo-scelto">
+            </form>
+            <form action="#" id="scelta-hotel">
+                <input type="text" name="hotel" id="hotel-scelto">
+                <input type="button" value="+">
+            </form>
+        </section>
         <section id="report"></section>
         <section id="tasti">
             <form action="#">
                 <div class="buttons">
                     <input type="button" id="invia-riepilogo" value="Inserisci">
-                 </div>
+                </div>
             </form>
         </section>
     </div>

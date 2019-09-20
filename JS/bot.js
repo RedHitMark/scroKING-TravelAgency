@@ -1,47 +1,46 @@
-$('.placesButtons').hide();
-$('.kindsButtons').hide();
-$('.botanswer').hide();
+$('#luogo-viaggio').hide();
+$('#motivo-viaggio').hide();
+$('#bot-answer').hide();
 
-
-
-$('.countryButtons, button').click(function(e){
+$('#selection-tipologia').click(function (e) {
     e.preventDefault();
-    $('.kindsButtons').hide();
-    $('.countryButtons').hide();
-    $('.placesButtons').show();
-    $('.botanswer').hide();
+    $('#luogo-viaggio').delay(2000).fadeIn(800);
+    $('#motivo-viaggio').hide();
+    $('#bot-answer').hide();
+    $('#tipologia-viaggio').delay(2000).fadeOut(800); 
+
 });
 
-$('.placesButtons, button').click(function(e){
+$('#selection-tipologia').change(function(){
+    var tipologia = $('#selection-tipologia').val();
+    console.log(tipologia);
+});
+
+
+$('#selection-luogo').click(function (e) {
     e.preventDefault();
-    $('.kindsButtons').show();
-    $('.countryButtons').hide();
-    $('.placesButtons').hide();
-    $('.botanswer').hide();
+    $('#luogo-viaggio').delay(2000).fadeOut(800);
+    $('#motivo-viaggio').delay(2000).fadeIn(800);
+    $('#bot-answer').hide();
+    $('#tipologia-viaggio').hide(); 
+
 });
 
-$('.kindsButtons, button').click(function(e){
+$('#selection-luogo').change(function(){
+    var luogo = $('#selection-luogo').val();
+    console.log(luogo);
+});
+
+$('#selection-motivo').click(function (e) {
     e.preventDefault();
-    $('.kindsButtons').hide();
-    $('.countryButtons').hide();
-    $('.placesButtons').hide();
-    $('.botanswer').show();
+    $('#luogo-viaggio').hide();
+    $('#motivo-viaggio').delay(2000).fadeOut(800);
+    $('#bot-answer').delay(2000).fadeIn(800);
+    $('#tipologia-viaggio').hide(); 
+
 });
 
-/* selection each dates to make query */
-
-
-$( "#countryB button" ).click(function() {
-    var country = $(this).text();
-    console.log(country);
+$('#selection-motivo').change(function(){
+    var motivo = $('#selection-motivo').val();
+    console.log(motivo);
 });
-$( "#placesB button" ).click(function() {
-    var place = $(this).text();
-    console.log(place);
-});
-$( "#kindsB button" ).click(function() {
-    var kind = $(this).text();
-    console.log(kind);
-});
-
-

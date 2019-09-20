@@ -1155,26 +1155,24 @@ td, th{
 #infoBot .row .col-8 p{
     padding: 1em;
 }
-#botPage{
+#bot-page{
     margin: 30% 0;
-}
-#botPage  .row article .question{
-    text-align: center;
-}
-#botPage .row .buttons{
     width: 100%;
-    margin-top: 2em;
-    display: flex;
-    justify-content: space-evenly;
 }
-#botPage button{
-    margin: 1em;
-    padding: 1em;
+#bot-page form{
+    width: 100%;
+    padding: 0.2em;
+}
+#bot-page .row h2{
+    text-align: center;
     text-transform: uppercase;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    background-color: rgba(38, 197, 17, 0.5);
+    font-weight: 300;
+    margin-bottom: 1em;
+}
+form #selection-tipologia, form #selection-luogo, form #selection-motivo{
+    padding: 1em;
+    margin-bottom: 1em;
+    width: 100%;
 }
 /* ======= Admin panel ======== */
 #adminpanel{
@@ -1213,6 +1211,19 @@ td, th{
     display: flex;
     flex-direction: column;
     padding: 0.2em;
+}
+#viaggi-panel form{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 1em;
+    padding: 0.5em;
+}
+#viaggi-panel #scelta-mezzi input[type="button"], #viaggi-panel #scelta-hotel input[type="button"]{
+    width: 2em;
+    border:none;
+    background-color: black;
+    color: white;
 }
 #tasti{
     margin-bottom: 20%;
@@ -1554,6 +1565,18 @@ td, th{
     #adminpanel{
         margin: 0;
         padding: 4px;
+    }
+    #viaggi-panel form{
+        flex-direction: column;
+        margin: 1em 0;
+    }
+    #viaggi-panel form input, #viaggi-panel form #selection-viaggio{
+        margin-bottom: 1em;
+        padding: 0.5em;
+    }
+    #viaggi-panel #scelta-mezzi input[type="button"], #viaggi-panel #scelta-hotel input[type="button"]{
+        width: 100%;
+        float: right;
     }
 }
 @media screen and (max-width: 400px){
