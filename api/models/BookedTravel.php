@@ -1,6 +1,6 @@
 <?php
 
-class BlookedTravdl{
+class BlookedTravel{
     public $_id;
     public $id_user;
     public $id_travel;
