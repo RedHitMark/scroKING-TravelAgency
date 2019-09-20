@@ -26,7 +26,7 @@
 
       if (isset($params->type)){
 
-        $result_with_existent_type = $mongo->ReadQuery("scroKING", "Viaggi", ["type" => $params->type]);
+        $result_with_existent_type = $mongo->ReadQuery("scroKING", "Travels", ["type" => $params->type]);
 
          if($result_with_existent_type >=1){
 
