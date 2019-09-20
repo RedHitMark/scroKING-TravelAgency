@@ -44,11 +44,13 @@
 
 
                 }else{
-                     //response: 406 Not Acceptable
+                    
+                    //response: 406 Not Acceptable
                     http_response_code(406);
                     echo json_encode(array("message" => "ID viaggio non presente"));
                 }
             }else{
+                
                 //response: 401 Unauthorized
                 http_response_code(401);
                 echo json_encode(array("message" => "Utente non loggato."));
@@ -56,9 +58,10 @@
             }
 
     }else{
-                    //response: 400 Bad Request
-                    http_response_code(400);
-                    echo json_encode(array("message" => "Parametri mancanti o errati."));
+                  
+        //response: 400 Bad Request
+         http_response_code(400);
+         echo json_encode(array("message" => "Parametri mancanti o errati."));
 
     }
 
