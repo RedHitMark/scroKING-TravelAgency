@@ -82,7 +82,8 @@
             </form>
         </section>
         <section id="viaggi-panel">
-            <form action="#">
+            <form action="#" id="vaggi-form-panel">
+                <label for="selection-viaggio">Tipologia di viaggio</label>
                 <select id="selection-viaggio">
                     <option value="null" selected>-</option>
                     <option value="relax" id="relax">Relax</option>
@@ -93,22 +94,44 @@
                     <option value="divertimento" id="divertimento">Divertimento</option>
                     <option value="sessuale" id="sessuale">Sessuale</option>
                 </select>
+                <label for="dataandata">Data di andata</label>
                 <input type="date" name="dataandata" id="dataandata">
+                <label for="dataritorno">Data di ritorno</label>
                 <input type="date" name="dataritorno" id="dataritorno">
+                <label for="prezzo">Prezzo</label>
                 <input type="text" name="prezzo" id="prezzo" placeholder="Prezzo">
+                <label for="city1">Prima città</label>
                 <input type="text" name="city1" id="city1" placeholder="Prima città">
+                <label for="city2">Seconda città</label>
                 <input type="text" name="city2" id="city2" placeholder="Seconda città">
+                <label for="city3">Terza città</label>
                 <input type="text" name="city3" id="city3" placeholder="Terza città">
-                <input type="button" value="proco" id="porcone">
             </form>
-            <form action="#" id="scelta-mezzi">
-                <input type="text" name="mezzo" id="mezzo-scelto">
-                <input type="button" value="+" id="button-mezzo-scelto">
-            </form>
-            <form action="#" id="scelta-hotel">
-                <input type="text" name="hotel" id="hotel-scelto">
-                <input type="button" value="+">
-            </form>
+            <div class="row">
+                <div class="col-10">
+                    <form action="#" id="scelta-mezzi">
+                            <input type="text" name="mezzo" id="mezzo-scelto">
+                    </form>
+                </div>
+                <div class="col-2">
+                        <form action="#" id="scelta-mezzi">
+                
+                                <input type="button" value="+" id="button-mezzo-scelto">
+                            </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-10">
+                        <form action="#" id="scelta-hotel">
+                                <input type="text" name="hotel" id="hotel-scelto">
+                            </form>
+                </div>
+                <div class="col-2">
+                        <form action="#" id="scelta-hotel">
+                                <input type="button" value="+" id="button-hotel-scelto">
+                            </form>
+                </div>
+            </div>
         </section>
         <section id="report"></section>
         <section id="tasti">

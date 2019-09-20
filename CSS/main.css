@@ -45,6 +45,9 @@ body {
 .col-8 {
     width: 75%;
 }
+.col-10{
+    width: 83.3333333333333334%
+}
 
 .col-12 {
     width: 100%;
@@ -1212,11 +1215,24 @@ form #selection-tipologia, form #selection-luogo, form #selection-motivo{
     flex-direction: column;
     padding: 0.2em;
 }
-#viaggi-panel form{
+.row .col-12{
     display: flex;
-    justify-content: space-between;
-    width: 100%;
+    justify-content: center;
+}
+#scelta-mezzi, #scelta-hotel{
     margin: 1em;
+}
+#scelta-mezzi input[type="text"]:nth-child(2), #scelta-mezzi input[type="text"]:nth-child(3), #scelta-mezzi input[type="text"]:nth-child(4), #scelta-mezzi input[type="text"]:nth-child(5){
+    margin-right: 1em;
+}
+
+#scelta-hotel input[type="text"]:nth-child(2), #scelta-hotel input[type="text"]:nth-child(3), #scelta-hotel input[type="text"]:nth-child(4), #scelta-hotel input[type="text"]:nth-child(5){
+    margin-right: 1em;
+}
+
+#viaggi-panel #vaggi-form-panel{
+    display: flex;
+    flex-direction: column;
     padding: 0.5em;
 }
 #viaggi-panel #scelta-mezzi input[type="button"], #viaggi-panel #scelta-hotel input[type="button"]{
@@ -1574,9 +1590,13 @@ form #selection-tipologia, form #selection-luogo, form #selection-motivo{
         margin-bottom: 1em;
         padding: 0.5em;
     }
+
+    .newinsertmezzi input, .newinserthotel input{
+        width: 100%;
+    }
+    
     #viaggi-panel #scelta-mezzi input[type="button"], #viaggi-panel #scelta-hotel input[type="button"]{
         width: 100%;
-        float: right;
     }
 }
 @media screen and (max-width: 400px){
