@@ -77,7 +77,10 @@
             <article id="bot-answer">
                 <div class="row"><h2>Il bot ha trovato queste mete per il tuo viaggio!</h2></div>
                 <div class="row">
-                    <div id="results-travel"></div>
+                    <div id="results-travel">
+
+
+                    </div>
                 </div>
             </article>
         </section>
@@ -90,7 +93,12 @@
 <script src="JS/bot.js"></script>
 <script src="JS/http.js"></script>
 <script src="api/viaggi/bot.php"></script>
+<script>
+    $.each(json_response, function(a,b) {
 
+    });
+
+</script>
 
 <script>
     //@TODO chiamate HTTP

@@ -36,12 +36,44 @@ $('#selection-motivo').click(function (e) {
     $('#luogo-viaggio').hide();
     $('#motivo-viaggio').delay(2000).fadeOut(800);
     $('#bot-answer').delay(2000).fadeIn(800);
-    $('#tipologia-viaggio').hide(); 
+    $('#tipologia-viaggio').hide();
 
-    //chiamata dentro una funzione
+        chiamataViaggi();
+
 });
 
 $('#selection-motivo').change(function(){
     var motivo = $('#selection-motivo').val();
     console.log(motivo);
 });
+
+function chiamataViaggi(){
+
+    function bot_success(json_response){
+        alert("Chiamata avvenuta con successo");
+        console.log(json_response);
+    }
+
+    function bot_missing_parameter(json_response){
+        alert("Errore nei parametri");
+    }
+
+    function bot_internal_server_error(json_response){
+        alert("Internal server error");
+    }
+    let viaggio_dati ={
+
+        type : $('#tipologia-viaggio').val()
+
+    };
+    let viaggio_functions = {
+        200: bot_success,
+        400: bot_missing_parameter,
+        500: bot_internal_server_error
+    };
+
+
+    post("api/travel/travel_bot.php", viaggio_dati,viaggio_functions);
+
+
+}
