@@ -38,6 +38,7 @@ $('#selection-motivo').click(function (e) {
     $('#bot-answer').delay(2000).fadeIn(800);
     $('#tipologia-viaggio').hide(); 
 
+    //chiamata dentro una funzione
 });
 
 $('#selection-motivo').change(function(){
