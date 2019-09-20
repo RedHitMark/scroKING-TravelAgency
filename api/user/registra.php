@@ -37,10 +37,14 @@
                 $registrationLog = new RegistrationLog(getTimestamp(), getClientIp(), $params->username, $params->email, "OK");
                 $mongo->WriteOneQuery("scroKING", "LoginLogs", $registrationLog);
 
-                //send email to confirm registration
+                //mail instance
                 $mail = new Mail();
-                $html_text_email = file_get_contents("../mail/email.html");
-                str_replace("%cliente%", $params->name . " " . $params->surname, $html_text_email);
+
+                //load html text of mail from file and replace with new client name
+                $html_text_email = file_get_contents("http://scroking.ddns.net/scroKING-TravelAgency/api/mail/email.htm");
+                $html_text_email = str_replace("%cliente%", $params->name . " " . $params->surname, $html_text_email);
+
+                //send mail to confirm registration
                 $mail->sendEmail($params->email, "Benvenuto in scroKING", $html_text_email);
 
                 //response: 200  Success
