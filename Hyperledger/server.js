@@ -1,18 +1,18 @@
 var http = require("http");
 var url = require('url');
+var utils = require('./utils');
 
 
 const SERVER_PORT = 8080;
 
 
 function onRequest(request, response) {
-    console.log("Richiesta ricevuta dal server");
+    let client_ip = utils.getClientAddress(request);
+    let url_obj = url.parse(request.url, true);
+    let query_params = url_obj.query;
+    let path_name = url_obj.pathname;
 
-    //response.write(request.url);
-
-    var url_obj = url.parse(request.url, true);
-    var query_params = url_obj.query;
-    var path_name = url_obj.pathname;
+    console.log("Richiesta ricevuta da: " + client_ip);
 
     switch(path_name) {
         case "/getTransactions":
@@ -34,11 +34,6 @@ function onRequest(request, response) {
             break;
 
     }
-
-    console.log(query_params);
-    console.log(path_name);
-
-    response.end();
 }
 http.createServer(onRequest).listen(SERVER_PORT);
 console.log("Server avviato ed in ascolto sulla porta " + SERVER_PORT);
