@@ -1296,6 +1296,11 @@ form #selection-tipologia, form #selection-luogo, form #selection-motivo{
     display: flex;
     justify-content: center;
 }
+.dattagli-prenotazioni > h2{
+    text-transform: uppercase;
+    text-align: center;
+    margin: 1em 0;
+}
 .dattagli-prenotazioni #dettagli-prenotazioni-form input[type="button"]{
     border: none;
     border-radius: 8px;
