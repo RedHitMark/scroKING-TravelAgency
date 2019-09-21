@@ -33,7 +33,7 @@
 
           
 
-        $mongo->WriteOneQuery("scroKING", "Mezzi", $doc);   
+        $mongo->WriteOneQuery("scroKING", "Veicles", $doc);   
 
          //response: 200  Success
         http_response_code(200);

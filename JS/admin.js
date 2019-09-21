@@ -24,107 +24,93 @@ $("#selection").click(function (e) {
         $("#hotels-panel").hide();
     }
 });
-$('#porcone').click(function () {
-    var hotelscelto = $('#hotel-scelto').val();
-    var hotelscelto1 = $('#hotel-scelto1').val();
-    var hotelscelto2 = $('#hotel-scelto2').val();
-    var hotelscelto3 = $('#hotel-scelto3').val();
-    var hotelscelto4 = $('#hotel-scelto4').val();
-    console.log(hotelscelto + "," + hotelscelto1 + "," + hotelscelto2 + "," + hotelscelto3 + "," + hotelscelto4);
 
-});
 
-var numMezziInseriti = 1;
+var numMezziInseriti = 0;
+
 
 $('#button-mezzo-scelto').click(function () {
-
-
-    if (numMezziInseriti <= 3) {
-        var input = $("<input type=\"text\" id=\"mezzo-scelto" + numMezziInseriti + "\" />");
-        $("#scelta-mezzi").append(input);
-
+    if(numMezziInseriti <= 3){
         numMezziInseriti++;
-    } else {
+        console.log(numMezziInseriti);
+        var select = '<select id="mezzo-scelto' +  numMezziInseriti + '">';
+        select += veicleselect;
+        select += '</select>';
+        $("#scelta-mezzi").append(select);
+    }else {
         $("#scelta-mezzi").html("<b>Hai inserito troppi parametri</b>");
     }
 
 });
 
 
-var numHotelsInseriti = 1;
+
+
+var numHotelsInseriti = 0;
 
 $('#button-hotel-scelto').click(function () {
 
 
-    if (numHotelsInseriti <= 3) {
-        var input = $("<input type=\"text\" id=\"hotel-scelto" + numHotelsInseriti + "\" />");
-        $("#scelta-hotel").append(input);
-
+    if(numHotelsInseriti <= 3){
         numHotelsInseriti++;
-    } else {
+        console.log(numHotelsInseriti);
+        var select = '<select id="hotel-scelto' +  numHotelsInseriti + '">';
+        select += hotelselect;
+        select += '</select>';
+        $("#scelta-hotel").append(select);
+    }else {
         $("#scelta-hotel").html("<b>Hai inserito troppi parametri</b>");
     }
 
 });
 
-function cittaScelte() {
+var hotelscelto = $('#hotel-scelto').val();
+var hotelscelto1 = $('#hotel-scelto1').val();
+var hotelscelto2 = $('#hotel-scelto2').val();
+var hotelscelto3 = $('#hotel-scelto3').val();
+
+function cittaScelte(){
     var city1 = $('#city1').val();
     var city2 = $('#city2').val();
     var city3 = $('#city3').val();
-    if (city2 == '' && city3 == '') {
-        console.log(city1);
+    if( city2 == '' && city3 == ''){
+        //console.log(city1);
         return city1;
-    } else if (city3 == '') {
+    }else if(city3 == ''){
         console.log(city1, city2);
         var doublecities = city1 + " , " + city2;
         return doublecities;
-    } else {
+    }else{
         console.log(city1, city2, city3);
         var triplecities = city1 + " , " + city2 + " , " + city3;
         return triplecities;
     }
 }
 
-function mezziScelti() {
-    var mezzoscelto = $('#mezzo-scelto').val();
-    var mezzoscelto1 = $('#mezzo-scelto1').val();
-    var mezzoscelto2 = $('#mezzo-scelto2').val();
-    var mezzoscelto3 = $('#mezzo-scelto3').val();
-    if ( mezzoscelto1 == '' && mezzoscelto2 == ''  && mezzoscelto3 == '') {
-        console.log(mezzoscelto);
-        return mezzoscelto;
-    } else if (mezzoscelto2 == '' && mezzoscelto3 == '') {
-        
-        var doubleMezzi = mezzoscelto + " , " + mezzoscelto1;
-        console.log(doubleMezzi);
-        return doubleMezzi;
-    } else if (mezzoscelto3 == '') {
-        var tripleMezzi = mezzoscelto + " , " + mezzoscelto1 + " , " + mezzoscelto2;
-        return tripleMezzi;
-    } else {
-        var fourfoldMezzi = mezzoscelto + " , " + mezzoscelto1 + " , " + mezzoscelto2 + " , " + mezzoscelto3;
-        return fourfoldMezzi;
+
+function mezziScelti(){
+
+    let mezziString = '';
+    for (let index = 0; index <= numMezziInseriti; index++) {
+        let id =  '#mezzo-scelto' + index;
+        mezziString = mezziString + $(id).val() + ',';
     }
 
+    mezziString = mezziString.substring(0, mezziString.length - 1);
+
+    return mezziString;
 }
 
-function hotelScelti() {
-    var hotelscelto = $('#hotel-scelto').val();
-    var hotelscelto1 = $('#hotel-scelto1').val();
-    var hotelscelto2 = $('#hotel-scelto2').val();
-    var hotelscelto3 = $('#hotel-scelto3').val();
-    if (hotelscelto1 == '' && hotelscelto2 == '' && hotelscelto3 == '') {
-        return hotelscelto;
-    } else if (hotelscelto2 == '' && hotelscelto3 == '') {
-        var doubleHotels = hotelscelto + " , " + hotelscelto1;
-        return doubleHotels;
-    } else if (hotelscelto3 == '') {
-        var tripleHotels = hotelscelto + " , " + hotelscelto1 + " , " + hotelscelto2;
-        return tripleHotels;
-    } else {
-        var fourfoldHotels = hotelscelto + " , " + hotelscelto1 + " , " + hotelscelto2 + " , " + hotelscelto3;
-        return fourfoldHotels;
+function hotelScelti(){
+    let hotelString = '';
+    for (let index = 0; index <= numHotelsInseriti; index++) {
+        let id =  '#hotel-scelto' + index;
+        hotelString += $(id).val() + ',';
     }
+
+    hotelString = hotelString.substring(0, hotelString.length - 1);
+
+    return hotelString;
 }
 
 
@@ -150,7 +136,7 @@ $("#invia-riepilogo").click(function () {
     var dataAndata = $('#dataandata').val();
     var dataRitorno = $('#dataritorno').val();
     var prezzo = $('#prezzo').val();
-
+    
 
     /* Report message and insert call */
     if (type == 'mezzi') {
@@ -235,5 +221,6 @@ function insert_veicle() {
         price: $("#costo-mezzo").val()
     }
 
-    post("api/veicle/insert_veicle.php", veicle_data, functions)
+    post("api/veicle/insert_veicle.php", veicle_data, functions);
 }
+
