@@ -959,6 +959,16 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     text-align: center;
 }
 
+#prenotazionihistory img{
+    padding-top: 0.1em;
+    width: 1.9em;
+    height: auto;
+}
+
+#prenotazionihistory a{
+    color : black;
+}
+
 .booking i{
     font-size: 30px;
 }
@@ -1176,6 +1186,15 @@ form #selection-tipologia, form #selection-luogo, form #selection-motivo{
     padding: 1em;
     margin-bottom: 1em;
     width: 100%;
+}
+
+#results-travel img{
+    padding-top: 0.1em;
+    width: 1.9em;
+    height: auto;
+}
+#results-travel a{
+    color : black;
 }
 /* ======= Admin panel ======== */
 #adminpanel{

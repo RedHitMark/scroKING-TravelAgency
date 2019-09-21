@@ -250,7 +250,7 @@
                 $('.nothing').html("");
 
                 $('.tableprenotazioni').append("<table>");
-                $('.tableprenotazioni').append("<tr><th>Tipo</th><th>Destinazione</th><th>Inizio</th><th>Fine</th><th>Prezzo</th><th>Dettagli</th></tr>");
+                $('.tableprenotazioni').append("<tr><th>Tipo</th><th>Destinazione</th><th>Data</th><th>Prezzo</th><th>Dettagli</th></tr>");
 
                 $.each(json_response.booked_travels, function (index, travel) {
                     let destinationString = "";
@@ -258,13 +258,16 @@
                         destinationString = destinationString + destination + "<br>";
                     });
 
-                    $('.tableprenotazioni').append("<tr><td>" + travel.type + "</td><td>" + destinationString + "</td><td>"+ travel.startdata + "</td><td>" + travel.finishdata + "</td><td>" + travel.price + "</td><td><a href='#'>Dettagli</a></td></tr>");
+                    let dataString = "";
+                    dataString = "Da <br>" + travel.startdata + "<br> A <br>" + travel.finishdata;
+
+                    $('.tableprenotazioni').append("<tr><td>" + travel.type + "</td><td>" + destinationString + "</td><td>"+ dataString  + "</td><td>" + travel.price + "<img src='IMG/scrocco.png' alt='moneta'></td><td><a href='info_prenotazioni.htm/" + travel._id.$oid + "'><i class='far fa-calendar-check fa-2x'></i></a></td></tr>");
                 });
 
                 $('.tableprenotazioni').append("</table>");
             } else {
                 $('.tableprenotazioni').html("<p>Non hai effettuato ancora nessun viaggio</p>");
-                $('.nothing').html("display : flex");
+                $('.nothing').html("");
             }
 
 

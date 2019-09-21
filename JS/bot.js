@@ -53,12 +53,12 @@ function chiamataViaggi(){
         console.log(json_response);
         let table;
         table = "<table>";
-        table = table + "<tr><th><h1>Tipo</h1></th> <th><h1>Destinazioni</h1></th> <th><h1>Data</h1></th> <th><h1>Prezzo</h1></th> </tr>"
-        $.each(json_response, function(index,value){
+        table = table + "<tr><th>Tipo</th> <th>Destinazioni</th> <th>Data</th> <th>Prezzo</th> <th>Dettagli</th> <th>Prenota</th> </tr>"
+        $.each(json_response, function(index,travel){
 
             let destinationString = '';
 
-            $.each(value.destinations, function (index, destination) {
+            $.each(travel.destinations, function (index, destination) {
                 destinationString = destinationString + destination + "<br>";
             });
 
@@ -67,10 +67,13 @@ function chiamataViaggi(){
             let newRaw = "<tr>";
 
             
-            newRaw = newRaw + "<td>" + value.type + "</td>";
+            newRaw = newRaw + "<td>" + travel.type + "</td>";
             newRaw = newRaw + "<td>" + destinationString + "</td>";
-            newRaw = newRaw + "<td> Da <br>" + value.startdata+ "<br> a <br>" + value.finishdata + " </td>";
-            newRaw = newRaw + "<td>" + value.price + "</td>";
+            newRaw = newRaw + "<td> Da <br>" + travel.startdata+ "<br> a <br>" + travel.finishdata + " </td>";
+            newRaw = newRaw + "<td>" + travel.price + "<img src='IMG/scrocco.png' alt='moneta'></td>";
+            //@TODO aggiornare con pagina nuova per info corretta
+            newRaw = newRaw + "<td><a href='info_prenotazioni.htm/" + travel._id.$oid + "'><i class='far fa-calendar-check fa-2x'></i></a></td>";
+            newRaw = newRaw + "<td><a href='info_prenotazioni.htm/" + travel._id.$oid + "'><i class='fas fa-dollar-sign fa-2x'></i></a></td>";
 
 
             newRaw = newRaw + "</tr>";
