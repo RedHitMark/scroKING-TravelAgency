@@ -1279,6 +1279,32 @@ form #selection-tipologia, form #selection-luogo, form #selection-motivo{
 #tasti{
     margin-bottom: 20%;
 }
+/* ======= Dettaglio prenotazione ====== */
+.dattagli-prenotazioni{
+    margin: 30% 0;
+}
+.dattagli-prenotazioni table tr{
+    display: flex;
+    justify-content: center;
+}
+.dattagli-prenotazioni table{
+    padding: 0 0.5em ;
+    width: 100%;
+}
+.dattagli-prenotazioni #dettagli-prenotazioni-form{
+    margin-top: 2em;
+    display: flex;
+    justify-content: center;
+}
+.dattagli-prenotazioni #dettagli-prenotazioni-form input[type="button"]{
+    border: none;
+    border-radius: 8px;
+    padding: 0.5em;
+    background-color: rgb(35, 124, 35);
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+}
 @media screen and (max-width: 992px) {
 
     /* ====== Generale ====== */
@@ -1644,6 +1670,16 @@ form #selection-tipologia, form #selection-luogo, form #selection-motivo{
     #scelta-hotel label, #scelta-mezzi label{
         text-align: center;
     }
+    /* ======= Dettaglio prenotazione ====== */
+.dattagli-prenotazioni table tr{
+    flex-direction: column;
+}
+.dattagli-prenotazioni #dettagli-prenotazioni-form{
+    padding: 0.5em;
+}
+.dattagli-prenotazioni #dettagli-prenotazioni-form input[type="button"]{
+   width: 100%;
+}
 }
 @media screen and (max-width: 400px){
     nav .col-12 .col-6 .log.mobile .yeslog{
