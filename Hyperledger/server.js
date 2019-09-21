@@ -3,7 +3,7 @@ var url = require('url');
 var utils = require('./utils');
 
 
-const SERVER_PORT = 27017;
+const SERVER_PORT = 8080;
 
 
 function onRequest(request, response) {
