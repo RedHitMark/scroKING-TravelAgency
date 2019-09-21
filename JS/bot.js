@@ -62,11 +62,8 @@ function chiamataViaggi(){
                 destinationString = destinationString + destination + "<br>";
             });
 
-            
-
             let newRaw = "<tr>";
 
-            
             newRaw = newRaw + "<td>" + travel.type + "</td>";
             newRaw = newRaw + "<td>" + destinationString + "</td>";
             newRaw = newRaw + "<td> Da <br>" + travel.startdata+ "<br> a <br>" + travel.finishdata + " </td>";

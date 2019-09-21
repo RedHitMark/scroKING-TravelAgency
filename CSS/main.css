@@ -968,6 +968,10 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
 #prenotazionihistory a{
     color : black;
 }
+#prenotazionihistory table, tr, td{
+    vertical-align: middle;
+}
+
 
 .booking i{
     font-size: 30px;
