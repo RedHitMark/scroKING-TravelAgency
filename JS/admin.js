@@ -76,6 +76,51 @@ var hotelscelto1 = $('#hotel-scelto1').val();
 var hotelscelto2 = $('#hotel-scelto2').val();
 var hotelscelto3 = $('#hotel-scelto3').val();
 
+function cittaScelte(){
+    var city1 = $('#city1').val();
+    var city2 = $('#city2').val();
+    var city3 = $('#city3').val();
+    if( city2 == '' && city3 == ''){
+        console.log(city1);
+        return city1;
+    }else if(city3 == ''){
+        console.log(city1, city2);
+        var doublecities = city1 + " , " + city2;
+        return doublecities;
+    }else{
+        console.log(city1, city2, city3);
+        var triplecities = city1 + " , " + city2 + " , " + city3;
+        return triplecities;
+    }
+}
+
+function mezziScelti(){
+    if(mezzoscelto1 == '' && mezzoscelto2 == '' && mezzoscelto3 == ''){
+        return mezzoscelto;
+    }else if( mezzoscelto2 == '' && mezzoscelto3 == ''){
+        var doubleMezzi = mezzoscelto + " , " + mezzoscelto1;
+        return doubleMezzi;
+    }else if( mezzoscelto3 == ''){
+        var tripleMezzi = mezzoscelto + " , " + mezzoscelto1 + " , " + mezzoscelto2;
+    }else{
+        var fourfoldMezzi = mezzoscelto + " , " + mezzoscelto1 + " , " + mezzoscelto2 + " , " + mezzoscelto3;
+    }
+
+}
+
+function hotelScelti(){
+    if(hotelscelto1 == '' && hotelscelto2 == '' && hotelscelto3 == ''){
+        return hotelscelto;
+    }else if( hotelscelto2 == '' && hotelscelto3 == ''){
+        var doubleHotels = hotelscelto + " , " + hotelscelto1;
+        return doubleHotels;
+    }else if( hotelscelto3 == ''){
+        var tripleHotels = hotelscelto + " , " + hotelscelto1 + " , " + hotelscelto2;
+    }else{
+        var fourfoldHotels = hotelscelto + " , " + hotelscelto1 + " , " + hotelscelto2 + " , " + hotelscelto3;
+    }
+}
+
 
 $("#invia-riepilogo").click(function () {
     /* General*/
@@ -95,13 +140,11 @@ $("#invia-riepilogo").click(function () {
     var emailHotel = $('#email-hotel').val();
     var camerelibereHotel = $('#camerelibere-hotel').val();
     /* Viaggi */
+    var tipologiaViaggio = $('#selection-viaggio').val();
     var dataAndata = $('#dataandata').val();
     var dataRitorno = $('#dataritorno').val();
     var prezzo = $('#prezzo').val();
-    var city1 = $('#city1').val();
-    var city2 = $('#city2').val();
-    var city3 = $('#city3').val();
-    var mezzoscelto = $('#mezzi-scelto').val();
+    
 
     /* Report message and insert call */
     if (type == 'mezzi') {
@@ -115,7 +158,7 @@ $("#invia-riepilogo").click(function () {
     } else if (type == 'null') {
         $('#report').html("<h1 style='text-transform: uppercase; text-align: center; font-weight: bold; margin: 1em 0; color:red;'>Non sono state inserite informazioni</h1>");
     } else if (type == 'viaggi') {
-
+        $('#report').html("<h1 style='text-transform: uppercase; text-align: center; font-weight: bold;'></h1>" + "<br>" + "<b>Tipologia viaggio: </b>" + tipologiaViaggio + "<br>" + "<b>Data andata: </b>" + dataAndata + "<br>" + "<b>Data ritorno: </b>" + dataRitorno + "<br>" + "<b>Prezzo: </b>" + prezzo + "<br>" + "<b>Città scelte: </b>" + cittaScelte() + "<br>" + "<b>Mezzi scelti: </b>" + mezziScelti() + "<br>" + "<b>Hotel scelti: </b>" + hotelScelti());
     }
 });
 
