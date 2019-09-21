@@ -9,6 +9,8 @@ const path = require('path');
 
 const ccpPath = path.resolve(__dirname, '..', '..', 'first-network', 'connection-org1.json');
 
+const CREATE_TRANSACTION = 'createCar';
+
 async function main() {
     try {
 
@@ -38,7 +40,14 @@ async function main() {
         // Submit the specified transaction.
         // createCar transaction - requires 5 argument, ex: ('createCar', 'CAR12', 'Honda', 'Accord', 'Black', 'Tom')
         // changeCarOwner transaction - requires 2 args , ex: ('changeCarOwner', 'CAR10', 'Dave')
-        await contract.submitTransaction('createCar', 'CAR12', 'Honda', 'Accord', 'Black', 'Tom');
+
+        //--create car = nostra funzione da rinominare
+        //--id della transazione
+        //--id utente
+        //--soldi (positivo = ricarica -- negativo = scrocco)
+        //--timestamp della transazione
+        //--descrizione
+        await contract.submitTransaction(CREATE_TRANSACTION, 'CAR12', 'Honda', 'Accord', 'Black', 'Tom');
         console.log('Transaction has been submitted');
 
         // Disconnect from the gateway.
