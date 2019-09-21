@@ -10,7 +10,6 @@
     include_once("../config/MongoDB.php");
     include_once("../models/Travel.php");
     include_once("../models/Veicle.php");
-    include_once("../models/Destination.php");
     include_once("../config/Mail.php");
     include_once("../config/timestamp.php");
     include_once("../config/security.php");

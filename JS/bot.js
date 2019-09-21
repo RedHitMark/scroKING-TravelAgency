@@ -49,19 +49,29 @@ $('#selection-motivo').change(function(){
 function chiamataViaggi(){
 
     function bot_success(json_response){
-        alert("Chiamata avvenuta con successo");
+       
         console.log(json_response);
         let table;
         table = "<table>";
-        table = table + "<tr><th> <h1>ID viaggio</h1></th> <th> <h1>Tipo</h1></th> <th> <h1>Destinazione</h1></th> <th> <h1>Data</h1></th> <th> <h1>Prezzo</h1></th> </tr>"
+        table = table + "<tr><th><h1>Tipo</h1></th> <th><h1>Destinazioni</h1></th> <th><h1>Data</h1></th> <th><h1>Prezzo</h1></th> </tr>"
         $.each(json_response, function(index,value){
+
+            let destinationString = '';
+
+            $.each(value.destinations, function (index, destination) {
+                destinationString = destinationString + destination + "<br>";
+            });
+
+            
 
             let newRaw = "<tr>";
 
-            newRaw = newRaw + "<td>" + value.id + "</td>";
+            
             newRaw = newRaw + "<td>" + value.type + "</td>";
-            newRaw = newRaw + "<td>" + value.data + "</td>";
+            newRaw = newRaw + "<td>" + destinationString + "</td>";
+            newRaw = newRaw + "<td> Da <br>" + value.startdata+ "<br> a <br>" + value.finishdata + " </td>";
             newRaw = newRaw + "<td>" + value.price + "</td>";
+
 
             newRaw = newRaw + "</tr>";
 
