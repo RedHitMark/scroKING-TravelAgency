@@ -12,10 +12,7 @@ const TRANSACTION_NAME = "queryAllCars";
 module.exports = {
     getAllTransactions : async function() {
         //get contract form hyperledger network
-        let contract = await get_hyperledger_contract;
-
-        // Evaluate the query transaction.
-        const result = await contract.evaluateTransaction(TRANSACTION_NAME);
+        let result = await executeHyperLedgerTransaction(TRANSACTION_NAME);
 
         var json_response = JSON.parse(result.toString());
 
@@ -30,7 +27,7 @@ module.exports = {
 
 
 
-async function get_hyperledger_contract() {
+async function executeHyperLedgerTransaction() {
     // Create a new file system based wallet for managing identities.
     const walletPath = path.join(process.cwd(), 'wallet');
     const wallet = new FileSystemWallet(walletPath);
@@ -50,7 +47,10 @@ async function get_hyperledger_contract() {
     const network = await gateway.getNetwork(CHANNEL_NAME);
 
     // return contract from the network.
-    return await network.getContract(CONTRACT_NAME);
+    const contract = network.getContract(CONTRACT_NAME);
+
+    // Evaluate the specified  transaction.
+    const result = await contract.evaluateTransaction(TRANSACTION_NAME);
 }
 
 
