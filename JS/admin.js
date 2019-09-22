@@ -64,10 +64,6 @@ $('#button-hotel-scelto').click(function () {
 
 });
 
-var hotelscelto = $('#hotel-scelto').val();
-var hotelscelto1 = $('#hotel-scelto1').val();
-var hotelscelto2 = $('#hotel-scelto2').val();
-var hotelscelto3 = $('#hotel-scelto3').val();
 
 function cittaScelte(){
     var city1 = $('#city1').val();
@@ -78,11 +74,11 @@ function cittaScelte(){
         return city1;
     }else if(city3 == ''){
         console.log(city1, city2);
-        var doublecities = city1 + " , " + city2;
+        var doublecities = city1 + "," + city2;
         return doublecities;
     }else{
         console.log(city1, city2, city3);
-        var triplecities = city1 + " , " + city2 + " , " + city3;
+        var triplecities = city1 + "," + city2 + "," + city3;
         return triplecities;
     }
 }
@@ -143,14 +139,26 @@ $("#invia-riepilogo").click(function () {
         $("#report").html("<h1 style='text-transform: uppercase; text-align: center; font-weight: bold;'>Riepilogo informazioni inserite:</h1>" + "<br>" + "<b>Tipologia nuovo elemento: </b> " + type + "<br>" + "<b>Posti del mezzo: </b>" + postiMezzo + "<br>" + "<b>Costo del mezzo:</b> " + costoMezzo + "<br>" + "<b>Tipologia del mezzo: </b>" + tipologiaMezzo + "<br>" + "<b>Nome del mezzo</b>" + nomeMezzo + "<br>" + "<b>Descrizione del mezzo</b>" + descrizioneMezzo);
 
         insert_veicle();
-
     } else if (type == 'hotel') {
         $('#report').html("<h1 style='text-transform: uppercase; text-align: center; font-weight: bold;'>Riepilogo informazioni inserite:</h1>" + "<br>" + "<b>Tipologia nuovo elemento: </b> " + type + "<br>" + "<b>Nome hotel: </b>" + nomeHotel + "<br>" + "<b>Descrizione hotel: </b>" + descrizioneHotel + "<br>" + "<b>Indirizzo Hotel: </b>" + indirizzoHotel + "<br>" + "<b>Telefono hotel: </b>" + telefonoHotel + "<br>" + "<b>E-mail hotel: </b>" + emailHotel + "<br>" + "<b>Camere libere: </b>" + camerelibereHotel);
-        insert_hotel()
+
+        insert_hotel();
     } else if (type == 'null') {
         $('#report').html("<h1 style='text-transform: uppercase; text-align: center; font-weight: bold; margin: 1em 0; color:red;'>Non sono state inserite informazioni</h1>");
     } else if (type == 'viaggi') {
-        $('#report').html("<h1 style='text-transform: uppercase; text-align: center; font-weight: bold;'></h1>" + "<br>" + "<b>Tipologia viaggio: </b>" + tipologiaViaggio + "<br>" + "<b>Data andata: </b>" + dataAndata + "<br>" + "<b>Data ritorno: </b>" + dataRitorno + "<br>" + "<b>Prezzo: </b>" + prezzo + "<br>" + "<b>Città scelte: </b>" + cittaScelte() + "<br>" + "<b>Mezzi scelti: </b>" + mezziScelti() + "<br>" + "<b>Hotel scelti: </b>" + hotelScelti());
+        let cityReport = cittaScelte();
+        cityReport = cityReport.replace(",", ", ");
+
+        let mezziReport = mezziScelti();
+        mezziReport = mezziReport.replace(",", ", ");
+
+        let hotelReport = mezziScelti();
+        hotelReport = hotelReport.replace(",", ", ");
+
+
+        $('#report').html("<h1 style='text-transform: uppercase; text-align: center; font-weight: bold;'></h1>" + "<br>" + "<b>Tipologia viaggio: </b>" + tipologiaViaggio + "<br>" + "<b>Data andata: </b>" + dataAndata + "<br>" + "<b>Data ritorno: </b>" + dataRitorno + "<br>" + "<b>Prezzo: </b>" + prezzo + "<br>" + "<b>Città scelte: </b>" + cityReport + "<br>" + "<b>Mezzi scelti: </b>" + mezziReport + "<br>" + "<b>Hotel scelti: </b>" + hotelReport);
+
+        insert_travel();
     }
 });
 
@@ -219,8 +227,48 @@ function insert_veicle() {
         type: $("#tipologia-mezzo").val(),
         seats: $("#posti-mezzo").val(),
         price: $("#costo-mezzo").val()
-    }
+    };
 
     post("api/veicle/insert_veicle.php", veicle_data, functions);
+}
+
+function insert_travel() {
+    function insert_ok() {
+        alert("Inserimento avvenuto con successo");
+    }
+
+    function insert_bad_request() {
+        alert("Compila tutti i campi")
+    }
+
+    function insert_internal_server_error() {
+        alert("Riprova più tardi");
+    }
+
+    let functions = {
+        200: insert_ok,
+        400: insert_bad_request,
+        500: insert_internal_server_error
+    };
+
+    let destinationsString = cittaScelte();
+    let hotelsString = hotelScelti();
+    let veiclesString = mezziScelti();
+
+    let destinations = destinationsString.split(",");
+    let hotels = hotelsString.split(",");
+    let veicles = veiclesString.split(",");
+
+    let travel_data = {
+        type: $("#selection-viaggio").val(),
+        startdata: $("#dataandata").val(),
+        finishdata: $("#dataritorno").val(),
+        price: $("#prezzo").val(),
+        destinations : destinations,
+        veicles : veicles,
+        hotels : hotels
+    };
+
+    post("api/travel/insert_travel.php", travel_data, functions);
 }
 

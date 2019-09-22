@@ -21,7 +21,7 @@
                 </div>
             </div>
             <form action="#">
-                <label for="select">Tipologia nuovo elemento</label>
+                <label for="selection">Tipologia nuovo elemento</label>
                 <select id="selection">
                     <option value="null" selected>-</option>
                     <option value="mezzi" id="mezzi">Mezzi</option>
@@ -110,7 +110,7 @@
             <div class="row">
                 <div class="col-10">
                     <form action="#" id="scelta-mezzi">
-                        <label for="mezzoscelto">Mezzo scelto</label>
+                        <label for="mezzoscelto0">Mezzo scelto</label>
                         <br>
 
                     </form>
@@ -125,7 +125,7 @@
             <div class="row">
                 <div class="col-10">
                         <form action="#" id="scelta-hotel">
-                                <label for="hotelscelto">Hotel scelto</label>
+                                <label for="hotelscelto0">Hotel scelto</label>
                                 <br>
                                 
                             </form>
@@ -157,71 +157,73 @@
 
 <script>
     var veicleselect = '';
-function load_all_veicles() {
-    function load_success(json_response) {
-        console.log(json_response);
-        
-        
-        $.each(json_response, function(index, veicle){
-            veicleselect += '<option value="' + veicle._id.$oid + '">' + veicle.name + '</option>';
-            console.log(veicle._id.$oid)
-        });
-        var option = '<select id="mezzo-scelto0">';
-        option += veicleselect;
-        option += '</select>';
-        $("#scelta-mezzi").append(option);
 
+    function load_all_veicles() {
+        function load_success(json_response) {
+            console.log(json_response);
+
+
+            $.each(json_response, function(index, veicle){
+                veicleselect += '<option value="' + veicle._id.$oid + '">' + veicle.name + '</option>';
+                console.log(veicle._id.$oid)
+            });
+            var option = '<select id="mezzo-scelto0">';
+            option += veicleselect;
+            option += '</select>';
+            $("#scelta-mezzi").append(option);
+
+        }
+
+
+
+        function internal_server_error() {
+            console.log("internal server error");
+        }
+
+
+        let functions = {
+            200 : load_success,
+            500 : internal_server_error
+        };
+
+        post("api/veicle/read_all_veicles.php", null, functions);
     }
 
+    var hotelselect = '';
+
+    function load_all_hotels(){
+        function load_success(json_response) {
+            console.log(json_response);
 
 
-    function internal_server_error() {
-        console.log("internal server error");
+            $.each(json_response, function(index, hotel){
+                hotelselect += '<option value="' + hotel._id.$oid + '">' + hotel.name + '</option>';
+                console.log(hotel._id.$oid)
+            });
+            var option = '<select id="hotel-scelto0">';
+            option += hotelselect;
+            option += '</select>';
+            $("#scelta-hotel").append(option);
+
+        }
+
+
+
+        function internal_server_error() {
+            console.log("internal server error");
+        }
+
+
+        let functions = {
+            200 : load_success,
+            500 : internal_server_error
+        };
+
+        post("api/hotel/read_all_hotels.php", null, functions);
     }
 
-
-    let functions = {
-        200 : load_success,
-        500 : internal_server_error
-    }
-
-    post("api/veicle/read_all_veicles.php", null, functions);
-}
-
-var hotelselect = '';
-
-function load_all_hotels(){
-    function load_success(json_response) {
-        console.log(json_response);
-        
-        
-        $.each(json_response, function(index, hotel){
-            hotelselect += '<option value="' + hotel._id.$oid + '">' + hotel.name + '</option>';
-            console.log(hotel._id.$oid)
-        });
-        var option = '<select id="hotel-scelto0">';
-        option += hotelselect;
-        option += '</select>';
-        $("#scelta-hotel").append(option);
-
-    }
-
-
-
-    function internal_server_error() {
-        console.log("internal server error");
-    }
-
-
-    let functions = {
-        200 : load_success,
-        500 : internal_server_error
-    }
-
-    post("api/hotel/read_all_hotels.php", null, functions);
-}
-load_all_veicles();
-load_all_hotels();
+    load_all_veicles();
+    load_all_hotels();
 </script>
 
 

@@ -20,7 +20,7 @@
 
             $doc = new Travel( $mongo->getNewIdObject(), $params->type,
             $params->destinations, $params->startdata,
-            $params->finishdata, $params->price, $params->veicles, $params->hotels );
+            $params->finishdata, $params->price, $params->veicles, $params->hotels);
 
             $mongo->WriteOneQuery("scroKING", "Travels", $doc);
 
