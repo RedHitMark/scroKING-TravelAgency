@@ -3,7 +3,7 @@ const path = require('path');
 
 const ccpPath = path.resolve(__dirname, '..', '..', 'first-network', 'connection-org1.json');
 
-const USER_NAME = "scrocco-user";
+const USER_NAME = 'scrocco-user';
 const CHANNEL_NAME = "mychannel";
 const CONTRACT_NAME = "fabcar";
 const TRANSACTION_NAME = "queryAllCars";
@@ -31,6 +31,10 @@ async function executeHyperLedgerTransaction() {
     // Create a new file system based wallet for managing identities.
     const walletPath = path.join(process.cwd(), 'wallet');
     const wallet = new FileSystemWallet(walletPath);
+    if (!wallet) {
+        throw new Error('Wallet not found');
+        //console.log('Run the registerUser.js application before retrying');
+    }
 
     // Check to see if we've already enrolled the user.
     const userExists = await wallet.exists(USER_NAME);
