@@ -68,10 +68,9 @@ function chiamataViaggi(){
             newRaw = newRaw + "<td>" + destinationString + "</td>";
             newRaw = newRaw + "<td> Da <br>" + travel.startdata+ "<br> a <br>" + travel.finishdata + " </td>";
             newRaw = newRaw + "<td>" + travel.price + "<img src='IMG/scrocco.png' alt='moneta'></td>";
-            //@TODO aggiornare con pagina nuova per info corretta
-            newRaw = newRaw + "<td><a href='info_prenotazioni.htm/" + travel._id.$oid + "'><i class='far fa-calendar-check fa-2x'></i></a></td>";
-            newRaw = newRaw + "<td><a href='info_prenotazioni.htm/" + travel._id.$oid + "'><i class='fas fa-dollar-sign fa-2x'></i></a></td>";
 
+            newRaw = newRaw + "<td><a href='dettaglio_prenotazione.htm?id=" + travel._id.$oid + "'><i class='far fa-calendar-check fa-2x'></i></a></td>";
+            newRaw = newRaw + "<td><a href='info_prenotazioni.htm/" + travel._id.$oid + "'><i class='fas fa-dollar-sign fa-2x'></i></a></td>";
 
             newRaw = newRaw + "</tr>";
 

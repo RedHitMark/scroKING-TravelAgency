@@ -250,6 +250,27 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     width: 100%;
 }
 
+#main .row .bot-adv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1em 0;
+}
+
+#main .row .bot-adv h2 {
+    padding: 0.5em;
+}
+
+#main .row .bot-adv button{
+    border: 1px solid black;
+    border-radius: 15px;
+    background-color : #17252A;
+    color : white;
+    font-size : 2em;
+    padding: 1em;
+    cursor: pointer;
+}
+
 
 #main .row .adv {
     display: flex;
