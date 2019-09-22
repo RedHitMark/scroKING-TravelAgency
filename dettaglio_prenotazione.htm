@@ -15,36 +15,15 @@
     <div class="wrapper">
         <div class="row">
             <div class="dattagli-prenotazioni">
-                <table>
-                    <tr>
-                        <th>Tipo</th>
-                        <th>Destinazioni</th>
-                        <th>Data</th>
-                        <th>Prezzo</th>
-                    </tr>
-                    <tbody id="dettagliP"></tbody>
+                <table id="dettagliP">
+
                 </table>
                 <h2>Dettaglio mezzi</h2>
                 <table>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Tipo</th>
-                        <th>Descrizione</th>
-                        <th>Posti</th>
-                        <th>Prezzo</th>
-                    </tr>
                     <tbody id="infoVeicoli"></tbody>
                 </table>
                 <h2>Dettagli hotel</h2>
                 <table>
-                    <tr>
-                        <th>nome</th>
-                        <th>descrizione</th>
-                        <th>indirizzo</th>
-                        <th>telefono</th>
-                        <th>e-mail</th>
-                        <th>stanze vuote</th>
-                    </tr>
                     <tbody id="infoHotel"></tbody>
                 </table>
                 <form action="#" id="dettagli-prenotazioni-form">
@@ -73,17 +52,30 @@
 
             let dataString = "Da <br>" + json_response.startdata + "<br> A <br>" + json_response.finishdata;
 
-            let viaggioRow = "<tr><td>" + json_response.type + "</td><td>" + destinationString + "</td><td>" + dataString + "</td><td>" + json_response.price + "<img src='IMG/scrocco.png' alt='moneta'></td></tr>";
+            let viaggioRow = "<tr>";
+                viaggioRow += "<th> Tipo </th>";
+                viaggioRow += "<td>" + json_response.type + "</td>";
+                viaggioRow += "<th> Destinazione </th>";
+                viaggioRow += "<td>" + destinationString + "</td>";
+                viaggioRow += "<th> Data </th>";
+                viaggioRow += "<td>" + dataString + "</td>";
+                viaggioRow += "<th> Prezzo </th>";
+                viaggioRow += "<td>" + json_response.price + "<img src='IMG/scrocco.png' alt='moneta'></td>";
             $("#dettagliP").html(viaggioRow);
 
 
             //print all veicles info
             $.each(json_response.veicles, function (index, veicle) {
                 let travelRow = "<tr>";
+                travelRow += "<th> Nome</th>"
                 travelRow += "<td>" + veicle.name + "</td>";
+                travelRow += "<th> Tipo </th>"
                 travelRow += "<td>" + veicle.type + "</td>";
+                travelRow += "<th> Descizione</th>"
                 travelRow += "<td>" + veicle.description + "</td>";
+                travelRow += "<th> Posti </th>"
                 travelRow += "<td>" + veicle.seats + "</td>";
+                travelRow += "<th> Prezzo </th>"
                 travelRow += "<td>" + veicle.price + "</td>";
                 travelRow += "</tr>";
 
@@ -95,11 +87,17 @@
                 let addressString = hotel.address.street + "<br>" + hotel.address.city + " " + hotel.address.cap + "<br>" + hotel.address.region + " " + hotel.address.state;
 
                 let hotelRow = "<tr>";
+                hotelRow += "<th>Nome</th>";
                 hotelRow += "<td>" + hotel.name + "</td>";
+                hotelRow += "<th>Descrizione</th>";
                 hotelRow += "<td>" + hotel.description + "</td>";
+                hotelRow += "<th>Indirizzo</th>";
                 hotelRow += "<td>" + addressString + "</td>";
+                hotelRow += "<th>Telefono</th>";
                 hotelRow += "<td>" + hotel.phone + "</td>";
+                hotelRow += "<th>Email</th>";
                 hotelRow += "<td>" + hotel.email + "</td>";
+                hotelRow += "<th>Stanze libere</th>";
                 hotelRow += "<td>" + hotel.free_room + "</td>";
                 hotelRow += "</tr>";
 

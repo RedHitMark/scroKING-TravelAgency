@@ -53,7 +53,6 @@ function chiamataViaggi(){
         console.log(json_response);
         let table;
         table = "<table>";
-        table = table + "<tr><th>Tipo</th> <th>Destinazioni</th> <th>Data</th> <th>Prezzo</th> <th>Dettagli</th> <th>Prenota</th> </tr>"
         $.each(json_response, function(index,travel){
 
             let destinationString = '';
@@ -62,19 +61,23 @@ function chiamataViaggi(){
                 destinationString = destinationString + destination + "<br>";
             });
 
-            let newRaw = "<tr>";
+            let newRow = "<tr>";
+            newRow = newRow +  "<th>Tipo</th>";
+            newRow = newRow + "<td>" + travel.type + "</td>";
+            newRow = newRow + "<th>Destinazioni</th>"; 
+            newRow = newRow + "<td>" + destinationString + "</td>";
+            newRow = newRow + "<th>Data</th>";
+            newRow = newRow + "<td> Da <br>" + travel.startdata+ "<br> a <br>" + travel.finishdata + " </td>";
+            newRow += " <th>Prezzo</th>";
+            newRow = newRow + "<td>" + travel.price + "<img src='IMG/scrocco.png' alt='moneta'></td>";
+            newRow += " <th>Dettagli</th>";
+            newRow = newRow + "<td><a href='dettaglio_prenotazione.htm?id=" + travel._id.$oid + "'><i class='far fa-calendar-check fa-2x'></i></a></td>";
+            newRow += " <th>Prenota</th>";
+            newRow = newRow + "<td><a href='info_prenotazioni.htm/" + travel._id.$oid + "'><i class='fas fa-dollar-sign fa-2x'></i></a></td>";
 
-            newRaw = newRaw + "<td>" + travel.type + "</td>";
-            newRaw = newRaw + "<td>" + destinationString + "</td>";
-            newRaw = newRaw + "<td> Da <br>" + travel.startdata+ "<br> a <br>" + travel.finishdata + " </td>";
-            newRaw = newRaw + "<td>" + travel.price + "<img src='IMG/scrocco.png' alt='moneta'></td>";
+            newRow = newRow + "</tr>";
 
-            newRaw = newRaw + "<td><a href='dettaglio_prenotazione.htm?id=" + travel._id.$oid + "'><i class='far fa-calendar-check fa-2x'></i></a></td>";
-            newRaw = newRaw + "<td><a href='info_prenotazioni.htm/" + travel._id.$oid + "'><i class='fas fa-dollar-sign fa-2x'></i></a></td>";
-
-            newRaw = newRaw + "</tr>";
-
-            table = table + newRaw;
+            table = table + newRow;
         });
 
         table = table + "</table>";

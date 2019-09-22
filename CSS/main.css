@@ -1224,6 +1224,14 @@ form #selection-tipologia, form #selection-luogo, form #selection-motivo{
 #results-travel a{
     color : black;
 }
+#bot-answer table{
+    width: 100%;
+}
+#bot-answer table tr{
+    
+    display: flex;
+    justify-content: center;
+}
 /* ======= Admin panel ======== */
 #adminpanel{
     margin-top: 20%;
@@ -1720,6 +1728,10 @@ form #selection-tipologia, form #selection-luogo, form #selection-motivo{
 }
 .dattagli-prenotazioni #dettagli-prenotazioni-form input[type="button"]{
    width: 100%;
+}
+/* ===== Bot page ===== */
+#bot-answer table tr{
+    flex-direction: column;
 }
 }
 @media screen and (max-width: 400px){
