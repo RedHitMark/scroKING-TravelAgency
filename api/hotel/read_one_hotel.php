@@ -14,7 +14,7 @@
     $params = json_decode(file_get_contents("php://input"));
 
     try{
-        if ( isset($params->id) ) {
+        if ( isset($params->id) && strlen($params->id_travel) >= 24) {
             //new mongo instance
             $mongo = new MongoDB();
 
@@ -27,7 +27,7 @@
         } else {
             //response: 400 Bad Request
             http_response_code(400);
-            echo json_encode(array("message" => "Parametri mancanti."));
+            echo json_encode(array("message" => "Parametri mancanti o errati."));
         }
 
     }catch (Exception | MongoDB\Driver\Exception\Exception $e) {

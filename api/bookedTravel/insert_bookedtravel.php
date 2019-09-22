@@ -11,11 +11,7 @@
     include_once("../config/Session.php");
     include_once("../config/Mail.php");
     include_once("../config/timestamp.php");
-    include_once("../config/security.php");
-    include_once("../models/Travel.php");
-    include_once("../models/Veicle.php");
     include_once("../models/BookedTravel.php");
-    include_once("../models/Destination.php");
 
 
     $params = json_decode(file_get_contents("php://input"));
@@ -32,14 +28,23 @@
                 $mongo = new MongoDB();
 
                 $result_with_existent_travel_id = $mongo->ReadOneQuery("scroKING", "Travels", $params->id_travel);
+                $user = $mongo->ReadOneQuery("scroKING", "Users", $session->get("id"), ['email']);
 
+                if ($result_with_existent_travel_id && $user) {
+                    $doc = new BookedTravel($mongo->getNewIdObject(), $params->id_travel, $session->get("id"), getTimestamp());
 
-                if ($result_with_existent_travel_id) {
-                    $id_user = $session->get("id");
-                    $doc = new BlookedTravel($mongo->getNewIdObject(), $params->id_travel, $id_user);
+                    //@TODO check cose strane con blockchain -> potrebbe non essere possibile la prenotazione (scroccocoins insufficienti)
 
+                    //insert booked travel in db
                     $mongo->WriteOneQuery("scroKING", "BookedTravels", $doc);
 
+                    //send mail of confirm
+                    $mail = new Mail();
+                    $mail->sendEmail($user->mail, "Prenotazione effettuata con succeso", "Congratulazioni la tua prenotazione è avvenuta con successo");
+
+                    //response: 200 Success
+                    http_response_code(200);
+                    echo json_encode(array("message" => "Prenotato con successo"));
                 } else {
                     //response: 406 Not Acceptable
                     http_response_code(406);
@@ -50,7 +55,6 @@
                 http_response_code(401);
                 echo json_encode(array("message" => "Utente non loggato."));
             }
-
         } else {
             //response: 400 Bad Request
             http_response_code(400);

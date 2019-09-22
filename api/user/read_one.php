@@ -32,7 +32,9 @@
 
             //retrive alla information about travels
             foreach ($booked_results as $booked_result) {
-                array_push($booked_travels, $mongo->ReadOneQuery("scroKING", "Travels", $booked_result->id_travel));
+                $travel = $mongo->ReadOneQuery("scroKING", "Travels", $booked_result->id_travel);
+                $travel = (object) array_merge( (array) $travel, array("booked_timestamp" => $booked_result->booked_timestamp));
+                array_push($booked_travels, $travel);
             }
 
             //empty array of transactions
