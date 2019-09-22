@@ -41,20 +41,24 @@ function onRequest(request, response) {
                 break;
 
             default:
+                let json_response = {
+                    message : "Not found",
+                };
+
+                //Not found
                 response.writeHead(404, {"Content-Type": "text/json"});
-                response.write("404 Not Found\n");
+                response.write(JSON.stringify(json_response));
                 response.end();
                 break;
         }
     } catch (e) {
-        //internal server error
-        response.writeHead(500, {"Content-Type": "text/json"});
-
         let json_response = {
             message : "Errore del server",
             verbose : e.message
         };
 
+        //internal server error
+        response.writeHead(500, {"Content-Type": "text/json"});
         response.write(JSON.stringify(json_response));
         response.end();
     }
