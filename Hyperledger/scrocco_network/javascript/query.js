@@ -24,7 +24,7 @@ module.exports = {
         let json_response = [];
         obj_response.forEach( (obj) => {
             let element = {
-                transaction_id : obj.Record.Key,
+                transaction_id : obj.Key,
                 user_id : obj.Record.owner,
                 money : obj.Record.make,
                 description : obj.Record.owner,
