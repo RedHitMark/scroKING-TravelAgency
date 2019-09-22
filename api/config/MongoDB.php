@@ -77,9 +77,9 @@ class MongoDB {
         //execute query
         $docs = $this->manager->executeQuery($namespace, $query);
 
-        $result = $docs->toArray()['0'];
+        $result = $docs->toArray();
 
-        return (isset($result) ?  $result : false);
+        return (count($result)==1 ?  $result['0'] : false );
     }
 
     /**

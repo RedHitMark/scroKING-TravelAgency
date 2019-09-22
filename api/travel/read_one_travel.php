@@ -21,9 +21,29 @@
             //read all hotels from db
             $result = $mongo->ReadOneQuery("scroKING", "Travels", $params->id);
 
-            //response: 200  Success
-            http_response_code(200);
-            echo json_encode($result);
+            if($result) {
+                $veicles = array();
+                foreach ($result->veicles as $veicle_id) {
+                    $veicle = $mongo->ReadOneQuery("scroKING", "Veicles", $veicle_id);
+                    array_push($veicles, $veicle);
+                }
+
+                $hotels = array();
+                foreach ($result->hotels as $hotel_id) {
+                    $hotel = $mongo->ReadOneQuery("scroKING", "Hotels", $hotel_id);
+                    array_push($hotels, $hotel);
+                }
+                $result->veicles = $veicles;
+                $result->hotels = $hotels;
+
+                //response: 200  Success
+                http_response_code(200);
+                echo json_encode($result);
+            } else {
+                //response: 404 Not Found
+                http_response_code(404);
+                echo json_encode(array("message" => "Viaggio non trovato."));
+            }
         } else {
             //response: 400 Bad Request
             http_response_code(400);

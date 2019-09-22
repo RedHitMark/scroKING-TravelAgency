@@ -22,9 +22,7 @@
                         <th>Data</th>
                         <th>Prezzo</th>
                     </tr>
-                    <tr>
-                        <tbody id="dettagliP"></tbody>
-                    </tr>
+                    <tbody id="dettagliP"></tbody>
                 </table>
                 <h2>Dettaglio mezzi</h2>
                 <table>
@@ -35,9 +33,7 @@
                         <th>Posti</th>
                         <th>Prezzo</th>
                     </tr>
-                    <td>
-                        <tbody id="infoVeicoli"></tbody>
-                    </td>
+                    <tbody id="infoVeicoli"></tbody>
                 </table>
                 <h2>Dettagli hotel</h2>
                 <table>
@@ -49,9 +45,7 @@
                         <th>e-mail</th>
                         <th>stanze vuote</th>
                     </tr>
-                    <tr>
-                        <tbody id="infoHotel"></tbody>
-                    </tr>
+                    <tbody id="infoHotel"></tbody>
                 </table>
                 <form action="#" id="dettagli-prenotazioni-form">
                     <input type="button" value="Conferma">
@@ -65,5 +59,82 @@
 <script src="JS/loadheaderfooter.js"></script>
 <script src="JS/menu.js"></script>
 <script src="JS/http.js"></script>
+<script src="JS/url.js"></script>
+
+<script>
+
+    function loadTravel() {
+        function load_success(json_response) {
+            //print all travel info
+            let destinationString = "";
+            $.each(json_response.destinations, function (index, destination) {
+                destinationString = destinationString + destination + "<br>";
+            });
+
+            let dataString = "Da <br>" + json_response.startdata + "<br> A <br>" + json_response.finishdata;
+
+            let viaggioRow = "<tr><td>" + json_response.type + "</td><td>" + destinationString + "</td><td>" + dataString + "</td><td>" + json_response.price + "<img src='IMG/scrocco.png' alt='moneta'></td></tr>";
+            $("#dettagliP").html(viaggioRow);
+
+
+            //print all veicles info
+            $.each(json_response.veicles, function (index, veicle) {
+                let travelRow = "<tr>";
+                travelRow += "<td>" + veicle.name + "</td>";
+                travelRow += "<td>" + veicle.type + "</td>";
+                travelRow += "<td>" + veicle.description + "</td>";
+                travelRow += "<td>" + veicle.seats + "</td>";
+                travelRow += "<td>" + veicle.price + "</td>";
+                travelRow += "</tr>";
+
+                $("#infoVeicoli").html(travelRow);
+            });
+
+            //print all hotels
+            $.each(json_response.hotels, function (index, hotel) {
+                let addressString = hotel.address.street + "<br>" + hotel.address.city + " " + hotel.address.cap + "<br>" + hotel.address.region + " " + hotel.address.state;
+
+                let hotelRow = "<tr>";
+                hotelRow += "<td>" + hotel.name + "</td>";
+                hotelRow += "<td>" + hotel.description + "</td>";
+                hotelRow += "<td>" + addressString + "</td>";
+                hotelRow += "<td>" + hotel.phone + "</td>";
+                hotelRow += "<td>" + hotel.email + "</td>";
+                hotelRow += "<td>" + hotel.free_rooms + "</td>";
+                hotelRow += "</tr>";
+
+                $("#infoHotel").html(hotelRow);
+            });
+
+        }
+        
+        function not_found() {
+            alert("Viaggio non trovato");
+        }
+        
+        function parametri_mancanti() {
+            alert("Torna alla home");
+        }
+
+        function internal_server_error() {
+            alert("Riprova più tardi");
+        }
+
+        let functions = {
+            200 : load_success,
+            400 : parametri_mancanti,
+            404 : not_found,
+            500 : internal_server_error
+        };
+
+        let data = {
+            id : $.urlParam("id")
+        };
+
+        post("api/travel/read_one_travel.php", data, functions);
+    }
+
+    loadTravel();
+</script>
 
 </html>

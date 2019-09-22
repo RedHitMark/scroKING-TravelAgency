@@ -261,7 +261,7 @@
                     let dataString = "";
                     dataString = "Da <br>" + travel.startdata + "<br> A <br>" + travel.finishdata;
 
-                    $('.tableprenotazioni').append("<tr><td>" + travel.type + "</td><td>" + destinationString + "</td><td>"+ dataString  + "</td><td>" + travel.price + "<img src='IMG/scrocco.png' alt='moneta'></td><td><a href='info_prenotazioni.htm/" + travel._id.$oid + "'><i class='far fa-calendar-check fa-2x'></i></a></td></tr>");
+                    $('.tableprenotazioni').append("<tr><td>" + travel.type + "</td><td>" + destinationString + "</td><td>"+ dataString  + "</td><td>" + travel.price + "<img src='IMG/scrocco.png' alt='moneta'></td><td><a href='dettaglio_prenotazione.htm?id=" + travel._id.$oid + "'><i class='far fa-calendar-check fa-2x'></i></a></td></tr>");
                 });
 
                 $('.tableprenotazioni').append("</table>");

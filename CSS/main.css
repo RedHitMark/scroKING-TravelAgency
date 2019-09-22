@@ -1283,14 +1283,26 @@ form #selection-tipologia, form #selection-luogo, form #selection-motivo{
 .dattagli-prenotazioni{
     margin: 30% 0;
 }
-.dattagli-prenotazioni table tr{
-    display: flex;
-    justify-content: center;
+
+#prenotazionihistory table, tr, td{
+    vertical-align: middle;
 }
+
 .dattagli-prenotazioni table{
     padding: 0 0.5em ;
     width: 100%;
 }
+
+.dattagli-prenotazioni table tr{
+    display: flex;
+    justify-content: center;
+}
+
+.dattagli-prenotazioni img{
+    width: 1.9em;
+    height: auto;
+}
+
 .dattagli-prenotazioni #dettagli-prenotazioni-form{
     margin-top: 2em;
     display: flex;
