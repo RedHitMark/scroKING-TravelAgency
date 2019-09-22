@@ -31,10 +31,7 @@ async function executeHyperLedgerTransaction() {
     // Create a new file system based wallet for managing identities.
     const walletPath = path.join(process.cwd(), 'wallet');
     const wallet = new FileSystemWallet(walletPath);
-    if (!wallet) {
-        throw new Error('Wallet not found');
-        //console.log('Run the registerUser.js application before retrying');
-    }
+    console.log(walletPath);
 
     // Check to see if we've already enrolled the user.
     const userExists = await wallet.exists(USER_NAME);
