@@ -10,7 +10,7 @@ const TRANSACTION_NAME = "queryAllCars";
 
 
 module.exports = {
-    getAllTransactions: async function() {
+    getAllTransactions : async function() {
         //get contract form hyperledger network
         let contract = await get_hyperledger_contract;
 

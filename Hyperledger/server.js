@@ -2,7 +2,7 @@ var http = require("http");
 var url = require('url');
 var utils = require('./utils');
 
-var chaincode_query = require('scrocco_network/javascript/query');
+var chaincode_query = require('./scrocco_network/javascript/query');
 
 
 const SERVER_PORT = 34518;
