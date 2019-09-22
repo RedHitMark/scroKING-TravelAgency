@@ -269,6 +269,9 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     font-size : 2em;
     padding: 1em;
     cursor: pointer;
+    -webkit-box-shadow: 21px 25px 31px 5px rgba(0, 0, 0, 0.68);
+    -moz-box-shadow: 21px 25px 31px 5px rgba(0, 0, 0, 0.68);
+    box-shadow: 21px 25px 31px 5px rgba(0, 0, 0, 0.68);
 }
 
 
