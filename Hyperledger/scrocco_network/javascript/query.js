@@ -54,7 +54,7 @@ async function executeHyperLedgerTransaction() {
     const result = await contract.evaluateTransaction(TRANSACTION_NAME);
 }
 
-console.log(getAllTransactions());
+//console.log(getAllTransactions());
 
 
 
