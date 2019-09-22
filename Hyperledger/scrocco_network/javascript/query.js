@@ -14,12 +14,26 @@ module.exports = {
         //get contract form hyperledger network
         let result = await executeHyperLedgerTransaction(TRANSACTION_NAME);
 
-        var json_response = JSON.parse(result.toString());
+        var obj_response = JSON.parse(result.toString());
 
         //var arr = Array.prototype.slice.call(result, 0);
-        json_response = json_response.filter( (value) => {
+        obj_response = obj_response.filter( (value) => {
             return value.Key !== "CAR0" && value.Key !== "CAR1" && value.Key !== "CAR2" && value.Key !== "CAR3" && value.Key !== "CAR4" && value.Key !== "CAR5" && value.Key !== "CAR6" && value.Key !== "CAR7" && value.Key !== "CAR8" && value.Key !== "CAR9";
         });
+
+        let json_response = [];
+        obj_response.forEach( (obj) => {
+            let element = {
+                transaction_id : obj.Key,
+                user_id : obj.owner,
+                money : obj.make,
+                description : obj.owner,
+                timestamp : obj.model
+            };
+            json_response.push(element);
+        });
+
+
 
         return json_response;
     }
@@ -36,8 +50,9 @@ async function executeHyperLedgerTransaction(transactionName) {
     // Check to see if we've already enrolled the user.
     const userExists = await wallet.exists(USER_NAME);
     if (!userExists) {
-        throw new Error('An identity for the user "user1" does not exist in the wallet');
-        //console.log('Run the registerUser.js application before retrying');
+        //Run the registerUser.js application before retrying
+        //Or check working directory
+        throw new Error("An identity for the user " + USER_NAME +" does not exist in the wallet");
     }
 
     // Create a new gateway for connecting to our peer node.
@@ -53,63 +68,3 @@ async function executeHyperLedgerTransaction(transactionName) {
     // Evaluate the specified  transaction.
     return await contract.evaluateTransaction(transactionName);
 }
-
-//console.log(getAllTransactions());
-
-
-
-/*async function main() {
-    try {
-
-        // Create a new file system based wallet for managing identities.
-        const walletPath = path.join(process.cwd(), 'wallet');
-        const wallet = new FileSystemWallet(walletPath);
-        console.log(`Wallet path: ${walletPath}`);
-
-        // Check to see if we've already enrolled the user.
-        const userExists = await wallet.exists('scrocco-user');
-        if (!userExists) {
-            console.log('An identity for the user "user1" does not exist in the wallet');
-            console.log('Run the registerUser.js application before retrying');
-            return;
-        }
-
-        // Create a new gateway for connecting to our peer node.
-        const gateway = new Gateway();
-        await gateway.connect(ccpPath, { wallet, identity: 'scrocco-user', discovery: { enabled: true, asLocalhost: true } });
-
-        // Get the network (channel) our contract is deployed to.
-        const network = await gateway.getNetwork('mychannel');
-
-        // Get the contract from the network.
-        const contract = network.getContract('fabcar');
-
-        // Evaluate the specified transaction.
-        // queryCar transaction - requires 1 argument, ex: ('queryCar', 'CAR4')
-        // queryAllCars transaction - requires no arguments, ex: ('queryAllCars')
-        const result = await contract.evaluateTransaction('queryAllCars');
-
-        /!*
-        arr = arr.filter( (value) => {
-            return !value.Key.startWith("CAR");
-        });*!/
-
-        console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
-
-        var js_string = "{" + result.toString() * "}";
-        var obj = JSON.parse(result.toString());
-
-        //var arr = Array.prototype.slice.call(result, 0);
-        obj = obj.filter( (value) => {
-            return value.Key != "CAR0" && value.Key != "CAR1" && value.Key != "CAR2" && value.Key != "CAR3" && value.Key != "CAR4" && value.Key != "CAR5" && value.Key != "CAR6" && value.Key != "CAR7" && value.Key != "CAR8" && value.Key != "CAR9";
-        });
-
-        console.log(obj)
-
-    } catch (error) {
-        console.error(`Failed to evaluate transaction: ${error}`);
-        process.exit(1);
-    }
-}
-
-main();*/
