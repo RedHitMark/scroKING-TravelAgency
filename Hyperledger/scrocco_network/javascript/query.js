@@ -24,11 +24,11 @@ module.exports = {
         let json_response = [];
         obj_response.forEach( (obj) => {
             let element = {
-                transaction_id : obj.Key,
-                user_id : obj.owner,
-                money : obj.make,
-                description : obj.owner,
-                timestamp : obj.model
+                transaction_id : obj.Record.Key,
+                user_id : obj.Record.owner,
+                money : obj.Record.make,
+                description : obj.Record.owner,
+                timestamp : obj.Record.model
             };
             json_response.push(element);
         });
