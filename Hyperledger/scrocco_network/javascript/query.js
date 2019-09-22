@@ -29,7 +29,7 @@ module.exports = {
 
 async function executeHyperLedgerTransaction() {
     // Create a new file system based wallet for managing identities.
-    const walletPath = path.join(process.cwd(), '/scrocco-network/javascript/wallet');
+    const walletPath = path.join(process.cwd(), '/scrocco_network/javascript/wallet');
     const wallet = new FileSystemWallet(walletPath);
     console.log(walletPath);
 
@@ -53,6 +53,8 @@ async function executeHyperLedgerTransaction() {
     // Evaluate the specified  transaction.
     const result = await contract.evaluateTransaction(TRANSACTION_NAME);
 }
+
+console.log(getAllTransactions());
 
 
 
