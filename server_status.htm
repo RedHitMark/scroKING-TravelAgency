@@ -30,31 +30,67 @@
                     </div>
                 </article>
             </div>
-            <section id="primaryserver">
-                <div class="row">
-                    <div class="col-4">
-                        <div class="aboutIMG">
-                            <img src="IMG/primary.png" alt="logo">
+            <div id="loaded">
+                <section id="primaryserver">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="aboutIMG">
+                                <img src="IMG/primary.png" alt="logo">
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <h1>Primary server</h1>
+                            <p id="primary-host"></p>
+                            <div class="tables primary">
+                                <table>
+                                    <tr>
+                                        <th>Eletto il</th>
+                                    </tr>
+                                    <tr>
+                                        <td id="primary-election-date"></td>
+                                    </tr>
+                                </table>
+                                <table>
+                                    <tr>
+                                        <th>Accesso da</th>
+                                    </tr>
+                                    <tr>
+                                        <td id="primary-uptime"></td>
+                                    </tr>
+                                </table>
+                                <table>
+                                    <tr>
+                                        <th>IP address</th>
+                                    </tr>
+                                    <tr>
+                                        <tbody id="ipserverPrimary"></tbody>
+                                    </tr>
+                                </table>
+                            </div>
+
                         </div>
                     </div>
-                    <div class="col-8">
-                        <h1>Primary server</h1>
-                        <p id="primary-host"></p>
-                        <div class="tables primary">
+                </section>
+                <section id="secondaryserver">
+                    <div class="row">
+                        <h1>Secondary server</h1>
+                    </div>
+                    <div class="row">
+                        <div class="tables">
                             <table>
                                 <tr>
-                                    <th>Eletto il</th>
+                                    <th>Hostname</th>
                                 </tr>
                                 <tr>
-                                    <td id="primary-election-date"></td>
+                                    <tbody id="secondaryTableBody"></tbody>
                                 </tr>
                             </table>
                             <table>
                                 <tr>
-                                    <th>Accesso da</th>
+                                    <th>Uptime</th>
                                 </tr>
                                 <tr>
-                                    <td id="primary-uptime"></td>
+                                    <tbody id="secondaryHTMLTableUptime"></tbody>
                                 </tr>
                             </table>
                             <table>
@@ -62,48 +98,15 @@
                                     <th>IP address</th>
                                 </tr>
                                 <tr>
-                                    <tbody id="ipserverPrimary"></tbody>
+                                    <tbody id="ipserver"></tbody>
                                 </tr>
                             </table>
-                        </div>
 
+                        </div>
                     </div>
-                </div>
-            </section>
-            <section id="secondaryserver">
-                <div class="row">
-                        <h1>Secondary server</h1>
-                </div>
-                <div class="row">
-                    <div class="tables">
-                        <table>
-                            <tr>
-                                <th>Hostname</th>
-                            </tr>
-                            <tr>
-                                <tbody id="secondaryTableBody"></tbody>
-                            </tr>
-                        </table>
-                        <table>
-                            <tr>
-                                <th>Uptime</th>
-                            </tr>
-                            <tr>
-                                <tbody id="secondaryHTMLTableUptime"></tbody>
-                            </tr>
-                        </table>
-                        <table>
-                            <tr>
-                                <th>IP address</th>
-                            </tr>
-                            <tr>
-                                <tbody id="ipserver"></tbody>
-                            </tr>
-                        </table>
-                        
-                    </div>
-                </div>
-            </section>
+                </section>
+            </div>
+        </section>
     </div>
     <div id="footer"></div>
 </body>
@@ -168,7 +171,7 @@
             $("#loading").css({
                 'display': 'none'
             });
-            $("#server").css({
+            $("#loaded").css({
                 'display': 'block'
             });
         }
@@ -177,7 +180,7 @@
             $("#loading").css({
                 'display': 'none'
             });
-            $("#server").css({
+            $("#loaded").css({
                 'display': 'none'
             });
         }
@@ -192,9 +195,11 @@
 
     loadServerInfo();
     $("#loading").css({
-        'display': 'flex'
+        'display' : 'flex',
+        'align-items' : 'center',
+        'height' : '100vh'
     });
-    $("#server").css({
+    $("#loaded").css({
         'display': 'none'
     });
 </script>
