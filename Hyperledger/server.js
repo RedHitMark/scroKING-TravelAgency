@@ -2,6 +2,8 @@ var http = require("http");
 var url = require('url');
 var utils = require('./utils');
 
+var chaincode_query = require('scrocco_network/javascript/query');
+
 
 const SERVER_PORT = 34518;
 
@@ -35,8 +37,8 @@ function onRequest(request, response) {
             case "/get_wallet": //returns money and all transactions
                 response.writeHead(200, {"Content-Type": "text/json"});
 
-                //always success
-
+                let result = chaincode_query.getAllTransactions();
+                response.write(JSON.stringify(result));
                 response.end();
                 break;
 
@@ -63,6 +65,8 @@ function onRequest(request, response) {
         response.end();
     }
 }
+
+//init blockchain
 
 http.createServer(onRequest).listen(SERVER_PORT);
 console.log("Server avviato ed in ascolto sulla porta " + SERVER_PORT);
