@@ -8,7 +8,7 @@ var chaincode_query = require('./scrocco_network/javascript/query');
 const SERVER_PORT = 34518;
 
 
-function onRequest(request, response) {
+async function onRequest(request, response) {
     try {
         let client_ip = utils.getClientAddress(request);
         let url_obj = url.parse(request.url, true);
@@ -17,7 +17,7 @@ function onRequest(request, response) {
 
         console.log("Richiesta ricevuta da: " + client_ip);
 
-        switch(path_name) {
+        switch (path_name) {
             case "/ricarca": //put money in wallet
                 response.writeHead(200, {"Content-Type": "text/json"});
 
@@ -37,14 +37,14 @@ function onRequest(request, response) {
             case "/get_wallet": //returns money and all transactions
                 response.writeHead(200, {"Content-Type": "text/json"});
 
-                let result = chaincode_query.getAllTransactions();
+                let result = await chaincode_query.getAllTransactions();
                 response.write(JSON.stringify(result));
                 response.end();
                 break;
 
             default:
                 let json_response = {
-                    message : "Not found",
+                    message: "Not found",
                 };
 
                 //Not found
@@ -55,8 +55,8 @@ function onRequest(request, response) {
         }
     } catch (e) {
         let json_response = {
-            message : "Errore del server",
-            verbose : e.message
+            message: "Errore del server",
+            verbose: e.message
         };
 
         //internal server error
