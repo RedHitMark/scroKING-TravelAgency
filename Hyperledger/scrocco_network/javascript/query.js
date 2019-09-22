@@ -50,7 +50,7 @@ async function get_hyperledger_contract() {
     const network = await gateway.getNetwork(CHANNEL_NAME);
 
     // return contract from the network.
-    return network.getContract(CONTRACT_NAME);
+    return await network.getContract(CONTRACT_NAME);
 }
 
 
