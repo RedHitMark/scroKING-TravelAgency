@@ -47,7 +47,7 @@ async function main() {
         //--soldi (positivo = ricarica -- negativo = scrocco)
         //--timestamp della transazione
         //--descrizione
-        await contract.submitTransaction('createCar', 'CAR51', '2325235', '2353252', '232635', '232362365');
+        await contract.submitTransaction('createCar', 'CAR67', '2325235', '2353252', '232635', '232362365');
         console.log('Transaction has been submitted');
 
         // Disconnect from the gateway.
