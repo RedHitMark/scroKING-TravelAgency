@@ -71,8 +71,10 @@ const READ_TRANSACTION = 'queryAllCars';
 const WRITE_TRANSACTION = 'createCar';
 
 async function readTransaction() {
-    //get contract form hyperledger network
-    let contract = await getHyperLedgerContract();
+    //get contract and gateway form hyperledger network
+    let hyperledgerObj = await getHyperLedgerObj();
+    let contract = hyperledgerObj.contract;
+    let gateway = hyperledgerObj.gateway;
 
     // Evaluate the specified  transaction.
     let result = await contract.evaluateTransaction(READ_TRANSACTION);
@@ -101,11 +103,15 @@ async function readTransaction() {
 }
 
 async function writeTransaction(transaction_id, user_id, money, description, timestamp) {
-    //get contract form hyperledger network
-    let contract = await getHyperLedgerContract();
+    //get contract and gateway form hyperledger network
+    let hyperledgerObj = await getHyperLedgerObj();
+    let contract = hyperledgerObj.contract;
+    let gateway = hyperledgerObj.gateway;
 
     // Evaluate the specified  transaction.
     await contract.evaluateTransaction(WRITE_TRANSACTION, transaction_id, user_id, money, description, timestamp);
+
+    await gateway.disconnect();
 }
 
 async function getNewTransactionID() {
@@ -121,7 +127,7 @@ async function getNewTransactionID() {
     return max + 1;
 }
 
-async function getHyperLedgerContract() {
+async function getHyperLedgerObj() {
     // Create a new file system based wallet for managing identities.
     const walletPath = path.join(process.cwd(), '/scrocco_network/javascript/wallet');
     const wallet = new FileSystemWallet(walletPath);
@@ -143,7 +149,10 @@ async function getHyperLedgerContract() {
     const network = await gateway.getNetwork(CHANNEL_NAME);
 
     // return contract from the network.
-    return network.getContract(CONTRACT_NAME);
+    return {
+        contract : await network.getContract(CONTRACT_NAME),
+        gateway : gateway
+    };
 }
 
 async function enrollAdmin() {
