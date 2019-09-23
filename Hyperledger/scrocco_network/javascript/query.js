@@ -99,7 +99,7 @@ async function writeTransaction(transaction_id, user_id, money, description, tim
 }
 
 async function getLastTransactionID() {
-    const result = readTransaction();
+    const result = await readTransaction();
 
     let max = 0;
     result.forEach( (transaction) => {
@@ -175,7 +175,7 @@ async function registerScroccoUser() {
         // Create a new gateway for connecting to our peer node.
         const gateway = new Gateway();
         await gateway.connect(ccpPath, { wallet, identity: ADMIN_NAME, discovery: { enabled: true, asLocalhost: true } });
-        console.log(ccpPath);
+
         // Get the CA client object from the gateway for interacting with the CA.
         const ca = gateway.getClient().getCertificateAuthority();
         const adminIdentity = gateway.getCurrentIdentity();
@@ -185,6 +185,6 @@ async function registerScroccoUser() {
         const enrollment = await ca.enroll({ enrollmentID: SCROCCO_USER_NAME, enrollmentSecret: secret });
         const userIdentity = X509WalletMixin.createIdentity('Org1MSP', enrollment.certificate, enrollment.key.toBytes());
         await wallet.import(SCROCCO_USER_NAME, userIdentity);
-        console.log('Successfully registered and enrolled admin user +' + SCROCCO_USER_NAME + ' and imported it into the wallet');
+        console.log('Successfully registered and enrolled ' + SCROCCO_USER_NAME + ' and imported it into the wallet');
     }
 }
