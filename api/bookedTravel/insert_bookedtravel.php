@@ -33,7 +33,7 @@
                 if ($travel && $user) {
                     //Query blockchain
                     $description = "Prenotazione viaggio n." . $params->id_travel;
-                    $url = "http://vox3715217.mynet.vodafone.it:6999//prenotazione_viaggio?user_id=" . rawurlencode($session->get('id')) . "&money=" . rawurlencode($travel->price) . "&description=" . rawurlencode($description);
+                    $url = "http://vox3715217.mynet.vodafone.it:6999/prenotazione_viaggio?user_id=" . rawurlencode($session->get('id')) . "&money=" . rawurlencode($travel->price) . "&description=" . rawurlencode($description);
                     $curl = curl_init();
 
                     curl_setopt($curl, CURLOPT_URL, $url);
