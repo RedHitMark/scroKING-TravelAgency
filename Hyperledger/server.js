@@ -48,6 +48,7 @@ async function onRequest(request, response) {
                 if (query_params.user_id && query_params.money && query_params.description) {
                     const wallet = chaincode.getWallet(query_params.user_id);
 
+                    console.log(wallet.wallet);
                     if(wallet.wallet > parseInt(query_params.money)) {
                         await chaincode.prenotazioneViaggio(query_params.user_id, query_params.money, query_params.description);
 
