@@ -85,9 +85,7 @@ async function onRequest(request, response) {
                 if (query_params.user_id) {
                     let json_response;
 
-                    do {
-                        json_response = await chaincode.getWallet(query_params.user_id);
-                    } while (json_response.wallet);
+                    json_response = await chaincode.getWallet(query_params.user_id);
 
                     //Success
                     response.writeHead(200, {"Content-Type": "text/json"});
