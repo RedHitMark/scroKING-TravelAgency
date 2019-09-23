@@ -278,7 +278,7 @@
                 $('.tabletransazioni').append("<tr><th>Codice Transazione</th><th>Soldi</th><th>Data</th><th>Descrizione</th></tr>");
 
                 $.each(json_response.transactions, function (index, transaction) {
-                    let dataTransazioneString = timestamp_seconds2string(transaction.timestamp);
+                    let dataTransazioneString = timestamp2string(parseInt(transaction.timestamp));
                     $('.tabletransazioni').append("<tr><td>" + transaction.transaction_id + "</td><td>" + transaction.money + "</td><td>" + dataTransazioneString + "</td><td>"+ transaction.description  + "</td></tr>");
                 });
 
