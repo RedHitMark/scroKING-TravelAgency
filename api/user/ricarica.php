@@ -8,7 +8,6 @@
 
     //include
     include_once("../config/MongoDB.php");
-    include_once("../config/CurlPotente.php");
     include_once("../config/Session.php");
     include_once("../config/timestamp.php");
 
@@ -19,15 +18,22 @@
         $session = new Session();
 
         if(isset($_SESSION['id']) && isset($_SESSION['timestamp'])){
-            //new curl instance
-            $curl = new CurlPotente("/ricarica");
+            $url = "http://vox3715217.mynet.vodafone.it:34518/ricarica?user_id=" . rawurlencode($session->get('id')) . "&money=" . rawurlencode($params->money) . "&description=" . rawurlencode($params->description);
 
-            $result = $curl->getJson();
+            $curl = curl_init();
 
-            $http_response_code = $curl->getHttpStatusCode();
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+            curl_setopt($curl, CURLOPT_HEADER, false);
+
+            $result = curl_exec($curl);
+            $http_status_code = curl_getinfo($curl,  CURLINFO_HTTP_CODE);
+
+            //close connection
+            curl_close($curl);
 
             // response: 200 success || 400 Bad Request
-            http_response_code($http_response_code);
+            http_response_code($http_status_code);
             echo json_encode($result);
         }else{
             // response: 401 Unauthorized

@@ -37,13 +37,23 @@
                 array_push($booked_travels, $travel);
             }
 
-            //empty array of transactions
-            $transactions = array();
-            //@TODO get all transaction from blockchain
+            //Query blockchain
+            $url = "http://vox3715217.mynet.vodafone.it:34518/get_wallet?user_id=" . rawurlencode($session->get('id'));
+            $curl = curl_init();
+
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+            curl_setopt($curl, CURLOPT_HEADER, false);
+
+            $result = json_decode(curl_exec($curl));
+
+            //close connection
+            curl_close($curl);
+
 
             //merge all response in same json
             $user_result = (object) array_merge( (array) $user_result, array("booked_travels" => $booked_travels));
-            $user_result = (object) array_merge( (array) $user_result, array("transactions" => $transactions));
+            $user_result = (object) array_merge( (array) $user_result, (array) $result);
 
             // response: 200 OK
             http_response_code(200);
