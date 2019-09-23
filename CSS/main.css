@@ -238,6 +238,9 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     color: black;
     font-size: 13px;
 }
+.col-3 .buy{
+    display: none;
+}
 
 /* =======Home======= */
 .slider {
@@ -262,16 +265,21 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
 }
 
 #main .row .bot-adv button{
+    
     border: 1px solid black;
     border-radius: 15px;
     background-color : #17252A;
-    color : white;
-    font-size : 2em;
     padding: 1em;
-    cursor: pointer;
     -webkit-box-shadow: 21px 25px 31px 5px rgba(0, 0, 0, 0.68);
     -moz-box-shadow: 21px 25px 31px 5px rgba(0, 0, 0, 0.68);
     box-shadow: 21px 25px 31px 5px rgba(0, 0, 0, 0.68);
+}
+
+#main .row .bot-adv button a{
+    color : white;
+    font-size : 1em;
+    text-transform: uppercase;
+    text-decoration: none;
 }
 
 
@@ -1565,6 +1573,14 @@ form #selection-tipologia, form #selection-luogo, form #selection-motivo{
     }
 
     /* ======= Home ======= */
+    #main .row .bot-adv button{
+        margin: 0;
+        padding: 0.5em;
+        margin-bottom: 1em;
+        -webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.58);
+        -moz-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.58);
+        box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.58);
+    }
     #main .row .col-3 {
         margin: 0;
         padding: 0.5em;

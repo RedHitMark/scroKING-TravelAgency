@@ -31,6 +31,7 @@
                     </aside>
                     <aside>
                         <h1 id="userName">Santa claus</h1>
+                        <h1 id="bill">4545</h1>
                     </aside>
                     <br>
                     <aside class="usersettings">
@@ -149,11 +150,6 @@
                     <aside>
                         <a href="user_log.htm" id="logButton">Log del account</a>
                     </aside>
-                    <aside>
-                        <h3>Mete preferite:</h3>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt voluptatum delectus magni
-                            enim cum. Deserunt, earum alias. Saepe, consequatur ipsa!</p>
-                    </aside>
 
                     <aside>
                         <a href="livelloscrocco.htm" id="scroccoLevel">Livello di scrocco: </a>
@@ -214,6 +210,7 @@
 
             //personal data
             $("#userName").html(json_response.username);
+            $("#bill").html(json_response.wallet);
             $("#nomeuser").html(json_response.name);
             $("#cognomeuser").html(json_response.surname);
             $("#emailuser").html(json_response.email);
