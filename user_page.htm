@@ -34,11 +34,24 @@
                     </aside>
                     <br>
                     <aside class="usersettings">
-                        <div class="cog">
+                        <div class="recarghe">
                             <i class="fas fa-plus-square"></i>
                             <h3>Ricarica il tuo account</h3>
                         </div>
                     </aside>
+                    <section id="rechargesettings">
+                        <form id="recharge_form">
+                            <input type="number" id="input-scrocco-coins" placeholder="scrocco-coins" required>
+                            <select id="type">
+                                <option>Carta</option>
+                                <option>Amico</option>
+                                <option>Paypal</option>
+                                <option>Bonifico bancario</option>
+                                <option>Contanti</option>
+                            </select>
+                            <input type="submit" value="Ricarica" id="rechage_button">
+                        </form>
+                    </section>
                     <aside class="ipostazioniaccount">
                         <div class="cog">
                             <i class="fas fa-cog"></i>
@@ -187,6 +200,7 @@
 <script src="JS/loadmailfield.js"></script>
 <script src="JS/sha512.js"></script>
 <script src="JS/showusersettings.js"></script>
+<script src="JS/show_recharage_settings.js"></script>
 <script src="JS/time.js"></script>
 <script>
     /**
@@ -279,7 +293,7 @@
 
                 $.each(json_response.transactions, function (index, transaction) {
                     let dataTransazioneString = timestamp2string(parseInt(transaction.timestamp));
-                    $('.tabletransazioni').append("<tr><td>" + transaction.transaction_id + "</td><td>" + transaction.money + "</td><td>" + dataTransazioneString + "</td><td>"+ transaction.description  + "</td></tr>");
+                    $('.tabletransazioni').append("<tr><td>" + transaction.transaction_id + "</td><td>" + transaction.money + "<img src='IMG/scrocco.png' alt='moneta'></td><td>" + dataTransazioneString + "</td><td>"+ transaction.description  + "</td></tr>");
                 });
 
                 $('.tabletransazioni').append("</table>");

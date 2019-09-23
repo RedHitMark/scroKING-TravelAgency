@@ -840,6 +840,42 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     margin-top: 1em;
     font-size: 30px;
 }
+.recarghe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+    margin: 0 0.5em;
+}
+.recarghe h3{
+    margin-top: 1em;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+}
+.recarghe i{
+    font-size: 30px;
+    margin-top: 1em;
+}
+#rechargesettings form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+#rechargesettings input, button, select {
+    margin-top: 0.5em;
+}
+.cog h3{
+    margin-top: 1em;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+}
+
 .cog{
     display: flex;
     justify-content: center;
@@ -983,16 +1019,16 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     text-align: center;
 }
 
-#prenotazionihistory img{
+#prenotazionihistory img, #wallet img{
     padding-top: 0.1em;
     width: 1.9em;
     height: auto;
 }
 
-#prenotazionihistory a{
+#prenotazionihistory a, #wallet a{
     color : black;
 }
-#prenotazionihistory table, tr, td{
+#prenotazionihistory table, tr, td, #wallet table, tr, td{
     vertical-align: middle;
 }
 
@@ -1055,7 +1091,7 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
 }
 
 
-#confirmpasswordbutton, #resetpssform, #update_username_button, #reset_username_form, #confirmmaildbutton, #resetmailform{
+#confirmpasswordbutton, #resetpssform, #update_username_button, #reset_username_form, #confirmmaildbutton, #resetmailform, #rechage_button {
     border: none; 
     border: 1px solid black;
     background-color: #17252A;
