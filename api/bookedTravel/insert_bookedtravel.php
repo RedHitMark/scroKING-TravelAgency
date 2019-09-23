@@ -54,7 +54,7 @@
 
                         //send mail of confirm
                         $mail = new Mail();
-                        $mail->sendEmail($user->mail, "Prenotazione effettuata con succeso", "Congratulazioni la tua prenotazione è avvenuta con successo");
+                        $mail->sendEmail($user->email, "Prenotazione effettuata con succeso", "Congratulazioni la tua prenotazione è avvenuta con successo");
 
                         //response: 200 Success
                         http_response_code(200);
