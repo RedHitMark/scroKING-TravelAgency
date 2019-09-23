@@ -46,7 +46,7 @@ module.exports = {
         let transactions = [];
         result.forEach( (transaction) => {
             if(transaction.user_id === userID) {
-                wallet += transaction.money;
+                wallet += parseInt(transaction.money);
                 transactions.push(transaction);
             }
         });
@@ -95,10 +95,10 @@ async function readTransaction() {
     obj_response.forEach( (obj) => {
         let element = {
             transaction_id : obj.Key,
-            user_id : obj.Record.owner,
-            money : obj.Record.make,
-            description : obj.Record.owner,
-            timestamp : obj.Record.model
+            user_id : obj.Record.make,
+            money : obj.Record.model,
+            description : obj.Record.color,
+            timestamp : obj.Record.owner
         };
         json_response.push(element);
     });
