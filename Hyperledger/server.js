@@ -19,20 +19,64 @@ async function onRequest(request, response) {
 
         switch (path_name) {
             case "/ricarca": //put money in wallet
-                response.writeHead(200, {"Content-Type": "text/json"});
+                if (query_params.user_id && query_params.money && query_params.description) {
+                    await chaincode_query.ricarica(query_params.user_id, query_params.money, query_params.description);
 
-                //@TODO call query of add new transaction always success ahahha
+                    let json_response = {
+                        message: "Ricarica effettuata con successo"
+                    };
 
-                response.end();
+                    //Success
+                    response.writeHead(200, {"Content-Type": "text/json"});
+                    response.write(JSON.stringify(json_response));
+                    response.end();
+                } else {
+                    let json_response = {
+                        message: "Parametri mancanti"
+                    };
+
+                    //Bad Request
+                    response.writeHead(400, {"Content-Type": "text/json"});
+                    response.write(JSON.stringify(json_response));
+                    response.end();
+                }
                 break;
 
             case "/prenotazione_viaggio": //remove money in waller if enough
-                response.writeHead(200, {"Content-Type": "text/json"});
+                if (query_params.user_id && query_params.money && query_params.description) {
+                    const wallet = chaincode_query.getWallet(user_id);
 
+                    if(wallet.wallet > money) {
+                        await chaincode_query.prenotazioneViaggio(query_params.user_id, query_params.money, query_params.description);
 
-                //@TODO call query of add new transaction only if
+                        let json_response = {
+                            message: "Prenotazione effettuata con successo"
+                        };
 
-                response.end();
+                        //Success
+                        response.writeHead(200, {"Content-Type": "text/json"});
+                        response.write(JSON.stringify(json_response));
+                        response.end();
+                    } else {
+                        let json_response = {
+                            message: "Non ci sono abbastanza fondi nel wallet"
+                        };
+
+                        //Not Acceptable
+                        response.writeHead(406, {"Content-Type": "text/json"});
+                        response.write(JSON.stringify(json_response));
+                        response.end();
+                    }
+                } else {
+                    let json_response = {
+                        message: "Parametri mancanti"
+                    };
+
+                    //Bad Request
+                    response.writeHead(400, {"Content-Type": "text/json"});
+                    response.write(JSON.stringify(json_response));
+                    response.end();
+                }
                 break;
 
             case "/get_wallet": //returns money and all transactions

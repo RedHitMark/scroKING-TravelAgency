@@ -1,17 +1,36 @@
 const { FileSystemWallet, Gateway } = require('fabric-network');
 const path = require('path');
 
+
+const util = require('./../../utils');
+
 const ccpPath = path.resolve(__dirname, '..', '..', 'first-network', 'connection-org1.json');
 
 const USER_NAME = 'scrocco-user';
 const CHANNEL_NAME = "mychannel";
 const CONTRACT_NAME = "fabcar";
 const READ_TRANSACTION = "queryAllCars";
-
+const WRITE_TRANSACTION = "queryAllCars";
 
 module.exports = {
     init : async function() {
-        //enroll admin and register scrocco user
+        //@TODO enroll admin and register scrocco user
+    },
+
+    ricarica : async function(userID, money, description) {
+        const transactionID = getLastTransactionID() + 1;
+        const timestamp = util.getTimestamp();
+
+        writeTransaction(transactionID, userID, money, description, timestamp);
+    },
+
+    prenotazioneViaggio : async function(userID, money, description) {
+        const transactionID = getLastTransactionID() + 1;
+        const timestamp = util.getTimestamp();
+
+        money = (parseInt(money) * (-1)).toString();
+
+        writeTransaction(transactionID, userID, money, description, timestamp);
     },
 
     getWallet : async function(userID) {
@@ -63,6 +82,27 @@ async function readTransaction() {
     });
 
     return json_response;
+}
+
+async function writeTransaction(transaction_id, user_id, money, description, timestamp) {
+    //get contract form hyperledger network
+    let contract = await getHyperLedgerContract();
+
+    // Evaluate the specified  transaction.
+    return await contract.evaluateTransaction(WRITE_TRANSACTION, transaction_id, user_id, money, description, timestamp);
+}
+
+async function getLastTransactionID() {
+    const result = readTransaction();
+
+    let max = 0;
+    result.forEach( (transaction) => {
+        if( parseInt(transaction.transaction_id.substring(3)) > max) {
+            max = parseInt(transaction.transaction_id.substring(3));
+        }
+    });
+
+    return max;
 }
 
 async function getHyperLedgerContract() {
