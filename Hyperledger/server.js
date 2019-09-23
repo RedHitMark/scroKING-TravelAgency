@@ -46,7 +46,7 @@ async function onRequest(request, response) {
 
             case "/prenotazione_viaggio": //remove money in waller if enough
                 if (query_params.user_id && query_params.money && query_params.description) {
-                    const wallet = chaincode.getWallet(user_id);
+                    const wallet = chaincode.getWallet(query_params.user_id);
 
                     if(wallet.wallet > money) {
                         await chaincode.prenotazioneViaggio(query_params.user_id, query_params.money, query_params.description);
