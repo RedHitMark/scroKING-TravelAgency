@@ -29,8 +29,9 @@
                             <img src="IMG/profile_pic.png" alt="profile pic">
                         </div>
                     </aside>
-                    <aside>
+                    <aside id="mainInfo">
                         <h1 id="userName">Santa claus</h1>
+                        <br>
                         <h1 id="bill">4545</h1>
                     </aside>
                     <br>
@@ -210,7 +211,7 @@
 
             //personal data
             $("#userName").html(json_response.username);
-            $("#bill").html(json_response.wallet);
+            $("#bill").html("HAI A DISPOZIONE " + json_response.wallet + "<img src='IMG/scrocco.png' alt='moneta'>");
             $("#nomeuser").html(json_response.name);
             $("#cognomeuser").html(json_response.surname);
             $("#emailuser").html(json_response.email);
