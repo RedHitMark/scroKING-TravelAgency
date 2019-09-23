@@ -5,7 +5,7 @@ const  utils = require('./utils');
 const chaincode = require('./scrocco_network/javascript/query');
 
 
-const SERVER_PORT = 34518;
+const SERVER_PORT = 6999;
 
 
 async function onRequest(request, response) {
@@ -83,7 +83,11 @@ async function onRequest(request, response) {
 
             case "/get_wallet": //returns money and all transactions
                 if (query_params.user_id) {
-                    let json_response = await chaincode.getWallet(query_params.user_id);
+                    let json_response;
+
+                    do {
+                        json_response = await chaincode.getWallet(query_params.user_id);
+                    } while (json_response.wallet);
 
                     //Success
                     response.writeHead(200, {"Content-Type": "text/json"});

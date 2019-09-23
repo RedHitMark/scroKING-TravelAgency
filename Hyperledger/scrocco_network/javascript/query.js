@@ -59,10 +59,6 @@ module.exports = {
 
     readAll : async function() {
         return await readTransaction();
-    },
-
-    writeProva : async function() {
-        return await writeTransaction();
     }
 };
 
