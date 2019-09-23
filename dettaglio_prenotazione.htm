@@ -31,7 +31,7 @@
                     <tbody id="infoHotel-Mobile"></tbody>
                 </table>
                 <form action="#" id="dettagli-prenotazioni-form">
-                    <input type="button" value="Conferma">
+                    <input type="button" value="Conferma" id="conferma-prenotazione">
                 </form>
             </div>
         </div>
@@ -47,7 +47,7 @@
 <script>
     function loadTravel() {
         function load_success(json_response) {
-
+            var travel = json_response;
             //print all travel info
             let destinationString = "";
             $.each(json_response.destinations, function (index, destination) {
@@ -180,6 +180,44 @@
     }
 
     loadTravel();
+    function bookTravel(){
+
+        function load_success(json_response){
+            alert("Viaggio prenotato con successo! A presto.");
+        }
+        function parametri_mancanti(){
+            alert("Parametri errati!");
+        }
+        function not_authorized(){
+            alert("Non hai effettuato il log-in. Accedi per poter prenotare il tuo viaggio!");
+        }
+        function not_found(){
+            alert("Viaggio non trovato, si prega di riprovare!");
+        }
+        function enough_money(){
+            alert("Non hai abbastanza soldi nel tuo portafoglio. Ricarica il tuo conto e prenota il viaggio!");
+        }
+        function internal_server_error(){
+            alert("Problema di collegamento con i server!");
+        }
+
+
+        let functions = {
+            200: load_success,
+            400: parametri_mancanti,
+            401: not_authorized,
+            404: not_found,
+            406: enough_money,
+            500: internal_server_error
+        };
+        let id_viaggio = {
+            id: travel._id.$oid
+        };
+        
+
+        post("api/booked/inser_bookedtravel.php", id_viaggio);
+    }
+    bookTravel();
 </script>
 
 </html>

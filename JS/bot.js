@@ -70,11 +70,8 @@ function chiamataViaggi(){
             newRow = newRow + "<td> Da <br>" + travel.startdata+ "<br> a <br>" + travel.finishdata + " </td>";
             newRow += " <th>Prezzo</th>";
             newRow = newRow + "<td>" + travel.price + "<img src='IMG/scrocco.png' alt='moneta'></td>";
-            newRow += " <th>Dettagli</th>";
+            newRow += " <th>Dettagli e prenota</th>";
             newRow = newRow + "<td><a href='dettaglio_prenotazione.htm?id=" + travel._id.$oid + "'><i class='far fa-calendar-check fa-2x'></i></a></td>";
-            newRow += " <th>Prenota</th>";
-            newRow = newRow + "<td><a href='info_prenotazioni.htm/" + travel._id.$oid + "'><i class='fas fa-dollar-sign fa-2x'></i></a></td>";
-
             newRow = newRow + "</tr>";
 
             table = table + newRow;
