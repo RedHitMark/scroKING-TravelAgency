@@ -1,20 +1,20 @@
-const { FileSystemWallet, Gateway } = require('fabric-network');
-const path = require('path');
+const FabricCAServices = require('fabric-ca-client');
+const { FileSystemWallet, X509WalletMixin, Gateway } = require('fabric-network');
 
+const path = require('path');
+const fs = require('fs');
 
 const util = require('./../../utils');
 
-const ccpPath = path.resolve(__dirname, '..', '..', 'first-network', 'connection-org1.json');
 
-const USER_NAME = 'scrocco-user';
-const CHANNEL_NAME = "mychannel";
-const CONTRACT_NAME = "fabcar";
-const READ_TRANSACTION = "queryAllCars";
-const WRITE_TRANSACTION = "queryAllCars";
+const ccpPath = path.resolve(__dirname, '..', '..', 'first-network', 'connection-org1.json');
+const ccpJSON = fs.readFileSync(ccpPath, 'utf8');
+const ccp = JSON.parse(ccpJSON);
+
 
 module.exports = {
     init : async function() {
-        //@TODO enroll admin and register scrocco user
+        await registerScroccoUser();
     },
 
     ricarica : async function(userID, money, description) {
@@ -52,7 +52,13 @@ module.exports = {
     }
 };
 
-
+const ADMIN_NAME = 'admin';
+const ADMIN_PASSWORD = 'adminpw';
+const SCROCCO_USER_NAME = 'scrocco-user';
+const CHANNEL_NAME = 'mychannel';
+const CONTRACT_NAME = 'fabcar';
+const READ_TRANSACTION = 'queryAllCars';
+const WRITE_TRANSACTION = 'createCar';
 
 async function readTransaction() {
     //get contract form hyperledger network
@@ -112,20 +118,73 @@ async function getHyperLedgerContract() {
     console.log(walletPath);
 
     // Check to see if we've already enrolled the user.
-    const userExists = await wallet.exists(USER_NAME);
+    const userExists = await wallet.exists(SCROCCO_USER_NAME);
     if (!userExists) {
         //Run the registerUser.js application before retrying
         //Or check working directory
-        throw new Error("An identity for the user " + USER_NAME +" does not exist in the wallet");
+        throw new Error("An identity for the user " + SCROCCO_USER_NAME +" does not exist in the wallet");
     }
 
     // Create a new gateway for connecting to our peer node.
     const gateway = new Gateway();
-    await gateway.connect(ccpPath, { wallet, identity: USER_NAME, discovery: { enabled: true, asLocalhost: true } });
+    await gateway.connect(ccpPath, { wallet, identity: SCROCCO_USER_NAME, discovery: { enabled: true, asLocalhost: true } });
 
     // Get the network (channel) our contract is deployed to.
     const network = await gateway.getNetwork(CHANNEL_NAME);
 
     // return contract from the network.
     return network.getContract(CONTRACT_NAME);
+}
+
+async function enrollAdmin() {
+    // Create a new CA client for interacting with the CA.
+    const caInfo = ccp.certificateAuthorities['ca.org1.example.com'];
+    const caTLSCACerts = caInfo.tlsCACerts.pem;
+    const ca = new FabricCAServices(caInfo.url, { trustedRoots: caTLSCACerts, verify: false }, caInfo.caName);
+
+    // Create a new file system based wallet for managing identities.
+    const walletPath = path.join(process.cwd(), '/scrocco_network/javascript/wallet');
+    const wallet = new FileSystemWallet(walletPath);
+
+    // Check to see if we've already enrolled the admin user.
+    const adminExists = await wallet.exists(ADMIN_NAME);
+    if ( !adminExists) {
+        // Enroll the admin user, and import the new identity into the wallet.
+        const enrollment = await ca.enroll({ enrollmentID: ADMIN_NAME, enrollmentSecret: ADMIN_PASSWORD });
+        const identity = X509WalletMixin.createIdentity('Org1MSP', enrollment.certificate, enrollment.key.toBytes());
+        await wallet.import(ADMIN_NAME, identity);
+
+        console.log('Successfully enrolled admin user "admin" and imported it into the wallet');
+    }
+}
+
+async function registerScroccoUser() {
+    // Create a new file system based wallet for managing identities.
+    const walletPath = path.join(process.cwd(), '/scrocco_network/javascript/wallet');
+    const wallet = new FileSystemWallet(walletPath);
+
+    // Check to see if we've already enrolled the user.
+    const userExists = await wallet.exists(SCROCCO_USER_NAME);
+    if (!userExists) {
+        // Check to see if we've already enrolled the admin user.
+        const adminExists = await wallet.exists(ADMIN_NAME);
+        if (!adminExists) {
+            await enrollAdmin();
+        }
+
+        // Create a new gateway for connecting to our peer node.
+        const gateway = new Gateway();
+        await gateway.connect(ccpPath, { wallet, identity: ADMIN_NAME, discovery: { enabled: true, asLocalhost: true } });
+
+        // Get the CA client object from the gateway for interacting with the CA.
+        const ca = gateway.getClient().getCertificateAuthority();
+        const adminIdentity = gateway.getCurrentIdentity();
+
+        // Register the user, enroll the user, and import the new identity into the wallet.
+        const secret = await ca.register({ affiliation: 'org1.department1', enrollmentID: SCROCCO_USER_NAME, role: 'client' }, adminIdentity);
+        const enrollment = await ca.enroll({ enrollmentID: SCROCCO_USER_NAME, enrollmentSecret: secret });
+        const userIdentity = X509WalletMixin.createIdentity('Org1MSP', enrollment.certificate, enrollment.key.toBytes());
+        await wallet.import(SCROCCO_USER_NAME, userIdentity);
+        console.log('Successfully registered and enrolled admin user +' + SCROCCO_USER_NAME + ' and imported it into the wallet');
+    }
 }

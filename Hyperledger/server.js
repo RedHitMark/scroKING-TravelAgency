@@ -1,8 +1,8 @@
-var http = require("http");
-var url = require('url');
-var utils = require('./utils');
+const http = require("http");
+const url = require('url');
+const  utils = require('./utils');
 
-var chaincode_query = require('./scrocco_network/javascript/query');
+const chaincode = require('./scrocco_network/javascript/query');
 
 
 const SERVER_PORT = 34518;
@@ -16,11 +16,13 @@ async function onRequest(request, response) {
         let path_name = url_obj.pathname;
 
         console.log("Richiesta ricevuta da: " + client_ip);
+        
+        await chaincode.init();
 
         switch (path_name) {
             case "/ricarca": //put money in wallet
                 if (query_params.user_id && query_params.money && query_params.description) {
-                    await chaincode_query.ricarica(query_params.user_id, query_params.money, query_params.description);
+                    await chaincode.ricarica(query_params.user_id, query_params.money, query_params.description);
 
                     let json_response = {
                         message: "Ricarica effettuata con successo"
@@ -44,10 +46,10 @@ async function onRequest(request, response) {
 
             case "/prenotazione_viaggio": //remove money in waller if enough
                 if (query_params.user_id && query_params.money && query_params.description) {
-                    const wallet = chaincode_query.getWallet(user_id);
+                    const wallet = chaincode.getWallet(user_id);
 
                     if(wallet.wallet > money) {
-                        await chaincode_query.prenotazioneViaggio(query_params.user_id, query_params.money, query_params.description);
+                        await chaincode.prenotazioneViaggio(query_params.user_id, query_params.money, query_params.description);
 
                         let json_response = {
                             message: "Prenotazione effettuata con successo"
@@ -81,7 +83,7 @@ async function onRequest(request, response) {
 
             case "/get_wallet": //returns money and all transactions
                 if (query_params.user_id) {
-                    json_response = await chaincode_query.getWallet();
+                    let json_response = await chaincode.getWallet();
 
                     //Success
                     response.writeHead(200, {"Content-Type": "text/json"});
@@ -101,7 +103,7 @@ async function onRequest(request, response) {
 
                 response.writeHead(200, {"Content-Type": "text/json"});
 
-                let result = await chaincode_query.getWallet();
+                let result = await chaincode.getWallet();
                 response.write(JSON.stringify(result));
                 response.end();
                 break;
@@ -129,8 +131,6 @@ async function onRequest(request, response) {
         response.end();
     }
 }
-
-//init blockchain
 
 http.createServer(onRequest).listen(SERVER_PORT);
 console.log("Server avviato ed in ascolto sulla porta " + SERVER_PORT);
