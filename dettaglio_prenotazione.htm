@@ -76,16 +76,8 @@
             viaggioRownoResp += "</tr>";
             let viaggionoResp = viaggioHeader + viaggioRownoResp;
             $("#dettagliP-Desktop").append(viaggionoResp);
-            $(window).resize(function () {
+            $("#dettagliP-Mobile").append(viaggioRow);
 
-                if ($(window).width() <= 992) {
-                    $("#dettagliP-Display").css("display", "none");
-                    $("#dettagliP-Mobile").css("display", "block");
-                    $("#dettagliP-Mobile").append(viaggioRow);
-
-                }
-
-            });
             //print all veicles info
             $.each(json_response.veicles, function (index, veicle) {
                 let veicleRow = "<tr>";
@@ -114,16 +106,7 @@
 
                 let veicleNoResp = veiclenoHeader + veicleRownoResp;
                 $("#infoVeicle-Display").append(veicleNoResp);
-                $(window).resize(function () {
-
-                    if ($(window).width() <= 992) {
-                        $("#infoVeicle-Display").css("display", "none");
-                        $("#infoVeicle-Mobile").css("display", "block");
-                        $("#infoVeicle-Mobile").append(veicleRow);
-
-                    }
-
-                });
+                $("#infoVeicle-Mobile").append(veicleRow);
 
 
 
@@ -163,16 +146,7 @@
                 hotelRownoResp += "</tr>";
                 let hotelnoResp = hotelHeader + hotelRownoResp;
                 $("#infoHotel-Display").append(hotelnoResp);
-                $(window).resize(function () {
-
-                    if ($(window).width() <= 992) {
-                        $("#infoHotel-Display").css("display", "none");
-                        $("#infoHotel-Mobile").css("display", "block");
-                        $("#infoHotel-Mobile").append(hotelRow);
-
-                    }
-
-                });
+                $("#infoHotel-Mobile").append(hotelRow);
 
 
             });

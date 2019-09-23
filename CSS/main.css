@@ -1345,6 +1345,10 @@ form #selection-tipologia, form #selection-luogo, form #selection-motivo{
     text-align: center;
     margin: 1em 0;
 }
+#dettagliP-Mobile, #infoVeicle-Mobile, #infoHotel-Mobile{
+    display: none;
+}
+
 .dattagli-prenotazioni #dettagli-prenotazioni-form input[type="button"]{
     border: none;
     border-radius: 8px;
@@ -1729,6 +1733,12 @@ form #selection-tipologia, form #selection-luogo, form #selection-motivo{
 .dattagli-prenotazioni #dettagli-prenotazioni-form input[type="button"]{
    width: 100%;
 }
+#dettagliP-Desktop, #infoVeicle-Display, #infoHotel-Display{
+    display: none;
+}
+    #dettagliP-Mobile, #infoVeicle-Mobile, #infoHotel-Mobile{
+        display: block;
+    }
 /* ===== Bot page ===== */
 #bot-answer table tr{
     flex-direction: column;

@@ -163,12 +163,10 @@
 
                 <div id="content">
                     <div id="prenotazionihistory">
-                        <div class="nothing"></div>
-
                         <div class="tableprenotazioni"></div>
                     </div>
                     <div id="wallet">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, repudiandae!</p>
+                        <div class="tabletransazioni"></div>
                     </div>
                 </div>
             </div>
@@ -253,8 +251,6 @@
 
             //set booked travels
             if ( json_response.booked_travels.length !== 0) {
-                $('.nothing').html("");
-
                 $('.tableprenotazioni').append("<table>");
                 $('.tableprenotazioni').append("<tr><th>Data prenotazione</th><th>Tipo</th><th>Destinazione</th><th>Data</th><th>Prezzo</th><th>Dettagli</th></tr>");
 
@@ -274,12 +270,22 @@
                 $('.tableprenotazioni').append("</table>");
             } else {
                 $('.tableprenotazioni').html("<p>Non hai effettuato ancora nessun viaggio</p>");
-                $('.nothing').html("");
             }
 
+            //set transazioni
+            if ( json_response.transactions.length !== 0) {
+                $('.tabletransazioni').append("<table>");
+                $('.tabletransazioni').append("<tr><th>Codice Transazione</th><th>Soldi</th><th>Data</th><th>Descrizione</th></tr>");
 
-            //@TODO set transaction
+                $.each(json_response.transactions, function (index, transaction) {
+                    let dataTransazioneString = timestamp_seconds2string(transaction.timestamp);
+                    $('.tabletransazioni').append("<tr><td>" + transaction.transaction_id + "</td><td>" + transaction.money + "</td><td>" + dataTransazioneString + "</td><td>"+ transaction.description  + "</td></tr>");
+                });
 
+                $('.tabletransazioni').append("</table>");
+            } else {
+                $('.tabletransazioni').html("<p>Non hai effettuato nessuna transazione</p>");
+            }
         }
 
         
