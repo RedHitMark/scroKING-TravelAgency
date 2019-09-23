@@ -29,15 +29,35 @@ async function onRequest(request, response) {
             case "/prenotazione_viaggio": //remove money in waller if enough
                 response.writeHead(200, {"Content-Type": "text/json"});
 
+
                 //@TODO call query of add new transaction only if
 
                 response.end();
                 break;
 
             case "/get_wallet": //returns money and all transactions
+                if (query_params.user_id) {
+                    json_response = await chaincode_query.getWallet();
+
+                    //Success
+                    response.writeHead(200, {"Content-Type": "text/json"});
+                    response.write(JSON.stringify(json_response));
+                    response.end();
+                } else {
+                    let json_response = {
+                        message: "Parametri mancanti"
+                    };
+
+                    //Bad Request
+                    response.writeHead(400, {"Content-Type": "text/json"});
+                    response.write(JSON.stringify(json_response));
+                    response.end();
+                }
+
+
                 response.writeHead(200, {"Content-Type": "text/json"});
 
-                let result = await chaincode_query.getAllTransactions();
+                let result = await chaincode_query.getWallet();
                 response.write(JSON.stringify(result));
                 response.end();
                 break;
@@ -59,7 +79,7 @@ async function onRequest(request, response) {
             verbose: e.message
         };
 
-        //internal server error
+        //Internal Server Rrror
         response.writeHead(500, {"Content-Type": "text/json"});
         response.write(JSON.stringify(json_response));
         response.end();
