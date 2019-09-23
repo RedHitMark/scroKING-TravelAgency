@@ -99,13 +99,6 @@ async function onRequest(request, response) {
                     response.write(JSON.stringify(json_response));
                     response.end();
                 }
-
-
-                response.writeHead(200, {"Content-Type": "text/json"});
-
-                let result = await chaincode.getWallet();
-                response.write(JSON.stringify(result));
-                response.end();
                 break;
 
             default:

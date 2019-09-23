@@ -68,7 +68,7 @@ async function readTransaction() {
     let result = await contract.evaluateTransaction(READ_TRANSACTION);
 
 
-    var obj_response = JSON.parse(result.toString());
+    let obj_response = JSON.parse(result.toString());
 
     //var arr = Array.prototype.slice.call(result, 0);
     obj_response = obj_response.filter( (value) => {
