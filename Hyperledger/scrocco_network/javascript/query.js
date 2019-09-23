@@ -22,6 +22,8 @@ module.exports = {
         const transactionID = "CAR" + transactionNumber;
         const timestamp = util.getTimestamp();
 
+        console.log("Transazione n." + transactionID);
+
         writeTransaction(transactionID, userID, money, description, timestamp.toString());
     },
 
@@ -31,6 +33,8 @@ module.exports = {
         const timestamp = util.getTimestamp();
 
         money = (parseInt(money) * (-1)).toString();
+
+        console.log("Transazione n." + transactionID);
 
         writeTransaction(transactionID, userID, money, description, timestamp.toString());
     },
@@ -101,7 +105,7 @@ async function writeTransaction(transaction_id, user_id, money, description, tim
     let contract = await getHyperLedgerContract();
 
     // Evaluate the specified  transaction.
-    return await contract.evaluateTransaction(WRITE_TRANSACTION, transaction_id, user_id, money, description, timestamp);
+    await contract.evaluateTransaction(WRITE_TRANSACTION, transaction_id, user_id, money, description, timestamp);
 }
 
 async function getNewTransactionID() {
