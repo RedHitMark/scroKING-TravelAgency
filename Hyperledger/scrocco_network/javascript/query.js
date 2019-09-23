@@ -105,7 +105,7 @@ async function writeTransaction(transaction_id, user_id, money, description, tim
 async function getLastTransactionID() {
     const result = await readTransaction();
 
-    let max = 0;
+    let max = 10;
     result.forEach( (transaction) => {
         if( parseInt(transaction.transaction_id.substring(3)) > max) {
             max = parseInt(transaction.transaction_id.substring(3));
