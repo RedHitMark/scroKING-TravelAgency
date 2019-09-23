@@ -20,7 +20,7 @@ async function onRequest(request, response) {
         await chaincode.init();
 
         switch (path_name) {
-            case "/ricarca": //put money in wallet
+            case "/ricarica": //put money in wallet
                 if (query_params.user_id && query_params.money && query_params.description) {
                     await chaincode.ricarica(query_params.user_id, query_params.money, query_params.description);
 
@@ -83,7 +83,7 @@ async function onRequest(request, response) {
 
             case "/get_wallet": //returns money and all transactions
                 if (query_params.user_id) {
-                    let json_response = await chaincode.getWallet();
+                    let json_response = await chaincode.getWallet(query_params.user_id);
 
                     //Success
                     response.writeHead(200, {"Content-Type": "text/json"});
