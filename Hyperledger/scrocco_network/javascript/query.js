@@ -10,6 +10,10 @@ const READ_TRANSACTION = "queryAllCars";
 
 
 module.exports = {
+    init : async function() {
+        //enroll admin and register scrocco user
+    },
+
     getWallet : async function(userID) {
         let result = readTransaction();
 
