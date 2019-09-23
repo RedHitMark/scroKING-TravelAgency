@@ -18,14 +18,14 @@ module.exports = {
     },
 
     ricarica : async function(userID, money, description) {
-        const transactionID = getLastTransactionID() + 1;
+        const transactionID = "CAR" + (getLastTransactionID() + 1);
         const timestamp = util.getTimestamp();
 
         writeTransaction(transactionID, userID, money, description, timestamp);
     },
 
     prenotazioneViaggio : async function(userID, money, description) {
-        const transactionID = getLastTransactionID() + 1;
+        const transactionID = "CAR" + (getLastTransactionID() + 1);
         const timestamp = util.getTimestamp();
 
         money = (parseInt(money) * (-1)).toString();
@@ -175,7 +175,7 @@ async function registerScroccoUser() {
         // Create a new gateway for connecting to our peer node.
         const gateway = new Gateway();
         await gateway.connect(ccpPath, { wallet, identity: ADMIN_NAME, discovery: { enabled: true, asLocalhost: true } });
-
+        console.log(ccpPath);
         // Get the CA client object from the gateway for interacting with the CA.
         const ca = gateway.getClient().getCertificateAuthority();
         const adminIdentity = gateway.getCurrentIdentity();
