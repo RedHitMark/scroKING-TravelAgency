@@ -38,7 +38,7 @@
             }
 
             //Query blockchain
-            $url = "http://vox3715217.mynet.vodafone.it:34518/get_wallet?user_id=" . rawurlencode($session->get('id'));
+            $url = "http://vox3715217.mynet.vodafone.it:6999/get_wallet?user_id=" . rawurlencode($session->get('id'));
             $curl = curl_init();
 
             curl_setopt($curl, CURLOPT_URL, $url);
