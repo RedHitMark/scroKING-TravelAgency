@@ -49,6 +49,10 @@ module.exports = {
             wallet: wallet,
             transactions: transactions
         };
+    },
+
+    readAll : async function() {
+        return await readTransaction();
     }
 };
 
@@ -70,7 +74,7 @@ async function readTransaction() {
 
     let obj_response = JSON.parse(result.toString());
 
-    //var arr = Array.prototype.slice.call(result, 0);
+
     obj_response = obj_response.filter( (value) => {
         return value.Key !== "CAR0" && value.Key !== "CAR1" && value.Key !== "CAR2" && value.Key !== "CAR3" && value.Key !== "CAR4" && value.Key !== "CAR5" && value.Key !== "CAR6" && value.Key !== "CAR7" && value.Key !== "CAR8" && value.Key !== "CAR9";
     });

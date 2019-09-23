@@ -101,6 +101,15 @@ async function onRequest(request, response) {
                 }
                 break;
 
+            case "/read_all":
+                let json = await chaincode.readAll();
+
+                //Success
+                response.writeHead(200, {"Content-Type": "text/json"});
+                response.write(JSON.stringify(json));
+                response.end();
+                break;
+
             default:
                 let json_response = {
                     message: "Not found",
