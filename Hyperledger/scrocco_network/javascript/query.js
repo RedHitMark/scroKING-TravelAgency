@@ -18,14 +18,16 @@ module.exports = {
     },
 
     ricarica : async function(userID, money, description) {
-        const transactionID = "CAR" + (getLastTransactionID() + 1);
+        const transactionNumber = await getLastTransactionID();
+        const transactionID = "CAR" + (transactionNumber + 1);
         const timestamp = util.getTimestamp();
 
         writeTransaction(transactionID, userID, money, description, timestamp);
     },
 
     prenotazioneViaggio : async function(userID, money, description) {
-        const transactionID = "CAR" + (await getLastTransactionID() + 1);
+        const transactionNumber = await getLastTransactionID();
+        const transactionID = "CAR" + (transactionNumber + 1);
         const timestamp = util.getTimestamp();
 
         money = (parseInt(money) * (-1)).toString();
