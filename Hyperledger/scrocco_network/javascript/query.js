@@ -40,7 +40,7 @@ module.exports = {
     },
 
     getWallet : async function(userID) {
-        let result = readTransaction();
+        let result = await readTransaction();
 
         let wallet = 0;
         let transactions = [];
