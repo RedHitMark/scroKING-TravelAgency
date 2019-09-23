@@ -1082,7 +1082,7 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     text-align: center;
 }
 
-#new_username, #oldpassword, #newpassword, #newpasswordconf, #oldmail, #newmail {
+#new_username, #oldpassword, #newpassword, #newpasswordconf, #oldmail, #newmail, #input-scrocco-coins, #type {
     border: 0.5px solid black;
     border-radius: 8px;
     font-family: cursive;

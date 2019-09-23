@@ -43,11 +43,11 @@
                         <form id="recharge_form">
                             <input type="number" id="input-scrocco-coins" placeholder="scrocco-coins" required>
                             <select id="type">
-                                <option>Carta</option>
-                                <option>Amico</option>
-                                <option>Paypal</option>
-                                <option>Bonifico bancario</option>
-                                <option>Contanti</option>
+                                <option value="carta">Carta</option>
+                                <option value="amico">Amico</option>
+                                <option value="paypal">Paypal</option>
+                                <option value="bonifico bancario">Bonifico bancario</option>
+                                <option value="contanti">Contanti</option>
                             </select>
                             <input type="submit" value="Ricarica" id="rechage_button">
                         </form>
@@ -473,6 +473,46 @@
         post("api/user/update_email.php", email_data, change_email_functions );
     }
 
+    function recharge(event) {
+        event.preventDefault();
+
+        function success(json_response) {
+            alert("Ricarica avvenuta con successo");
+
+            window.location.reload();
+        }
+
+        function bad_request(json_response) {
+            alert("Parametri mancanti");
+        }
+
+        function unauthorized(json_response) {
+            alert("Non sei loggato");
+
+            $(location).attr("href", "access.htm");
+        }
+
+        function internal_server_error(json_response) {
+            alert("Server non raggiungibile, riprova piu tardi");
+
+            //$(location).attr("href", "access.htm");
+        }
+
+        let functions = {
+            200:  success,
+            400:  bad_request,
+            401:  unauthorized,
+            500:  internal_server_error
+        };
+
+        let data = {
+            money: $("#input-scrocco-coins").val(),
+            description: "ricarica da " + $("#type").val()
+        };
+
+        post("api/user/ricarica.php", data, functions);
+    }
+
     let formNewPass = document.getElementById("restPassForm");
     formNewPass.addEventListener('submit', change_password);
 
@@ -481,6 +521,9 @@
 
     let formNewEmail = document.getElementById("update_email_form");
     formNewEmail.addEventListener('submit', change_email);
+
+    let formRecharge = document.getElementById("recharge_form");
+    formRecharge.addEventListener('submit', recharge);
 
 </script>
 
