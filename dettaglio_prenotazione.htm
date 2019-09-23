@@ -15,16 +15,20 @@
     <div class="wrapper">
         <div class="row">
             <div class="dattagli-prenotazioni">
-                <table id="dettagliP">
-
+                <h2>Dettagli prenotazione</h2>
+                <table>
+                    <tbody id="dettagliP-Desktop"></tbody>
+                    <tbody id="dettagliP-Mobile"></tbody>
                 </table>
                 <h2>Dettaglio mezzi</h2>
                 <table>
-                    <tbody id="infoVeicoli"></tbody>
+                    <tbody id="infoVeicle-Display"></tbody>
+                    <tbody id="infoVeicle-Mobile"></tbody>
                 </table>
                 <h2>Dettagli hotel</h2>
                 <table>
-                    <tbody id="infoHotel"></tbody>
+                    <tbody id="infoHotel-Display"></tbody>
+                    <tbody id="infoHotel-Mobile"></tbody>
                 </table>
                 <form action="#" id="dettagli-prenotazioni-form">
                     <input type="button" value="Conferma">
@@ -41,9 +45,9 @@
 <script src="JS/url.js"></script>
 
 <script>
-
     function loadTravel() {
         function load_success(json_response) {
+
             //print all travel info
             let destinationString = "";
             $.each(json_response.destinations, function (index, destination) {
@@ -53,38 +57,84 @@
             let dataString = "Da <br>" + json_response.startdata + "<br> A <br>" + json_response.finishdata;
 
             let viaggioRow = "<tr>";
-                viaggioRow += "<th> Tipo </th>";
-                viaggioRow += "<td>" + json_response.type + "</td>";
-                viaggioRow += "<th> Destinazione </th>";
-                viaggioRow += "<td>" + destinationString + "</td>";
-                viaggioRow += "<th> Data </th>";
-                viaggioRow += "<td>" + dataString + "</td>";
-                viaggioRow += "<th> Prezzo </th>";
-                viaggioRow += "<td>" + json_response.price + "<img src='IMG/scrocco.png' alt='moneta'></td>";
-            $("#dettagliP").html(viaggioRow);
+            viaggioRow += "<th> Tipo </th>";
+            viaggioRow += "<td>" + json_response.type + "</td>";
+            viaggioRow += "<th> Destinazione </th>";
+            viaggioRow += "<td>" + destinationString + "</td>";
+            viaggioRow += "<th> Data </th>";
+            viaggioRow += "<td>" + dataString + "</td>";
+            viaggioRow += "<th> Prezzo </th>";
+            viaggioRow += "<td>" + json_response.price + "<img src='IMG/scrocco.png' alt='moneta'></td>";
+            viaggioRow += "</tr>";
 
+            let viaggioHeader = "<tr><th>Tipo</th><th>Destinazione</th><th>Data</th><th>Prezzo</th></tr>";
+            let viaggioRownoResp = "<tr>";
+            viaggioRownoResp += "<td>" + json_response.type + "</td>";
+            viaggioRownoResp += "<td>" + destinationString + "</td>";
+            viaggioRownoResp += "<td>" + dataString + "</td>";
+            viaggioRownoResp += "<td>" + json_response.price + "</td>";
+            viaggioRownoResp += "</tr>";
+            let viaggionoResp = viaggioHeader + viaggioRownoResp;
+            $("#dettagliP-Desktop").append(viaggionoResp);
+            $(window).resize(function () {
 
+                if ($(window).width() <= 992) {
+                    $("#dettagliP-Display").css("display", "none");
+                    $("#dettagliP-Mobile").css("display", "block");
+                    $("#dettagliP-Mobile").append(viaggioRow);
+
+                }
+
+            });
             //print all veicles info
             $.each(json_response.veicles, function (index, veicle) {
-                let travelRow = "<tr>";
-                travelRow += "<th> Nome</th>"
-                travelRow += "<td>" + veicle.name + "</td>";
-                travelRow += "<th> Tipo </th>"
-                travelRow += "<td>" + veicle.type + "</td>";
-                travelRow += "<th> Descizione</th>"
-                travelRow += "<td>" + veicle.description + "</td>";
-                travelRow += "<th> Posti </th>"
-                travelRow += "<td>" + veicle.seats + "</td>";
-                travelRow += "<th> Prezzo </th>"
-                travelRow += "<td>" + veicle.price + "</td>";
-                travelRow += "</tr>";
+                let veicleRow = "<tr>";
+                veicleRow += "<th> Nome</th>"
+                veicleRow += "<td>" + veicle.name + "</td>";
+                veicleRow += "<th> Tipo </th>"
+                veicleRow += "<td>" + veicle.type + "</td>";
+                veicleRow += "<th> Descizione</th>"
+                veicleRow += "<td>" + veicle.description + "</td>";
+                veicleRow += "<th> Posti </th>"
+                veicleRow += "<td>" + veicle.seats + "</td>";
+                veicleRow += "<th> Prezzo </th>"
+                veicleRow += "<td>" + veicle.price + "</td>";
+                veicleRow += "</tr>";
 
-                $("#infoVeicoli").html(travelRow);
+
+                let veiclenoHeader =
+                    "<tr><th>Nome</th><th>Tipo</th><th>Descrizione</th><th>Posti</th><th>Prezzo</th></tr>";
+                let veicleRownoResp = "<tr>";
+                veicleRownoResp += "<td>" + veicle.name + "</td>";
+                veicleRownoResp += "<td>" + veicle.type + "</td>";
+                veicleRownoResp += "<td>" + veicle.description + "</td>";
+                veicleRownoResp += "<td>" + veicle.seats + "</td>";
+                veicleRownoResp += "<td>" + veicle.price + "</td>";
+                veicleRownoResp += "</tr>";
+
+                let veicleNoResp = veiclenoHeader + veicleRownoResp;
+                $("#infoVeicle-Display").append(veicleNoResp);
+                $(window).resize(function () {
+
+                    if ($(window).width() <= 992) {
+                        $("#infoVeicle-Display").css("display", "none");
+                        $("#infoVeicle-Mobile").css("display", "block");
+                        $("#infoVeicle-Mobile").append(veicleRow);
+
+                    }
+
+                });
+
+
+
+
+
             });
 
             //print all hotels
             $.each(json_response.hotels, function (index, hotel) {
-                let addressString = hotel.address.street + "<br>" + hotel.address.city + " " + hotel.address.cap + "<br>" + hotel.address.region + " " + hotel.address.state;
+                let addressString = hotel.address.street + "<br>" + hotel.address.city + " " + hotel.address
+                    .cap + "<br>" + hotel.address.region + " " + hotel.address.state;
 
                 let hotelRow = "<tr>";
                 hotelRow += "<th>Nome</th>";
@@ -98,18 +148,41 @@
                 hotelRow += "<th>Email</th>";
                 hotelRow += "<td>" + hotel.email + "</td>";
                 hotelRow += "<th>Stanze libere</th>";
-                hotelRow += "<td>" + hotel.free_room + "</td>";
+                hotelRow += "<td>" + hotel.freeRoom + "</td>";
                 hotelRow += "</tr>";
 
-                $("#infoHotel").html(hotelRow);
+                let hotelHeader =
+                    "<tr><th>Nome</th><th>Descrizione</th><th>Indirizzo</th><th>Telefono</th><th>Email</th><th>Stanze libere</th></tr>";
+                let hotelRownoResp = "<tr>";
+                hotelRownoResp += "<td>" + hotel.name + "</td>";
+                hotelRownoResp += "<td>" + hotel.description + "</td>";
+                hotelRownoResp += "<td>" + addressString + "</td>";
+                hotelRownoResp += "<td>" + hotel.phone + "</td>";
+                hotelRownoResp += "<td>" + hotel.email + "</td>";
+                hotelRownoResp += "<td>" + hotel.freeRoom + "</td>";
+                hotelRownoResp += "</tr>";
+                let hotelnoResp = hotelHeader + hotelRownoResp;
+                $("#infoHotel-Display").append(hotelnoResp);
+                $(window).resize(function () {
+
+                    if ($(window).width() <= 992) {
+                        $("#infoHotel-Display").css("display", "none");
+                        $("#infoHotel-Mobile").css("display", "block");
+                        $("#infoHotel-Mobile").append(hotelRow);
+
+                    }
+
+                });
+
+
             });
 
         }
-        
+
         function not_found() {
             alert("Viaggio non trovato");
         }
-        
+
         function parametri_mancanti() {
             alert("Torna alla home");
         }
@@ -119,14 +192,14 @@
         }
 
         let functions = {
-            200 : load_success,
-            400 : parametri_mancanti,
-            404 : not_found,
-            500 : internal_server_error
+            200: load_success,
+            400: parametri_mancanti,
+            404: not_found,
+            500: internal_server_error
         };
 
         let data = {
-            id : $.urlParam("id")
+            id: $.urlParam("id")
         };
 
         post("api/travel/read_one_travel.php", data, functions);
