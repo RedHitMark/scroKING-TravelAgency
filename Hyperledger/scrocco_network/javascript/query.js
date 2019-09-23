@@ -22,7 +22,7 @@ module.exports = {
         const transactionID = "CAR" + (transactionNumber + 1);
         const timestamp = util.getTimestamp();
 
-        writeTransaction(transactionID, userID, money, description, timestamp);
+        writeTransaction(transactionID, userID, money, description, timestamp.toString());
     },
 
     prenotazioneViaggio : async function(userID, money, description) {
@@ -32,7 +32,7 @@ module.exports = {
 
         money = (parseInt(money) * (-1)).toString();
 
-        writeTransaction(transactionID, userID, money, description, timestamp);
+        writeTransaction(transactionID, userID, money, description, timestamp.toString());
     },
 
     getWallet : async function(userID) {
