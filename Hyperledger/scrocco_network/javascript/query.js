@@ -25,7 +25,7 @@ module.exports = {
     },
 
     prenotazioneViaggio : async function(userID, money, description) {
-        const transactionID = "CAR" + (getLastTransactionID() + 1);
+        const transactionID = "CAR" + (await getLastTransactionID() + 1);
         const timestamp = util.getTimestamp();
 
         money = (parseInt(money) * (-1)).toString();
