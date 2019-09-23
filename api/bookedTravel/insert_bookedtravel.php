@@ -46,7 +46,7 @@
                     //close connection
                     curl_close($curl);
                     if ($http_status_code == "200") {
-                        $doc = new BookedTravel($mongo->getNewIdObject(), $params->id_travel, $session->get("id"), getTimestamp());
+                        $doc = new BookedTravel($mongo->getNewIdObject(), $session->get("id"), $params->id_travel, getTimestamp());
 
 
                         //insert booked travel in db
