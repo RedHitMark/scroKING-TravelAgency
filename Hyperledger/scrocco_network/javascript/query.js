@@ -59,6 +59,10 @@ module.exports = {
 
     readAll : async function() {
         return await readTransaction();
+    },
+
+    writeProva : async function() {
+        return await writeTransaction();
     }
 };
 
@@ -108,8 +112,8 @@ async function writeTransaction(transaction_id, user_id, money, description, tim
     let contract = hyperledgerObj.contract;
     let gateway = hyperledgerObj.gateway;
 
-    // Evaluate the specified  transaction.
-    await contract.evaluateTransaction(WRITE_TRANSACTION, transaction_id, user_id, money, description, timestamp);
+    // Submit the specified  transaction.
+    await contract.submitTransaction(WRITE_TRANSACTION, transaction_id, user_id, money, description, timestamp);
 
     await gateway.disconnect();
 }
