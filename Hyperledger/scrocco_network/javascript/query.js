@@ -18,16 +18,16 @@ module.exports = {
     },
 
     ricarica : async function(userID, money, description) {
-        const transactionNumber = await getLastTransactionID();
-        const transactionID = "CAR" + (transactionNumber + 1);
+        const transactionNumber = await getNewTransactionID();
+        const transactionID = "CAR" + transactionNumber;
         const timestamp = util.getTimestamp();
 
         writeTransaction(transactionID, userID, money, description, timestamp.toString());
     },
 
     prenotazioneViaggio : async function(userID, money, description) {
-        const transactionNumber = await getLastTransactionID();
-        const transactionID = "CAR" + (transactionNumber + 1);
+        const transactionNumber = await getNewTransactionID();
+        const transactionID = "CAR" + transactionNumber;
         const timestamp = util.getTimestamp();
 
         money = (parseInt(money) * (-1)).toString();
@@ -104,17 +104,17 @@ async function writeTransaction(transaction_id, user_id, money, description, tim
     return await contract.evaluateTransaction(WRITE_TRANSACTION, transaction_id, user_id, money, description, timestamp);
 }
 
-async function getLastTransactionID() {
+async function getNewTransactionID() {
     const result = await readTransaction();
 
-    let max = 10;
+    let max = 9;
     result.forEach( (transaction) => {
         if( parseInt(transaction.transaction_id.substring(3)) > max) {
             max = parseInt(transaction.transaction_id.substring(3));
         }
     });
 
-    return max;
+    return max + 1;
 }
 
 async function getHyperLedgerContract() {
