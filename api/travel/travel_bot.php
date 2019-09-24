@@ -21,28 +21,19 @@
         $mongo = new MongoDB();
 
 
-        if (isset($params->type)) {
+        if (isset($params->type) && isset($params->destination)) {
 
-            $result_with_existent_type = $mongo->ReadQuery("scroKING", "Travels", ["type" => $params->type]);
-
-            if ($result_with_existent_type >= 1) {
-
-
+            if ($params->destination == "") {
+                $result = $mongo->ReadQuery("scroKING", "Travels", ["type" => $params->type]);
                 //response: 200  Success
                 http_response_code(200);
-                echo json_encode($result_with_existent_type);
-
+                echo json_encode($result);
             } else {
-
-
-                //response: 406 Not Acceptable
-                http_response_code(406);
-                echo json_encode(array("message" => "tipologia non presente"));
-
-
+                $result = $mongo->ReadQuery("scroKING", "Travels", ["type" => $params->type, "destinations" => $params->destination]);
+                //response: 200  Success
+                http_response_code(200);
+                echo json_encode($result);
             }
-
-
         } else {
             //response: 400 Bad Request
             http_response_code(400);

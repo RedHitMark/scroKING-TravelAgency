@@ -91,7 +91,8 @@ function chiamataViaggi(){
     }
 
     let viaggio_dati ={
-        type : $('#selection-tipologia').val()
+        type : $('#selection-tipologia').val(),
+        destination : $('#selection-luogo').val()
     };
 
     let viaggio_functions = {
