@@ -28,7 +28,7 @@
                 $mongo = new MongoDB();
 
                 $travel = $mongo->ReadOneQuery("scroKING", "Travels", $params->id_travel);
-                $user = $mongo->ReadOneQuery("scroKING", "Users", $session->get("id"), ['email']);
+                $user = $mongo->ReadOneQuery("scroKING", "Users", $session->get("id"), ['email', 'num_scrocced_travels']);
 
                 if ($travel && $user) {
                     //Query blockchain
@@ -48,9 +48,12 @@
                     if ($http_status_code == "200") {
                         $doc = new BookedTravel($mongo->getNewIdObject(), $session->get("id"), $params->id_travel, getTimestamp());
 
-
                         //insert booked travel in db
                         $mongo->WriteOneQuery("scroKING", "BookedTravels", $doc);
+
+                        //update num
+                        $user->num_scrocced_travels++;
+                        $mongo->UpdateOneQuery("scroKING", "BookedTravels", $session->get("id"), $user);
 
                         //send mail of confirm
                         $mail = new Mail();
