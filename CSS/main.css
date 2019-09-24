@@ -821,9 +821,24 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
 #profile aside {
     margin: 0.5em 0;
 }
-
+#mainInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 #userName {
     text-transform: uppercase;
+}
+#bill{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#bill img{
+    padding-top: 0.1em;
+    width: 1.9em;
+    height: auto;
 }
 .ipostazioniaccount{
     display: flex;
@@ -944,10 +959,6 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-#street, #city, #state {
-    /*padding-right: 0.2em*/
 }
 
 #scroccoLevel {
