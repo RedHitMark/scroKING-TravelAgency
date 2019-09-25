@@ -18,8 +18,7 @@ module.exports = {
     },
 
     ricarica : async function(userID, money, description) {
-        const transactionNumber = await getNewTransactionID();
-        const transactionID = "CAR" + transactionNumber;
+        const transactionID = await getNewTransactionID();
         const timestamp = util.getTimestamp();
 
         console.log("Transazione n." + transactionID);
@@ -28,8 +27,7 @@ module.exports = {
     },
 
     prenotazioneViaggio : async function(userID, money, description) {
-        const transactionNumber = await getNewTransactionID();
-        const transactionID = "CAR" + transactionNumber;
+        const transactionID = await getNewTransactionID();
         const timestamp = util.getTimestamp();
 
         money = (parseInt(money) * (-1)).toString();
@@ -118,7 +116,7 @@ async function getNewTransactionID() {
         }
     });
 
-    return max + 1;
+    return "CAR" + (max + 1);
 }
 
 async function getHyperLedgerObj(userID) {
@@ -131,7 +129,6 @@ async function getHyperLedgerObj(userID) {
     const userExists = await wallet.exists(userID);
     if (!userExists) {
         registerUser(userID);
-        throw new Error("An identity for the user " + userID +" does not exist in the wallet");
     }
 
     // Create a new gateway for connecting to our peer node.
