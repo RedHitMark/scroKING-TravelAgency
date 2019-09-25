@@ -98,7 +98,7 @@ async function readTransaction(userID) {
 
 async function writeTransaction(transaction_id, user_id, money, description, timestamp) {
     //get contract and gateway form hyperledger network
-    let hyperledgerObj = await getHyperLedgerObj();
+    let hyperledgerObj = await getHyperLedgerObj(user_id);
     let contract = hyperledgerObj.contract;
     let gateway = hyperledgerObj.gateway;
 
@@ -109,7 +109,7 @@ async function writeTransaction(transaction_id, user_id, money, description, tim
 }
 
 async function getNewTransactionID() {
-    const result = await readTransaction();
+    const result = await readTransaction(SCROCCO_USER_NAME);
 
     let max = 9;
     result.forEach( (transaction) => {
