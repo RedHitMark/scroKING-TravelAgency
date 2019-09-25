@@ -128,7 +128,7 @@ async function getHyperLedgerObj(userID) {
     // Check to see if we've already enrolled the user.
     const userExists = await wallet.exists(userID);
     if (!userExists) {
-        registerUser(userID);
+        await registerUser(userID);
     }
 
     // Create a new gateway for connecting to our peer node.
