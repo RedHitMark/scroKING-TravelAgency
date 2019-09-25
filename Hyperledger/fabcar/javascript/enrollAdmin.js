@@ -15,6 +15,7 @@ const ccp = JSON.parse(ccpJSON);
 
 async function main() {
     try {
+
         // Create a new CA client for interacting with the CA.
         const caInfo = ccp.certificateAuthorities['ca.org1.example.com'];
         const caTLSCACerts = caInfo.tlsCACerts.pem;
