@@ -90,7 +90,7 @@ async function readTransaction() {
     let json_response = [];
     obj_response.forEach( (obj) => {
         let element = {
-            transaction_id : obj.Key,
+            transaction_id : obj.Key.substring(3),
             user_id : obj.Record.make,
             money : obj.Record.model,
             description : obj.Record.color,
@@ -119,8 +119,8 @@ async function getNewTransactionID() {
 
     let max = 9;
     result.forEach( (transaction) => {
-        if( parseInt(transaction.transaction_id.substring(3)) > max) {
-            max = parseInt(transaction.transaction_id.substring(3));
+        if( parseInt(transaction.transaction_id) > max) {
+            max = parseInt(transaction.transaction_id);
         }
     });
 

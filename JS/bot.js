@@ -4,10 +4,10 @@ $('#bot-answer').hide();
 
 $('#selection-tipologia').click(function (e) {
     e.preventDefault();
-    $('#luogo-viaggio').delay(2000).fadeIn(800);
+    $('#luogo-viaggio').delay(6000).fadeIn(800);
     $('#motivo-viaggio').hide();
     $('#bot-answer').hide();
-    $('#tipologia-viaggio').delay(2000).fadeOut(800); 
+    $('#tipologia-viaggio').delay(6000).fadeOut(800); 
 
 });
 
@@ -19,8 +19,8 @@ $('#selection-tipologia').change(function(){
 
 $('#selection-luogo').click(function (e) {
     e.preventDefault();
-    $('#luogo-viaggio').delay(2000).fadeOut(800);
-    $('#motivo-viaggio').delay(2000).fadeIn(800);
+    $('#luogo-viaggio').delay(6000).fadeOut(800);
+    $('#motivo-viaggio').delay(6000).fadeIn(800);
     $('#bot-answer').hide();
     $('#tipologia-viaggio').hide(); 
 
@@ -34,8 +34,8 @@ $('#selection-luogo').change(function(){
 $('#selection-motivo').click(function (e) {
     e.preventDefault();
     $('#luogo-viaggio').hide();
-    $('#motivo-viaggio').delay(2000).fadeOut(800);
-    $('#bot-answer').delay(2000).fadeIn(800);
+    $('#motivo-viaggio').delay(6000).fadeOut(800);
+    $('#bot-answer').delay(6000).fadeIn(800);
     $('#tipologia-viaggio').hide();
 
     chiamataViaggi();
@@ -70,11 +70,8 @@ function chiamataViaggi(){
             newRow = newRow + "<td> Da <br>" + travel.startdata+ "<br> a <br>" + travel.finishdata + " </td>";
             newRow += " <th>Prezzo</th>";
             newRow = newRow + "<td>" + travel.price + "<img src='IMG/scrocco.png' alt='moneta'></td>";
-            newRow += " <th>Dettagli</th>";
+            newRow += " <th>Dettagli e prenota</th>";
             newRow = newRow + "<td><a href='dettaglio_prenotazione.htm?id=" + travel._id.$oid + "'><i class='far fa-calendar-check fa-2x'></i></a></td>";
-            newRow += " <th>Prenota</th>";
-            newRow = newRow + "<td><a href='info_prenotazioni.htm/" + travel._id.$oid + "'><i class='fas fa-dollar-sign fa-2x'></i></a></td>";
-
             newRow = newRow + "</tr>";
 
             table = table + newRow;
@@ -94,7 +91,8 @@ function chiamataViaggi(){
     }
 
     let viaggio_dati ={
-        type : $('#selection-tipologia').val()
+        type : $('#selection-tipologia').val(),
+        destination : $('#selection-luogo').val()
     };
 
     let viaggio_functions = {

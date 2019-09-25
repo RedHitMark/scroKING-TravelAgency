@@ -48,7 +48,7 @@ async function onRequest(request, response) {
                 if (query_params.user_id && query_params.money && query_params.description) {
                     const wallet = await chaincode.getWallet(query_params.user_id);
 
-                    if(wallet.wallet > parseInt(query_params.money)) {
+                    if(wallet.wallet >= parseInt(query_params.money)) {
                         await chaincode.prenotazioneViaggio(query_params.user_id, query_params.money, query_params.description);
 
                         let json_response = {
@@ -85,9 +85,7 @@ async function onRequest(request, response) {
                 if (query_params.user_id) {
                     let json_response;
 
-                    do {
-                        json_response = await chaincode.getWallet(query_params.user_id);
-                    } while (json_response.wallet);
+                    json_response = await chaincode.getWallet(query_params.user_id);
 
                     //Success
                     response.writeHead(200, {"Content-Type": "text/json"});

@@ -29,16 +29,31 @@
                             <img src="IMG/profile_pic.png" alt="profile pic">
                         </div>
                     </aside>
-                    <aside>
+                    <aside id="mainInfo">
                         <h1 id="userName">Santa claus</h1>
+                        <br>
+                        <h1 id="bill">4545</h1>
                     </aside>
                     <br>
                     <aside class="usersettings">
-                        <div class="cog">
+                        <div class="recarghe">
                             <i class="fas fa-plus-square"></i>
                             <h3>Ricarica il tuo account</h3>
                         </div>
                     </aside>
+                    <section id="rechargesettings">
+                        <form id="recharge_form">
+                            <input type="number" id="input-scrocco-coins" placeholder="scrocco-coins" required>
+                            <select id="type">
+                                <option value="carta">Carta</option>
+                                <option value="amico">Amico</option>
+                                <option value="paypal">Paypal</option>
+                                <option value="bonifico bancario">Bonifico bancario</option>
+                                <option value="contanti">Contanti</option>
+                            </select>
+                            <input type="submit" value="Ricarica" id="rechage_button">
+                        </form>
+                    </section>
                     <aside class="ipostazioniaccount">
                         <div class="cog">
                             <i class="fas fa-cog"></i>
@@ -136,11 +151,6 @@
                     <aside>
                         <a href="user_log.htm" id="logButton">Log del account</a>
                     </aside>
-                    <aside>
-                        <h3>Mete preferite:</h3>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt voluptatum delectus magni
-                            enim cum. Deserunt, earum alias. Saepe, consequatur ipsa!</p>
-                    </aside>
 
                     <aside>
                         <a href="livelloscrocco.htm" id="scroccoLevel">Livello di scrocco: </a>
@@ -187,6 +197,7 @@
 <script src="JS/loadmailfield.js"></script>
 <script src="JS/sha512.js"></script>
 <script src="JS/showusersettings.js"></script>
+<script src="JS/show_recharage_settings.js"></script>
 <script src="JS/time.js"></script>
 <script>
     /**
@@ -200,6 +211,7 @@
 
             //personal data
             $("#userName").html(json_response.username);
+            $("#bill").html("HAI A DISPOSIZIONE " + json_response.wallet + "<img src='IMG/scrocco.png' alt='moneta'>");
             $("#nomeuser").html(json_response.name);
             $("#cognomeuser").html(json_response.surname);
             $("#emailuser").html(json_response.email);
@@ -279,7 +291,7 @@
 
                 $.each(json_response.transactions, function (index, transaction) {
                     let dataTransazioneString = timestamp2string(parseInt(transaction.timestamp));
-                    $('.tabletransazioni').append("<tr><td>" + transaction.transaction_id + "</td><td>" + transaction.money + "</td><td>" + dataTransazioneString + "</td><td>"+ transaction.description  + "</td></tr>");
+                    $('.tabletransazioni').append("<tr><td>" + transaction.transaction_id + "</td><td>" + transaction.money + "<img src='IMG/scrocco.png' alt='moneta'></td><td>" + dataTransazioneString + "</td><td>"+ transaction.description  + "</td></tr>");
                 });
 
                 $('.tabletransazioni').append("</table>");
@@ -459,6 +471,46 @@
         post("api/user/update_email.php", email_data, change_email_functions );
     }
 
+    function recharge(event) {
+        event.preventDefault();
+
+        function success(json_response) {
+            alert("Ricarica avvenuta con successo");
+
+            window.location.reload();
+        }
+
+        function bad_request(json_response) {
+            alert("Parametri mancanti");
+        }
+
+        function unauthorized(json_response) {
+            alert("Non sei loggato");
+
+            $(location).attr("href", "access.htm");
+        }
+
+        function internal_server_error(json_response) {
+            alert("Server non raggiungibile, riprova piu tardi");
+
+            //$(location).attr("href", "access.htm");
+        }
+
+        let functions = {
+            200:  success,
+            400:  bad_request,
+            401:  unauthorized,
+            500:  internal_server_error
+        };
+
+        let data = {
+            money: $("#input-scrocco-coins").val(),
+            description: "ricarica da " + $("#type").val()
+        };
+
+        post("api/user/ricarica.php", data, functions);
+    }
+
     let formNewPass = document.getElementById("restPassForm");
     formNewPass.addEventListener('submit', change_password);
 
@@ -467,6 +519,9 @@
 
     let formNewEmail = document.getElementById("update_email_form");
     formNewEmail.addEventListener('submit', change_email);
+
+    let formRecharge = document.getElementById("recharge_form");
+    formRecharge.addEventListener('submit', recharge);
 
 </script>
 

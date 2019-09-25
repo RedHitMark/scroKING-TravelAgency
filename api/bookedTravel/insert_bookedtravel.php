@@ -27,27 +27,54 @@
                 //new mongo instance
                 $mongo = new MongoDB();
 
-                $result_with_existent_travel_id = $mongo->ReadOneQuery("scroKING", "Travels", $params->id_travel);
-                $user = $mongo->ReadOneQuery("scroKING", "Users", $session->get("id"), ['email']);
+                $travel = $mongo->ReadOneQuery("scroKING", "Travels", $params->id_travel);
+                $user = $mongo->ReadOneQuery("scroKING", "Users", $session->get("id"), ['email', 'num_scrocced_travels']);
 
-                if ($result_with_existent_travel_id && $user) {
-                    $doc = new BookedTravel($mongo->getNewIdObject(), $params->id_travel, $session->get("id"), getTimestamp());
+                if ($travel && $user) {
+                    //Query blockchain
+                    $description = "Prenotazione viaggio n." . $params->id_travel;
+                    $url = "http://vox3715217.mynet.vodafone.it:6999/prenotazione_viaggio?user_id=" . rawurlencode($session->get('id')) . "&money=" . rawurlencode($travel->price) . "&description=" . rawurlencode($description);
+                    $curl = curl_init();
 
-                    //@TODO check cose strane con blockchain -> potrebbe non essere possibile la prenotazione (scroccocoins insufficienti)
+                    curl_setopt($curl, CURLOPT_URL, $url);
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+                    curl_setopt($curl, CURLOPT_HEADER, false);
 
-                    //insert booked travel in db
-                    $mongo->WriteOneQuery("scroKING", "BookedTravels", $doc);
+                    $result = curl_exec($curl);
+                    $http_status_code = curl_getinfo($curl,  CURLINFO_HTTP_CODE);
 
-                    //send mail of confirm
-                    $mail = new Mail();
-                    $mail->sendEmail($user->mail, "Prenotazione effettuata con succeso", "Congratulazioni la tua prenotazione è avvenuta con successo");
+                    //close connection
+                    curl_close($curl);
+                    if ($http_status_code == "200") {
+                        $doc = new BookedTravel($mongo->getNewIdObject(), $session->get("id"), $params->id_travel, getTimestamp());
 
-                    //response: 200 Success
-                    http_response_code(200);
-                    echo json_encode(array("message" => "Prenotato con successo"));
+                        //insert booked travel in db
+                        $mongo->WriteOneQuery("scroKING", "BookedTravels", $doc);
+
+                        //update num
+                        $user->num_scrocced_travels++;
+                        $mongo->UpdateOneQuery("scroKING", "BookedTravels", $session->get("id"), $user);
+
+                        //send mail of confirm
+                        $mail = new Mail();
+                        $mail->sendEmail($user->email, "Prenotazione effettuata con succeso", "Congratulazioni la tua prenotazione è avvenuta con successo");
+
+                        //response: 200 Success
+                        http_response_code(200);
+                        echo json_encode(array("message" => "Prenotato con successo"));
+                    } else if ($http_status_code == "406"){
+                        //response: 406 Not Acceptable
+                        http_response_code(406);
+                        echo json_encode(array("message" => "Non abbastanza soldi"));
+                    } else {
+                        //response: 500 Internal Server Error
+                        http_response_code(500);
+                        echo json_encode(array("message" => "Node server error"));
+                    }
+
                 } else {
-                    //response: 406 Not Acceptable
-                    http_response_code(406);
+                    //response: 404 Not Found
+                    http_response_code(404);
                     echo json_encode(array("message" => "ID viaggio non presente"));
                 }
             } else {

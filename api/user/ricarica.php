@@ -18,7 +18,7 @@
         $session = new Session();
 
         if(isset($_SESSION['id']) && isset($_SESSION['timestamp'])){
-            $url = "http://vox3715217.mynet.vodafone.it:34518/ricarica?user_id=" . rawurlencode($session->get('id')) . "&money=" . rawurlencode($params->money) . "&description=" . rawurlencode($params->description);
+            $url = "http://vox3715217.mynet.vodafone.it:6999/ricarica?user_id=" . rawurlencode($session->get('id')) . "&money=" . rawurlencode($params->money) . "&description=" . rawurlencode($params->description);
 
             $curl = curl_init();
 
