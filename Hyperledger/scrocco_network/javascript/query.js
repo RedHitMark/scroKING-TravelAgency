@@ -23,7 +23,7 @@ module.exports = {
 
         console.log("Transazione n." + transactionID);
 
-        writeTransaction(transactionID, userID, money, description, timestamp.toString());
+        await writeTransaction(transactionID, userID, money, description, timestamp.toString());
     },
 
     prenotazioneViaggio : async function(userID, money, description) {
@@ -34,7 +34,7 @@ module.exports = {
 
         console.log("Transazione n." + transactionID);
 
-        writeTransaction(transactionID, userID, money, description, timestamp.toString());
+        await writeTransaction(transactionID, userID, money, description, timestamp.toString());
     },
 
     getWallet : async function(userID) {
