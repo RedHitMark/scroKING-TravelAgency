@@ -35,7 +35,7 @@
 
                 //save registration log in db
                 $registrationLog = new RegistrationLog(getTimestamp(), getClientIp(), $params->username, $params->email, "OK");
-                $mongo->WriteOneQuery("scroKING", "LoginLogs", $registrationLog);
+                $mongo->WriteOneQuery("scroKING", "RegistrationLog", $registrationLog);
 
                 //mail instance
                 $mail = new Mail();

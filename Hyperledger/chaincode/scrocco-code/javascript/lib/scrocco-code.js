@@ -36,10 +36,7 @@ class ScroccoCode extends Contract {
     }
 
     async queryAll(ctx) {
-        const startKey = '10';
-        const endKey = '999';
-
-        const iterator = await ctx.stub.getStateByRange(startKey, endKey);
+        const iterator = await ctx.stub.getStateByRange('10', '999');
 
         const allResults = [];
         while (true) {
