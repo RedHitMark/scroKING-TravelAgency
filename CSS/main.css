@@ -1024,7 +1024,6 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
 
 .portafoglio p { 
     font-size: 13pt;
-    font-family: cursive; 
     background: none repeat scroll 0 0; 
     color:black; 
     display: none; 
@@ -1058,7 +1057,6 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
 
 .booking p{
     font-size: 8pt;
-    font-family: cursive; 
     background: none repeat scroll 0 0; 
     color: black; 
     display: none; 
@@ -1104,7 +1102,6 @@ nav .col-12 .col-6 .log.mobile .yeslog, nav .col-12 .col-6 .log.mobile  .nolog{
 #new_username, #oldpassword, #newpassword, #newpasswordconf, #oldmail, #newmail, #input-scrocco-coins, #type {
     border: 0.5px solid black;
     border-radius: 8px;
-    font-family: cursive;
     text-align: center;
     margin-bottom: 5px;
 }

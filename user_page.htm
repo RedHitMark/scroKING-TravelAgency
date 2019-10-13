@@ -219,6 +219,10 @@
             $("#city").html(json_response.address.cap + " " + json_response.address.city + " (" + json_response.address.region + ")");
             $("#state").html(json_response.address.state);
 
+            if(!json_response.wallet){
+                window.location.reload();
+            }
+
             //stop loading
             $("#loading").css({ 'display' : 'none'});
             $("#mainUser").css({ 'display' : 'flex'});

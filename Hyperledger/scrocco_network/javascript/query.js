@@ -14,33 +14,31 @@ const ccp = JSON.parse(ccpJSON);
 
 module.exports = {
     init : async function() {
-        await registerScroccoUser();
+        await enrollAdmin();
     },
 
     ricarica : async function(userID, money, description) {
-        const transactionNumber = await getNewTransactionID();
-        const transactionID = "CAR" + transactionNumber;
+        const transactionID = await getNewTransactionID();
         const timestamp = util.getTimestamp();
 
         console.log("Transazione n." + transactionID);
 
-        writeTransaction(transactionID, userID, money, description, timestamp.toString());
+        await writeTransaction(transactionID, userID, money, description, timestamp.toString());
     },
 
     prenotazioneViaggio : async function(userID, money, description) {
-        const transactionNumber = await getNewTransactionID();
-        const transactionID = "CAR" + transactionNumber;
+        const transactionID = await getNewTransactionID();
         const timestamp = util.getTimestamp();
 
         money = (parseInt(money) * (-1)).toString();
 
         console.log("Transazione n." + transactionID);
 
-        writeTransaction(transactionID, userID, money, description, timestamp.toString());
+        await writeTransaction(transactionID, userID, money, description, timestamp.toString());
     },
 
     getWallet : async function(userID) {
-        let result = await readTransaction();
+        let result = await readTransaction(userID);
 
         let wallet = 0;
         let transactions = [];
@@ -58,21 +56,15 @@ module.exports = {
     },
 
     readAll : async function() {
-        return await readTransaction();
+        return await readTransaction(SCROCCO_USER_NAME);
     }
 };
 
-const ADMIN_NAME = 'admin';
-const ADMIN_PASSWORD = 'adminpw';
-const SCROCCO_USER_NAME = 'scrocco-user';
-const CHANNEL_NAME = 'mychannel';
-const CONTRACT_NAME = 'fabcar';
-const READ_TRANSACTION = 'queryAllCars';
-const WRITE_TRANSACTION = 'createCar';
 
-async function readTransaction() {
+
+async function readTransaction(userID) {
     //get contract and gateway form hyperledger network
-    let hyperledgerObj = await getHyperLedgerObj();
+    let hyperledgerObj = await getHyperLedgerObj(userID);
     let contract = hyperledgerObj.contract;
     let gateway = hyperledgerObj.gateway;
 
@@ -104,7 +96,7 @@ async function readTransaction() {
 
 async function writeTransaction(transaction_id, user_id, money, description, timestamp) {
     //get contract and gateway form hyperledger network
-    let hyperledgerObj = await getHyperLedgerObj();
+    let hyperledgerObj = await getHyperLedgerObj(user_id);
     let contract = hyperledgerObj.contract;
     let gateway = hyperledgerObj.gateway;
 
@@ -115,7 +107,7 @@ async function writeTransaction(transaction_id, user_id, money, description, tim
 }
 
 async function getNewTransactionID() {
-    const result = await readTransaction();
+    const result = await readTransaction(SCROCCO_USER_NAME);
 
     let max = 9;
     result.forEach( (transaction) => {
@@ -124,26 +116,24 @@ async function getNewTransactionID() {
         }
     });
 
-    return max + 1;
+    return "CAR" + (max + 1);
 }
 
-async function getHyperLedgerObj() {
+async function getHyperLedgerObj(userID) {
     // Create a new file system based wallet for managing identities.
     const walletPath = path.join(process.cwd(), '/scrocco_network/javascript/wallet');
     const wallet = new FileSystemWallet(walletPath);
     console.log(walletPath);
 
     // Check to see if we've already enrolled the user.
-    const userExists = await wallet.exists(SCROCCO_USER_NAME);
+    const userExists = await wallet.exists(userID);
     if (!userExists) {
-        //Run the registerUser.js application before retrying
-        //Or check working directory
-        throw new Error("An identity for the user " + SCROCCO_USER_NAME +" does not exist in the wallet");
+        await registerUser(userID);
     }
 
     // Create a new gateway for connecting to our peer node.
     const gateway = new Gateway();
-    await gateway.connect(ccpPath, { wallet, identity: SCROCCO_USER_NAME, discovery: { enabled: true, asLocalhost: true } });
+    await gateway.connect(ccpPath, { wallet, identity: userID, discovery: { enabled: true, asLocalhost: true } });
 
     // Get the network (channel) our contract is deployed to.
     const network = await gateway.getNetwork(CHANNEL_NAME);
@@ -177,13 +167,13 @@ async function enrollAdmin() {
     }
 }
 
-async function registerScroccoUser() {
+async function registerUser(userID) {
     // Create a new file system based wallet for managing identities.
     const walletPath = path.join(process.cwd(), '/scrocco_network/javascript/wallet');
     const wallet = new FileSystemWallet(walletPath);
 
     // Check to see if we've already enrolled the user.
-    const userExists = await wallet.exists(SCROCCO_USER_NAME);
+    const userExists = await wallet.exists(userID);
     if (!userExists) {
         // Check to see if we've already enrolled the admin user.
         const adminExists = await wallet.exists(ADMIN_NAME);
@@ -200,10 +190,18 @@ async function registerScroccoUser() {
         const adminIdentity = gateway.getCurrentIdentity();
 
         // Register the user, enroll the user, and import the new identity into the wallet.
-        const secret = await ca.register({ affiliation: 'org1.department1', enrollmentID: SCROCCO_USER_NAME, role: 'client' }, adminIdentity);
-        const enrollment = await ca.enroll({ enrollmentID: SCROCCO_USER_NAME, enrollmentSecret: secret });
+        const secret = await ca.register({ affiliation: 'org1.department1', enrollmentID: userID, role: 'client' }, adminIdentity);
+        const enrollment = await ca.enroll({ enrollmentID: userID, enrollmentSecret: secret });
         const userIdentity = X509WalletMixin.createIdentity('Org1MSP', enrollment.certificate, enrollment.key.toBytes());
-        await wallet.import(SCROCCO_USER_NAME, userIdentity);
-        console.log('Successfully registered and enrolled ' + SCROCCO_USER_NAME + ' and imported it into the wallet');
+        await wallet.import(userID, userIdentity);
+        console.log('Successfully registered and enrolled ' + userID + ' and imported it into the wallet');
     }
 }
+
+const ADMIN_NAME = 'admin';
+const ADMIN_PASSWORD = 'adminpw';
+const SCROCCO_USER_NAME = 'scrocco-user';
+const CHANNEL_NAME = 'mychannel';
+const CONTRACT_NAME = 'fabcar';
+const READ_TRANSACTION = 'queryAllCars';
+const WRITE_TRANSACTION = 'createCar';
